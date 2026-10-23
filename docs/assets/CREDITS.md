@@ -24,4 +24,24 @@ These website images are raster exports of the project's canonical manuscript fi
 
 The website exports add no license to the manuscript, original diagrams, or cited third-party images. Existing source attribution is retained; this file does not assert permission to relicense third-party material. Consult the original publications and their rights notices for reuse beyond this project.
 
-PNG files are full-resolution 3200-pixel-wide exports; WebP files provide smaller web downloads, and preview WebP files are 1600 pixels wide. The downloadable manuscript and bibliography are unchanged copies of the canonical project files.
+PNG files are full-resolution 3200-pixel-wide exports; WebP files provide smaller web images, and preview WebP files are 1600 pixels wide. The website publishes figure previews and bibliographic records; the review manuscript and its source files are not distributed here.
+
+## Published example gallery
+
+The 12 thumbnails in `examples/` illustrate published model outputs or system previews. They are not newly reproduced experiments, measured interaction traces, or a controlled benchmark. Each example links to its source publication. The gallery data, including exact figure anchors, image hashes and image-specific notes, are in [`showcase.json`](../data/showcase.json).
+
+| Website files | Source and retained credit | Source figure |
+|---|---|---|
+| `trellis-excavator.webp`, `lgm-chest.webp`, `instantmesh-excavator.webp` | Jianfeng Xiang et al., *Structured 3D Latents for Scalable and Versatile 3D Generation*, [arXiv:2412.01506v1](https://arxiv.org/abs/2412.01506v1). The LGM and InstantMesh results are the baseline outputs reproduced in this source. | Figure 5, image-conditioned examples, PDF page 7; both rendered views and original geometry insets retained. |
+| `voyager-staircase.webp`, `viewcrafter-bathroom.webp` | Tianyu Huang et al., *Voyager: Long-Range and World-Consistent Video Diffusion for Explorable 3D Scene Generation*, [arXiv:2506.04225v1](https://arxiv.org/abs/2506.04225v1). The ViewCrafter result is reproduced in this source. | Figure 4, PDF page 6; first scene/Voyager and fourth scene/ViewCrafter. Original annotations and watermark retained. |
+| `scenescape-museum.webp` | Rafail Fridman, Amit Abecasis, Yoni Kasten and Tali Dekel, *SceneScape: Text-Driven Consistent Scene Generation*, [arXiv:2302.01133v2](https://arxiv.org/abs/2302.01133v2). | Figure 2, generated RGB frame, PDF page 3. |
+| `4dfy-monkey.webp`, `4dfy-panda.webp` | Sherwin Bahmani et al., *4D-fy: Text-to-4D Generation Using Hybrid Score Distillation Sampling*, [arXiv:2311.17984v2](https://arxiv.org/abs/2311.17984v2). | Figure 3, architecture-stack rendered monkey frame, PDF page 4; Figure 5, full-model panda output, PDF page 8. A single still does not demonstrate motion. |
+| `worldplay-interior.webp` | Wenqiang Sun et al., *WorldPlay: Towards Long-Term Geometric Consistency for Real-Time Interactive World Modeling*, [PMLR 306 (2026)](https://proceedings.mlr.press/v306/sun26az.html). | Figure 12, example row 7, first displayed generated output, PDF page 18. No claim is made about exact cache occupancy or timing. |
+| `dreamcrafter-preview.webp`, `dreamcrafter-final.webp` | Cyrus Vachha et al., *Dreamcrafter: Immersive Editing of 3D Radiance Fields Through Flexible, Generative Inputs and Outputs*, [CHI 2025](https://doi.org/10.1145/3706598.3714312). | Figure 5, middle preview and right final-generation panels, PDF page 5. The supplied preview crop includes a previously documented font-only change in its speech bubble; the phrase and scene pixels are unchanged. |
+| `generated-reality-hands.webp` | Linxi Xie et al., *Generated Reality: Human-centric World Simulation using Interactive Video Generation with Hand and Camera Control*, [arXiv:2602.18422v1](https://arxiv.org/abs/2602.18422v1). | Figure 8, Task 1, Ours, last displayed sample, central crop, PDF page 14. |
+
+The existing provenance records identify the specific SceneScape, 4D-fy, Dreamcrafter, WorldPlay and Generated Reality source editions as [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The gallery retains author, publication, figure and change credits. This does not imply author endorsement or independently establish rights in any third-party material embedded in those papers.
+
+The version-specific TRELLIS and Voyager records link to the arXiv non-exclusive distribution licence. That record does **not** establish a new third-party image reuse licence. No Creative Commons licence is asserted for those excerpts; their source attribution is retained and no additional licence is granted by this website.
+
+All gallery images come from already documented source excerpts in the local project. For this website, their complete pixels were converted to WebP at original aspect ratio, without retouching or synthetic content changes. Maximum width is 1280 pixels; the current 12 images are 272–658 pixels wide and were not upscaled. No source paper PDF, review manuscript, or manuscript source file is included in the gallery.

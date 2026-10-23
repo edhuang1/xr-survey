@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "title": "A field guide to visual generation for XR",
+  "provenance": {
+    "updated": "2026-10-23",
+    "basis": "Concise editorial summaries of the review framework, catalogue, and proposed evaluation agenda.",
+    "source_sections": ["Analytical Framework for the Review", "Methods: Assets, Scenes, and Dynamic Worlds", "Data and Evaluation", "XR Systems, Workflows, and Model Selection", "Challenges and Future Directions"],
+    "resource_verification": "All six selected resource titles, publication years, and source URLs were checked against their NeurIPS or CVF proceedings records on 23 October 2026."
+  },
+  "axes": [
+    {
+      "id": "content-unit",
+      "title": "Content unit",
+      "question": "What does the application receive?",
+      "explanation": "Start with the unit exposed to the application: an object, an environment, prepared motion, or observations generated as actions arrive.",
+      "values": ["Visual asset", "Spatial scene", "Time-varying 3D content", "Action-conditioned world"],
+      "reading_tip": "Separate changes in viewpoint, changes over time, and changes caused by an action. They require different forms of retained information.",
+      "sources": ["main.tex: sec:content-units"]
+    },
+    {
+      "id": "mechanism",
+      "title": "Generative mechanism",
+      "question": "How is content constructed or updated?",
+      "explanation": "A pipeline may optimize a particular instance, sample a learned model, arrange existing assets, or generate observations and fuse them into geometry.",
+      "values": ["Instance optimization", "Learned sampling", "Layout and asset assembly", "Observation generation", "Geometry fusion"],
+      "reading_tip": "Trace the full sequence of operators. Learned models, procedural rules, and explicit constraints can all contribute to one result.",
+      "sources": ["main.tex: sec:mechanisms"]
+    },
+    {
+      "id": "representation",
+      "title": "Representation",
+      "question": "What structure can the next component use?",
+      "explanation": "Distinguish the generator's internal state, the representation used for rendering, and the artifact delivered to the application.",
+      "values": ["Meshes and parts", "Point clouds and Gaussians", "Implicit fields", "Layouts and scene graphs", "Images, video, and latent history"],
+      "reading_tip": "A point cloud used as a generation condition differs from geometry exposed for interaction. Check each conversion and the operations that survive it.",
+      "sources": ["main.tex: sec:mechanisms", "main.tex: sec:background-representations"]
+    },
+    {
+      "id": "operating-stage",
+      "title": "Operating stage",
+      "question": "When does generation enter the user loop?",
+      "explanation": "Content can be prepared before viewing, rendered locally, replaced after asynchronous editing, or generated continuously from incoming context.",
+      "values": ["Offline generation", "Runtime rendering", "Asynchronous editing", "Streaming generation"],
+      "reading_tip": "Locate the first usable response. Generation speed, rendering rate, and input-to-display delay measure different stages of a system.",
+      "sources": ["main.tex: sec:operating-stages", "main.tex: sec:stage-costs"]
+    }
+  ],
+  "domains": [
+    {
+      "id": "assets",
+      "title": "Visual assets",
+      "what": "Objects and localized elements, from complete shapes to textured surfaces and separately represented parts.",
+      "inputs": "Text, images, multiview observations, supplied geometry, or random latent codes, depending on the method.",
+      "outputs": "Meshes, part collections, point clouds, fields, materials, and other renderable object representations.",
+      "operations": "Inspect the exposed editing unit. Placement, part manipulation, collision behavior, and saved edits each depend on the delivered structure and application components.",
+      "sources": ["main.tex: sec:assets", "main.tex: sec:asset-parts", "main.tex: sec:asset-preparation"]
+    },
+    {
+      "id": "scenes",
+      "title": "Spatial scenes",
+      "what": "Arrangements and connected environments built through layout generation, asset assembly, completion, or spatial expansion.",
+      "inputs": "Language, images, camera poses, layouts, geometry, and existing scene observations.",
+      "outputs": "Object layouts, scene graphs, meshes, Gaussian scenes, or camera-conditioned views; some methods combine several of these.",
+      "operations": "Check viewpoint control, disocclusion, object addressability, and any collision proxy. A retained scene and a generated view expose different interfaces.",
+      "sources": ["main.tex: sec:scenes", "main.tex: sec:scene-layout", "main.tex: sec:scene-memory", "main.tex: sec:scene-functionality"]
+    },
+    {
+      "id": "temporal",
+      "title": "Dynamic content & worlds",
+      "what": "Time-varying 3D content and observations that evolve with camera commands, user actions, or changing conditions.",
+      "inputs": "Text, images, video, time, camera trajectories, actions, and retained context, as supported by each configuration.",
+      "outputs": "Prepared 4D representations, multiview video, generated observation streams, or visual responses coupled to an external state system.",
+      "operations": "Distinguish animation playback from action response. Revisit tests examine recall; edit-and-return tests examine whether an accepted change survives absence.",
+      "sources": ["main.tex: sec:dynamic-worlds", "main.tex: sec:time-varying-content", "main.tex: sec:action-conditioned-video", "main.tex: sec:world-memory"]
+    },
+    {
+      "id": "xr",
+      "title": "XR systems",
+      "what": "Complete authoring and presentation workflows that connect visual generators with tracked input, user interfaces, rendering, and displays.",
+      "inputs": "User requests, spatial context, tracked head or hand input, selected previews, and prepared content.",
+      "outputs": "Immersive authoring interfaces, manipulated scene content, stereoscopic imagery, and displayed responses in a specified device setup.",
+      "operations": "Identify which component implements loading, manipulation, registration, state storage, and display. Judge the operation in the configuration and task actually tested.",
+      "sources": ["main.tex: sec:xr-systems", "main.tex: sec:documented-links", "main.tex: sec:capability-origins", "main.tex: sec:vr-ar-mr"]
+    }
+  ],
+  "agenda": [
+    {
+      "id": "binocular",
+      "title": "Binocular viewing under head motion",
+      "status": "Proposed evaluation",
+      "question": "Does consistency measured offline predict viewing quality when the headset requests new left and right views?",
+      "design": "Use the same content across applicable fixed-stereo, panoramic-rotation, and translated-view conditions. Record the renderer, stereo baseline, depth scale, display, and reprojection settings; vary presentation while retaining the content reference.",
+      "measurements": ["Cross-view geometric error and visible artifacts", "Task performance and participant judgments", "Results separated by viewing condition and content dynamics"],
+      "sources": ["main.tex: sec:agenda-binocular", "Tang2023MVDiffusion", "Tamir2025Stereoscopic", "Han2026PanoramicStimuli"]
+    },
+    {
+      "id": "preview-replacement",
+      "title": "From preview to final asset",
+      "status": "Proposed evaluation",
+      "question": "Which size, placement, and appearance decisions remain valid when a preview is replaced by final geometry?",
+      "design": "Retain the preview, user operations, and final asset. Replay matched requests with the same final asset and delivery time while changing preview format. A separate live study can test the complete workflow, including any selected-preview conditioning.",
+      "measurements": ["Scale, contact, volume, or projected-outline agreement", "Preserved placement constraints and revised decisions", "Total correction time after replacement"],
+      "sources": ["main.tex: sec:agenda-proxies", "Vachha2025Dreamcrafter"]
+    },
+    {
+      "id": "persistent-changes",
+      "title": "Persistent changes & shared state",
+      "status": "Proposed evaluation",
+      "question": "Does a supported, accepted change survive leaving and returning, and agree across observers?",
+      "design": "Apply an edit supported by the interface, confirm its success, move out of view, and return by another route. Pair this with an unchanged-scene revisit. Vary absence and occlusion; where available, compare stored state with rendered observations and action outcomes.",
+      "measurements": ["Initial update success", "Retention among successful updates and overall completion", "Identity, pose, appearance, and action-relevant state"],
+      "sources": ["main.tex: sec:agenda-state", "Sun2025WorldPlay", "Po2026MultiGen", "Yang2024Holodeck", "HYWorldTeam2026HYWorld2"]
+    },
+    {
+      "id": "response-scheduling",
+      "title": "Response latency & scheduling",
+      "status": "Proposed evaluation",
+      "question": "How long does a user wait for a meaningful response and for a result that supports the intended operation?",
+      "design": "Timestamp input, queues, retrieval, generation, transfer, rendering, and display. Compare scheduling strategies with the input trace, model settings, hardware, and network fixed; track local head-motion rendering separately when it continues during generation.",
+      "measurements": ["Time to first meaningful response and usable final result", "Average and tail delay, content age, and superseded requests", "Visual quality and task completion alongside timing"],
+      "sources": ["main.tex: sec:agenda-response", "Xie2026GeneratedReality"]
+    },
+    {
+      "id": "physical-alignment",
+      "title": "Physical-space alignment",
+      "status": "Proposed evaluation",
+      "question": "Do placement, scale, occlusion, and appearance constraints survive changes in viewpoint and the physical environment?",
+      "design": "Generate and place a constrained asset, then revisit after viewpoint or environmental changes. Hold the asset fixed to isolate alignment effects; hold registration fixed to test generated geometry. Record whether spatial inputs are measured, inferred, or manually specified.",
+      "measurements": ["Support-relative placement and reference-relative scale error", "Occlusion-order violations and task success", "Geometry and appearance under changing light and partial occlusion"],
+      "sources": ["main.tex: sec:agenda-physical", "Lee2025ImaginateAR"]
+    }
+  ],
+  "benchmarks": [
+    {
+      "id": "R3",
+      "name": "Objaverse-XL",
+      "title": "Objaverse-XL: A Universe of 10M+ 3D Objects",
+      "year": 2023,
+      "role": "A large collection of 3D objects for learning shape, appearance, and novel-view generation. Filtering and rendering determine the actual training subset.",
+      "category": "Object dataset",
+      "source_link": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/70364304877b5e767de4e9a2a511be0c-Abstract-Datasets_and_Benchmarks.html",
+      "bibkey": "Deitke2023ObjaverseXL"
+    },
+    {
+      "id": "R15",
+      "name": "DL3DV-10K",
+      "title": "DL3DV-10K: A Large-Scale Scene Dataset for Deep Learning-based 3D Vision",
+      "year": 2024,
+      "role": "Real scene videos supporting novel-view synthesis and scene representation learning across varied capture conditions.",
+      "category": "Scene dataset",
+      "source_link": "https://openaccess.thecvf.com/content/CVPR2024/html/Ling_DL3DV-10K_A_Large-Scale_Scene_Dataset_for_Deep_Learning-based_3D_Vision_CVPR_2024_paper.html",
+      "bibkey": "Ling2024DL3DV"
+    },
+    {
+      "id": "R21",
+      "name": "SCOPE",
+      "title": "What Makes for a Good Stereoscopic Image?",
+      "year": 2025,
+      "role": "Headset preference annotations for static stereoscopic images, connecting image distortions with perceived viewing quality.",
+      "category": "Stereo preference dataset",
+      "source_link": "https://openaccess.thecvf.com/content/CVPR2025W/CV4Metaverse/html/Tamir_What_Makes_for_a_Good_Stereoscopic_Image_CVPRW_2025_paper.html",
+      "bibkey": "Tamir2025Stereoscopic"
+    },
+    {
+      "id": "R35",
+      "name": "VBench",
+      "title": "VBench: Comprehensive Benchmark Suite for Video Generative Models",
+      "year": 2024,
+      "role": "Dimension-specific video evaluation covering properties such as subject consistency, temporal flicker, motion smoothness, and spatial relationships.",
+      "category": "Video benchmark",
+      "source_link": "https://openaccess.thecvf.com/content/CVPR2024/html/Huang_VBench_Comprehensive_Benchmark_Suite_for_Video_Generative_Models_CVPR_2024_paper.html",
+      "bibkey": "Huang2024VBench"
+    },
+    {
+      "id": "R36",
+      "name": "WorldScore",
+      "title": "WorldScore: A Unified Evaluation Benchmark for World Generation",
+      "year": 2025,
+      "role": "Camera-trajectory-based next-scene tasks for comparing controllability, visual quality, and dynamics across world-generation approaches.",
+      "category": "World-generation benchmark",
+      "source_link": "https://openaccess.thecvf.com/content/ICCV2025/html/Duan_WorldScore_A_Unified_Evaluation_Benchmark_for_World_Generation_ICCV_2025_paper.html",
+      "bibkey": "Duan2025WorldScore"
+    },
+    {
+      "id": "R37",
+      "name": "4DWorldBench",
+      "title": "4DWorldBench: A Comprehensive Evaluation Framework for 3D/4D World Generation Models",
+      "year": 2026,
+      "role": "Evaluation of perceptual quality, conditioning alignment, physical realism, and consistency for 3D/4D generation from multiple input modalities.",
+      "category": "3D/4D benchmark",
+      "source_link": "https://openaccess.thecvf.com/content/CVPR2026/html/Lu_4DWorldBench_A_Comprehensive_Evaluation_Framework_for_3D4D_World_Generation_Models_CVPR_2026_paper.html",
+      "bibkey": "Lu2026FourDWorldBench"
+    }
+  ],
+  "reading_routes": [
+    {
+      "id": "start-here",
+      "title": "Understand the landscape",
+      "audience": "New to visual generation for XR",
+      "description": "Build a vocabulary for comparing outputs before exploring individual methods.",
+      "steps": [
+        {"title": "Meet the four domains", "target": "#domains", "description": "Identify the content and application interface."},
+        {"title": "Read the comparison axes", "target": "#framework", "description": "Separate mechanism, representation, and operating stage."},
+        {"title": "Explore the method families", "target": "#taxonomy", "description": "Locate related approaches and follow their sources."}
+      ]
+    },
+    {
+      "id": "build-a-pipeline",
+      "title": "Choose an XR pipeline",
+      "audience": "Building an authoring or viewing system",
+      "description": "Begin with an operation, then trace the representation, integration components, and evidence needed to support it.",
+      "steps": [
+        {"title": "Compare generation routes", "target": "#framework", "description": "Determine what must be prepared and what must respond during use."},
+        {"title": "Shortlist methods and systems", "target": "#collection", "description": "Filter the catalogue by domain, inputs, and publication year."},
+        {"title": "Check the evidence", "target": "#evidence", "description": "Keep demonstrated operations and measured properties tied to their configurations."}
+      ]
+    },
+    {
+      "id": "design-evaluation",
+      "title": "Design a stronger evaluation",
+      "audience": "Planning experiments or reviewing claims",
+      "description": "Match the claimed operation to an observable outcome and a suitable reference.",
+      "steps": [
+        {"title": "Select data and benchmarks", "target": "#benchmarks", "description": "Choose resources for the property being measured."},
+        {"title": "Inspect the evidence types", "target": "#evidence", "description": "Distinguish measurement, demonstration, claim, and inference."},
+        {"title": "Adapt a proposed XR test", "target": "#evaluation", "description": "Hold the relevant task or content fixed while varying one pipeline stage."}
+      ]
+    }
+  ]
+}

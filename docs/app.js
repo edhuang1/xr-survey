@@ -1,110 +1,207 @@
 "use strict";
 (() => {
   const $ = (s) => document.querySelector(s);
-  const state = { entries: [], category: "all", query: "", year: "all", sort: "newest", page: 1 };
-  const pageSize = 12;
-  let fieldNotes = {};
-  const displayField = (key, value) => {
+  const $$ = (s) => [...document.querySelectorAll(s)];
+  const esc = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const url = (v) => { try { const u = new URL(v); return ["https:", "http:"].includes(u.protocol) ? u.href : ""; } catch { return ""; } };
+  const localImage = (v) => typeof v === "string" && /^assets\/[a-zA-Z0-9/_.-]+\.(webp|png|svg|jpg)$/.test(v) && !v.includes("..") ? v : "";
+  const external = (v, label, cls = "") => url(v) ? `<a href="${esc(url(v))}" class="${cls}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : "";
+  const labels = { assets: "3D assets", scenes: "Spatial scenes", temporal: "Time & worlds", xr: "XR systems", resources: "Resources" };
+  const illustrations = { assets: "assets", scenes: "scenes", temporal: "worlds", xr: "xr" };
+  const state = { entries: [], category: "all", query: "", year: "all", sort: "newest", view: "table", page: 1 };
+  const pageSize = 15;
+  let fieldNotes = {}, catalogueReady = false, showcase;
+  const scrollTo = (id) => $(id).scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+  const searchText = (e) => [e.id, e.name, e.title, e.venue, e.year, e.category_label, e.group, e.description, e.bibkey, JSON.stringify(e.fields || {}), e.authors].join(" ").toLocaleLowerCase();
+  function displayField(key, value) {
     const dictionary = ["Stage", "Evaluation"].includes(key) && fieldNotes[key]
       ? Object.fromEntries(fieldNotes[key].replace(/\.$/, "").split(";").map((pair) => pair.split(":").map((part) => part.trim()))) : null;
     if (dictionary && typeof value === "string") return value.split("/").map((part) => dictionary[part.trim()] || part.trim()).join(" / ");
     return Array.isArray(value) ? value.join(", ") : value;
-  };
-  const labels = { assets: "3D assets", scenes: "Spatial scenes", temporal: "Time & worlds", xr: "XR systems", resources: "Resources" };
-  const escape = (value) => String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const safeUrl = (value) => { try { const url = new URL(value); return ["https:", "http:"].includes(url.protocol) ? url.href : ""; } catch { return ""; } };
-  const paperLink = (url, text, className = "") => safeUrl(url) ? `<a class="${className}" href="${escape(safeUrl(url))}" target="_blank" rel="noopener noreferrer">${text}</a>` : "";
-  const searchText = (entry) => [entry.name, entry.title, entry.venue, entry.year, entry.category_label, entry.group, entry.description, entry.bibkey, JSON.stringify(entry.fields || {}), entry.authors].join(" ").toLocaleLowerCase();
-
+  }
   function readFilters() {
-    const params = new URLSearchParams(location.search);
-    if (params.has("q")) state.query = params.get("q");
-    if (Object.hasOwn(labels, params.get("category"))) state.category = params.get("category");
-    if (["newest", "oldest", "name"].includes(params.get("sort"))) state.sort = params.get("sort");
-    const year = params.get("year");
-    if (year && state.entries.some((entry) => String(entry.year) === year)) state.year = year;
-    $("#search").value = state.query;
-    $("#year").value = state.year;
-    $("#sort").value = state.sort;
+    const p = new URLSearchParams(location.search);
+    state.query = p.get("q") || "";
+    state.category = Object.hasOwn(labels, p.get("category")) ? p.get("category") : "all";
+    state.sort = ["newest", "oldest", "name"].includes(p.get("sort")) ? p.get("sort") : "newest";
+    state.year = state.entries.some((e) => String(e.year) === p.get("year")) ? p.get("year") : "all";
+    state.view = p.get("view") === "cards" ? "cards" : "table";
+    state.page = 1;
+    syncInputs();
   }
-
+  function syncInputs() { $("#search").value = state.query; $("#year").value = state.year; $("#sort").value = state.sort; }
   function saveFilters() {
-    const params = new URLSearchParams();
-    if (state.query) params.set("q", state.query);
-    if (state.category !== "all") params.set("category", state.category);
-    if (state.year !== "all") params.set("year", state.year);
-    if (state.sort !== "newest") params.set("sort", state.sort);
-    const query = params.toString();
-    history.replaceState(null, "", `${location.pathname}${query ? `?${query}` : ""}${location.hash}`);
+    const p = new URLSearchParams();
+    if (state.query) p.set("q", state.query);
+    if (state.category !== "all") p.set("category", state.category);
+    if (state.year !== "all") p.set("year", state.year);
+    if (state.sort !== "newest") p.set("sort", state.sort);
+    if (state.view !== "table") p.set("view", state.view);
+    const q = p.toString();
+    history.replaceState(null, "", `${location.pathname}${q ? `?${q}` : ""}${location.hash}`);
   }
-
+  function links(e) {
+    const primary = url(e.paper_url || e.url);
+    return external(primary, "Source ↗", "primary-link") + (e.project_url && url(e.project_url) !== primary ? external(e.project_url, "Project ↗") : "");
+  }
+  function card(e) {
+    const fields = Object.entries(e.fields || {}).map(([key, value]) => `<strong>${esc(key.replace(/_/g, " "))}:</strong> ${esc(displayField(key, value))}`).join("<br>");
+    return `<article class="paper-card" data-id="${esc(e.id)}"><div class="paper-card-head"><h3>${external(e.paper_url || e.url, e.name) || esc(e.name)}</h3><span class="paper-year">${esc(e.year)}</span></div><p class="paper-title">${esc(e.title)}</p><div class="paper-meta"><span class="category-tag">${esc(labels[e.category])}</span><span>${esc(e.venue)}</span></div><details><summary>Catalogue details · ${esc(e.id)}</summary><p>${esc(e.description)}</p>${fields ? `<p>${fields}</p>` : ""}<p>Reference key: ${esc(e.bibkey)}</p></details><div class="paper-links">${links(e)}</div></article>`;
+  }
+  function venue(v) {
+    const name = String(v || "");
+    const known = name.match(/\b(CVPR|ICCV|ECCV|ICLR|ICML|NeurIPS|UIST|CHI|SIGGRAPH|ISMAR|I3D|TVCG)\b/i);
+    if (known) return known[0];
+    const fullNames = [[/Conference on Machine Learning/i, "ICML"], [/Conference on Learning Representations/i, "ICLR"], [/Neural Information Processing Systems/i, "NeurIPS"], [/Computer Vision and Pattern Recognition/i, "CVPR"], [/International Conference on Computer Vision/i, "ICCV"], [/Human Factors in Computing Systems/i, "CHI"], [/User Interface Software and Technology/i, "UIST"], [/Virtual Reality and 3D User Interfaces/i, "IEEE VR"]];
+    const fullName = fullNames.find(([pattern]) => pattern.test(name));
+    if (fullName) return fullName[1];
+    if (/arxiv/i.test(name)) return "arXiv";
+    return name;
+  }
+  function table(items) {
+    return `<table class="paper-table"><caption class="sr-only">Research collection, sorted by ${esc(state.sort)}</caption><thead><tr><th scope="col">ID</th><th scope="col">PAPER / METHOD</th><th scope="col">PUBLICATION</th><th scope="col">LINKS</th></tr></thead><tbody>${items.map((e) => `<tr data-id="${esc(e.id)}"><td class="record-id">${esc(e.id)}</td><td>${external(e.paper_url || e.url, e.title, "table-title")}<div class="table-subtitle"><strong>${esc(e.name)}</strong><span class="category-tag">${esc(labels[e.category])}</span></div></td><td><span class="table-year">${esc(e.year)}</span><span class="venue-name" title="${esc(e.venue)}">${esc(venue(e.venue))}</span></td><td><div class="paper-links">${links(e)}</div></td></tr>`).join("")}</tbody></table>`;
+  }
   function render() {
+    if (!catalogueReady) return;
     const terms = state.query.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
-    const filtered = state.entries.filter((entry) =>
-      (state.category === "all" || entry.category === state.category) &&
-      (state.year === "all" || String(entry.year) === state.year) &&
-      terms.every((term) => entry.searchText.includes(term))
-    ).sort((a, b) => state.sort === "name" ? a.name.localeCompare(b.name) :
-      (state.sort === "oldest" ? a.year - b.year : b.year - a.year) || a.name.localeCompare(b.name));
+    const filtered = state.entries.filter((e) => (state.category === "all" || e.category === state.category) && (state.year === "all" || String(e.year) === state.year) && terms.every((t) => e.searchText.includes(t)))
+      .sort((a, b) => state.sort === "name" ? a.name.localeCompare(b.name) : (state.sort === "oldest" ? a.year - b.year : b.year - a.year) || a.name.localeCompare(b.name));
     const pages = Math.max(1, Math.ceil(filtered.length / pageSize));
-    state.page = Math.min(state.page, pages);
-    const start = (state.page - 1) * pageSize;
+    state.page = Math.max(1, Math.min(state.page, pages));
+    const start = (state.page - 1) * pageSize, items = filtered.slice(start, start + pageSize);
     $("#result-count").textContent = filtered.length ? `${start + 1}–${Math.min(start + pageSize, filtered.length)} of ${filtered.length} records` : "0 records";
-    document.querySelectorAll("[data-category]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.category === state.category)));
-    $("#paper-list").innerHTML = filtered.slice(start, start + pageSize).map((entry) => {
-      const primary = safeUrl(entry.paper_url || entry.url);
-      const title = primary ? `<a href="${escape(primary)}" target="_blank" rel="noopener noreferrer">${escape(entry.name)}</a>` : escape(entry.name);
-      const fields = Object.entries(entry.fields || {}).map(([key, value]) => `<strong>${escape(key.replace(/_/g, " "))}:</strong> ${escape(displayField(key, value))}`).join("<br>");
-      return `<article class="paper-card" data-id="${escape(entry.id)}"><div class="paper-year">${escape(entry.year)}</div><div class="paper-content"><h3>${title}</h3><p class="paper-title">${escape(entry.title)}</p><div class="paper-meta"><span class="category-tag">${escape(labels[entry.category])}</span><span class="paper-venue">${escape(entry.venue)}</span></div><details><summary>Catalogue details · ${escape(entry.id)}</summary><p>${escape(entry.description)}</p>${fields ? `<p>${fields}</p>` : ""}<p>Reference key: ${escape(entry.bibkey)}</p></details></div><div class="paper-links">${paperLink(primary, "Source ↗", "primary-link")}${entry.project_url && safeUrl(entry.project_url) !== primary ? paperLink(entry.project_url, "Project ↗") : ""}</div></article>`;
-    }).join("");
+    $$("[data-category]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.category === state.category)));
+    $$("[data-view]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.view === state.view)));
+    $("#paper-list").innerHTML = items.length ? (state.view === "table" ? table(items) : `<div class="paper-card-grid">${items.map(card).join("")}</div>`) : "";
     $("#empty-state").hidden = filtered.length > 0;
     $("#pagination").hidden = pages <= 1;
     $("#page-status").textContent = `Page ${state.page} of ${pages}`;
     $("#previous-page").disabled = state.page === 1;
     $("#next-page").disabled = state.page === pages;
   }
-
   function update() { state.page = 1; render(); saveFilters(); }
-  function setCategory(category) { state.category = category; update(); }
-  function reset() { state.category = "all"; state.query = ""; state.year = "all"; state.sort = "newest"; $("#search").value = ""; $("#year").value = "all"; $("#sort").value = "newest"; update(); }
-  $("#search").addEventListener("input", (event) => { state.query = event.target.value; update(); });
-  $("#year").addEventListener("change", (event) => { state.year = event.target.value; update(); });
-  $("#sort").addEventListener("change", (event) => { state.sort = event.target.value; update(); });
-  $("#reset-filters").addEventListener("click", reset);
-  document.querySelectorAll("[data-category]").forEach((button) => button.addEventListener("click", () => setCategory(button.dataset.category)));
-  document.querySelectorAll("[data-category-jump]").forEach((link) => link.addEventListener("click", () => { reset(); setCategory(link.dataset.categoryJump); }));
-  ["previous", "next"].forEach((direction) => $(`#${direction}-page`).addEventListener("click", () => { state.page += direction === "next" ? 1 : -1; render(); $("#collection").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" }); }));
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "/" && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName) && !document.activeElement.isContentEditable) { event.preventDefault(); $("#search").focus(); }
+  function reset() { Object.assign(state, { category: "all", query: "", year: "all", sort: "newest", page: 1 }); syncInputs(); }
+  $("#search").addEventListener("input", (e) => { state.query = e.target.value; update(); });
+  $("#year").addEventListener("change", (e) => { state.year = e.target.value; update(); });
+  $("#sort").addEventListener("change", (e) => { state.sort = e.target.value; update(); });
+  $("#reset-filters").addEventListener("click", () => { reset(); update(); });
+  $$("[data-category]").forEach((b) => b.addEventListener("click", () => { state.category = b.dataset.category; update(); }));
+  $$("[data-view]").forEach((b) => b.addEventListener("click", () => { state.view = b.dataset.view; render(); saveFilters(); }));
+  ["previous", "next"].forEach((direction) => $(`#${direction}-page`).addEventListener("click", () => { state.page += direction === "next" ? 1 : -1; render(); scrollTo("#collection"); }));
+  window.addEventListener("popstate", () => { readFilters(); render(); });
+
+  const heroScenes = {
+    assets: ["assets.svg", "Geometry, appearance, and parts", "Illustrative exploded chair showing separately represented components."],
+    scenes: ["hero-scene.svg", "An explorable spatial scene", "Illustrative isometric room with furniture, spatial geometry, and a tracked view."],
+    temporal: ["worlds.svg", "Content that evolves over time", "Illustrative sequence of a changing spatial world across three moments."],
+    xr: ["xr.svg", "Connect generation to interaction", "Illustrative XR headset, hand input, and spatial object manipulation."]
+  };
+  $$("[data-hero]").forEach((b) => b.addEventListener("click", () => {
+    const scene = heroScenes[b.dataset.hero];
+    $("#hero-scene").src = `assets/illustrations/${scene[0]}`;
+    $("#hero-scene").alt = scene[2]; $("#scene-label").textContent = scene[1];
+    $$("[data-hero]").forEach((other) => other.setAttribute("aria-pressed", String(other === b)));
+  }));
+  function tabSelection(container, key, value) {
+    $$(`${container} [role=tab]`).forEach((b) => { const active = b.dataset[key] === value; b.setAttribute("aria-selected", String(active)); b.tabIndex = active ? 0 : -1; });
+  }
+  function renderTaxonomy(category) {
+    const entries = state.entries.filter((e) => e.category === category);
+    const groups = new Map();
+    entries.forEach((e) => { if (!groups.has(e.group)) groups.set(e.group, []); groups.get(e.group).push(e); });
+    tabSelection(".taxonomy-tabs", "taxonomy", category);
+    $("#taxonomy-panel").setAttribute("aria-labelledby", `tax-${category}`);
+    $("#taxonomy-panel").innerHTML = `<div class="taxonomy-heading"><h3>${esc(labels[category])}</h3><span>${groups.size} families · ${entries.length} records</span></div><div class="taxonomy-families">${[...groups].map(([name, items]) => `<article class="family"><h4>${esc(name)}<span>${items.length}</span></h4><div class="method-chips">${items.map((e) => `<button type="button" data-method="${esc(e.id)}" title="${esc(e.title)}">${esc(e.name)}</button>`).join("")}</div></article>`).join("")}</div>`;
+  }
+  $$("[data-taxonomy]").forEach((b) => b.addEventListener("click", () => { if (catalogueReady) renderTaxonomy(b.dataset.taxonomy); }));
+  function renderGuide(guide) {
+    $("#reading-routes").innerHTML = guide.reading_routes.map((r, i) => `<article class="route-card"><span class="route-number">READING ROUTE 0${i + 1}</span><h3>${esc(r.title)}</h3><p>${esc(r.description)}</p><ol>${r.steps.map((s) => `<li><a href="${esc(s.target)}" title="${esc(s.description)}">${esc(s.title)}</a></li>`).join("")}</ol></article>`).join("");
+    $("#domain-grid").innerHTML = guide.domains.map((d, i) => `<article class="definition-card"><img src="assets/illustrations/${illustrations[d.id]}.svg" width="640" height="420" alt="Conceptual illustration of ${esc(d.title.toLowerCase())}." loading="lazy"><div class="definition-body"><span class="overline">DOMAIN 0${i + 1}</span><h3>${esc(d.title)}</h3><p>${esc(d.what)}</p><dl><dt>Inputs</dt><dd>${esc(d.inputs)}</dd><dt>Outputs</dt><dd>${esc(d.outputs)}</dd></dl><details><summary>What matters for XR?</summary><p>${esc(d.operations)}</p></details><a href="#collection" data-category-jump="${esc(d.id)}">Explore ${state.entries.filter((e) => e.category === d.id).length || { assets: 52, scenes: 49, temporal: 72, xr: 31 }[d.id]} methods & systems →</a></div></article>`).join("");
+    $("#axis-grid").innerHTML = guide.axes.map((a, i) => `<article class="axis-card"><div class="axis-title"><span>0${i + 1}</span><h3>${esc(a.title)}</h3></div><h4>${esc(a.question)}</h4><p>${esc(a.explanation)}</p><div class="value-tags">${a.values.map((v) => `<span>${esc(v)}</span>`).join("")}</div><p class="axis-tip">${esc(a.reading_tip)}</p></article>`).join("");
+    $("#benchmark-grid").innerHTML = guide.benchmarks.map((b) => `<article class="benchmark-card"><div class="benchmark-top"><span>${esc(b.category)}</span><span>${esc(b.year)}</span></div><h3>${esc(b.name)}</h3><p>${esc(b.role)}</p>${external(b.source_link, "Explore resource ↗")}</article>`).join("");
+    $("#agenda-list").innerHTML = guide.agenda.map((a, i) => `<details class="agenda-item"${i === 0 ? " open" : ""}><summary><span class="agenda-number">0${i + 1}</span><h3>${esc(a.title)}</h3></summary><div class="agenda-body"><p class="agenda-question">${esc(a.question)}</p><p>${esc(a.design)}</p><h4>What to measure</h4><ul>${a.measurements.map((m) => `<li>${esc(m)}</li>`).join("")}</ul></div></details>`).join("");
+  }
+  function renderExamples(groupId, itemId) {
+    const group = showcase.groups.find((g) => g.id === groupId) || showcase.groups[0];
+    const item = group.items.find((i) => i.id === itemId) || group.items[0];
+    tabSelection("#example-tabs", "exampleGroup", group.id);
+    $("#example-panel").setAttribute("aria-labelledby", `example-tab-${group.id}`);
+    $("#example-panel").innerHTML = `<div class="example-group-header"><span class="overline">${esc(group.kicker)}</span><h3>${esc(group.title)}</h3><p>${esc(group.description)}</p></div><div class="example-stage"><button type="button" class="example-image" data-lightbox="${esc(localImage(item.image))}" data-caption="${esc(item.attribution)}" aria-label="Expand ${esc(item.method)} example"><img src="${esc(localImage(item.image))}" width="${Number(item.width)}" height="${Number(item.height)}" alt="${esc(item.alt)}"><span class="expand-label">⤢ Expand</span></button><div class="example-caption"><span class="example-method">${esc(item.method)}</span><h4>${esc(item.title)}</h4><p>${esc(item.description)}</p>${external(item.sourceUrl, `${item.sourceLabel} ↗`)}<p class="source-location">${esc(item.sourceAnchor)} <a href="assets/CREDITS.md">Image credits</a></p></div></div><div class="example-thumbnails" role="group" aria-label="Select a visual example">${group.items.map((i) => `<button type="button" data-example-item="${esc(i.id)}" data-group="${esc(group.id)}" aria-pressed="${i.id === item.id}" aria-label="Show ${esc(i.method)}: ${esc(i.title)}"><img src="${esc(localImage(i.image))}" width="${Number(i.width)}" height="${Number(i.height)}" alt="" loading="lazy"><span><strong>${esc(i.method)}</strong><small>${esc(i.title)}</small></span></button>`).join("")}</div>`;
+  }
+  const dialog = $("#image-dialog");
+  let lightboxTrigger;
+  document.addEventListener("click", (event) => {
+    const b = event.target.closest("[data-category-jump], [data-method], [data-example-group], [data-example-item], [data-lightbox]");
+    if (!b) return;
+    if (b.hasAttribute("data-category-jump")) { reset(); state.category = b.dataset.categoryJump; update(); }
+    if (b.hasAttribute("data-method")) {
+      const entry = state.entries.find((e) => e.id === b.dataset.method);
+      if (entry) { reset(); state.query = entry.name; state.category = entry.category; state.view = "cards"; syncInputs(); update(); location.hash = "collection"; $("#search").focus({ preventScroll: true }); scrollTo("#collection"); }
+    }
+    if (b.hasAttribute("data-example-group") && showcase) renderExamples(b.dataset.exampleGroup);
+    if (b.hasAttribute("data-example-item") && showcase) {
+      const itemId = b.dataset.exampleItem;
+      renderExamples(b.dataset.group, itemId);
+      $(`[data-example-item="${itemId}"]`).focus({ preventScroll: true });
+    }
+    if (b.hasAttribute("data-lightbox") && localImage(b.dataset.lightbox)) {
+      lightboxTrigger = b; $("#lightbox-image").src = b.dataset.lightbox;
+      $("#lightbox-image").alt = b.querySelector("img")?.alt || b.dataset.caption || "Expanded research illustration";
+      $("#lightbox-caption").textContent = b.dataset.caption || "Research illustration";
+      dialog.showModal();
+    }
   });
-  window.addEventListener("popstate", () => { state.category = "all"; state.query = ""; state.year = "all"; state.sort = "newest"; state.page = 1; readFilters(); render(); });
+  $("#close-lightbox").addEventListener("click", () => dialog.close());
+  dialog.addEventListener("click", (e) => { if (e.target === dialog) { const r = dialog.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) dialog.close(); } });
+  dialog.addEventListener("close", () => lightboxTrigger?.focus({ preventScroll: true }));
+  document.addEventListener("keydown", (event) => {
+    const active = document.activeElement;
+    if (active.matches("[role=tab]") && ["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) {
+      const tabs = [...active.closest("[role=tablist]").querySelectorAll("[role=tab]")];
+      const index = tabs.indexOf(active);
+      const next = event.key === "Home" ? 0 : event.key === "End" ? tabs.length - 1 : (index + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+      event.preventDefault(); tabs[next].focus(); tabs[next].click();
+    }
+    if (event.key === "/" && !dialog.open && !/INPUT|TEXTAREA|SELECT/.test(active.tagName) && !active.isContentEditable && !event.ctrlKey && !event.metaKey && !event.altKey) { event.preventDefault(); $("#search").focus(); }
+  });
   $("#copy-citation").addEventListener("click", async () => {
-    const button = $("#copy-citation");
-    try { await navigator.clipboard.writeText($("#citation-text").textContent); button.textContent = "Copied!"; $("#copy-status").textContent = "Citation copied to clipboard."; }
-    catch { const range = document.createRange(); range.selectNodeContents($("#citation-text")); const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range); button.textContent = "Select & copy"; $("#copy-status").textContent = "Citation selected. Press Control+C or Command+C to copy."; }
-    setTimeout(() => { button.textContent = "Copy citation"; }, 2500);
+    const b = $("#copy-citation");
+    try { await navigator.clipboard.writeText($("#citation-text").textContent); b.textContent = "Copied!"; $("#copy-status").textContent = "Citation copied to clipboard."; }
+    catch { const range = document.createRange(); range.selectNodeContents($("#citation-text")); const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range); b.textContent = "Select & copy"; $("#copy-status").textContent = "Citation selected. Press Control+C or Command+C to copy."; }
+    setTimeout(() => { b.textContent = "Copy citation"; }, 2500);
   });
   if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver((entries) => { entries.forEach((entry) => { if (entry.isIntersecting) document.querySelectorAll(".sidebar nav a").forEach((link) => { const active = link.hash === `#${entry.target.id}`; link.classList.toggle("active", active); if (active) link.setAttribute("aria-current", "location"); else link.removeAttribute("aria-current"); }); }); }, { rootMargin: "-5% 0px -70% 0px" });
-    document.querySelectorAll("main section[id]").forEach((section) => observer.observe(section));
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+      if (entry.isIntersecting) $$(".sidebar nav a").forEach((link) => { const active = link.hash === `#${entry.target.id}`; link.classList.toggle("active", active); if (active) link.setAttribute("aria-current", "location"); else link.removeAttribute("aria-current"); });
+    }), { rootMargin: "-5% 0px -70% 0px" });
+    $$("main section[id]").forEach((s) => observer.observe(s));
   }
+  let scrollPending = false;
+  function progress() { const d = document.documentElement; $("#reading-progress").style.width = `${Math.min(100, 100 * d.scrollTop / Math.max(1, d.scrollHeight - d.clientHeight))}%`; scrollPending = false; }
+  window.addEventListener("scroll", () => { if (!scrollPending) { scrollPending = true; requestAnimationFrame(progress); } }, { passive: true });
+  const fetchJSON = async (path) => { const r = await fetch(path); if (!r.ok) throw new Error(`${path}: ${r.status}`); return r.json(); };
   async function load() {
-    try {
-      const response = await fetch("data/catalogue.json");
-      if (!response.ok) throw new Error(`Catalogue request failed: ${response.status}`);
-      const data = await response.json();
-      if (!Array.isArray(data.entries)) throw new Error("Invalid catalogue format");
-      fieldNotes = data.field_notes || {};
-      state.entries = data.entries.map((entry) => ({ ...entry, searchText: searchText(entry) }));
-      [...new Set(state.entries.map((entry) => entry.year))].filter(Boolean).sort((a, b) => b - a).forEach((year) => { const option = document.createElement("option"); option.value = String(year); option.textContent = String(year); $("#year").append(option); });
-      readFilters(); render();
-    } catch (error) {
+    const results = await Promise.allSettled(["catalogue", "project", "research-guide", "showcase"].map((name) => fetchJSON(`data/${name}.json`)));
+    const [catalogue, project, guide, examples] = results;
+    if (catalogue.status === "fulfilled" && Array.isArray(catalogue.value.entries)) {
+      fieldNotes = catalogue.value.field_notes || {};
+      state.entries = catalogue.value.entries.map((e) => ({ ...e, searchText: searchText(e) }));
+      [...new Set(state.entries.map((e) => e.year))].filter(Boolean).sort((a, b) => b - a).forEach((year) => { const o = document.createElement("option"); o.value = String(year); o.textContent = String(year); $("#year").append(o); });
+      catalogueReady = true; readFilters(); render(); renderTaxonomy("assets");
+    } else {
       $("#result-count").textContent = "Catalogue could not be loaded";
-      $("#paper-list").innerHTML = '<p class="empty-state">Please reload the page or <a href="data/catalogue.json">download the catalogue</a>.</p>';
-      console.error(error);
+      $("#paper-list").innerHTML = '<p class="empty-state">Please reload or <a href="data/catalogue.json">download the catalogue</a>.</p>';
+      $("#taxonomy-panel").textContent = "Reload the page to explore the taxonomy.";
     }
-    try { const response = await fetch("data/project.json"); if (response.ok) { const project = await response.json(); if (project.abstract) $("#abstract-text").textContent = project.abstract; } } catch { /* The static abstract remains available. */ }
-    try { const response = await fetch("site-config.json"); if (response.ok) { const config = await response.json(); const repository = safeUrl(config.repository); if (repository && new URL(repository).hostname === "github.com") document.querySelectorAll(".repository-link").forEach((link) => { link.href = repository; link.hidden = false; }); } } catch { /* Repository links appear after deployment is configured. */ }
+    if (project.status === "fulfilled" && project.value.abstract) $("#abstract-text").textContent = project.value.abstract;
+    if (guide.status === "fulfilled") renderGuide(guide.value);
+    else ["#axis-grid", "#benchmark-grid", "#agenda-list"].forEach((id) => { $(id).innerHTML = '<p class="empty-state">Please reload or <a href="data/research-guide.json">open the research guide</a>.</p>'; });
+    if (examples.status === "fulfilled" && examples.value.groups?.length) {
+      showcase = examples.value;
+      $("#example-tabs").innerHTML = showcase.groups.map((g, i) => `<button type="button" role="tab" id="example-tab-${esc(g.id)}" aria-controls="example-panel" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-example-group="${esc(g.id)}">${esc(g.title)}</button>`).join("");
+      renderExamples(showcase.groups[0].id);
+    } else $("#example-panel").innerHTML = '<p class="empty-state">Please reload or <a href="data/showcase.json">view the visual example index</a>.</p>';
+    progress();
   }
-  load();
+  load().catch((error) => console.error("Page initialization failed", error));
 })();
