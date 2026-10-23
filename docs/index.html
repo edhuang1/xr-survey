@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Visual Generative AI for Extended Reality: A Survey. Explore 204 methods and systems, 37 resources, visual examples, and source-linked evidence for XR.">
-  <meta name="theme-color" content="#203d51">
+  <meta name="theme-color" content="#f7f8fa">
   <meta property="og:title" content="Visual Generative AI for Extended Reality: A Survey">
   <meta property="og:description" content="From 3D assets and spatial scenes to dynamic worlds and XR interaction. An illustrated research collection.">
   <meta property="og:type" content="website">
@@ -13,17 +13,18 @@
   <link rel="canonical" href="https://edhuang1.github.io/xr-survey/">
   <title>Visual Generative AI for Extended Reality: A Survey</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=4">
-  <link rel="stylesheet" href="media-gallery.css?v=2">
-  <link rel="stylesheet" href="spatial-demo.css?v=2">
-  <script src="app.js?v=4" defer></script>
+  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="media-gallery.css?v=3">
+  <link rel="stylesheet" href="spatial-demo.css?v=3">
+  <link rel="stylesheet" href="taxonomy.css?v=1">
+  <script src="app.js?v=5" defer></script>
   <script src="spatial-demo.js?v=2" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="masthead" id="top">
   <div class="topbar"><a class="brand" href="#top"><img src="favicon.svg" width="25" height="25" alt=""> XR SURVEY</a><nav aria-label="Quick links"><a href="#collection">Papers</a><a href="#overview">About</a><a href="https://github.com/edhuang1/xr-survey" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav></div>
-  <div class="title-block"><h1>Visual Generative AI for Extended Reality</h1><p class="subtitle">A survey of assets, scenes, dynamic worlds, and XR systems.</p><p class="byline"><a href="mailto:g.huang2@aston.ac.uk">Guoxi Huang</a><span>·</span>Aston University</p></div>
+  <div class="title-block"><h1>Visual Generative AI <span>for Extended Reality</span></h1><p class="subtitle">A survey of assets, scenes, dynamic worlds, and XR systems.</p><p class="byline"><a href="mailto:g.huang2@aston.ac.uk">Guoxi Huang</a><span>·</span>Aston University</p></div>
 </header>
 <main id="main" class="site-main">
   <section id="examples" class="section showcase-section">
@@ -49,9 +50,13 @@
     <h2>About the survey</h2>
     <p id="domains">How do generated objects, scenes, and dynamic worlds become usable XR experiences? This survey connects four content families with the representations and evidence needed for viewing, editing, and interaction.</p>
     <details id="taxonomy" class="review-detail"><summary>Browse the method taxonomy</summary><div class="detail-content">
-      <div class="taxonomy-tabs segmented-tabs" role="tablist" aria-label="Taxonomy domain"><button id="tax-assets" role="tab" aria-selected="true" aria-controls="taxonomy-panel" data-taxonomy="assets" type="button">Visual assets <span>52</span></button><button id="tax-scenes" role="tab" aria-selected="false" aria-controls="taxonomy-panel" data-taxonomy="scenes" type="button" tabindex="-1">Spatial scenes <span>49</span></button><button id="tax-temporal" role="tab" aria-selected="false" aria-controls="taxonomy-panel" data-taxonomy="temporal" type="button" tabindex="-1">Time & worlds <span>72</span></button><button id="tax-xr" role="tab" aria-selected="false" aria-controls="taxonomy-panel" data-taxonomy="xr" type="button" tabindex="-1">XR systems <span>31</span></button></div>
+      <div class="taxonomy-tabs" role="tablist" aria-label="Taxonomy domain">
+        <button id="tax-assets" role="tab" aria-selected="true" aria-controls="taxonomy-panel" data-taxonomy="assets" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Zm0 9 8-4.5M12 12 4 7.5M12 12v9"/></svg><span class="taxonomy-tab-label">3D assets<small>52 records</small></span></button>
+        <button id="tax-scenes" role="tab" aria-selected="false" aria-controls="taxonomy-panel" data-taxonomy="scenes" type="button" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18M5 20V9l7-5 7 5v11M9 20v-7h6v7M3 9l9-6 9 6"/></svg><span class="taxonomy-tab-label">Spatial scenes<small>49 records</small></span></button>
+        <button id="tax-temporal" role="tab" aria-selected="false" aria-controls="taxonomy-panel" data-taxonomy="temporal" type="button" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 1 2.34 5.66M4 5v7h7M12 7v5l3 2"/></svg><span class="taxonomy-tab-label">Time & worlds<small>72 records</small></span></button>
+        <button id="tax-xr" role="tab" aria-selected="false" aria-controls="taxonomy-panel" data-taxonomy="xr" type="button" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l2 4v6a2 2 0 0 1-2 2h-3l-4-3-4 3H5a2 2 0 0 1-2-2v-6l2-4ZM7 11h2m6 0h2M7 4h10"/></svg><span class="taxonomy-tab-label">XR systems<small>31 records</small></span></button>
+      </div>
       <div id="taxonomy-panel" role="tabpanel" aria-labelledby="tax-assets" class="taxonomy-panel"><p>Loading the taxonomy…</p></div>
-      <details class="full-taxonomy"><summary><span>View the illustrated taxonomy <small>60 representatives · 20 families · 4 domains</small></span><span>+</span></summary><button type="button" class="image-button" data-lightbox="assets/taxonomy.png" data-caption="Illustrated taxonomy of 60 representatives. Annual counts summarize 203 catalogue papers, excluding the Genie 3 official blog."><img src="assets/taxonomy-preview.webp" width="1600" height="2290" alt="Illustrated taxonomy of 60 representative methods and the annual catalogue counts." loading="lazy"><span class="expand-label">⤢ Expand figure</span></button></details>
 </div></details>
     <details id="framework" class="review-detail"><summary>Review framework & overview</summary><div class="detail-content"><p>Compare what is generated, how it is generated, the representation exposed to applications, and when generation enters the interaction loop.</p>
       <figure class="overview-figure"><button class="image-button" type="button" data-lightbox="assets/overview.png" data-caption="Review overview: generated content, mechanisms, evaluation targets, and XR operations."><img src="assets/overview-preview.webp" width="1600" height="951" alt="Review overview linking four content families to mechanisms, data, evaluation, and XR operations." loading="lazy"><span class="expand-label">⤢ Expand figure</span></button><figcaption>From generated content to XR operations. Source examples: SceneScape, 4D-fy, and WorldPlay. <a href="assets/CREDITS.md">Figure credits ↗</a></figcaption></figure></div></details>

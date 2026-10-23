@@ -98,8 +98,10 @@
     const groups = new Map();
     entries.forEach((e) => { if (!groups.has(e.group)) groups.set(e.group, []); groups.get(e.group).push(e); });
     tabSelection(".taxonomy-tabs", "taxonomy", category);
-    $("#taxonomy-panel").setAttribute("aria-labelledby", `tax-${category}`);
-    $("#taxonomy-panel").innerHTML = `<div class="taxonomy-heading"><h3>${esc(labels[category])}</h3><span>${groups.size} families · ${entries.length} records</span></div><div class="taxonomy-families">${[...groups].map(([name, items]) => `<article class="family"><h4>${esc(name)}<span>${items.length}</span></h4><div class="method-chips">${items.map((e) => `<button type="button" data-method="${esc(e.id)}" title="${esc(e.title)}">${esc(e.name)}</button>`).join("")}</div></article>`).join("")}</div>`;
+    const panel = $("#taxonomy-panel");
+    panel.setAttribute("aria-labelledby", `tax-${category}`);
+    panel.dataset.domain = category;
+    panel.innerHTML = `<div class="taxonomy-heading"><p>${groups.size} families <span>· Select a method to view its paper</span></p><button type="button" class="taxonomy-original" data-lightbox="assets/taxonomy.png" data-caption="Illustrated taxonomy of 60 representatives. Annual counts summarize 203 catalogue papers, excluding the Genie 3 official blog.">Original figure ↗</button></div><div class="taxonomy-families">${[...groups].map(([name, items], index) => `<article class="family" aria-labelledby="taxonomy-family-${category}-${index}"><div class="family-heading"><span class="family-number" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span><h4 id="taxonomy-family-${category}-${index}">${esc(name)}</h4><span class="family-count" aria-label="${items.length} records">${items.length}</span></div><div class="method-chips">${items.map((e) => `<button type="button" data-method="${esc(e.id)}" title="${esc(e.title)}" aria-label="Browse ${esc(e.name)} in the paper collection">${esc(e.name)}</button>`).join("")}</div></article>`).join("")}</div>`;
   }
   $$("[data-taxonomy]").forEach((b) => b.addEventListener("click", () => { if (catalogueReady) renderTaxonomy(b.dataset.taxonomy); }));
   function renderGuide(guide) {

@@ -1,14 +1,14 @@
 #spatial-demo{margin-top:0;--sd-ink:#29414b;--sd-teal:#3d7d78;--sd-line:#dbe3df}
 #spatial-demo[hidden]{display:none}
-.sd-shell{border:1px solid var(--sd-line);border-radius:12px;overflow:hidden;background:#fff}
-.sd-header{display:flex;align-items:baseline;flex-wrap:wrap;gap:5px 18px;padding:16px 20px}
+.sd-shell{border:1px solid var(--sd-line);border-radius:12px;overflow:hidden;background:#fff;margin-top:15px}
+.sd-header{display:flex;align-items:baseline;flex-wrap:wrap;gap:5px 18px;padding:17px 20px;background:#fafcfa}
 .sd-header h3{font-size:18px;line-height:1.4;color:var(--sd-ink);margin:0;letter-spacing:-.02em}
 .sd-header p{font-size:12px;line-height:1.5;color:#61717a;margin:0}
 .sd-stage{position:relative;background:radial-gradient(ellipse at 50% 30%,#fffcf4,#f5f0e5 75%);border-block:1px solid #e6e4da;overflow:hidden}
 .sd-canvas{display:block;width:100%;height:330px;cursor:grab;touch-action:pan-y;outline-offset:-5px!important}
 .sd-canvas.sd-dragging{cursor:grabbing;touch-action:none}
 .sd-stage-tip{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-size:11px;color:#687c74;pointer-events:none}
-.sd-controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px;padding:12px 18px}
+.sd-controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px;padding:12px 18px;background:#fbfcfb}
 .sd-representations{display:flex;align-items:center;gap:3px;background:#f0f4f2;padding:3px;border-radius:8px}
 .sd-controls button{border:1px solid transparent;min-height:44px;padding:8px 13px;border-radius:6px;font-size:12px;line-height:1.4;font-weight:650;color:#536c66;background:transparent;white-space:nowrap}
 .sd-representations button:hover{background:#e3ece6}
