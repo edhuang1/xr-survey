@@ -7,7 +7,6 @@
   const localImage = (v) => typeof v === "string" && /^assets\/[a-zA-Z0-9/_.-]+\.(webp|png|svg|jpg)$/.test(v) && !v.includes("..") ? v : "";
   const external = (v, label, cls = "") => url(v) ? `<a href="${esc(url(v))}" class="${cls}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>` : "";
   const labels = { assets: "3D assets", scenes: "Spatial scenes", temporal: "Time & worlds", xr: "XR systems", resources: "Resources" };
-  const illustrations = { assets: "assets", scenes: "scenes", temporal: "worlds", xr: "xr" };
   const state = { entries: [], category: "all", query: "", year: "all", sort: "newest", view: "table", page: 1 };
   const pageSize = 15;
   let fieldNotes = {}, catalogueReady = false, showcase, videoShowcase;
@@ -91,18 +90,6 @@
   ["previous", "next"].forEach((direction) => $(`#${direction}-page`).addEventListener("click", () => { state.page += direction === "next" ? 1 : -1; render(); scrollTo("#collection"); }));
   window.addEventListener("popstate", () => { readFilters(); render(); });
 
-  const heroScenes = {
-    assets: ["assets.svg", "Geometry, appearance, and parts", "Illustrative exploded chair showing separately represented components."],
-    scenes: ["hero-scene.svg", "An explorable spatial scene", "Illustrative isometric room with furniture, spatial geometry, and a tracked view."],
-    temporal: ["worlds.svg", "Content that evolves over time", "Illustrative sequence of a changing spatial world across three moments."],
-    xr: ["xr.svg", "Connect generation to interaction", "Illustrative XR headset, hand input, and spatial object manipulation."]
-  };
-  $$("[data-hero]").forEach((b) => b.addEventListener("click", () => {
-    const scene = heroScenes[b.dataset.hero];
-    $("#hero-scene").src = `assets/illustrations/${scene[0]}`;
-    $("#hero-scene").alt = scene[2]; $("#scene-label").textContent = scene[1];
-    $$("[data-hero]").forEach((other) => other.setAttribute("aria-pressed", String(other === b)));
-  }));
   function tabSelection(container, key, value) {
     $$(`${container} [role=tab]`).forEach((b) => { const active = b.dataset[key] === value; b.setAttribute("aria-selected", String(active)); b.tabIndex = active ? 0 : -1; });
   }
@@ -116,18 +103,15 @@
   }
   $$("[data-taxonomy]").forEach((b) => b.addEventListener("click", () => { if (catalogueReady) renderTaxonomy(b.dataset.taxonomy); }));
   function renderGuide(guide) {
-    $("#reading-routes").innerHTML = guide.reading_routes.map((r, i) => `<article class="route-card"><span class="route-number">READING ROUTE 0${i + 1}</span><h3>${esc(r.title)}</h3><p>${esc(r.description)}</p><ol>${r.steps.map((s) => `<li><a href="${esc(s.target)}" title="${esc(s.description)}">${esc(s.title)}</a></li>`).join("")}</ol></article>`).join("");
-    $("#domain-grid").innerHTML = guide.domains.map((d, i) => `<article class="definition-card"><img src="assets/illustrations/${illustrations[d.id]}.svg" width="640" height="420" alt="Conceptual illustration of ${esc(d.title.toLowerCase())}." loading="lazy"><div class="definition-body"><span class="overline">DOMAIN 0${i + 1}</span><h3>${esc(d.title)}</h3><p>${esc(d.what)}</p><dl><dt>Inputs</dt><dd>${esc(d.inputs)}</dd><dt>Outputs</dt><dd>${esc(d.outputs)}</dd></dl><details><summary>What matters for XR?</summary><p>${esc(d.operations)}</p></details><a href="#collection" data-category-jump="${esc(d.id)}">Explore ${state.entries.filter((e) => e.category === d.id).length || { assets: 52, scenes: 49, temporal: 72, xr: 31 }[d.id]} methods & systems →</a></div></article>`).join("");
-    $("#axis-grid").innerHTML = guide.axes.map((a, i) => `<article class="axis-card"><div class="axis-title"><span>0${i + 1}</span><h3>${esc(a.title)}</h3></div><h4>${esc(a.question)}</h4><p>${esc(a.explanation)}</p><div class="value-tags">${a.values.map((v) => `<span>${esc(v)}</span>`).join("")}</div><p class="axis-tip">${esc(a.reading_tip)}</p></article>`).join("");
-    $("#benchmark-grid").innerHTML = guide.benchmarks.map((b) => `<article class="benchmark-card"><div class="benchmark-top"><span>${esc(b.category)}</span><span>${esc(b.year)}</span></div><h3>${esc(b.name)}</h3><p>${esc(b.role)}</p>${external(b.source_link, "Explore resource ↗")}</article>`).join("");
-    $("#agenda-list").innerHTML = guide.agenda.map((a, i) => `<details class="agenda-item"${i === 0 ? " open" : ""}><summary><span class="agenda-number">0${i + 1}</span><h3>${esc(a.title)}</h3></summary><div class="agenda-body"><p class="agenda-question">${esc(a.question)}</p><p>${esc(a.design)}</p><h4>What to measure</h4><ul>${a.measurements.map((m) => `<li>${esc(m)}</li>`).join("")}</ul></div></details>`).join("");
+    $("#benchmark-grid").innerHTML = guide.benchmarks.map((b) => `<li>${external(b.source_link, b.name + " ↗")}<span>${esc(b.category)} · ${esc(b.year)}</span></li>`).join("");
+    $("#agenda-list").innerHTML = guide.agenda.map((a) => `<li><strong>${esc(a.title)}</strong><p>${esc(a.question)}</p></li>`).join("");
   }
   function renderFigures(groupId, itemId) {
     const group = showcase.groups.find((g) => g.id === groupId) || showcase.groups[0];
     const item = group.items.find((i) => i.id === itemId) || group.items[0];
     tabSelection("#example-tabs", "exampleGroup", group.id);
     $("#example-panel").setAttribute("aria-labelledby", `example-tab-${group.id}`);
-    $("#example-panel").innerHTML = `<div class="example-group-header"><span class="overline">${esc(group.kicker)}</span><h3>${esc(group.title)}</h3><p>${esc(group.description)}</p></div><div class="example-stage"><button type="button" class="example-image" data-lightbox="${esc(localImage(item.image))}" data-caption="${esc(item.attribution)}" aria-label="Expand ${esc(item.method)} example"><img src="${esc(localImage(item.image))}" width="${Number(item.width)}" height="${Number(item.height)}" alt="${esc(item.alt)}"><span class="expand-label">⤢ Expand</span></button><div class="example-caption"><span class="example-method">${esc(item.method)}</span><h4>${esc(item.title)}</h4><p>${esc(item.description)}</p>${external(item.sourceUrl, `${item.sourceLabel} ↗`)}<p class="source-location">${esc(item.sourceAnchor)} <a href="assets/CREDITS.md">Image credits</a></p></div></div><div class="example-thumbnails" role="group" aria-label="Select a visual example">${group.items.map((i) => `<button type="button" data-example-item="${esc(i.id)}" data-group="${esc(group.id)}" aria-pressed="${i.id === item.id}" aria-label="Show ${esc(i.method)}: ${esc(i.title)}"><img src="${esc(localImage(i.image))}" width="${Number(i.width)}" height="${Number(i.height)}" alt="" loading="lazy"><span><strong>${esc(i.method)}</strong><small>${esc(i.title)}</small></span></button>`).join("")}</div>`;
+    $("#example-panel").innerHTML = `<div class="example-stage"><button type="button" class="example-image" data-lightbox="${esc(localImage(item.image))}" data-caption="${esc(item.attribution)}" aria-label="Expand ${esc(item.method)} example"><img src="${esc(localImage(item.image))}" width="${Number(item.width)}" height="${Number(item.height)}" alt="${esc(item.alt)}"><span class="expand-label">⤢ Expand</span></button><div class="example-caption"><span class="example-method">${esc(item.method)}</span><h4>${esc(item.title)}</h4><p>${esc(item.description)}</p>${external(item.sourceUrl, `${item.sourceLabel} ↗`)}<p class="source-location">${esc(item.sourceAnchor)} <a href="assets/CREDITS.md">Image credits</a></p></div></div><div class="example-thumbnails" role="group" aria-label="Select a visual example">${group.items.map((i) => `<button type="button" data-example-item="${esc(i.id)}" data-group="${esc(group.id)}" aria-pressed="${i.id === item.id}" aria-label="Show ${esc(i.method)}: ${esc(i.title)}"><img src="${esc(localImage(i.image))}" width="${Number(i.width)}" height="${Number(i.height)}" alt="" loading="lazy"><span><strong>${esc(i.method)}</strong><small>${esc(i.title)}</small></span></button>`).join("")}</div>`;
   }
   const videoUrl = (value) => {
     const candidate = url(value);
@@ -138,12 +122,19 @@
     releaseVideo();
     activeExampleGroup = groupId || activeExampleGroup;
     $$("[data-example-mode]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.exampleMode === exampleMode)));
+    const interactive = exampleMode === "interactive";
+    $("#example-tabs").hidden = interactive;
+    $("#example-panel").hidden = interactive;
+    $("#spatial-demo").hidden = !interactive;
+    $("#media-credit").hidden = interactive;
+    if (interactive) return;
+    $("#media-credit").innerHTML = `${exampleMode === "figures" ? "Research figures" : "Recorded research demos"} from their authors. <a href="assets/CREDITS.md">Sources & credits ↗</a>`;
     const group = videoShowcase?.groups.find((g) => g.id === activeExampleGroup);
     if (exampleMode === "figures" || !group?.items.length) { renderFigures(activeExampleGroup, itemId); return; }
     const item = group.items.find((i) => i.id === itemId) || group.items[0];
     tabSelection("#example-tabs", "exampleGroup", group.id);
     $("#example-panel").setAttribute("aria-labelledby", `example-tab-${group.id}`);
-    $("#example-panel").innerHTML = `<div class="example-group-header video-group-header"><div><span class="overline">${esc(group.kicker)}</span><h3>${esc(group.title)}</h3><p>${esc(group.description)}</p></div><span class="motion-badge"><i></i> IN MOTION</span></div><div class="example-stage video-example-stage"><div class="video-player"><div class="video-surface"><video id="example-video" controls loop muted playsinline preload="none" poster="${esc(localImage(item.poster.path))}" width="${Number(item.width)}" height="${Number(item.height)}" aria-label="${esc(item.method)}: ${esc(item.title)}" aria-describedby="video-description"><p>Your browser cannot play this video. ${external(item.sourceUrl, "Watch on the official project page")}</p></video><span class="video-corner-label">OFFICIAL DEMO · ${formatDuration(item.durationSeconds)}</span></div><div class="video-toolbar"><button type="button" id="video-play-toggle" aria-label="Play video">▶ Play</button><span id="video-status" role="status">Ready to play · ${item.audio ? "Muted" : "Silent clip"}</span><button type="button" id="video-expand" aria-label="Expand video">⤢ <span>Expand</span></button></div><div class="video-error" id="video-error" hidden><p>This video could not be played here.</p>${external(item.sourceUrl, "Open the official demonstration ↗")}<button type="button" id="video-retry">Try again</button></div></div><div class="example-caption"><span class="example-method">${esc(item.method)}</span><h4>${esc(item.title)}</h4><p id="video-description">${esc(item.description)}</p>${external(item.sourceUrl, "Official project ↗")}<p class="source-location">${esc(item.sourceLabel)}<br>${esc(item.sourceLocator)}<br><a href="assets/CREDITS.md">Media credits</a></p><div class="video-meta"><span>${Number(item.width)} × ${Number(item.height)}</span><span>${formatDuration(item.durationSeconds)} loop</span><span>${item.audio ? "Audio available" : "Silent"}</span></div></div></div><div class="example-thumbnails video-thumbnails" role="group" aria-label="Select a video demonstration">${group.items.map((i) => `<button type="button" data-video-item="${esc(i.id)}" data-group="${esc(group.id)}" aria-pressed="${i.id === item.id}" aria-label="Watch ${esc(i.method)}: ${esc(i.title)}"><span class="video-thumb-image"><img src="${esc(localImage(i.poster.path))}" width="${Number(i.poster.width)}" height="${Number(i.poster.height)}" alt="" loading="lazy"><span>▶ ${formatDuration(i.durationSeconds)}</span></span><span><strong>${esc(i.method)}</strong><small>${esc(i.title)}</small></span></button>`).join("")}</div>`;
+    $("#example-panel").innerHTML = `<div class="example-stage video-example-stage"><div class="video-player"><div class="video-surface"><video id="example-video" controls loop muted playsinline preload="none" poster="${esc(localImage(item.poster.path))}" width="${Number(item.width)}" height="${Number(item.height)}" aria-label="${esc(item.method)}: ${esc(item.title)}" aria-describedby="video-description"><p>Your browser cannot play this video. ${external(item.sourceUrl, "Watch on the official project page")}</p></video></div><div class="video-toolbar"><button type="button" id="video-play-toggle" aria-label="Play video">▶ Play</button><span id="video-status" role="status">Ready to play · ${item.audio ? "Muted" : "Silent clip"}</span><button type="button" id="video-expand" aria-label="Expand video">⤢ <span>Expand</span></button></div><div class="video-error" id="video-error" hidden><p>This video could not be played here.</p>${external(item.sourceUrl, "Open the official demonstration ↗")}<button type="button" id="video-retry">Try again</button></div></div><div class="example-caption"><span class="example-method">${esc(item.method)}</span><h4>${esc(item.title)}</h4><p id="video-description">${esc(item.description)}</p>${external(item.sourceUrl, "Official project ↗")}<p class="source-location">${esc(item.sourceLabel)}</p></div></div><div class="example-thumbnails video-thumbnails" role="group" aria-label="Select a video demonstration">${group.items.map((i) => `<button type="button" data-video-item="${esc(i.id)}" data-group="${esc(group.id)}" aria-pressed="${i.id === item.id}" aria-label="Watch ${esc(i.method)}: ${esc(i.title)}"><span class="video-thumb-image"><img src="${esc(localImage(i.poster.path))}" width="${Number(i.poster.width)}" height="${Number(i.poster.height)}" alt="" loading="lazy"><span>▶ ${formatDuration(i.durationSeconds)}</span></span><span><strong>${esc(i.method)}</strong><small>${esc(i.title)}</small></span></button>`).join("")}</div>`;
     setupVideo(item);
   }
   function setupVideo(item) {
@@ -216,7 +207,7 @@
       if (entry) { reset(); state.query = entry.name; state.category = entry.category; state.view = "cards"; syncInputs(); update(); location.hash = "collection"; $("#search").focus({ preventScroll: true }); scrollTo("#collection"); }
     }
     if (b.hasAttribute("data-example-group") && showcase) renderExamples(b.dataset.exampleGroup);
-    if (b.hasAttribute("data-example-mode") && showcase) { exampleMode = b.dataset.exampleMode; renderExamples(activeExampleGroup); }
+    if (b.hasAttribute("data-example-mode") && (showcase || b.dataset.exampleMode === "interactive")) { exampleMode = b.dataset.exampleMode; renderExamples(activeExampleGroup); }
     if (b.hasAttribute("data-video-item") && videoShowcase) {
       renderExamples(b.dataset.group, b.dataset.videoItem);
       $(`[data-video-item="${b.dataset.videoItem}"]`).focus({ preventScroll: true });
@@ -254,24 +245,10 @@
     catch { const range = document.createRange(); range.selectNodeContents($("#citation-text")); const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range); b.textContent = "Select & copy"; $("#copy-status").textContent = "Citation selected. Press Control+C or Command+C to copy."; }
     setTimeout(() => { b.textContent = "Copy citation"; }, 2500);
   });
-  function updateActiveSection() {
-    const sections = $$("main section[id]");
-    const passed = sections.filter((section) => section.getBoundingClientRect().top <= window.innerHeight * 0.3);
-    const current = passed[passed.length - 1] || sections[0];
-    $$(".sidebar nav a").forEach((link) => {
-      const active = link.hash === `#${current.id}`;
-      link.classList.toggle("active", active);
-      if (active) link.setAttribute("aria-current", "location"); else link.removeAttribute("aria-current");
-    });
-  }
-  let scrollPending = false;
-  function progress() { const d = document.documentElement; $("#reading-progress").style.width = `${Math.min(100, 100 * d.scrollTop / Math.max(1, d.scrollHeight - d.clientHeight))}%`; updateActiveSection(); scrollPending = false; }
-  window.addEventListener("scroll", () => { if (!scrollPending) { scrollPending = true; requestAnimationFrame(progress); } }, { passive: true });
-  window.addEventListener("resize", () => { if (!scrollPending) { scrollPending = true; requestAnimationFrame(progress); } });
   const fetchJSON = async (path) => { const r = await fetch(path); if (!r.ok) throw new Error(`${path}: ${r.status}`); return r.json(); };
   async function load() {
-    const results = await Promise.allSettled(["catalogue", "project", "research-guide", "showcase", "videos"].map((name) => fetchJSON(`data/${name}.json`)));
-    const [catalogue, project, guide, examples, videos] = results;
+    const results = await Promise.allSettled(["catalogue", "research-guide", "showcase", "videos"].map((name) => fetchJSON(`data/${name}.json`)));
+    const [catalogue, guide, examples, videos] = results;
     if (videos.status === "fulfilled" && videos.value.groups?.length) videoShowcase = videos.value;
     else { exampleMode = "figures"; $('[data-example-mode="videos"]').disabled = true; }
     if (catalogue.status === "fulfilled" && Array.isArray(catalogue.value.entries)) {
@@ -284,15 +261,23 @@
       $("#paper-list").innerHTML = '<p class="empty-state">Please reload or <a href="data/catalogue.json">download the catalogue</a>.</p>';
       $("#taxonomy-panel").textContent = "Reload the page to explore the taxonomy.";
     }
-    if (project.status === "fulfilled" && project.value.abstract) $("#abstract-text").textContent = project.value.abstract;
     if (guide.status === "fulfilled") renderGuide(guide.value);
-    else ["#axis-grid", "#benchmark-grid", "#agenda-list"].forEach((id) => { $(id).innerHTML = '<p class="empty-state">Please reload or <a href="data/research-guide.json">open the research guide</a>.</p>'; });
+    else ["#benchmark-grid", "#agenda-list"].forEach((id) => { $(id).innerHTML = '<p class="empty-state">Please reload or <a href="data/research-guide.json">open the research guide</a>.</p>'; });
     if (examples.status === "fulfilled" && examples.value.groups?.length) {
       showcase = examples.value;
       $("#example-tabs").innerHTML = showcase.groups.map((g, i) => `<button type="button" role="tab" id="example-tab-${esc(g.id)}" aria-controls="example-panel" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-example-group="${esc(g.id)}">${esc(g.title)}</button>`).join("");
       renderExamples(showcase.groups[0].id);
     } else $("#example-panel").innerHTML = '<p class="empty-state">Please reload or <a href="data/showcase.json">view the visual example index</a>.</p>';
-    progress();
   }
+  // Preserve section links when their content is collapsed by default.
+  function revealAnchor() {
+    const target = document.getElementById(location.hash.slice(1));
+    if (!target) return;
+    let node = target;
+    while (node) { if (node.tagName === "DETAILS") node.open = true; node = node.parentElement; }
+    if (target.closest("details")) target.scrollIntoView();
+  }
+  window.addEventListener("hashchange", revealAnchor);
+  revealAnchor();
   load().catch((error) => console.error("Page initialization failed", error));
 })();

@@ -7,20 +7,16 @@
   host.innerHTML = `
     <div class="sd-shell">
       <div class="sd-header">
-        <div><span class="sd-kicker">Interactive illustration</span><h3>Explore a spatial representation</h3><p id="sd-description">A constructed scene for exploring viewpoints and representations; not a model-generated result.</p></div>
-        <span class="sd-live-badge">Try it yourself</span>
+        <h3>Explore in 3D</h3><p id="sd-description">Illustrative scene · hand-built geometry, not model output.</p>
       </div>
       <div class="sd-stage">
-        <div class="sd-stage-note" aria-hidden="true">A small room, many viewpoints</div>
         <canvas class="sd-canvas" tabindex="0" role="img" aria-label="Interactive 3D room. Drag horizontally or use arrow keys to orbit; drag vertically to change elevation." aria-describedby="sd-description sd-instructions">A teal sofa, wooden table, lounge chair, plant, and window form a constructed 3D room. Use the viewpoint and representation controls to explore it.</canvas>
-        <div class="sd-stage-tip" id="sd-instructions">Drag to explore · Arrow keys also rotate the view</div>
+        <div class="sd-stage-tip" id="sd-instructions">Drag or use arrow keys to rotate</div>
       </div>
       <div class="sd-controls">
         <div class="sd-representations" role="group" aria-label="Scene representation"><button type="button" data-sd-mode="solid" aria-pressed="true">Solid</button><button type="button" data-sd-mode="wire" aria-pressed="false">Wireframe</button><button type="button" data-sd-mode="points" aria-pressed="false">Points</button></div>
-        <label class="sd-orbit" for="sd-angle"><span>Viewpoint</span><input id="sd-angle" type="range" min="0" max="360" value="35" step="1" aria-label="Camera orbit angle in degrees"><output for="sd-angle" id="sd-angle-value">35°</output></label>
-        <div class="sd-actions"><button class="sd-tour" type="button" aria-pressed="false">▶ Play camera tour</button><button class="sd-reset" type="button">Reset</button></div>
+        <div class="sd-actions"><button class="sd-tour" type="button" aria-pressed="false" aria-label="Play camera tour">▶ Play</button><button class="sd-reset" type="button">Reset</button></div>
       </div>
-      <div class="sd-footer"><p>Rotate the same geometry. Switch how its surfaces are shown.</p><div class="sd-palette" aria-hidden="true"><span></span><span></span><span></span><span></span></div></div>
       <span class="sr-only" role="status" aria-live="polite" id="sd-status"></span>
     </div>`;
 
@@ -31,8 +27,6 @@
     host.querySelector('.sd-stage-tip').textContent = 'This illustration needs a browser with Canvas support.';
     return;
   }
-  const angleInput = host.querySelector('#sd-angle');
-  const angleOutput = host.querySelector('#sd-angle-value');
   const tourButton = host.querySelector('.sd-tour');
   const status = host.querySelector('#sd-status');
   const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -229,11 +223,6 @@
     ctx.setTransform(ratio,0,0,ratio,0,0);
     draw();
   }
-  function updateAngleControl() {
-    const degrees = Math.round(((angle % TAU + TAU) % TAU)*180/Math.PI)%360;
-    angleInput.value = String(degrees);
-    angleOutput.textContent = `${degrees}°`;
-  }
   function cancelLoop() {
     if (frame) cancelAnimationFrame(frame);
     frame = 0;lastTime = 0;
@@ -241,7 +230,8 @@
   function setPlaying(value, announce = false) {
     playing = value && visible && !document.hidden;
     tourButton.setAttribute('aria-pressed',String(playing));
-    tourButton.textContent = playing ? 'Ⅱ Pause camera tour' : '▶ Play camera tour';
+    tourButton.textContent = playing ? 'Ⅱ Pause' : '▶ Play';
+    tourButton.setAttribute('aria-label',playing ? 'Pause camera tour' : 'Play camera tour');
     cancelLoop();
     if (announce) status.textContent = playing ? 'Camera tour playing. Press Pause to stop.' : 'Camera tour paused.';
     if (playing) frame = requestAnimationFrame(animate);
@@ -250,7 +240,7 @@
     frame=0;
     if (!playing || !visible || document.hidden || !host.isConnected) { setPlaying(false);return; }
     if (lastTime) angle += Math.min(time-lastTime,60)*.00013;
-    lastTime=time;updateAngleControl();draw();
+    lastTime=time;draw();
     frame=requestAnimationFrame(animate);
   }
   function setMode(next) {
@@ -262,10 +252,9 @@
     draw();
   }
   host.querySelectorAll('[data-sd-mode]').forEach(button=>button.addEventListener('click',()=>setMode(button.dataset.sdMode)));
-  angleInput.addEventListener('input',()=>{setPlaying(false);angle=Number(angleInput.value)*Math.PI/180;angleOutput.textContent=`${angleInput.value}°`;draw();});
   tourButton.addEventListener('click',()=>setPlaying(!playing,true));
   host.querySelector('.sd-reset').addEventListener('click',()=>{
-    setPlaying(false);angle=35*Math.PI/180;elevation=.54;updateAngleControl();setMode('solid');status.textContent='Scene reset to the original viewpoint and solid representation.';
+    setPlaying(false);angle=35*Math.PI/180;elevation=.54;setMode('solid');status.textContent='Scene reset to the original viewpoint and solid representation.';
   });
   canvas.addEventListener('pointerdown',event=>{
     if (event.button !== 0) return;
@@ -276,7 +265,7 @@
     if (!drag || drag.id!==event.pointerId) return;
     angle=drag.angle+(event.clientX-drag.x)*.009;
     elevation=Math.max(.25,Math.min(.95,drag.elevation+(event.clientY-drag.y)*.004));
-    updateAngleControl();draw();
+    draw();
   });
   function endDrag(){drag=null;canvas.classList.remove('sd-dragging');}
   canvas.addEventListener('pointerup',endDrag);canvas.addEventListener('pointercancel',endDrag);canvas.addEventListener('lostpointercapture',endDrag);
@@ -287,7 +276,7 @@
     if(event.key==='ArrowRight') angle+=.12;
     if(event.key==='ArrowUp') elevation=Math.min(.95,elevation+.05);
     if(event.key==='ArrowDown') elevation=Math.max(.25,elevation-.05);
-    updateAngleControl();draw();
+    draw();
   });
   document.addEventListener('visibilitychange',()=>{if(document.hidden)setPlaying(false);});
   window.addEventListener('pagehide',()=>setPlaying(false));
@@ -297,7 +286,7 @@
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(entries=>{
       visible=entries[0].isIntersecting;
-      if (!visible) setPlaying(false);else draw();
+      if (!visible) setPlaying(false);else setSize();
     },{threshold:.15});
     observer.observe(canvas);
   } else visible=true;

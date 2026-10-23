@@ -13,109 +13,66 @@
   <link rel="canonical" href="https://edhuang1.github.io/xr-survey/">
   <title>Visual Generative AI for Extended Reality: A Survey</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=3">
-  <link rel="stylesheet" href="media-gallery.css?v=1">
-  <link rel="stylesheet" href="spatial-demo.css?v=1">
-  <script src="app.js?v=3" defer></script>
-  <script src="spatial-demo.js?v=1" defer></script>
+  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet" href="media-gallery.css?v=2">
+  <link rel="stylesheet" href="spatial-demo.css?v=2">
+  <script src="app.js?v=4" defer></script>
+  <script src="spatial-demo.js?v=2" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-<div class="reading-progress" aria-hidden="true"><span id="reading-progress"></span></div>
-<header class="hero" id="top">
-  <div class="topbar"><a class="brand" href="#top"><img src="favicon.svg" width="27" height="27" alt=""> VISUAL GENAI × XR</a><nav aria-label="Quick links"><a href="#examples">Examples</a><a href="#collection">Collection</a><a href="https://github.com/edhuang1/xr-survey" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav></div>
-  <div class="hero-grid">
-    <div class="hero-copy">
-      <p class="eyebrow"><span></span> FROM CONTENT GENERATION TO INTERACTION</p>
-      <h1>Visual Generative AI<br>for Extended Reality:<br><span>A Survey</span></h1>
-      <p class="hero-subtitle">Assets. Scenes. Dynamic worlds.<br>The foundations of generative XR.</p>
-      <div class="author-line"><span class="author-monogram" aria-hidden="true">GH</span><div><a href="mailto:g.huang2@aston.ac.uk">Guoxi Huang</a><span>Aston University</span></div></div>
-      <p class="updated">Research collection updated · October 23, 2026</p>
-      <div class="hero-actions"><a class="button button-cream" href="#collection"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14v14H5zM9 5v14M5 10h14"/></svg> Collection</a><a class="button button-cream" href="#examples"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 17 5-6 4 4 3-4 3 6M4 4h16v16H4z"/><circle cx="9" cy="8" r="1"/></svg> Examples</a><a class="button button-cream" href="https://github.com/edhuang1/xr-survey" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 18c-4 1-4-2-5-2m14 5v-4c0-1-.3-2-1-2 3-.4 5-1.5 5-5 0-1.5-.5-2.5-1.5-3.5.2-1 .2-2-.4-3-1.7 0-2.8.6-3.6 1A13 13 0 0 0 8.5 4C7.7 3.6 6.6 3 5 3c-.6 1-.6 2-.4 3C3.6 7 3 8.5 3 10c0 3.5 2 4.6 5 5-.7.5-1 1.4-1 2v4"/></svg> GitHub</a></div>
-    </div>
-    <div class="hero-visual">
-      <div class="scene-window"><div class="scene-title"><span class="window-dots"><i></i><i></i><i></i></span><span id="scene-label">An explorable spatial scene</span><span class="scene-badge">3D → XR</span></div><img id="hero-scene" src="assets/illustrations/hero-scene.svg" alt="Illustrative isometric room with furniture, spatial geometry, and a tracked view." width="1200" height="900" fetchpriority="high"><div class="scene-bottom"><span class="status-dot"></span> Content → representation → interaction <span class="illustration-note">Illustrative</span></div></div>
-      <div class="hero-switcher" role="group" aria-label="Explore content illustrations"><button type="button" data-hero="assets" aria-pressed="false">01 <span>Assets</span></button><button type="button" data-hero="scenes" aria-pressed="true">02 <span>Scenes</span></button><button type="button" data-hero="temporal" aria-pressed="false">03 <span>Worlds</span></button><button type="button" data-hero="xr" aria-pressed="false">04 <span>XR</span></button></div>
-    </div>
-  </div>
-  <div class="hero-stats"><a href="#collection"><strong>204</strong><span>Methods & systems</span></a><a href="#collection" data-category-jump="resources"><strong>37</strong><span>Datasets & benchmarks</span></a><a href="#evidence"><strong>31</strong><span>Detailed evidence profiles</span></a><a href="#framework"><strong>4</strong><span>Comparison axes</span></a></div>
+<header class="masthead" id="top">
+  <div class="topbar"><a class="brand" href="#top"><img src="favicon.svg" width="25" height="25" alt=""> XR SURVEY</a><nav aria-label="Quick links"><a href="#collection">Papers</a><a href="#overview">About</a><a href="https://github.com/edhuang1/xr-survey" target="_blank" rel="noopener noreferrer">GitHub ↗</a></nav></div>
+  <div class="title-block"><h1>Visual Generative AI for Extended Reality</h1><p class="subtitle">A survey of assets, scenes, dynamic worlds, and XR systems.</p><p class="byline"><a href="mailto:g.huang2@aston.ac.uk">Guoxi Huang</a><span>·</span>Aston University</p></div>
 </header>
-<div class="page-layout">
-  <aside class="sidebar"><nav aria-label="On this page"><p class="nav-title">CONTENTS</p><a href="#overview">Introduction</a><a href="#domains">Definition</a><a href="#taxonomy">Taxonomy</a><a href="#framework">Framework</a><a href="#examples">Visual examples</a><a href="#collection">Collections</a><a href="#benchmarks">Datasets & benchmarks</a><a href="#evaluation">XR evaluation</a><a href="#evidence">Evidence</a><a href="#citation">Citation</a><a href="#contact">About</a></nav><div class="sidebar-footer"><span class="small-status"></span> 241 catalogue entries<br><span>Coverage through Oct 2026</span></div></aside>
-  <main id="main">
-    <section id="overview" class="section">
-      <h2><span class="section-icon">◈</span> Introduction</h2>
-      <p class="lead">Generative models are changing how we create 3D objects, build spatial scenes, and imagine interactive worlds. Bringing these outputs into extended reality means connecting what a model generates to what a person can actually do.</p>
-      <p>A convincing image is only the starting point. Walking around a generated scene, editing an object's parts, keeping a change after a revisit, and responding to tracked input each require particular representations and system components.</p>
-      <div class="intro-highlight">This survey connects <strong>visual assets, spatial scenes, temporal content, and XR systems</strong> through a shared framework of generated outputs, exposed representations, and operational evidence.</div>
-      <figure class="overview-figure"><button class="image-button" type="button" data-lightbox="assets/overview.png" data-caption="Review overview: generated content, mechanisms, evaluation targets, and XR operations."><img src="assets/overview-preview.webp" width="1600" height="951" alt="Review overview linking four content families to mechanisms, data, evaluation, and XR operations." loading="lazy"><span class="expand-label">⤢ Expand figure</span></button><figcaption>From generated content to XR operations. Source examples: SceneScape, 4D-fy, and WorldPlay. <a href="assets/CREDITS.md">Figure credits ↗</a></figcaption></figure>
-      <details class="abstract"><summary>Read the abstract <span>+</span></summary><p id="abstract-text">The review catalogues 204 methods and systems and 37 resources. Four comparison axes organize the analysis, and source-linked profiles examine capability evidence for 31 selected methods and systems.</p></details>
-      <div id="reading-routes" class="reading-routes"></div>
-    </section>
-    <section id="domains" class="section">
-      <h2><span class="section-icon">▱</span> What is generated?</h2><p class="section-intro">Four complementary content families span the route from a single asset to an interactive XR experience.</p>
-      <div id="domain-grid" class="domain-grid">
-        <article class="definition-card"><img src="assets/illustrations/assets.svg" width="600" height="400" alt="Illustrative 3D asset with separable components." loading="lazy"><h3>Visual assets</h3><p>Geometry, appearance, parts, and materials for object-level creation.</p></article>
-        <article class="definition-card"><img src="assets/illustrations/scenes.svg" width="600" height="400" alt="Illustrative spatial scene." loading="lazy"><h3>Spatial scenes</h3><p>Layouts, retained environments, and generated views for spatial exploration.</p></article>
-        <article class="definition-card"><img src="assets/illustrations/worlds.svg" width="600" height="400" alt="Illustrative sequence of a changing world." loading="lazy"><h3>Temporal content & worlds</h3><p>Time-varying 3D and action-conditioned observations.</p></article>
-        <article class="definition-card"><img src="assets/illustrations/xr.svg" width="600" height="400" alt="Illustrative XR headset and spatial interaction." loading="lazy"><h3>XR systems</h3><p>Interfaces, delivery, and rendering that connect generation to interaction.</p></article>
-      </div>
-    </section>
-    <section id="taxonomy" class="section">
-      <h2><span class="section-icon">⌘</span> A hierarchical taxonomy</h2><p class="section-intro">Explore the method families in the full catalogue. Select a method to find its paper and technical descriptors.</p>
-      <div class="taxonomy-tabs segmented-tabs" role="tablist" aria-label="Taxonomy domain"><button id="tax-assets" role="tab" aria-selected="true" aria-controls="taxonomy-panel" data-taxonomy="assets" type="button">Visual assets <span>52</span></button><button id="tax-scenes" role="tab" aria-selected="false" aria-controls="taxonomy-panel" data-taxonomy="scenes" type="button" tabindex="-1">Spatial scenes <span>49</span></button><button id="tax-temporal" role="tab" aria-selected="false" aria-controls="taxonomy-panel" data-taxonomy="temporal" type="button" tabindex="-1">Time & worlds <span>72</span></button><button id="tax-xr" role="tab" aria-selected="false" aria-controls="taxonomy-panel" data-taxonomy="xr" type="button" tabindex="-1">XR systems <span>31</span></button></div>
-      <div id="taxonomy-panel" role="tabpanel" aria-labelledby="tax-assets" class="taxonomy-panel"><p>Loading the taxonomy…</p></div>
-      <details class="full-taxonomy"><summary><span>View the illustrated taxonomy <small>60 representatives · 20 families · 4 domains</small></span><span>+</span></summary><button type="button" class="image-button" data-lightbox="assets/taxonomy.png" data-caption="Illustrated taxonomy of 60 representatives. Annual counts summarize 203 catalogue papers, excluding the Genie 3 official blog."><img src="assets/taxonomy-preview.webp" width="1600" height="2290" alt="Illustrated taxonomy of 60 representative methods and the annual catalogue counts." loading="lazy"><span class="expand-label">⤢ Expand figure</span></button></details>
-    </section>
-    <section id="framework" class="section">
-      <h2><span class="section-icon">⊞</span> Four axes for comparison</h2><p>Content categories tell us what is created. These four axes explain how it is constructed and what remains available during use.</p><div id="axis-grid" class="axis-grid"></div>
-      <div class="operation-path"><span>Generated output</span><b aria-hidden="true">→</b><span>Exposed representation</span><b aria-hidden="true">→</b><span>Supporting component</span><b aria-hidden="true">→</b><span>XR operation</span></div>
-    </section>
-    <section id="examples" class="section">
-      <h2><span class="section-icon">▧</span> Generated content in motion</h2><p class="section-intro">Watch objects turn, move through generated scenes, and see XR interaction in action. Select a category and a demo to explore the original research.</p>
-      <div class="media-mode-row"><div class="media-mode" role="group" aria-label="Example format"><button type="button" data-example-mode="videos" aria-pressed="true">▶ Videos & motion <span>8</span></button><button type="button" data-example-mode="figures" aria-pressed="false">▧ Research figures <span>12</span></button></div><span class="media-mode-note">Official project demonstrations</span></div>
-      <div id="example-tabs" class="segmented-tabs" role="tablist" aria-label="Visual example category"></div>
-      <div id="example-panel" role="tabpanel" class="example-panel"><p>Loading visual examples…</p></div>
-      <p class="fine-print">Videos stream from the authors' project websites. These are recorded demonstrations, not live model inference or experiments reproduced by this survey. <a href="assets/CREDITS.md">Media sources & credits ↗</a></p>
-      <div id="spatial-demo"></div>
-    </section>
+<main id="main" class="site-main">
+  <section id="examples" class="section showcase-section">
+    <div class="showcase-toolbar"><h2>Explore</h2><div class="media-mode" role="group" aria-label="Example format"><button type="button" data-example-mode="videos" aria-pressed="true" aria-controls="example-panel">Videos</button><button type="button" data-example-mode="interactive" aria-pressed="false" aria-controls="spatial-demo">Interactive 3D</button><button type="button" data-example-mode="figures" aria-pressed="false" aria-controls="example-panel">Figures</button></div></div>
+    <div id="example-tabs" class="segmented-tabs" role="tablist" aria-label="Visual example category"></div>
+    <div id="example-panel" role="tabpanel" class="example-panel"><p>Loading demonstrations…</p></div>
+    <div id="spatial-demo" hidden></div>
+    <p id="media-credit" class="fine-print">Recorded research demos from their authors. <a href="assets/CREDITS.md">Sources & credits ↗</a></p>
+  </section>
     <section id="collection" class="section collection-section">
-      <div class="heading-row"><h2><span class="section-icon">▤</span> Paper collections</h2><a class="text-link" href="data/catalogue.json" download>Download catalogue ↓</a></div>
-      <p class="section-intro">Search the complete collection of 204 methods and systems and 37 resources. Browse compact tables or open the detailed record for a method.</p>
+      <div class="heading-row"><h2>Paper collection</h2><a class="text-link" href="data/catalogue.json" download>Download catalogue ↓</a></div>
+      <p class="section-intro">204 methods and systems · 37 datasets and benchmarks · Updated October 2026</p>
       <div class="collection-controls"><label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span class="sr-only">Search papers</span><input type="search" id="search" placeholder="Search titles, methods, venues, representations…" autocomplete="off"><kbd aria-hidden="true">/</kbd></label>
         <div class="category-filters" role="group" aria-label="Content category"><button type="button" data-category="all" aria-pressed="true">All <span>241</span></button><button type="button" data-category="assets" aria-pressed="false">Assets <span>52</span></button><button type="button" data-category="scenes" aria-pressed="false">Scenes <span>49</span></button><button type="button" data-category="temporal" aria-pressed="false">Time & worlds <span>72</span></button><button type="button" data-category="xr" aria-pressed="false">XR <span>31</span></button><button type="button" data-category="resources" aria-pressed="false">Resources <span>37</span></button></div>
         <div class="select-row"><label for="year">Year</label><select id="year"><option value="all">All years</option></select><label for="sort">Sort</label><select id="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="name">Method A–Z</option></select><button id="reset-filters" class="reset" type="button">Reset</button><div class="view-toggle" role="group" aria-label="Collection layout"><button type="button" data-view="table" aria-pressed="true" title="Table view">▤ <span>Table</span></button><button type="button" data-view="cards" aria-pressed="false" title="Detailed view">▦ <span>Details</span></button></div></div>
       </div>
-      <div class="results-meta"><p id="result-count" role="status" aria-live="polite">Loading catalogue…</p><span>Source links open the original research ↗</span></div>
+      <div class="results-meta"><p id="result-count" role="status" aria-live="polite">Loading catalogue…</p></div>
       <div id="paper-list" aria-label="Research catalogue"></div><p id="empty-state" class="empty-state" hidden>No matching papers. Try another term or reset the filters.</p>
       <div id="pagination" class="pagination" hidden><button id="previous-page" type="button">← Previous</button><span id="page-status"></span><button id="next-page" type="button">Next →</button></div>
-      <noscript><p>The interactive collection requires JavaScript. <a href="data/catalogue.json">Download all 241 records</a>.</p></noscript><p class="fine-print">A critical narrative review with purposive selection and targeted retrieval through 23 October 2026. Counts describe this catalogue, not the prevalence of approaches across the field.</p>
+      <noscript><p>The interactive collection requires JavaScript. <a href="data/catalogue.json">Download all 241 records</a>.</p></noscript><p class="fine-print">A curated narrative review with targeted retrieval through 23 October 2026.</p>
     </section>
-    <section id="benchmarks" class="section">
-      <div class="heading-row"><h2><span class="section-icon">◫</span> Datasets & benchmarks</h2><a href="#collection" data-category-jump="resources" class="text-link">Explore all 37 ↗</a></div><p class="section-intro">Resources serve different roles: providing training content, furnishing interactive environments, or evaluating a specified generation task.</p><div id="benchmark-grid" class="benchmark-grid"></div>
-    </section>
-    <section id="evaluation" class="section">
-      <h2><span class="section-icon">◎</span> From generation to XR evaluation</h2><p class="section-intro">Five proposed evaluation designs connect model-level evidence to the demands of immersive use. Each starts with an explicit operation and a measurable endpoint.</p><div id="agenda-list" class="agenda-list"></div><p class="fine-print">Research agenda: these are proposed matched evaluations, not new experimental results.</p>
-    </section>
-    <section id="evidence" class="section">
-      <h2><span class="section-icon">▥</span> Evidence behind the capabilities</h2><p class="section-intro">Which operation was demonstrated, by which component, and under which configuration? The supplement preserves the source locations behind the review's capability profiles.</p>
-      <div class="evidence-panel"><div><span class="overline">SOURCE-LINKED EVIDENCE</span><h3>From a capability claim<br>to an inspected source.</h3><p>Explore 31 selected profiles across eight capability dimensions, with all 248 cell explanations and configuration-specific evidence.</p><a class="button button-dark" href="evidence/index.html">Explore the evidence ↗</a></div><div class="evidence-numbers"><div><strong>31</strong><span>Selected profiles</span></div><div><strong>8</strong><span>Capability dimensions</span></div><div><strong>248</strong><span>Cell explanations</span></div></div></div>
-      <div id="resources" class="resource-list"><a href="data/catalogue.json" download><span class="file-icon">{ }</span><span><strong>Research catalogue</strong><small>241 source-linked records · JSON</small></span><b>↓</b></a><a href="paper/references.bib" download><span class="file-icon">Bᵢ</span><span><strong>Bibliography</strong><small>Research reference library · BibTeX</small></span><b>↓</b></a><a href="evidence/index.html"><span class="file-icon">≡</span><span><strong>Evidence supplement</strong><small>Profiles, inspection notes & quantitative evidence</small></span><b>↗</b></a></div>
-    </section>
-    <section id="citation" class="section">
-      <h2><span class="section-icon">❞</span> Citation</h2><p>If this survey helps your research, please use the following bibliographic information.</p><div class="citation-block"><div class="code-header"><span>BibTeX</span><button id="copy-citation" type="button">Copy citation</button></div><pre><code id="citation-text">@unpublished{huang2026visualgenerativexr,
+  <section id="overview" class="section about-section">
+    <h2>About the survey</h2>
+    <p id="domains">How do generated objects, scenes, and dynamic worlds become usable XR experiences? This survey connects four content families with the representations and evidence needed for viewing, editing, and interaction.</p>
+    <details id="taxonomy" class="review-detail"><summary>Browse the method taxonomy</summary><div class="detail-content">
+      <div class="taxonomy-tabs segmented-tabs" role="tablist" aria-label="Taxonomy domain"><button id="tax-assets" role="tab" aria-selected="true" aria-controls="taxonomy-panel" data-taxonomy="assets" type="button">Visual assets <span>52</span></button><button id="tax-scenes" role="tab" aria-selected="false" aria-controls="taxonomy-panel" data-taxonomy="scenes" type="button" tabindex="-1">Spatial scenes <span>49</span></button><button id="tax-temporal" role="tab" aria-selected="false" aria-controls="taxonomy-panel" data-taxonomy="temporal" type="button" tabindex="-1">Time & worlds <span>72</span></button><button id="tax-xr" role="tab" aria-selected="false" aria-controls="taxonomy-panel" data-taxonomy="xr" type="button" tabindex="-1">XR systems <span>31</span></button></div>
+      <div id="taxonomy-panel" role="tabpanel" aria-labelledby="tax-assets" class="taxonomy-panel"><p>Loading the taxonomy…</p></div>
+      <details class="full-taxonomy"><summary><span>View the illustrated taxonomy <small>60 representatives · 20 families · 4 domains</small></span><span>+</span></summary><button type="button" class="image-button" data-lightbox="assets/taxonomy.png" data-caption="Illustrated taxonomy of 60 representatives. Annual counts summarize 203 catalogue papers, excluding the Genie 3 official blog."><img src="assets/taxonomy-preview.webp" width="1600" height="2290" alt="Illustrated taxonomy of 60 representative methods and the annual catalogue counts." loading="lazy"><span class="expand-label">⤢ Expand figure</span></button></details>
+</div></details>
+    <details id="framework" class="review-detail"><summary>Review framework & overview</summary><div class="detail-content"><p>Compare what is generated, how it is generated, the representation exposed to applications, and when generation enters the interaction loop.</p>
+      <figure class="overview-figure"><button class="image-button" type="button" data-lightbox="assets/overview.png" data-caption="Review overview: generated content, mechanisms, evaluation targets, and XR operations."><img src="assets/overview-preview.webp" width="1600" height="951" alt="Review overview linking four content families to mechanisms, data, evaluation, and XR operations." loading="lazy"><span class="expand-label">⤢ Expand figure</span></button><figcaption>From generated content to XR operations. Source examples: SceneScape, 4D-fy, and WorldPlay. <a href="assets/CREDITS.md">Figure credits ↗</a></figcaption></figure></div></details>
+    <details id="evaluation" class="review-detail"><summary>Open questions for XR evaluation</summary><div class="detail-content"><p>Proposed evaluation directions, rather than new experimental results.</p><ul id="agenda-list" class="compact-list"></ul></div></details>
+  </section>
+  <section id="evidence" class="section resources-section">
+    <h2>Resources & references</h2>
+    <p>Source-linked capability evidence for 31 selected methods and systems.</p>
+    <div id="resources" class="resource-links"><a href="evidence/index.html">Evidence supplement ↗</a><a href="paper/references.bib" download>Bibliography ↓</a><a href="data/catalogue.json" download>Catalogue JSON ↓</a></div>
+    <details id="benchmarks" class="review-detail"><summary>Selected datasets & benchmarks</summary><div class="detail-content"><ul id="benchmark-grid" class="compact-list"></ul><a href="#collection" data-category-jump="resources">Browse all 37 resources →</a></div></details>
+    <details id="citation" class="review-detail"><summary>Cite this survey</summary><div class="detail-content">
+<div class="citation-block"><div class="code-header"><span>BibTeX</span><button id="copy-citation" type="button">Copy citation</button></div><pre><code id="citation-text">@unpublished{huang2026visualgenerativexr,
   title  = {Visual Generative AI for Extended Reality: A Survey},
   author = {Huang, Guoxi},
   year   = {2026},
   note   = {Manuscript, 23 October 2026}
 }</code></pre><span id="copy-status" class="sr-only" role="status"></span></div>
-    </section>
-    <section id="contact" class="section contact-section">
-      <h2><span class="section-icon">◉</span> About this project</h2><div class="contact-card"><div class="contact-avatar" aria-hidden="true">GH</div><div><h3>Guoxi Huang</h3><p>School of Computer Science and Digital Technologies<br>Aston University · Birmingham, United Kingdom</p><div class="contact-links"><a href="mailto:g.huang2@aston.ac.uk">Email ↗</a><a href="https://github.com/edhuang1/xr-survey/issues" target="_blank" rel="noopener noreferrer">Suggest a correction ↗</a><a href="https://github.com/edhuang1/xr-survey/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contribute ↗</a></div></div></div><p class="acknowledgement">We thank the authors of the collected work for sharing their research. The website's visual organization is inspired by the <a href="https://worldbench.github.io/survey" target="_blank" rel="noopener noreferrer">WorldBench survey website</a>.</p>
-    </section>
-  </main>
-</div>
-<footer class="footer"><a class="brand" href="#top"><img src="favicon.svg" width="27" height="27" alt=""> VISUAL GENAI × XR</a><p>Guoxi Huang · Aston University · 2026</p><a href="assets/CREDITS.md">Image sources & credits</a><a class="back-top" href="#top" aria-label="Back to top">↑</a></footer>
+</div></details>
+  </section>
+</main>
+<footer id="contact" class="footer"><p>Guoxi Huang · Aston University</p><div><a href="mailto:g.huang2@aston.ac.uk">Contact</a><a href="https://github.com/edhuang1/xr-survey/issues" target="_blank" rel="noopener noreferrer">Suggest a paper ↗</a><a href="assets/CREDITS.md">Credits</a></div><p class="design-credit">Inspired by the <a href="https://worldbench.github.io/survey" target="_blank" rel="noopener noreferrer">WorldBench survey</a>.</p></footer>
 <dialog id="video-dialog" class="video-dialog" aria-label="Expanded video"><div class="dialog-toolbar"><p id="expanded-video-title"></p><button type="button" id="close-video" aria-label="Close expanded video">×</button></div><div id="expanded-video"></div></dialog>
 <dialog id="image-dialog" class="image-dialog" aria-label="Expanded figure"><div class="dialog-toolbar"><p id="lightbox-caption"></p><button type="button" id="close-lightbox" aria-label="Close expanded figure">×</button></div><img id="lightbox-image" alt="Expanded research figure"></dialog>
 </body>
