@@ -1,0 +1,29 @@
+/* Transparent text remains part of the browser's native Select All range. */
+#visitor-counter {
+  position: fixed;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(14px, env(safe-area-inset-bottom));
+  z-index: 20;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: transparent;
+  background: transparent;
+  text-shadow: none;
+  font: 11px/1.6 "Segoe UI", Arial, sans-serif;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .04em;
+  white-space: nowrap;
+  user-select: text;
+  -webkit-user-select: text;
+  pointer-events: none;
+  forced-color-adjust: none;
+}
+#visitor-counter::selection {
+  color: #173f48;
+  background: #d7eae7;
+  text-shadow: none;
+}
+@media print {
+  #visitor-counter { display: none; }
+}

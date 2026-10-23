@@ -23,6 +23,8 @@ This repository accompanies *Visual Generative AI for Extended Reality: A Survey
 
 The website opens with eight official video demonstrations, an interactive spatial representation sandbox, and 12 attributed research figures in a single switchable showcase. A searchable catalogue follows. Method taxonomy, review framework, evaluation questions, resources, and citation information expand on demand. Videos load when visible, pause offscreen, and respect reduced-motion preferences. Video files remain on their official project hosts; only credited posters and metadata are stored here.
 
+The bottom-right visitor counter is transparent until selected (for example, with Ctrl+A). It uses the public [Busuanzi API](https://github.com/soxft/busuanzi/wiki/API) to display `page_uv`, an approximate unique-visitor total based on IP address and User-Agent, starting when enabled. Only the canonical project URL is supplied: search queries and fragments are excluded. The integration sends no cookies, stores no browser identifier, and does not load third-party JavaScript. The provider receives the counting request; its public service has no availability or data-integrity guarantee. Local previews and browsers requesting Do Not Track or Global Privacy Control read the total without incrementing it. If the service is unreachable, selection reveals “Visitors: unavailable”.
+
 ## Contents
 
 - [At a glance](#at-a-glance)
