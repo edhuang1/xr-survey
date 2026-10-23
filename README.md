@@ -11,7 +11,7 @@
 ![Detailed evidence profiles: 31](https://img.shields.io/badge/Evidence_profiles-31-a37535?style=flat-square)
 ![Coverage through 23 October 2026](https://img.shields.io/badge/Coverage-23_Oct_2026-555c70?style=flat-square)
 
-[**Project website**](https://edhuang1.github.io/awesome-visual-generative-ai-for-xr/) · [**Full catalogue**](https://edhuang1.github.io/awesome-visual-generative-ai-for-xr/#collection) · [**Evidence supplement**](https://edhuang1.github.io/awesome-visual-generative-ai-for-xr/evidence/) · [**Bibliography**](docs/paper/references.bib)
+[**Project website**](https://edhuang1.github.io/xr-survey/) · [**Full catalogue**](https://edhuang1.github.io/xr-survey/#collection) · [**Evidence supplement**](https://edhuang1.github.io/xr-survey/evidence/) · [**Bibliography**](docs/paper/references.bib)
 
 </div>
 
