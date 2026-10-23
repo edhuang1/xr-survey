@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "updated": "2026-10-23",
+  "hosting": "Official project media streamed over HTTPS; only full-frame posters are stored in this repository.",
+  "note": "These clips are recorded research demonstrations. They are not new experiments, a controlled comparison, or live model inference on this webpage.",
+  "groups": [
+    {
+      "id": "assets",
+      "title": "3D assets",
+      "kicker": "From an image to an object",
+      "description": "Turntable views reveal generated shape and appearance.",
+      "items": [
+        {
+          "mimeType": "video/mp4",
+          "audio": false,
+          "hasAudioTrack": false,
+          "id": "trellis-cottage",
+          "method": "TRELLIS",
+          "title": "A colorful cottage in 3D",
+          "description": "A single-image 3D result shown as a rotating textured cottage. The official project identifies the conditioning image as DALL·E 3 generated.",
+          "videoUrl": "https://microsoft.github.io/TRELLIS/assets/img2/videos/colorful_cottage.mp4",
+          "sourceUrl": "https://microsoft.github.io/TRELLIS/",
+          "sourceLabel": "Xiang et al. · TRELLIS",
+          "sourceLocator": "Image-to-3D generation · colorful cottage",
+          "attribution": "Jianfeng Xiang et al., TRELLIS: Structured 3D Latents for Scalable and Versatile 3D Generation. Official project demonstration.",
+          "rightsNote": "The official TRELLIS page restricts its materials to academic and research purposes and excludes commercial exploitation. Video remains hosted by its authors; the full-frame poster is extracted and converted to WebP for this research survey.",
+          "width": 512,
+          "height": 512,
+          "durationSeconds": 10,
+          "byteLength": 626199,
+          "poster": {
+            "path": "assets/video-posters/trellis-cottage.webp",
+            "width": 512,
+            "height": 512,
+            "sha256": "5ca88f4605356e3cb81039a4aa0fc7606a5566cbbe89f02033dd9d277b69c531"
+          }
+        },
+        {
+          "mimeType": "video/mp4",
+          "audio": false,
+          "hasAudioTrack": false,
+          "id": "lgm-multiview",
+          "method": "LGM",
+          "title": "A gallery of generated 3D assets",
+          "description": "Twenty generated objects rotate in the official image-to-3D gallery, revealing their appearance from changing viewpoints.",
+          "videoUrl": "https://me.kiui.moe/lgm/videos/demo.mp4",
+          "sourceUrl": "https://me.kiui.moe/lgm/",
+          "sourceLabel": "Tang et al. · LGM",
+          "sourceLocator": "Image-to-3D · demo gallery",
+          "attribution": "Jiaxiang Tang, Zhaoxi Chen, Xiaokang Chen, Tengfei Wang, Gang Zeng and Ziwei Liu, LGM: Large Multi-View Gaussian Model for High-Resolution 3D Content Creation. Official project demonstration.",
+          "rightsNote": "Video streamed directly from the authors' official project host. No separate video reuse licence is asserted. The credited poster is a complete frame extracted at 0.8 seconds, resized without upscaling, and converted to WebP.",
+          "width": 1324,
+          "height": 1080,
+          "durationSeconds": 5.4,
+          "byteLength": 3286962,
+          "poster": {
+            "path": "assets/video-posters/lgm-multiview.webp",
+            "width": 960,
+            "height": 783,
+            "sha256": "4cf0f93584ed034126da20d2417b1de90b0a3ccf26a67e1b15d657a3d2895dfc"
+          }
+        }
+      ]
+    },
+    {
+      "id": "scenes",
+      "title": "Spatial scenes",
+      "kicker": "Move through a generated scene",
+      "description": "Explore scene expansion and camera-controlled novel views.",
+      "items": [
+        {
+          "mimeType": "video/mp4",
+          "audio": false,
+          "hasAudioTrack": false,
+          "id": "scenescape-cave",
+          "method": "SceneScape",
+          "title": "A text-generated cave walkthrough",
+          "description": "A first-person sequence moves through a generated dark cavern with rocky surfaces and pools of water, extending the scene along the camera path.",
+          "videoUrl": "https://scenescape.github.io/sm/assets/results/POV,_cave,_pools,_water,_dark_cavern,_in_100/video.mp4",
+          "sourceUrl": "https://scenescape.github.io/",
+          "sourceLabel": "Fridman et al. · SceneScape",
+          "sourceLocator": "Text-driven scene generation · cave and water",
+          "attribution": "Rafail Fridman, Amit Abecasis, Yoni Kasten and Tali Dekel, SceneScape: Text-Driven Consistent Scene Generation. Official project demonstration.",
+          "rightsNote": "Video streamed directly from the authors' official project host. No separate video reuse licence is asserted. The credited poster is a complete frame extracted at 0.8 seconds, resized without upscaling, and converted to WebP.",
+          "width": 512,
+          "height": 512,
+          "durationSeconds": 5.1,
+          "byteLength": 902694,
+          "poster": {
+            "path": "assets/video-posters/scenescape-cave.webp",
+            "width": 512,
+            "height": 512,
+            "sha256": "a0b2d9dbc3016d61d42b580fad3c2dccd91f507baa8b2ed6911315d43abc4dce"
+          }
+        },
+        {
+          "mimeType": "video/mp4",
+          "audio": false,
+          "hasAudioTrack": false,
+          "id": "viewcrafter-nvs",
+          "method": "ViewCrafter",
+          "title": "Camera-controlled novel views",
+          "description": "The original montage pairs camera trajectories on the left with generated views on the right, across a car, an astronaut, a laptop, and a cat.",
+          "videoUrl": "https://drexubery.github.io/ViewCrafter/static/videos/nvs1.mp4",
+          "sourceUrl": "https://drexubery.github.io/ViewCrafter/",
+          "sourceLabel": "Yu et al. · ViewCrafter",
+          "sourceLocator": "Novel-view synthesis · camera trajectory montage",
+          "attribution": "Wangbo Yu, Jinbo Xing, Li Yuan, Wenbo Hu, Xiaoyu Li, Zhipeng Huang, Xiangjun Gao, Tien-Tsin Wong, Ying Shan and Yonghong Tian, ViewCrafter: Taming Video Diffusion Models for High-fidelity Novel View Synthesis. Official project demonstration.",
+          "rightsNote": "Video streamed directly from the authors' official project host. No separate video reuse licence is asserted. The credited poster is a complete frame extracted at 0.8 seconds, resized without upscaling, and converted to WebP.",
+          "width": 1408,
+          "height": 1080,
+          "durationSeconds": 3.183,
+          "byteLength": 3412213,
+          "poster": {
+            "path": "assets/video-posters/viewcrafter-nvs.webp",
+            "width": 960,
+            "height": 736,
+            "sha256": "b68bdf38a59d892bbe5c479acd0ba23c7be815fdd8330828626fd6dc06c1dfbc"
+          }
+        }
+      ]
+    },
+    {
+      "id": "temporal",
+      "title": "Dynamic worlds",
+      "kicker": "See generation unfold",
+      "description": "Time-varying 3D content and recorded world-model responses.",
+      "items": [
+        {
+          "mimeType": "video/mp4",
+          "audio": false,
+          "hasAudioTrack": false,
+          "id": "4dfy-bear",
+          "method": "4D-fy",
+          "title": "A bear driving through time",
+          "description": "A text-to-4D result prompted as a bear driving a car. The original paired visualization shows generated content over time and changing viewpoints.",
+          "videoUrl": "https://sherwinbahmani.github.io/4dfy/data/videos/ours/a_bear_driving_a_car.mp4",
+          "sourceUrl": "https://sherwinbahmani.github.io/4dfy/",
+          "sourceLabel": "Bahmani et al. · 4D-fy",
+          "sourceLocator": "4D Generation · a bear driving a car",
+          "attribution": "Sherwin Bahmani et al., 4D-fy: Text-to-4D Generation Using Hybrid Score Distillation Sampling, CVPR 2024. Official project demonstration.",
+          "rightsNote": "Video streamed directly from the authors' official project host. No separate video reuse licence is asserted. The credited poster is a complete frame extracted at 0.8 seconds, resized without upscaling, and converted to WebP.",
+          "width": 512,
+          "height": 256,
+          "durationSeconds": 8.266667,
+          "byteLength": 661743,
+          "poster": {
+            "path": "assets/video-posters/4dfy-bear.webp",
+            "width": 512,
+            "height": 256,
+            "sha256": "18d52993f48b3b3465237fb455ee0ae99aea2b64455c09919a5295fe0e66aa04"
+          }
+        },
+        {
+          "mimeType": "video/mp4",
+          "audio": false,
+          "hasAudioTrack": false,
+          "id": "worldplay-demo",
+          "method": "WorldPlay",
+          "title": "Keyboard-conditioned world exploration",
+          "description": "An official third-person demonstration in which keyboard inputs steer a generated walk through a cherry-blossom schoolyard. This is a recorded research demo.",
+          "videoUrl": "https://3d-models.hunyuan.tencent.com/world/world1_5/ShowRoom2/01.mp4",
+          "sourceUrl": "https://github.com/Tencent-Hunyuan/HY-WorldPlay",
+          "sourceLabel": "Tencent Hunyuan · WorldPlay",
+          "sourceLocator": "HY-World 1.5 · Third-Person View Results · example 01",
+          "attribution": "Team HunyuanWorld / Tencent Hunyuan, HY-World 1.5 (WorldPlay), official third-person demonstration.",
+          "rightsNote": "Video streamed from Tencent Hunyuan's official project host. The repository/model licence is not asserted as a separate video reuse licence. The credited poster preserves the full source frame, including the keyboard-input overlay.",
+          "width": 1280,
+          "height": 704,
+          "durationSeconds": 8.25,
+          "byteLength": 2293262,
+          "poster": {
+            "path": "assets/video-posters/worldplay-demo.webp",
+            "width": 960,
+            "height": 528,
+            "sha256": "dd02780c1f8394ec7ee7ae35a18d4986774b3eb930e78887b25bb4c3b686f597"
+          }
+        }
+      ]
+    },
+    {
+      "id": "xr",
+      "title": "XR experiences",
+      "kicker": "Create and interact",
+      "description": "Spatial editing and generated responses to tracked interaction.",
+      "items": [
+        {
+          "mimeType": "video/mp4",
+          "audio": false,
+          "hasAudioTrack": true,
+          "id": "dreamcrafter-edit",
+          "method": "Dreamcrafter",
+          "title": "Edit objects inside VR",
+          "description": "A spatial editing interface applies natural-language instructions to an object, with a preview before full-fidelity processing. The original on-screen annotations are retained.",
+          "videoUrl": "https://dream-crafter.github.io/static/videos/edit_obj_vid_mini.mp4",
+          "sourceUrl": "https://dream-crafter.github.io/",
+          "sourceLabel": "Vachha et al. · Dreamcrafter",
+          "sourceLocator": "Edit · object-editing walkthrough",
+          "attribution": "Cyrus Vachha et al., Dreamcrafter: Immersive Editing of 3D Radiance Fields Through Flexible, Generative Inputs and Outputs, CHI 2025. Official project demonstration.",
+          "rightsNote": "Video streamed from its official host. The project footer declares the website CC BY-SA 4.0; no separate clip-specific licence is asserted. The poster preserves the full frame, resized and converted to WebP.",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "width": 1080,
+          "height": 1080,
+          "durationSeconds": 10.301958,
+          "byteLength": 3741159,
+          "audioNote": "AAC track is silent: full-clip FFmpeg volumedetect mean and peak -91 dB.",
+          "poster": {
+            "path": "assets/video-posters/dreamcrafter-edit.webp",
+            "width": 960,
+            "height": 960,
+            "sha256": "19544991d92ef6f5cba3b58a6d718972c8826f66ac08f1e0495ed05eb99567d3"
+          }
+        },
+        {
+          "mimeType": "video/mp4",
+          "audio": false,
+          "hasAudioTrack": false,
+          "id": "generated-reality-interaction",
+          "method": "Generated Reality",
+          "title": "Hand-conditioned play with a cat",
+          "description": "A first-person generated scene depicts hands moving a cat toy while a cat reacts. The source system conditions generation on tracked hand and head poses; this clip is a recorded output.",
+          "videoUrl": "https://codeysun.github.io/generated-reality/static/videos/cat.mp4",
+          "sourceUrl": "https://codeysun.github.io/generated-reality/",
+          "sourceLabel": "Xie et al. · Generated Reality",
+          "sourceLocator": "Example gallery · cat",
+          "attribution": "Linxi Xie, Lisong C. Sun, Ashley Neall, Tong Wu, Shengqu Cai and Gordon Wetzstein, Generated Reality, 2026. Official project demonstration.",
+          "rightsNote": "Video streamed directly from the authors' official project host. No separate video reuse licence is asserted. The credited poster is a complete frame extracted at 0.8 seconds, resized without upscaling, and converted to WebP.",
+          "width": 1280,
+          "height": 704,
+          "durationSeconds": 5.4,
+          "byteLength": 1193572,
+          "poster": {
+            "path": "assets/video-posters/generated-reality-interaction.webp",
+            "width": 960,
+            "height": 528,
+            "sha256": "4f22081ab31a790edfdb0dbee31bd9bd9e558b4cf643f22d784a9013383b91ed"
+          }
+        }
+      ]
+    }
+  ]
+}

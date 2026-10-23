@@ -45,3 +45,26 @@ The existing provenance records identify the specific SceneScape, 4D-fy, Dreamcr
 The version-specific TRELLIS and Voyager records link to the arXiv non-exclusive distribution licence. That record does **not** establish a new third-party image reuse licence. No Creative Commons licence is asserted for those excerpts; their source attribution is retained and no additional licence is granted by this website.
 
 All gallery images come from already documented source excerpts in the local project. For this website, their complete pixels were converted to WebP at original aspect ratio, without retouching or synthetic content changes. Maximum width is 1280 pixels; the current 12 images are 272–658 pixels wide and were not upscaled. No source paper PDF, review manuscript, or manuscript source file is included in the gallery.
+
+## Video gallery and interactive illustration
+
+The eight video demonstrations stream directly from the authors' official project websites; this repository contains no video copies. These are recorded examples, not live inference, new experiments, or a controlled cross-method comparison. Exact media URLs, technical metadata, source locations and poster hashes are recorded in [`videos.json`](../data/videos.json).
+
+| Poster file | Official demonstration and attribution |
+|---|---|
+| `trellis-cottage.webp` | [TRELLIS](https://microsoft.github.io/TRELLIS/) — Jianfeng Xiang et al., TRELLIS: Structured 3D Latents for Scalable and Versatile 3D Generation. Official project demonstration. |
+| `lgm-multiview.webp` | [LGM](https://me.kiui.moe/lgm/) — LGM project authors, LGM: Large Multi-View Gaussian Model for High-Resolution 3D Content Creation. Official project demonstration. |
+| `scenescape-cave.webp` | [SceneScape](https://scenescape.github.io/) — Rafail Fridman, Amit Abecasis, Yoni Kasten and Tali Dekel, SceneScape: Text-Driven Consistent Scene Generation. Official project demonstration. |
+| `viewcrafter-nvs.webp` | [ViewCrafter](https://drexubery.github.io/ViewCrafter/) — ViewCrafter project authors, ViewCrafter: Taming Video Diffusion Models for High-fidelity Novel View Synthesis. Official project demonstration. |
+| `4dfy-bear.webp` | [4D-fy](https://sherwinbahmani.github.io/4dfy/) — Sherwin Bahmani et al., 4D-fy: Text-to-4D Generation Using Hybrid Score Distillation Sampling, CVPR 2024. Official project demonstration. |
+| `worldplay-demo.webp` | [WorldPlay](https://github.com/Tencent-Hunyuan/HY-WorldPlay) — Team HunyuanWorld / Tencent Hunyuan, HY-World 1.5 (WorldPlay), official third-person demonstration. |
+| `dreamcrafter-edit.webp` | [Dreamcrafter](https://dream-crafter.github.io/) — Cyrus Vachha et al., Dreamcrafter: Immersive Editing of 3D Radiance Fields Through Flexible, Generative Inputs and Outputs, CHI 2025. Official project demonstration. |
+| `generated-reality-interaction.webp` | [Generated Reality](https://codeysun.github.io/generated-reality/) — Linxi Xie, Lisong C. Sun, Ashley Neall, Tong Wu, Shengqu Cai and Gordon Wetzstein, Generated Reality, 2026. Official project demonstration. |
+
+Posters in `video-posters/` are complete frames extracted at 0.8 seconds, preserving overlays and aspect ratio, resized to at most 960 pixels wide without upscaling, and encoded as WebP. They identify their corresponding videos; they are not additional generated results.
+
+The TRELLIS project states that its materials are for academic and research purposes, excluding commercial exploitation. Dreamcrafter's website declares [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). A code, model, or paper licence is not asserted as a separate video reuse licence; no additional third-party media licence is granted here. All official source and rights notices remain applicable.
+
+All eight selected demonstrations are silent. Dreamcrafter contains an AAC track whose full-clip peak and mean both measured −91 dB; its stream is presented muted, like the clips with no audio track. Visible source annotations and descriptive text accompany the videos.
+
+The interactive spatial sandbox is original website code and uses constructed geometric primitives. Its camera orbit, surface/wireframe/point views illustrate representation and viewing choices. It is not an output of any cited model, a live generator, or an XR performance measurement.

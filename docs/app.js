@@ -10,7 +10,8 @@
   const illustrations = { assets: "assets", scenes: "scenes", temporal: "worlds", xr: "xr" };
   const state = { entries: [], category: "all", query: "", year: "all", sort: "newest", view: "table", page: 1 };
   const pageSize = 15;
-  let fieldNotes = {}, catalogueReady = false, showcase;
+  let fieldNotes = {}, catalogueReady = false, showcase, videoShowcase;
+  let exampleMode = "videos", activeExampleGroup = "assets", releaseVideo = () => {};
   const scrollTo = (id) => $(id).scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   const searchText = (e) => [e.id, e.name, e.title, e.venue, e.year, e.category_label, e.group, e.description, e.bibkey, JSON.stringify(e.fields || {}), e.authors].join(" ").toLocaleLowerCase();
   function displayField(key, value) {
@@ -121,17 +122,93 @@
     $("#benchmark-grid").innerHTML = guide.benchmarks.map((b) => `<article class="benchmark-card"><div class="benchmark-top"><span>${esc(b.category)}</span><span>${esc(b.year)}</span></div><h3>${esc(b.name)}</h3><p>${esc(b.role)}</p>${external(b.source_link, "Explore resource ↗")}</article>`).join("");
     $("#agenda-list").innerHTML = guide.agenda.map((a, i) => `<details class="agenda-item"${i === 0 ? " open" : ""}><summary><span class="agenda-number">0${i + 1}</span><h3>${esc(a.title)}</h3></summary><div class="agenda-body"><p class="agenda-question">${esc(a.question)}</p><p>${esc(a.design)}</p><h4>What to measure</h4><ul>${a.measurements.map((m) => `<li>${esc(m)}</li>`).join("")}</ul></div></details>`).join("");
   }
-  function renderExamples(groupId, itemId) {
+  function renderFigures(groupId, itemId) {
     const group = showcase.groups.find((g) => g.id === groupId) || showcase.groups[0];
     const item = group.items.find((i) => i.id === itemId) || group.items[0];
     tabSelection("#example-tabs", "exampleGroup", group.id);
     $("#example-panel").setAttribute("aria-labelledby", `example-tab-${group.id}`);
     $("#example-panel").innerHTML = `<div class="example-group-header"><span class="overline">${esc(group.kicker)}</span><h3>${esc(group.title)}</h3><p>${esc(group.description)}</p></div><div class="example-stage"><button type="button" class="example-image" data-lightbox="${esc(localImage(item.image))}" data-caption="${esc(item.attribution)}" aria-label="Expand ${esc(item.method)} example"><img src="${esc(localImage(item.image))}" width="${Number(item.width)}" height="${Number(item.height)}" alt="${esc(item.alt)}"><span class="expand-label">⤢ Expand</span></button><div class="example-caption"><span class="example-method">${esc(item.method)}</span><h4>${esc(item.title)}</h4><p>${esc(item.description)}</p>${external(item.sourceUrl, `${item.sourceLabel} ↗`)}<p class="source-location">${esc(item.sourceAnchor)} <a href="assets/CREDITS.md">Image credits</a></p></div></div><div class="example-thumbnails" role="group" aria-label="Select a visual example">${group.items.map((i) => `<button type="button" data-example-item="${esc(i.id)}" data-group="${esc(group.id)}" aria-pressed="${i.id === item.id}" aria-label="Show ${esc(i.method)}: ${esc(i.title)}"><img src="${esc(localImage(i.image))}" width="${Number(i.width)}" height="${Number(i.height)}" alt="" loading="lazy"><span><strong>${esc(i.method)}</strong><small>${esc(i.title)}</small></span></button>`).join("")}</div>`;
   }
+  const videoUrl = (value) => {
+    const candidate = url(value);
+    return candidate && new URL(candidate).protocol === "https:" && /\.(mp4|webm)$/i.test(new URL(candidate).pathname) ? candidate : "";
+  };
+  const formatDuration = (seconds) => `${Math.round(seconds)}s`;
+  function renderExamples(groupId, itemId) {
+    releaseVideo();
+    activeExampleGroup = groupId || activeExampleGroup;
+    $$("[data-example-mode]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.exampleMode === exampleMode)));
+    const group = videoShowcase?.groups.find((g) => g.id === activeExampleGroup);
+    if (exampleMode === "figures" || !group?.items.length) { renderFigures(activeExampleGroup, itemId); return; }
+    const item = group.items.find((i) => i.id === itemId) || group.items[0];
+    tabSelection("#example-tabs", "exampleGroup", group.id);
+    $("#example-panel").setAttribute("aria-labelledby", `example-tab-${group.id}`);
+    $("#example-panel").innerHTML = `<div class="example-group-header video-group-header"><div><span class="overline">${esc(group.kicker)}</span><h3>${esc(group.title)}</h3><p>${esc(group.description)}</p></div><span class="motion-badge"><i></i> IN MOTION</span></div><div class="example-stage video-example-stage"><div class="video-player"><div class="video-surface"><video id="example-video" controls loop muted playsinline preload="none" poster="${esc(localImage(item.poster.path))}" width="${Number(item.width)}" height="${Number(item.height)}" aria-label="${esc(item.method)}: ${esc(item.title)}" aria-describedby="video-description"><p>Your browser cannot play this video. ${external(item.sourceUrl, "Watch on the official project page")}</p></video><span class="video-corner-label">OFFICIAL DEMO · ${formatDuration(item.durationSeconds)}</span></div><div class="video-toolbar"><button type="button" id="video-play-toggle" aria-label="Play video">▶ Play</button><span id="video-status" role="status">Ready to play · ${item.audio ? "Muted" : "Silent clip"}</span><button type="button" id="video-expand" aria-label="Expand video">⤢ <span>Expand</span></button></div><div class="video-error" id="video-error" hidden><p>This video could not be played here.</p>${external(item.sourceUrl, "Open the official demonstration ↗")}<button type="button" id="video-retry">Try again</button></div></div><div class="example-caption"><span class="example-method">${esc(item.method)}</span><h4>${esc(item.title)}</h4><p id="video-description">${esc(item.description)}</p>${external(item.sourceUrl, "Official project ↗")}<p class="source-location">${esc(item.sourceLabel)}<br>${esc(item.sourceLocator)}<br><a href="assets/CREDITS.md">Media credits</a></p><div class="video-meta"><span>${Number(item.width)} × ${Number(item.height)}</span><span>${formatDuration(item.durationSeconds)} loop</span><span>${item.audio ? "Audio available" : "Silent"}</span></div></div></div><div class="example-thumbnails video-thumbnails" role="group" aria-label="Select a video demonstration">${group.items.map((i) => `<button type="button" data-video-item="${esc(i.id)}" data-group="${esc(group.id)}" aria-pressed="${i.id === item.id}" aria-label="Watch ${esc(i.method)}: ${esc(i.title)}"><span class="video-thumb-image"><img src="${esc(localImage(i.poster.path))}" width="${Number(i.poster.width)}" height="${Number(i.poster.height)}" alt="" loading="lazy"><span>▶ ${formatDuration(i.durationSeconds)}</span></span><span><strong>${esc(i.method)}</strong><small>${esc(i.title)}</small></span></button>`).join("")}</div>`;
+    setupVideo(item);
+  }
+  function setupVideo(item) {
+    const video = $("#example-video"), toggle = $("#video-play-toggle"), status = $("#video-status");
+    const failure = $("#video-error");
+    const videoDialog = $("#video-dialog"), home = video.parentElement, expandButton = $("#video-expand");
+    let visible = false, userPaused = false, internalPause = false, disposed = false;
+    const motionPreference = matchMedia("(prefers-reduced-motion: reduce)");
+    const canAutoPlay = () => !motionPreference.matches && !navigator.connection?.saveData && visible && !document.hidden && !userPaused;
+    const attachSource = () => { if (!video.hasAttribute("src")) video.src = videoUrl(item.videoUrl); };
+    const play = async () => {
+      attachSource(); status.textContent = "Loading video…";
+      try { await video.play(); if (disposed || document.hidden || !visible) pauseForVisibility(); }
+      catch { if (!disposed && !video.error) { status.textContent = "Press Play to start"; toggle.textContent = "▶ Play"; } }
+    };
+    const pauseForVisibility = () => { if (!video.paused) { internalPause = true; video.pause(); } };
+    const onPlaying = () => { userPaused = false; toggle.textContent = "Ⅱ Pause"; toggle.setAttribute("aria-label", "Pause video"); status.textContent = item.audio ? "Playing · audio controls in video" : "Playing · silent loop"; failure.hidden = true; };
+    const onPause = () => { if (!internalPause) userPaused = true; internalPause = false; toggle.textContent = "▶ Play"; toggle.setAttribute("aria-label", "Play video"); status.textContent = "Paused"; };
+    const onError = () => { failure.hidden = false; status.textContent = "Video unavailable"; toggle.textContent = "▶ Play"; toggle.setAttribute("aria-label", "Play video"); };
+    const onVisibility = () => { if (document.hidden) pauseForVisibility(); else if (canAutoPlay()) play(); };
+    const onMotionPreference = () => { if (motionPreference.matches) pauseForVisibility(); };
+    video.addEventListener("playing", onPlaying);
+    video.addEventListener("pause", onPause);
+    video.addEventListener("error", onError);
+    video.addEventListener("waiting", () => { if (!disposed) status.textContent = "Buffering…"; });
+    toggle.addEventListener("click", () => { if (video.paused) { userPaused = false; visible = true; play(); } else { userPaused = true; video.pause(); } });
+    $("#video-retry").addEventListener("click", () => { failure.hidden = true; video.removeAttribute("src"); userPaused = false; visible = true; play(); });
+    const restoreVideo = () => {
+      if (video.parentElement !== home) home.prepend(video);
+      expandButton.focus({ preventScroll: true });
+    };
+    expandButton.addEventListener("click", () => {
+      const wasPlaying = !video.paused;
+      $("#expanded-video-title").textContent = `${item.method} · ${item.title}`;
+      $("#expanded-video").append(video); videoDialog.showModal(); visible = true;
+      if (wasPlaying) play();
+    });
+    videoDialog.addEventListener("close", restoreVideo);
+    document.addEventListener("visibilitychange", onVisibility);
+    motionPreference.addEventListener("change", onMotionPreference);
+    const observer = "IntersectionObserver" in window ? new IntersectionObserver((entries) => {
+      visible = videoDialog.open || (entries[0].isIntersecting && entries[0].intersectionRatio >= 0.25);
+      if (canAutoPlay()) play(); else if (!visible) pauseForVisibility();
+    }, { threshold: [0, 0.25] }) : null;
+    observer?.observe(video);
+    releaseVideo = () => {
+      disposed = true; observer?.disconnect();
+      videoDialog.removeEventListener("close", restoreVideo);
+      if (videoDialog.open) { videoDialog.close(); home.prepend(video); }
+      document.removeEventListener("visibilitychange", onVisibility);
+      motionPreference.removeEventListener("change", onMotionPreference);
+      video.removeEventListener("playing", onPlaying); video.removeEventListener("pause", onPause); video.removeEventListener("error", onError);
+      video.pause(); video.removeAttribute("src"); video.load();
+      releaseVideo = () => {};
+    };
+  }
   const dialog = $("#image-dialog");
+  $("#close-video").addEventListener("click", () => $("#video-dialog").close());
+  $("#video-dialog").addEventListener("click", (e) => {
+    const modal = $("#video-dialog"), r = modal.getBoundingClientRect();
+    if (e.target === modal && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) modal.close();
+  });
   let lightboxTrigger;
   document.addEventListener("click", (event) => {
-    const b = event.target.closest("[data-category-jump], [data-method], [data-example-group], [data-example-item], [data-lightbox]");
+    const b = event.target.closest("[data-category-jump], [data-method], [data-example-group], [data-example-item], [data-video-item], [data-example-mode], [data-lightbox]");
     if (!b) return;
     if (b.hasAttribute("data-category-jump")) { reset(); state.category = b.dataset.categoryJump; update(); }
     if (b.hasAttribute("data-method")) {
@@ -139,6 +216,13 @@
       if (entry) { reset(); state.query = entry.name; state.category = entry.category; state.view = "cards"; syncInputs(); update(); location.hash = "collection"; $("#search").focus({ preventScroll: true }); scrollTo("#collection"); }
     }
     if (b.hasAttribute("data-example-group") && showcase) renderExamples(b.dataset.exampleGroup);
+    if (b.hasAttribute("data-example-mode") && showcase) { exampleMode = b.dataset.exampleMode; renderExamples(activeExampleGroup); }
+    if (b.hasAttribute("data-video-item") && videoShowcase) {
+      renderExamples(b.dataset.group, b.dataset.videoItem);
+      $(`[data-video-item="${b.dataset.videoItem}"]`).focus({ preventScroll: true });
+      const bounds = $("#example-video").getBoundingClientRect();
+      if (bounds.top < 0 || bounds.bottom > window.innerHeight) scrollTo(".video-player");
+    }
     if (b.hasAttribute("data-example-item") && showcase) {
       const itemId = b.dataset.exampleItem;
       renderExamples(b.dataset.group, itemId);
@@ -162,7 +246,7 @@
       const next = event.key === "Home" ? 0 : event.key === "End" ? tabs.length - 1 : (index + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
       event.preventDefault(); tabs[next].focus(); tabs[next].click();
     }
-    if (event.key === "/" && !dialog.open && !/INPUT|TEXTAREA|SELECT/.test(active.tagName) && !active.isContentEditable && !event.ctrlKey && !event.metaKey && !event.altKey) { event.preventDefault(); $("#search").focus(); }
+    if (event.key === "/" && !dialog.open && !$("#video-dialog").open && !/INPUT|TEXTAREA|SELECT/.test(active.tagName) && !active.isContentEditable && !event.ctrlKey && !event.metaKey && !event.altKey) { event.preventDefault(); $("#search").focus(); }
   });
   $("#copy-citation").addEventListener("click", async () => {
     const b = $("#copy-citation");
@@ -170,19 +254,26 @@
     catch { const range = document.createRange(); range.selectNodeContents($("#citation-text")); const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range); b.textContent = "Select & copy"; $("#copy-status").textContent = "Citation selected. Press Control+C or Command+C to copy."; }
     setTimeout(() => { b.textContent = "Copy citation"; }, 2500);
   });
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
-      if (entry.isIntersecting) $$(".sidebar nav a").forEach((link) => { const active = link.hash === `#${entry.target.id}`; link.classList.toggle("active", active); if (active) link.setAttribute("aria-current", "location"); else link.removeAttribute("aria-current"); });
-    }), { rootMargin: "-5% 0px -70% 0px" });
-    $$("main section[id]").forEach((s) => observer.observe(s));
+  function updateActiveSection() {
+    const sections = $$("main section[id]");
+    const passed = sections.filter((section) => section.getBoundingClientRect().top <= window.innerHeight * 0.3);
+    const current = passed[passed.length - 1] || sections[0];
+    $$(".sidebar nav a").forEach((link) => {
+      const active = link.hash === `#${current.id}`;
+      link.classList.toggle("active", active);
+      if (active) link.setAttribute("aria-current", "location"); else link.removeAttribute("aria-current");
+    });
   }
   let scrollPending = false;
-  function progress() { const d = document.documentElement; $("#reading-progress").style.width = `${Math.min(100, 100 * d.scrollTop / Math.max(1, d.scrollHeight - d.clientHeight))}%`; scrollPending = false; }
+  function progress() { const d = document.documentElement; $("#reading-progress").style.width = `${Math.min(100, 100 * d.scrollTop / Math.max(1, d.scrollHeight - d.clientHeight))}%`; updateActiveSection(); scrollPending = false; }
   window.addEventListener("scroll", () => { if (!scrollPending) { scrollPending = true; requestAnimationFrame(progress); } }, { passive: true });
+  window.addEventListener("resize", () => { if (!scrollPending) { scrollPending = true; requestAnimationFrame(progress); } });
   const fetchJSON = async (path) => { const r = await fetch(path); if (!r.ok) throw new Error(`${path}: ${r.status}`); return r.json(); };
   async function load() {
-    const results = await Promise.allSettled(["catalogue", "project", "research-guide", "showcase"].map((name) => fetchJSON(`data/${name}.json`)));
-    const [catalogue, project, guide, examples] = results;
+    const results = await Promise.allSettled(["catalogue", "project", "research-guide", "showcase", "videos"].map((name) => fetchJSON(`data/${name}.json`)));
+    const [catalogue, project, guide, examples, videos] = results;
+    if (videos.status === "fulfilled" && videos.value.groups?.length) videoShowcase = videos.value;
+    else { exampleMode = "figures"; $('[data-example-mode="videos"]').disabled = true; }
     if (catalogue.status === "fulfilled" && Array.isArray(catalogue.value.entries)) {
       fieldNotes = catalogue.value.field_notes || {};
       state.entries = catalogue.value.entries.map((e) => ({ ...e, searchText: searchText(e) }));

@@ -21,7 +21,7 @@ Visual generative models create objects, spatial scenes, time-varying 3D content
 
 This repository accompanies *Visual Generative AI for Extended Reality: A Survey*. It provides a searchable project website, a structured catalogue, and source-linked evidence records. The manuscript and its source files remain outside the public repository. Targeted literature retrieval extends through **23 October 2026**.
 
-The illustrated website includes four content-domain guides, an interactive method taxonomy, 12 attributed visual examples, table and detailed catalogue views, six featured resources, and five proposed XR evaluation designs. The page adapts to mobile screens and supports keyboard navigation for the taxonomy and example tabs.
+The illustrated website includes four content-domain guides, an interactive method taxonomy, eight official video demonstrations, 12 attributed research figures, and an interactive spatial representation sandbox. It also includes table and detailed catalogue views, six featured resources, and five proposed XR evaluation designs. Videos load when visible, pause offscreen, and respect reduced-motion preferences. The page adapts to mobile screens and supports keyboard navigation. Video files stay on their official project hosts; the repository stores only credited full-frame posters and source metadata.
 
 ## Contents
 
