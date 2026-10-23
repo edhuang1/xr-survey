@@ -1,0 +1,32 @@
+evidence_id,record_id,method,citation_key,catalogue,catalogue_id,catalogue_name
+E/A01,A01,DreamFusion,Poole2023DreamFusion,Table 1,A11,DreamFusion
+E/A02,A02,Magic3D,Lin2023Magic3D,Table 1,A12,Magic3D
+E/A03,A03,TRELLIS,Xiang2025TRELLIS,Table 1,A31,TRELLIS
+E/A04,A04,Hunyuan3D 2.0,Zhao2025Hunyuan3D2,Table 1,A35,Hunyuan3D 2.0
+E/A05,A05,TRELLIS.2,Xiang2026TRELLIS2,Table 1,A36,TRELLIS.2
+E/A06,A06,PartCrafter,Lin2025PartCrafter,Table 1,A45,PartCrafter
+E/SCE01,SCE01,Text2Room,Hollein2023Text2Room,Table 1,B21,Text2Room
+E/SCE02,SCE02,SceneScape,Fridman2023SceneScape,Table 1,B22,SceneScape
+E/SCE03,SCE03,SceneDreamer,Chen2023SceneDreamer,Table 1,B32,SceneDreamer
+E/SCE04,SCE04,Holodeck,Yang2024Holodeck,Table 1,B13,Holodeck
+E/SCE05,SCE05,HunyuanWorld 1.0,HunyuanWorldTeam2025HunyuanWorld,Table 1,B23,HunyuanWorld 1.0
+E/SCE06,SCE06,HY-World 2.0,HYWorldTeam2026HYWorld2,Table 1,B40,HY-World 2.0
+E/D01,D01,4D-fy,Bahmani2024FourDfy,Table 1,C22,4D-fy
+E/D02,D02,DreamGaussian4D,Ren2023DreamGaussian4D,Table 1,C23,DreamGaussian4D
+E/D03,D03,DimensionX,Sun2025DimensionX,Table 1,C28,DimensionX
+E/D04,D04,Voyager / HunyuanWorld-Voyager,Huang2025Voyager,Table 1,B39,Voyager
+E/D05,D05,Matrix-Game 2.0,He2025MatrixGame2,Table 1,C37,Matrix-Game 2.0
+E/D06,D06,Matrix-Game 3.0,Wang2026MatrixGame3,Table 1,C51,Matrix-Game 3.0
+E/D07,D07,WorldPlay / HY-World 1.5,Sun2025WorldPlay,Table 1,C50,WorldPlay
+E/D08,D08,Genie 3,ParkerHolder2025Genie3,Table 1,C38,Genie 3
+E/X01,X01,VRCopilot,Zhang2024VRCopilot,XR catalogue,1,VRCopilot
+E/X02,X02,MS2Mesh-XR,Tong2025MS2MeshXR,XR catalogue,12,MS2Mesh-XR
+E/X03,X03,Dreamcrafter,Vachha2025Dreamcrafter,XR catalogue,2,Dreamcrafter
+E/X04,X04,CoGen3D,Jiang2026CoGen3D,XR catalogue,13,CoGen3D
+E/P01,P01,MVDiffusion,Tang2023MVDiffusion,Table 1,B33,MVDiffusion
+E/P02,P02,EPIC,Mandal2026EPIC,XR catalogue,27,EPIC
+E/X05,X05,Generated Reality,Xie2026GeneratedReality,XR catalogue,26,Generated Reality
+E/D09,D09,MultiGen,Po2026MultiGen,Table 1,C52,MultiGen
+E/X06,X06,ImaginateAR,Lee2025ImaginateAR,XR catalogue,7,ImaginateAR
+E/X07,X07,Heritage visualization prototyping,Liu2026HeritagePrototyping,XR catalogue,28,Heritage prototyping
+E/X08,X08,360-degree stimulus validation,Han2026PanoramicStimuli,XR catalogue,29,Panoramic stimuli

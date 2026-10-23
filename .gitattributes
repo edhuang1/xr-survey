@@ -1,0 +1,14 @@
+* text=auto
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+# Preserve the released supplement bytes and their published SHA-256 manifest.
+docs/evidence/** -text
+docs/paper/references.bib -text
+*.pdf binary
+*.png binary
+*.webp binary

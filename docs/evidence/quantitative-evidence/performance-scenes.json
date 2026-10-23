@@ -1,0 +1,1246 @@
+{
+  "schema_version": "1.0",
+  "checked_date": "2026-10-22",
+  "purpose": "Evidence for grouped scene-generation performance tables; numerical values transcribed from primary papers, no experiments run.",
+  "comparison_rule": "Rank only within each original protocol and source snapshot. Similar metric names across protocols do not establish comparability.",
+  "sources": {
+    "text2room": {
+      "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Hollein_Text2Room_Extracting_Textured_3D_Meshes_from_2D_Text-to-Image_Models_ICCV_2023_paper.pdf",
+      "local_pdf": "ccfa-workfiles/writing/visual-generative-xr/exemplar-2509-07996/cache/text2room-iccv2023.pdf",
+      "sha256": "b578eb072e4df7065e99b723643eb1c96e91b9dc0bd083d567cfe434b1b225ec",
+      "edition": "ICCV 2023 accepted CVF open-access edition"
+    },
+    "text2room_supp": {
+      "url": "https://openaccess.thecvf.com/content/ICCV2023/supplemental/Hollein_Text2Room_Extracting_Textured_ICCV_2023_supplemental.pdf",
+      "local_pdf": "ccfa-workfiles/figures/table-redesign/cache/text2room-iccv2023-supplemental.pdf",
+      "sha256": "99371f637d9ce18c772053336f67c9c06cc167ee36e917a1847d2e1429566d5e",
+      "edition": "ICCV 2023 official supplement"
+    },
+    "voyager": {
+      "url": "https://arxiv.org/pdf/2506.04225v1",
+      "local_pdf": "ccfa-workfiles/writing/visual-generative-xr/exemplar-2509-07996/cache/voyager-2506.04225v1.pdf",
+      "sha256": "481f20ee0775c767297ffee242b99f8f308302fa9c4d407ab02ab42339bd3979",
+      "edition": "arXiv:2506.04225v1, 4 June 2025 (14-page technical source; do not imply final TOG version was checked)"
+    },
+    "worldscore": {
+      "url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Duan_WorldScore_A_Unified_Evaluation_Benchmark_for_World_Generation_ICCV_2025_paper.pdf",
+      "local_pdf": "ccfa-workfiles/figures/table-redesign/cache/worldscore-iccv2025.pdf",
+      "sha256": "b3fa32a2e163738b89d8761a17247f4eeeef007c8991f92751fea8e35566b78f",
+      "edition": "ICCV 2025 accepted CVF open-access edition, 20-model table"
+    },
+    "worldscore_supp": {
+      "url": "https://openaccess.thecvf.com/content/ICCV2025/supplemental/Duan_WorldScore_A_Unified_ICCV_2025_supplemental.pdf",
+      "local_pdf": "ccfa-workfiles/figures/table-redesign/cache/worldscore-iccv2025-supplemental.pdf",
+      "sha256": "1e5f20b8edc1061ea3cbc7088e90948419e3f4f1b9da46f3efe18ec058dd248c",
+      "edition": "ICCV 2025 official supplement"
+    },
+    "scenedreamer": {
+      "url": "https://arxiv.org/pdf/2302.01330v3",
+      "local_pdf": "ccfa-workfiles/writing/visual-generative-xr/exemplar-2509-07996/cache/scenedreamer-2302.01330.pdf",
+      "sha256": "1af2fe3aac1e67586f3490accd48a980524f89c2a8f2b3e518fc166f32ade024",
+      "edition": "15-page cached TPAMI manuscript; referenced technical source arXiv:2302.01330v3"
+    },
+    "scenescape": {
+      "url": "https://arxiv.org/pdf/2302.01133v2",
+      "local_pdf": "ccfa-workfiles/figures/source-evidence/cache/scenescape-v2.pdf",
+      "sha256": "d4370c88e03cb9f4dd99990047628312319a27deccecc3d5de178f15729595f6",
+      "edition": "arXiv:2302.01133v2"
+    },
+    "holodeck": {
+      "url": "https://openaccess.thecvf.com/content/CVPR2024/papers/Yang_Holodeck_Language_Guided_Generation_of_3D_Embodied_AI_Environments_CVPR_2024_paper.pdf",
+      "local_pdf": "ccfa-workfiles/figures/source-evidence/cache/holodeck-cvpr2024.pdf",
+      "sha256": "54eaa46f788abc03c2559e251ed753c90fd1e8b7f13f45b28f1a70df1933de86",
+      "edition": "CVPR 2024 accepted CVF open-access edition"
+    }
+  },
+  "primary_blocks": [
+    {
+      "id": "text2room_rooms",
+      "title": "Text-to-room generation: image quality and perceived 3D completeness",
+      "citation_key": "Hollein2023Text2Room",
+      "source_id": "text2room",
+      "source_table": "Table 1",
+      "pdf_page": 5,
+      "printed_page": "7913",
+      "visual_check": {
+        "image": "ccfa-workfiles/figures/table-redesign/cache/text2room-table1-p5.png",
+        "checked": true,
+        "scope": "All five selected complete-pipeline rows and all four numeric columns; ablation rows excluded."
+      },
+      "protocol": {
+        "dataset": "Author-defined indoor-room text prompts; not a named public test benchmark",
+        "split": "Generated scenes, evaluated from novel viewpoints; exact scene/prompt count not stated in main paper or official supplement",
+        "test_samples": "60 novel-view RGB renderings per scene for CS/IS; 61 human participants; 1098 total user-study datapoints",
+        "input": "Text description. Text2Room generation additionally uses 20 predefined trajectories of 10 frames each, followed by completion views.",
+        "evaluation_views": "2D metrics: 60 novel views per scene. Human study: multiple rendered and top-down views, each method rated individually, not pairwise.",
+        "resolution": "Evaluation render resolution not reported in inspected main paper or supplement; do not substitute the separate WorldScore 512x512 setting.",
+        "metric_protocol": "CS and IS on scene RGB renderings; PQ and 3DS rated on a 1–5 scale, then averaged.",
+        "generation_configuration": "Text2Room uses Stable Diffusion inpainting, IronDepth pretrained on ScanNet, mesh edge and normal thresholds both 0.1; approximately 50 minutes per scene on one RTX 3090.",
+        "protocol_locations": [
+          "Main p.5 / printed p.7913, Results implementation, Evaluation Metrics, and Sec.4.2",
+          "Official supplement p.1 Sec.D (1098 datapoints), pp.3–5 Sec.F (baseline pipelines)"
+        ],
+        "missing_fields": [
+          "Exact number/list of evaluation scenes",
+          "Image evaluation resolution",
+          "Variance/confidence intervals",
+          "Random seed and exact baseline checkpoint revisions"
+        ]
+      },
+      "metrics": [
+        {
+          "id": "CS",
+          "label": "CLIP score",
+          "direction": "up",
+          "unit": "reported score"
+        },
+        {
+          "id": "IS",
+          "label": "Inception score",
+          "direction": "up",
+          "unit": "reported score"
+        },
+        {
+          "id": "PQ",
+          "label": "Perceptual quality",
+          "direction": "up",
+          "unit": "mean rating, 1–5"
+        },
+        {
+          "id": "3DS",
+          "label": "3D structure completeness",
+          "direction": "up",
+          "unit": "mean rating, 1–5"
+        }
+      ],
+      "rows": [
+        {
+          "method": "PureClipNeRF",
+          "values": {
+            "CS": "24.06",
+            "IS": "1.26",
+            "PQ": "2.34",
+            "3DS": "2.38"
+          },
+          "configuration_note": "Object-centric text-to-NeRF baseline; not a dedicated room generator.",
+          "is_ablation": false
+        },
+        {
+          "method": "Outpainting",
+          "values": {
+            "CS": "23.10",
+            "IS": "1.60",
+            "PQ": "2.90",
+            "3DS": "2.58"
+          },
+          "configuration_note": "Author-constructed pipeline: Stable Diffusion outpainting, then depth estimation and triangulation.",
+          "is_ablation": false
+        },
+        {
+          "method": "Text2Light + Text2Room mesh fusion",
+          "values": {
+            "CS": "25.99",
+            "IS": "2.21",
+            "PQ": "2.82",
+            "3DS": "2.97"
+          },
+          "configuration_note": "Original row label Text2Light [11]+Ours. Panorama generation plus depth prediction and the Text2Room mesh-fusion step; do not label as standalone Text2Light.",
+          "is_ablation": false,
+          "original_row_label": "Text2Light [11]+Ours"
+        },
+        {
+          "method": "Blockade + Text2Room mesh fusion",
+          "values": {
+            "CS": "26.29",
+            "IS": "2.13",
+            "PQ": "3.35",
+            "3DS": "3.36"
+          },
+          "configuration_note": "Original row label Blockade [37]+Ours. Panorama plus depth/mesh extraction. Cited service snapshot accessed 2023-03-04.",
+          "is_ablation": false,
+          "original_row_label": "Blockade [37]+Ours"
+        },
+        {
+          "method": "Text2Room",
+          "values": {
+            "CS": "28.02",
+            "IS": "2.31",
+            "PQ": "4.01",
+            "3DS": "4.19"
+          },
+          "configuration_note": "Full method, original row Ours.",
+          "is_ablation": false,
+          "original_row_label": "Ours"
+        }
+      ],
+      "scientific_limits": [
+        "CS/IS are image-based and PQ/3DS are human ratings; none directly measures metric geometric accuracy, collision correctness, interaction latency, or headset quality.",
+        "Room generation baselines differ in intended task and are author-constructed complete pipelines. Preserve the +mesh-fusion labels.",
+        "These CLIP scores cannot be ranked against SceneScape CLIP-TS or normalized WorldScore content-alignment scores.",
+        "Number of scenes and evaluation image resolution remain unreported, limiting reproducibility; do not infer the former from the number of user ratings."
+      ],
+      "recommended_compact_columns": [
+        "CS",
+        "IS",
+        "PQ",
+        "3DS"
+      ]
+    },
+    {
+      "id": "voyager_realestate_nvs",
+      "title": "Image-conditioned novel-view synthesis on RealEstate10K",
+      "citation_key": "Huang2025Voyager",
+      "source_id": "voyager",
+      "source_table": "Table 1",
+      "pdf_page": 5,
+      "printed_page": "5",
+      "visual_check": {
+        "image": "ccfa-workfiles/figures/table-redesign/cache/voyager-table1-2-p5.png",
+        "checked": true,
+        "scope": "All five Table 1 rows and PSNR/SSIM/LPIPS, distinct from the right-hand Table 2 reconstruction results."
+      },
+      "protocol": {
+        "dataset": "RealEstate10K",
+        "split": "150 video clips randomly selected from the test set",
+        "test_samples": "150 video clips; exact clip IDs, evaluation frame count and duration not given",
+        "input": "Single image and target camera trajectory; camera parameters and depth are estimated by the Voyager data engine because the evaluated clips lack ground-truth cameras in this setup.",
+        "trajectory_and_depth": "VGGT camera/depth estimation; MoGE depth alignment; metric scaling with Metric3D (Sec.4.4 and supplement Sec.C).",
+        "resolution": "Test rendering/evaluation resolution not stated in the inspected v1 paper; do not infer from the pretrained HunyuanVideo model.",
+        "sequence_configuration": "Supplement Sec.A reports 49 generated frames per single pass; the paper does not explicitly identify 49 as the Table 1 evaluation length.",
+        "metric_protocol": "PSNR, SSIM and LPIPS between generated frames and ground-truth video frames; these are synthesis scores, not reconstructed-3DGS scores.",
+        "protocol_locations": [
+          "pp.5–6 Sec.5.1",
+          "p.5 Sec.4.4",
+          "p.11 supplement Sec.A and C"
+        ],
+        "missing_fields": [
+          "150 clip IDs",
+          "Evaluation image resolution",
+          "Exact evaluation frame sampling and duration",
+          "Per-method released checkpoint revision",
+          "Confidence intervals/seeds"
+        ]
+      },
+      "metrics": [
+        {
+          "id": "PSNR",
+          "label": "PSNR",
+          "direction": "up",
+          "unit": "dB"
+        },
+        {
+          "id": "SSIM",
+          "label": "SSIM",
+          "direction": "up",
+          "unit": "unitless"
+        },
+        {
+          "id": "LPIPS",
+          "label": "LPIPS",
+          "direction": "down",
+          "unit": "unitless"
+        }
+      ],
+      "rows": [
+        {
+          "method": "SEVA",
+          "values": {
+            "PSNR": "16.648",
+            "SSIM": "0.613",
+            "LPIPS": "0.349"
+          },
+          "configuration_note": "Camera parameters supplied directly to the model.",
+          "is_ablation": false
+        },
+        {
+          "method": "ViewCrafter",
+          "values": {
+            "PSNR": "16.512",
+            "SSIM": "0.636",
+            "LPIPS": "0.332"
+          },
+          "configuration_note": "Viewpoint control uses point-cloud conditions.",
+          "is_ablation": false
+        },
+        {
+          "method": "See3D",
+          "values": {
+            "PSNR": "18.189",
+            "SSIM": "0.694",
+            "LPIPS": "0.290"
+          },
+          "configuration_note": "Viewpoint control uses point-cloud conditions.",
+          "is_ablation": false
+        },
+        {
+          "method": "FlexWorld",
+          "values": {
+            "PSNR": "18.278",
+            "SSIM": "0.693",
+            "LPIPS": "0.281"
+          },
+          "configuration_note": "Viewpoint control uses point-cloud conditions.",
+          "is_ablation": false
+        },
+        {
+          "method": "Voyager",
+          "values": {
+            "PSNR": "18.751",
+            "SSIM": "0.715",
+            "LPIPS": "0.277"
+          },
+          "configuration_note": "RGB-D video diffusion with geometry-conditioned generation; v1 results.",
+          "is_ablation": false
+        }
+      ],
+      "scientific_limits": [
+        "This is a within-paper comparison on 150 RealEstate10K test clips. Do not combine it with another paper’s PSNR/SSIM/LPIPS results unless the exact scenes, poses, frame selection and resolution match.",
+        "Estimated camera/depth conditions are part of the protocol; the metrics do not measure camera calibration accuracy.",
+        "Photometric fidelity on held-out real videos does not establish long-horizon world persistence, delivered mesh quality or interactive XR performance.",
+        "Table 2 on the same PDF page is a different reconstruction protocol and must remain a separate block if used."
+      ],
+      "recommended_compact_columns": [
+        "PSNR",
+        "SSIM",
+        "LPIPS"
+      ]
+    },
+    {
+      "id": "worldscore_iccv2025",
+      "title": "WorldScore: common world-generation benchmark, fixed ICCV 2025 snapshot",
+      "citation_key": "Duan2025WorldScore",
+      "source_id": "worldscore",
+      "source_table": "Table 2",
+      "pdf_page": 7,
+      "printed_page": "27719",
+      "visual_check": {
+        "image": "ccfa-workfiles/figures/table-redesign/cache/worldscore-table2-p7.png",
+        "checked": true,
+        "scope": "All 20 method rows and 12 numerical columns; model configuration and 4D-fy budget footnote also viewed in official supplement Table S1 p.2.",
+        "configuration_image": "ccfa-workfiles/figures/table-redesign/cache/worldscore-model-config-p2.png"
+      },
+      "protocol": {
+        "dataset": "WorldScore",
+        "split": "Curated evaluation benchmark: 2000 static world specifications; 1000 dynamic world specifications",
+        "test_samples": "Static: 10 scene categories (5 indoor, 5 outdoor), each with photorealistic and stylized examples. Dynamic: 5 motion categories. These are world specifications, not physical scenes or human subjects.",
+        "input": "Current-scene image and text, next-scene text, and camera matrices plus a text description of camera movement. Model-specific preprocessing passes the supported input forms; T2V models ignore image conditioning.",
+        "trajectories": "8 camera motions: push in, pull out, orbit left/right, move left/right, pan left/right. 80% of static examples specify one new scene, 20% specify three new scenes. Dynamic tasks explicitly use a fixed camera.",
+        "resolution": "Method-specific native resolutions, lengths and FPS in each row from official supplement Table S1; images are center-cropped/resized to the model input resolution.",
+        "evaluation": "All outputs evaluated as videos. WS_static is the arithmetic mean of 3 controllability + 4 quality scores. WS_dynamic adds 3 motion scores. Every dimension is normalized to 0–100 with higher better.",
+        "compute": "Benchmark generations used H100 and L40S GPUs, with unequal per-method runtime; no common computational budget.",
+        "protocol_locations": [
+          "Main pp.3–7 Secs.3.1–3.3",
+          "Official supplement p.1 Sec.A",
+          "Official supplement p.2 Table S1"
+        ],
+        "missing_fields": [
+          "Exact per-method GPU assignment",
+          "All random seeds",
+          "Confidence intervals in result table"
+        ]
+      },
+      "metrics": [
+        {
+          "id": "WS_static",
+          "label": "WorldScore-Static",
+          "direction": "up",
+          "unit": "normalized 0–100"
+        },
+        {
+          "id": "WS_dynamic",
+          "label": "WorldScore-Dynamic",
+          "direction": "up",
+          "unit": "normalized 0–100"
+        },
+        {
+          "id": "camera",
+          "label": "Camera controllability",
+          "direction": "up",
+          "unit": "normalized 0–100",
+          "note": "Camera pose error is normalized and direction-reversed; not degrees."
+        },
+        {
+          "id": "object",
+          "label": "Object controllability",
+          "direction": "up",
+          "unit": "normalized 0–100",
+          "note": "Open-set detection of objects specified by next-scene prompts."
+        },
+        {
+          "id": "content",
+          "label": "Content alignment",
+          "direction": "up",
+          "unit": "normalized 0–100",
+          "note": "Normalized CLIPScore, not comparable to raw Text2Room CS."
+        },
+        {
+          "id": "consistency_3d",
+          "label": "3D consistency",
+          "direction": "up",
+          "unit": "normalized 0–100",
+          "note": "DROID-SLAM-based depth/reprojection measure on generated video; not ground-truth metric reconstruction accuracy."
+        },
+        {
+          "id": "photometric",
+          "label": "Photometric consistency",
+          "direction": "up",
+          "unit": "normalized 0–100"
+        },
+        {
+          "id": "style",
+          "label": "Style consistency",
+          "direction": "up",
+          "unit": "normalized 0–100"
+        },
+        {
+          "id": "subjective",
+          "label": "Subjective quality",
+          "direction": "up",
+          "unit": "normalized 0–100",
+          "note": "Automatic CLIP-IQA+ and CLIP Aesthetic ensemble selected using a separate human study; this column is not a direct participant rating."
+        },
+        {
+          "id": "motion_accuracy",
+          "label": "Motion accuracy",
+          "direction": "up",
+          "unit": "normalized 0–100"
+        },
+        {
+          "id": "motion_magnitude",
+          "label": "Motion magnitude",
+          "direction": "up",
+          "unit": "normalized 0–100"
+        },
+        {
+          "id": "motion_smoothness",
+          "label": "Motion smoothness",
+          "direction": "up",
+          "unit": "normalized 0–100"
+        }
+      ],
+      "rows": [
+        {
+          "method": "Gen-3",
+          "original_row_label": "Gen-3 [58]",
+          "values": {
+            "WS_static": "60.71",
+            "WS_dynamic": "57.58",
+            "camera": "29.47",
+            "object": "62.92",
+            "content": "50.49",
+            "consistency_3d": "68.31",
+            "photometric": "87.09",
+            "style": "62.82",
+            "subjective": "63.85",
+            "motion_accuracy": "54.53",
+            "motion_magnitude": "27.48",
+            "motion_smoothness": "68.87"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": true,
+          "configuration": {
+            "benchmark_version_label": "24.07.01",
+            "benchmark_input_mode": "I2V",
+            "resolution": "1280x768",
+            "clip_length_seconds": "10",
+            "fps": "24",
+            "precise_camera_pose_input": false,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "video"
+        },
+        {
+          "method": "Hailuo",
+          "original_row_label": "Hailuo [20]",
+          "values": {
+            "WS_static": "57.55",
+            "WS_dynamic": "56.36",
+            "camera": "22.39",
+            "object": "69.56",
+            "content": "73.53",
+            "consistency_3d": "67.18",
+            "photometric": "62.82",
+            "style": "54.91",
+            "subjective": "52.44",
+            "motion_accuracy": "63.46",
+            "motion_magnitude": "27.20",
+            "motion_smoothness": "70.07"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": true,
+          "configuration": {
+            "benchmark_version_label": "24.08.31",
+            "benchmark_input_mode": "I2V",
+            "resolution": "1072x720",
+            "clip_length_seconds": "5.6",
+            "fps": "25",
+            "precise_camera_pose_input": false,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "video"
+        },
+        {
+          "method": "DynamiCrafter",
+          "original_row_label": "DynamiCrafter [84]",
+          "values": {
+            "WS_static": "52.09",
+            "WS_dynamic": "47.19",
+            "camera": "25.15",
+            "object": "47.36",
+            "content": "25.00",
+            "consistency_3d": "72.90",
+            "photometric": "60.95",
+            "style": "78.85",
+            "subjective": "54.40",
+            "motion_accuracy": "41.11",
+            "motion_magnitude": "39.25",
+            "motion_smoothness": "26.92"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": true,
+          "configuration": {
+            "benchmark_version_label": "23.10.18",
+            "benchmark_input_mode": "I2V",
+            "resolution": "1024x576",
+            "clip_length_seconds": "5",
+            "fps": "10",
+            "precise_camera_pose_input": false,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "video"
+        },
+        {
+          "method": "VideoCrafter1-T2V",
+          "original_row_label": "VideoCrafter1-T2V [9]",
+          "values": {
+            "WS_static": "47.10",
+            "WS_dynamic": "43.54",
+            "camera": "21.61",
+            "object": "50.44",
+            "content": "60.78",
+            "consistency_3d": "64.86",
+            "photometric": "51.36",
+            "style": "38.05",
+            "subjective": "42.63",
+            "motion_accuracy": "11.76",
+            "motion_magnitude": "75.00",
+            "motion_smoothness": "18.87"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": true,
+          "configuration": {
+            "benchmark_version_label": "23.10.30",
+            "benchmark_input_mode": "T2V",
+            "resolution": "1024x576",
+            "clip_length_seconds": "2",
+            "fps": "8",
+            "precise_camera_pose_input": false,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "video"
+        },
+        {
+          "method": "VideoCrafter1-I2V",
+          "original_row_label": "VideoCrafter1-I2V [9]",
+          "values": {
+            "WS_static": "50.47",
+            "WS_dynamic": "47.64",
+            "camera": "25.46",
+            "object": "24.25",
+            "content": "35.27",
+            "consistency_3d": "74.42",
+            "photometric": "73.89",
+            "style": "65.17",
+            "subjective": "54.85",
+            "motion_accuracy": "55.63",
+            "motion_magnitude": "25.00",
+            "motion_smoothness": "42.49"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": true,
+          "configuration": {
+            "benchmark_version_label": "23.10.30",
+            "benchmark_input_mode": "I2V",
+            "resolution": "512x320",
+            "clip_length_seconds": "2",
+            "fps": "8",
+            "precise_camera_pose_input": false,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "video"
+        },
+        {
+          "method": "VideoCrafter2",
+          "original_row_label": "VideoCrafter2 [9]",
+          "values": {
+            "WS_static": "52.57",
+            "WS_dynamic": "47.49",
+            "camera": "28.92",
+            "object": "39.07",
+            "content": "72.46",
+            "consistency_3d": "65.14",
+            "photometric": "61.85",
+            "style": "43.79",
+            "subjective": "56.74",
+            "motion_accuracy": "47.12",
+            "motion_magnitude": "30.40",
+            "motion_smoothness": "29.39"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": true,
+          "configuration": {
+            "benchmark_version_label": "24.01.17",
+            "benchmark_input_mode": "T2V",
+            "resolution": "512x320",
+            "clip_length_seconds": "2",
+            "fps": "8",
+            "precise_camera_pose_input": false,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "video"
+        },
+        {
+          "method": "T2V-Turbo",
+          "original_row_label": "T2V-Turbo [41]",
+          "values": {
+            "WS_static": "45.65",
+            "WS_dynamic": "40.20",
+            "camera": "27.80",
+            "object": "30.68",
+            "content": "69.14",
+            "consistency_3d": "38.72",
+            "photometric": "34.84",
+            "style": "49.65",
+            "subjective": "68.74",
+            "motion_accuracy": "34.87",
+            "motion_magnitude": "40.09",
+            "motion_smoothness": "7.48"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": true,
+          "configuration": {
+            "benchmark_version_label": "24.05.29",
+            "benchmark_input_mode": "T2V",
+            "resolution": "512x320",
+            "clip_length_seconds": "3",
+            "fps": "16",
+            "precise_camera_pose_input": false,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "video"
+        },
+        {
+          "method": "EasyAnimate",
+          "original_row_label": "EasyAnimate [86]",
+          "values": {
+            "WS_static": "52.85",
+            "WS_dynamic": "51.65",
+            "camera": "26.72",
+            "object": "54.50",
+            "content": "50.76",
+            "consistency_3d": "67.29",
+            "photometric": "47.35",
+            "style": "73.05",
+            "subjective": "50.31",
+            "motion_accuracy": "75.00",
+            "motion_magnitude": "31.16",
+            "motion_smoothness": "40.32"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": true,
+          "configuration": {
+            "benchmark_version_label": "24.05.29",
+            "benchmark_input_mode": "I2V",
+            "resolution": "1344x768",
+            "clip_length_seconds": "6",
+            "fps": "8",
+            "precise_camera_pose_input": false,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "video"
+        },
+        {
+          "method": "Allegro",
+          "original_row_label": "Allegro [97]",
+          "values": {
+            "WS_static": "55.31",
+            "WS_dynamic": "51.97",
+            "camera": "24.84",
+            "object": "57.47",
+            "content": "51.48",
+            "consistency_3d": "70.50",
+            "photometric": "69.89",
+            "style": "65.60",
+            "subjective": "47.41",
+            "motion_accuracy": "54.39",
+            "motion_magnitude": "40.28",
+            "motion_smoothness": "37.81"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": true,
+          "configuration": {
+            "benchmark_version_label": "24.10.20",
+            "benchmark_input_mode": "I2V",
+            "resolution": "1280x720",
+            "clip_length_seconds": "6",
+            "fps": "15",
+            "precise_camera_pose_input": false,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "video"
+        },
+        {
+          "method": "Vchitect-2.0",
+          "original_row_label": "Vchitect-2.0 [14]",
+          "values": {
+            "WS_static": "42.28",
+            "WS_dynamic": "38.47",
+            "camera": "26.55",
+            "object": "49.54",
+            "content": "65.75",
+            "consistency_3d": "41.53",
+            "photometric": "42.30",
+            "style": "25.69",
+            "subjective": "44.58",
+            "motion_accuracy": "33.59",
+            "motion_magnitude": "33.81",
+            "motion_smoothness": "21.31"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": true,
+          "configuration": {
+            "benchmark_version_label": "25.01.14",
+            "benchmark_input_mode": "T2V",
+            "resolution": "768x432",
+            "clip_length_seconds": "5",
+            "fps": "8",
+            "precise_camera_pose_input": false,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "video"
+        },
+        {
+          "method": "LTX-Video",
+          "original_row_label": "LTX-Video [19]",
+          "values": {
+            "WS_static": "55.44",
+            "WS_dynamic": "56.54",
+            "camera": "25.06",
+            "object": "53.41",
+            "content": "39.73",
+            "consistency_3d": "78.41",
+            "photometric": "88.92",
+            "style": "53.50",
+            "subjective": "49.08",
+            "motion_accuracy": "76.22",
+            "motion_magnitude": "29.95",
+            "motion_smoothness": "71.09"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": true,
+          "configuration": {
+            "benchmark_version_label": "25.05.05",
+            "benchmark_input_mode": "I2V",
+            "resolution": "768x512",
+            "clip_length_seconds": "4",
+            "fps": "30",
+            "precise_camera_pose_input": false,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "video"
+        },
+        {
+          "method": "CogVideoX-T2V",
+          "original_row_label": "CogVideoX-T2V [88]",
+          "values": {
+            "WS_static": "54.18",
+            "WS_dynamic": "48.79",
+            "camera": "40.22",
+            "object": "51.05",
+            "content": "68.12",
+            "consistency_3d": "68.81",
+            "photometric": "64.20",
+            "style": "42.19",
+            "subjective": "44.67",
+            "motion_accuracy": "25.00",
+            "motion_magnitude": "47.31",
+            "motion_smoothness": "36.28"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": true,
+          "configuration": {
+            "benchmark_version_label": "24.08.12",
+            "benchmark_input_mode": "T2V",
+            "resolution": "720x480",
+            "clip_length_seconds": "6",
+            "fps": "8",
+            "precise_camera_pose_input": false,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "video"
+        },
+        {
+          "method": "CogVideoX-I2V",
+          "original_row_label": "CogVideoX-I2V [88]",
+          "values": {
+            "WS_static": "62.15",
+            "WS_dynamic": "59.12",
+            "camera": "38.27",
+            "object": "40.07",
+            "content": "36.73",
+            "consistency_3d": "86.21",
+            "photometric": "88.12",
+            "style": "83.22",
+            "subjective": "62.44",
+            "motion_accuracy": "69.56",
+            "motion_magnitude": "26.42",
+            "motion_smoothness": "60.15"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": true,
+          "configuration": {
+            "benchmark_version_label": "24.08.12",
+            "benchmark_input_mode": "I2V",
+            "resolution": "720x480",
+            "clip_length_seconds": "6",
+            "fps": "8",
+            "precise_camera_pose_input": false,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "video"
+        },
+        {
+          "method": "SceneScape",
+          "original_row_label": "SceneScape [16]",
+          "values": {
+            "WS_static": "50.73",
+            "WS_dynamic": "35.51",
+            "camera": "84.99",
+            "object": "47.44",
+            "content": "28.64",
+            "consistency_3d": "76.54",
+            "photometric": "62.88",
+            "style": "21.85",
+            "subjective": "32.75",
+            "motion_accuracy": "0.00",
+            "motion_magnitude": "0.00",
+            "motion_smoothness": "0.00"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": true,
+          "configuration": {
+            "benchmark_version_label": "23.02.02",
+            "benchmark_input_mode": "T2V",
+            "resolution": "512x512",
+            "clip_length_seconds": "5",
+            "fps": "10",
+            "precise_camera_pose_input": true,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "3D"
+        },
+        {
+          "method": "Text2Room",
+          "original_row_label": "Text2Room [24]",
+          "values": {
+            "WS_static": "62.10",
+            "WS_dynamic": "43.47",
+            "camera": "94.01",
+            "object": "38.93",
+            "content": "50.79",
+            "consistency_3d": "88.71",
+            "photometric": "88.36",
+            "style": "37.23",
+            "subjective": "36.69",
+            "motion_accuracy": "0.00",
+            "motion_magnitude": "0.00",
+            "motion_smoothness": "0.00"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": true,
+          "configuration": {
+            "benchmark_version_label": "23.03.21",
+            "benchmark_input_mode": "I2V",
+            "resolution": "512x512",
+            "clip_length_seconds": "5",
+            "fps": "10",
+            "precise_camera_pose_input": true,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "3D"
+        },
+        {
+          "method": "LucidDreamer",
+          "original_row_label": "LucidDreamer [11]",
+          "values": {
+            "WS_static": "70.40",
+            "WS_dynamic": "49.28",
+            "camera": "88.93",
+            "object": "41.18",
+            "content": "75.00",
+            "consistency_3d": "90.37",
+            "photometric": "90.20",
+            "style": "48.10",
+            "subjective": "58.99",
+            "motion_accuracy": "0.00",
+            "motion_magnitude": "0.00",
+            "motion_smoothness": "0.00"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": true,
+          "configuration": {
+            "benchmark_version_label": "23.11.22",
+            "benchmark_input_mode": "I2V",
+            "resolution": "512x512",
+            "clip_length_seconds": "5",
+            "fps": "10",
+            "precise_camera_pose_input": true,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "3D"
+        },
+        {
+          "method": "WonderJourney",
+          "original_row_label": "WonderJourney [90]",
+          "values": {
+            "WS_static": "63.75",
+            "WS_dynamic": "44.63",
+            "camera": "84.60",
+            "object": "37.10",
+            "content": "35.54",
+            "consistency_3d": "80.60",
+            "photometric": "79.03",
+            "style": "62.82",
+            "subjective": "66.56",
+            "motion_accuracy": "0.00",
+            "motion_magnitude": "0.00",
+            "motion_smoothness": "0.00"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": true,
+          "configuration": {
+            "benchmark_version_label": "23.12.06",
+            "benchmark_input_mode": "I2V",
+            "resolution": "512x512",
+            "clip_length_seconds": "5",
+            "fps": "10",
+            "precise_camera_pose_input": true,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "3D"
+        },
+        {
+          "method": "InvisibleStitch",
+          "original_row_label": "InvisibleStitch [12]",
+          "values": {
+            "WS_static": "61.12",
+            "WS_dynamic": "42.78",
+            "camera": "93.20",
+            "object": "36.51",
+            "content": "29.53",
+            "consistency_3d": "88.51",
+            "photometric": "89.19",
+            "style": "32.37",
+            "subjective": "58.50",
+            "motion_accuracy": "0.00",
+            "motion_magnitude": "0.00",
+            "motion_smoothness": "0.00"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": true,
+          "configuration": {
+            "benchmark_version_label": "24.04.30",
+            "benchmark_input_mode": "I2V",
+            "resolution": "512x512",
+            "clip_length_seconds": "5",
+            "fps": "10",
+            "precise_camera_pose_input": true,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "3D"
+        },
+        {
+          "method": "WonderWorld",
+          "original_row_label": "WonderWorld [91]",
+          "values": {
+            "WS_static": "72.69",
+            "WS_dynamic": "50.88",
+            "camera": "92.98",
+            "object": "51.76",
+            "content": "71.25",
+            "consistency_3d": "86.87",
+            "photometric": "85.56",
+            "style": "70.57",
+            "subjective": "49.81",
+            "motion_accuracy": "0.00",
+            "motion_magnitude": "0.00",
+            "motion_smoothness": "0.00"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": true,
+          "configuration": {
+            "benchmark_version_label": "24.06.13",
+            "benchmark_input_mode": "I2V",
+            "resolution": "512x512",
+            "clip_length_seconds": "5",
+            "fps": "10",
+            "precise_camera_pose_input": true,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "3D"
+        },
+        {
+          "method": "4D-fy",
+          "original_row_label": "4D-fy [3]",
+          "values": {
+            "WS_static": "27.98",
+            "WS_dynamic": "32.10",
+            "camera": "69.92",
+            "object": "55.09",
+            "content": "0.85",
+            "consistency_3d": "35.47",
+            "photometric": "1.59",
+            "style": "32.04",
+            "subjective": "0.89",
+            "motion_accuracy": "22.22",
+            "motion_magnitude": "22.88",
+            "motion_smoothness": "80.06"
+          },
+          "is_ablation": false,
+          "eligible_full_budget_main_comparison": false,
+          "configuration": {
+            "benchmark_version_label": "23.11.29",
+            "benchmark_input_mode": "T2V",
+            "resolution": "256x256",
+            "clip_length_seconds": "4",
+            "fps": "30",
+            "precise_camera_pose_input": true,
+            "source": "Official supplement Table S1, p.2; labels refer to benchmark implementations, not universal method capabilities."
+          },
+          "family": "4D",
+          "configuration_note": "Benchmark authors explicitly decrease optimization iteration steps to save time: about 3h per benchmark instance versus about 20h stated for the original generation. This is a reduced-budget benchmark configuration; exclude from a table claiming full-method/full-budget results, or clearly label separately."
+        }
+      ],
+      "scientific_limits": [
+        "Treat this as a fixed published benchmark snapshot, not a current leaderboard.",
+        "Unified task specification does not imply equal input modality, resolution, duration, compute or model scale. Preserve each method’s input and resolution where space permits.",
+        "For static 3D methods, zero motion scores are assigned by benchmark policy, not measured motion failures. Prefer WS_static for a spatial-scene comparison.",
+        "4D-fy was evaluated with fewer iterations; its result cannot stand for the original full-budget method.",
+        "Static consistency scores assess video observations, not collision geometry, persistent object identity under interaction or user-centered XR outcomes.",
+        "Do not append Voyager Table 3 to this snapshot without explaining source/version differences; its reported average also has an internal arithmetic inconsistency."
+      ],
+      "recommended_compact_columns": [
+        "WS_static",
+        "camera",
+        "object",
+        "content",
+        "consistency_3d",
+        "photometric",
+        "style",
+        "subjective"
+      ],
+      "recommended_scene_comparison_rows": [
+        "Gen-3",
+        "EasyAnimate",
+        "Allegro",
+        "CogVideoX-I2V",
+        "SceneScape",
+        "Text2Room",
+        "LucidDreamer",
+        "WonderJourney",
+        "InvisibleStitch",
+        "WonderWorld"
+      ]
+    }
+  ],
+  "datasets": [
+    {
+      "dataset": "WorldScore",
+      "role": "Evaluation benchmark, not a training corpus",
+      "reported_scale": "3000 world specifications: 2000 static + 1000 dynamic",
+      "modalities": "Reference images, current/next scene text, camera trajectories/text; dynamic motion masks",
+      "split_or_use": "Static: 10 scene types, 7 stylization candidates, 80% one-new-scene and 20% three-new-scene tasks; dynamic: 5 motion types",
+      "source_id": "worldscore",
+      "source_location": "pp.4–5 Sec.3.2",
+      "citation_key": "Duan2025WorldScore"
+    },
+    {
+      "dataset": "RealEstate10K in Voyager",
+      "role": "Real video training source and held-out novel-view evaluation",
+      "reported_scale": "Source corpus reported as 74766 video clips; evaluation uses 150 randomly selected test clips",
+      "modalities": "Video RGB with camera/depth estimated by the Voyager engine",
+      "split_or_use": "The 74766 number is the paper’s source-dataset size, not a verified count of training clips after splitting; 150 is the evaluation subset",
+      "source_id": "voyager",
+      "source_location": "pp.5–6 Secs.4.4,5.1",
+      "citation_key": "Huang2025Voyager"
+    },
+    {
+      "dataset": "DL3DV in Voyager",
+      "role": "Training video source",
+      "reported_scale": "10000 videos in source dataset; 3000 selected high-quality videos segmented into approximately 18000 clips",
+      "modalities": "Real RGB video with estimated geometry",
+      "split_or_use": "Used in stage 1; excluded from stage 2 depth training because of camera motion; stage 3 uses only UE",
+      "source_id": "voyager",
+      "source_location": "p.5 Sec.4.4; p.11 supplement Sec.A",
+      "citation_key": "Huang2025Voyager"
+    },
+    {
+      "dataset": "Voyager Unreal Engine scenes",
+      "role": "Synthetic training data with metric depth",
+      "reported_scale": "1500 scene models; over 10000 rendered video samples",
+      "modalities": "Rendered video, cameras, metric depth",
+      "split_or_use": "Combined data engine produces over 100000 video clips across RealEstate, DL3DV and UE; third-stage control training uses UE only",
+      "source_id": "voyager",
+      "source_location": "p.5 Sec.4.4; p.11 supplement Sec.A",
+      "citation_key": "Huang2025Voyager"
+    },
+    {
+      "dataset": "Text2Room custom room prompts",
+      "role": "Author-defined generation/evaluation set",
+      "reported_scale": "Scene count not stated; 60 novel-view renders/scene; 61 raters; 1098 human-study datapoints",
+      "modalities": "Text-conditioned rooms, RGB renderings, user ratings",
+      "split_or_use": "Do not represent 61 or 1098 as number of scenes",
+      "source_id": "text2room",
+      "source_location": "p.5 Results; official supplement p.1 Sec.D",
+      "citation_key": "Hollein2023Text2Room"
+    },
+    {
+      "dataset": "ScanNet in Text2Room",
+      "role": "Upstream pretrained depth-estimator supervision",
+      "reported_scale": "Not specified in inspected Text2Room paper",
+      "modalities": "Indoor scene depth supervision for IronDepth",
+      "split_or_use": "Not the evaluation dataset for Text2Room Table 1, and not direct training data for the Text2Room scene generator",
+      "source_id": "text2room",
+      "source_location": "p.5 Implementation Details",
+      "citation_key": "Hollein2023Text2Room"
+    },
+    {
+      "dataset": "SceneDreamer Flickr landscape collection",
+      "role": "Unposed 2D-image training collection with held-out images",
+      "reported_scale": "1135662 raw downloaded landscape images; 15000 held out for evaluation",
+      "modalities": "Natural RGB images; inferred semantic maps from ViT-Adapter",
+      "split_or_use": "Filtering removes dark, grayscale and abnormal-ratio images; final filtered training size not reported. Source images resized to 896px on the short side",
+      "source_id": "scenedreamer",
+      "source_location": "pp.8–9 Secs.5.1–5.2",
+      "citation_key": "Chen2023SceneDreamer"
+    },
+    {
+      "dataset": "SceneDreamer generated evaluation trajectories",
+      "role": "Synthetic evaluation samples, not a public source dataset",
+      "reported_scale": "1024 random scenes ×20 styles; 40-frame fly-through samples at 960x540",
+      "modalities": "Generated RGB, rendered depth, target cameras; COLMAP estimated cameras",
+      "split_or_use": "FID/KID on 15000 generated frames vs 15000 evaluation images; depth error on 100 frames; CE/SfM use specified circular trajectories",
+      "source_id": "scenedreamer",
+      "source_location": "pp.8–9 Sec.5.2",
+      "citation_key": "Chen2023SceneDreamer"
+    },
+    {
+      "dataset": "Holodeck asset library",
+      "role": "Retrieval and simulation asset bank",
+      "reported_scale": "51464 annotated assets combining curated Objaverse 1.0 assets and ProcTHOR assets",
+      "modalities": "3D meshes, text descriptions, scale/canonical views, simulation visibility/collider preprocessing",
+      "split_or_use": "This is the combined curated library size, not the total size of Objaverse",
+      "source_id": "holodeck",
+      "source_location": "p.6 / printed p.16232",
+      "citation_key": "Yang2024Holodeck"
+    },
+    {
+      "dataset": "MIT Scenes categories in Holodeck",
+      "role": "Scene-category prompt taxonomy for generalization evaluation",
+      "reported_scale": "52 selected types; 5 generated scenes/type =260 examples",
+      "modalities": "Scene names used as generation prompts, evaluated with top-down image +360-degree video",
+      "split_or_use": "Does not mean Holodeck was trained on MIT Scenes images; categories requiring unsupported structures were excluded",
+      "source_id": "holodeck",
+      "source_location": "pp.6–7 Sec.4.2",
+      "citation_key": "Yang2024Holodeck"
+    },
+    {
+      "dataset": "NOVELTYTHOR",
+      "role": "Artist-designed downstream ObjectNav test environments",
+      "reported_scale": "10 test environments: 2 for each of 5 types; 92 unique object types",
+      "modalities": "Interactive simulator scenes for target-object navigation",
+      "split_or_use": "Office, daycare, music room, gym, arcade. Holodeck scene generation supplies separate fine-tuning data, not the artist-designed test scenes",
+      "source_id": "holodeck",
+      "source_location": "p.8 / printed p.16234 Sec.5",
+      "citation_key": "Yang2024Holodeck"
+    },
+    {
+      "dataset": "RealEstate10K in SceneScape comparison with GEN-1",
+      "role": "Camera/video source for a controlled comparison",
+      "reported_scale": "22 selected smooth-backward indoor trajectories ×5 prompts =110 generated videos",
+      "modalities": "Camera poses supplied to SceneScape; source RGB video supplied to GEN-1",
+      "split_or_use": "Input conditions differ by design; incompatible with Voyager’s 150-clip NVS protocol",
+      "source_id": "scenescape",
+      "source_location": "p.9 Sec.4.3.1",
+      "citation_key": "Fridman2023SceneScape"
+    }
+  ],
+  "excluded_or_secondary_sources": [
+    {
+      "source_id": "voyager",
+      "source_location": "Table 3 p.7 / Sec.5.3 p.6",
+      "reason": "Not chosen as the main WorldScore source: official benchmark Table 2 provides a broader fixed snapshot with model configuration evidence. Voyager row reports average 77.62, while the seven printed component scores have arithmetic mean 77.902857...; retain 77.62 only as an explicitly source-reported aggregate, do not silently correct it or use it to claim a global ranking.",
+      "reported_voyager_values": {
+        "average": "77.62",
+        "camera": "85.95",
+        "object": "66.92",
+        "content": "68.92",
+        "consistency_3d": "81.56",
+        "photometric": "85.99",
+        "style": "84.89",
+        "subjective": "71.09"
+      },
+      "visual_page": "ccfa-workfiles/figures/table-redesign/cache/voyager-table3-p7.png",
+      "visually_checked": true
+    },
+    {
+      "source_id": "scenescape",
+      "source_location": "Table 2 p.9; Sec.4.3 pp.8–9",
+      "reason": "Two separately designed pairwise protocols (VideoFusion vs SceneScape; GEN-1 vs SceneScape). Do not place the two SceneScape rows and both baselines into one leaderboard. VideoFusion uses 1000 text-to-video samples at 256x256, while GEN-1 comparison uses 22 RealEstate10K trajectories and 5 prompts (110 videos)."
+    },
+    {
+      "source_id": "scenedreamer",
+      "source_location": "Table 2 p.8; Sec.5.3 p.9",
+      "reason": "Useful optional landscape comparison, but GANcraft and EG3D are explicitly adapted architecture baselines; Inf-Nature is evaluated only on CE/SfM because training data are incompatible. Not needed for the three chosen complete-pipeline comparison blocks.",
+      "visual_page": "ccfa-workfiles/figures/table-redesign/cache/scenedreamer-table2-p8.png"
+    },
+    {
+      "source_id": "holodeck",
+      "source_location": "Table 1 p.7 and Table 2 p.8",
+      "reason": "Table 1 is a layout ablation and was not used as a collection of independent generation methods. Table 2 is downstream ObjectNav agent training, not image/scene generation quality; suitable for a separate downstream-use evidence table.",
+      "optional_downstream_average_rows": [
+        {
+          "agent_training": "Random",
+          "Success_percent": "3.71",
+          "SPL": "0.037"
+        },
+        {
+          "agent_training": "ProcTHOR pretrained",
+          "Success_percent": "4.11",
+          "SPL": "0.015"
+        },
+        {
+          "agent_training": "ProcTHOR + Objaverse scene fine-tuning",
+          "Success_percent": "17.02",
+          "SPL": "0.093"
+        },
+        {
+          "agent_training": "ProcTHOR + Holodeck scene fine-tuning",
+          "Success_percent": "20.40",
+          "SPL": "0.127"
+        }
+      ],
+      "configuration": "Same ProcTHOR-10K pretrained ObjectNav model (~400M steps) for non-random methods; fine-tuning 100 scenes and 50M steps, separately for each scene type. Test episodes count/resolution not stated in main section.",
+      "visual_page": "ccfa-workfiles/figures/table-redesign/cache/holodeck-objectnav-p8.png"
+    }
+  ],
+  "validation": {
+    "selected_primary_protocols": 3,
+    "total_primary_rows": 30,
+    "full_budget_primary_rows_excluding_reduced_4dfy": 29,
+    "primary_ablation_rows": 0,
+    "numbers_are_strings": true,
+    "pdf_table_pages_visually_checked": true,
+    "missing_values_policy": "Explicitly state unreported configuration; never infer dataset size, resolution or full-budget status."
+  }
+}

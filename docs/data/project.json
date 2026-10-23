@@ -1,0 +1,265 @@
+{
+  "schema_version": 1,
+  "title": "Visual Generative AI for Extended Reality: A Survey",
+  "short_title": "Visual Generative AI for Extended Reality",
+  "authors": [
+    {
+      "name": "Guoxi Huang",
+      "email": "g.huang2@aston.ac.uk",
+      "affiliation": "School of Computer Science and Digital Technologies, Aston University, Birmingham, B4 7ET, United Kingdom"
+    }
+  ],
+  "abstract": "Visual generative models create objects, spatial scenes, time-varying 3D content, and action-conditioned observations for extended reality (XR). Using these outputs requires knowing which viewing, editing, and state-changing operations they support, and which system components supply those operations. This critical narrative review catalogues 204 methods and systems and traces generated outputs into specific XR operations. Four comparison axes organize content units, generative mechanisms, representations, and operating stages; common mathematical definitions clarify conditioning and update rules. An evidence map records eight capability dimensions for a purposively selected subset of 31 methods and systems. The synthesis combines these profiles with source-specific quantitative comparisons and deployment studies, identifying the components, configurations, and endpoints supporting capability claims. Building on paradigm-level comparisons, this analysis distinguishes the evidence needed to generate editable structure, preserve an accepted modification, and respond to tracked input. Visual recall and modification retention require different references, while generation throughput and input-to-display latency describe different parts of the response path. Worked task comparisons explain how these distinctions change the choice between prepared geometry with local rendering and continuing observation generation. We derive task-specific selection criteria and propose matched evaluations of binocular viewing, preview replacement, persistent changes, response scheduling, and physical-space alignment. The resulting framework connects model selection to explicit task requirements and identifies the additional tests needed to assess XR use.",
+  "keywords": [
+    "Visual generative models",
+    "Extended reality",
+    "3D asset generation",
+    "Scene generation",
+    "Interactive world models",
+    "XR evaluation"
+  ],
+  "review_type": "Critical narrative review",
+  "retrieval_cutoff": "23 October 2026",
+  "release_date": "2026-10-23",
+  "counts": {
+    "methods_and_systems": 204,
+    "resources": 37,
+    "detailed_evidence_records": 31,
+    "evidence_dimensions": 8,
+    "catalogued_papers": 203,
+    "by_category": {
+      "assets": 52,
+      "scenes": 49,
+      "temporal": 72,
+      "xr": 31,
+      "resources": 37
+    }
+  },
+  "annual_counts": [
+    {
+      "year": 2001,
+      "journal_or_conference": 1,
+      "preprint": 0,
+      "total_papers": 1,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2002,
+      "journal_or_conference": 0,
+      "preprint": 0,
+      "total_papers": 0,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2003,
+      "journal_or_conference": 0,
+      "preprint": 0,
+      "total_papers": 0,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2004,
+      "journal_or_conference": 0,
+      "preprint": 0,
+      "total_papers": 0,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2005,
+      "journal_or_conference": 0,
+      "preprint": 0,
+      "total_papers": 0,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2006,
+      "journal_or_conference": 1,
+      "preprint": 0,
+      "total_papers": 1,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2007,
+      "journal_or_conference": 0,
+      "preprint": 0,
+      "total_papers": 0,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2008,
+      "journal_or_conference": 0,
+      "preprint": 0,
+      "total_papers": 0,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2009,
+      "journal_or_conference": 0,
+      "preprint": 0,
+      "total_papers": 0,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2010,
+      "journal_or_conference": 1,
+      "preprint": 0,
+      "total_papers": 1,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2011,
+      "journal_or_conference": 0,
+      "preprint": 0,
+      "total_papers": 0,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2012,
+      "journal_or_conference": 1,
+      "preprint": 0,
+      "total_papers": 1,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2013,
+      "journal_or_conference": 0,
+      "preprint": 0,
+      "total_papers": 0,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2014,
+      "journal_or_conference": 0,
+      "preprint": 0,
+      "total_papers": 0,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2015,
+      "journal_or_conference": 0,
+      "preprint": 0,
+      "total_papers": 0,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2016,
+      "journal_or_conference": 1,
+      "preprint": 0,
+      "total_papers": 1,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2017,
+      "journal_or_conference": 0,
+      "preprint": 0,
+      "total_papers": 0,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2018,
+      "journal_or_conference": 3,
+      "preprint": 0,
+      "total_papers": 3,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2019,
+      "journal_or_conference": 3,
+      "preprint": 0,
+      "total_papers": 3,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2020,
+      "journal_or_conference": 1,
+      "preprint": 0,
+      "total_papers": 1,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2021,
+      "journal_or_conference": 3,
+      "preprint": 1,
+      "total_papers": 4,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2022,
+      "journal_or_conference": 7,
+      "preprint": 1,
+      "total_papers": 8,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2023,
+      "journal_or_conference": 25,
+      "preprint": 4,
+      "total_papers": 29,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2024,
+      "journal_or_conference": 48,
+      "preprint": 6,
+      "total_papers": 54,
+      "excluded_blog": 0
+    },
+    {
+      "year": 2025,
+      "journal_or_conference": 45,
+      "preprint": 9,
+      "total_papers": 54,
+      "excluded_blog": 1
+    },
+    {
+      "year": 2026,
+      "journal_or_conference": 25,
+      "preprint": 17,
+      "total_papers": 42,
+      "excluded_blog": 0
+    }
+  ],
+  "scope_note": "The catalogue contains 204 methods and systems and 37 resources. A purposively selected subset of 31 methods and systems receives detailed capability coding. Annual paper counts exclude the Genie 3 official blog.",
+  "source_files": [
+    {
+      "path": "manuscript/main.tex",
+      "sha256": "1d0249c82e082c3124208046c26c89eadc4979ca3b722133f6baf435fcdb9c88"
+    },
+    {
+      "path": "manuscript/references.bib",
+      "sha256": "415ea64d2e7521b5f73afaaf68f308a327389206c42e44327118f61f492098e2"
+    },
+    {
+      "path": "manuscript/evidence-supplement/catalogue-publication-records.csv",
+      "sha256": "d251d02b84bf587c261921b1c43577b9788761a3c64efe569c0788a81f7a9a1d"
+    },
+    {
+      "path": "manuscript/evidence-supplement/manifest.json",
+      "sha256": "0d132ea08aeffe25df90d3c039c78e3edfbf717e491d61fe8920dc2590c74610"
+    },
+    {
+      "path": "manuscript/evidence-supplement/catalogue-papers-by-year.csv",
+      "sha256": "fcf584c5c12600f23f7222648fda08e079e338b23f3414321425d6eb2ff4a538"
+    },
+    {
+      "path": "manuscript/tables/catalogue-assets.tex",
+      "sha256": "b0ed1eed11834bfdb31315c134794fa0c9e04603df89bf45ebb660a287da09b1"
+    },
+    {
+      "path": "manuscript/tables/catalogue-scenes.tex",
+      "sha256": "923b1d02a84c4731d1b2cb3036b87d5b9ded8538fe23880369a5b05695250c19"
+    },
+    {
+      "path": "manuscript/tables/catalogue-temporal.tex",
+      "sha256": "095dfd0b669b44ec231a1ac01dfd8ed241e59c19b8006de247f6ef727942fcb7"
+    },
+    {
+      "path": "manuscript/tables/catalogue-xr.tex",
+      "sha256": "3ae5582767814584b558c0abe89c2b12f8f77ee1111aa5506ba9556bc0140765"
+    },
+    {
+      "path": "manuscript/tables/catalogue-resources.tex",
+      "sha256": "eea583ac7afe9f83797404eb528ff096f738dd37313664f89e3abc532a4cb787"
+    }
+  ]
+}

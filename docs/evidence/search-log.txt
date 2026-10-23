@@ -1,0 +1,443 @@
+Visual Generative Models for Extended Reality
+Search and verification log
+Initial detailed-subset retrieval: 2026-10-21
+Targeted expansion: 2026-10-22
+Later verification and revision dates are recorded in the entries below; these are not complete reruns of the initial retrieval.
+
+Scope and status
+This log preserves the executed query strings and source-location operations retained in the working evidence record. Retrieval used purposive sampling by content and technical category, targeted primary-source verification, and citation-led follow-up. This is a representative critical review, not an exhaustive database-level systematic review. No complete Scopus/Web of Science export, deduplication and screening flow was executed. Per-query result counts and full exclusion counts were not retained and are not reconstructed here. No independent duplicate human full-text screening or intercoder agreement statistic is claimed.
+
+Current inventory (23 October 2026, final review): the manuscript cites 376 distinct works and catalogues 204 methods/systems and 37 resources. The detailed evidence collection contains 43 records: 31 methods/systems, three evaluation records, and nine reviews. Only the 31 methods/systems supply the 248 capability cells. Catalogue membership, citation inclusion, and detailed coding are separate roles, not additive or equally inspected samples.
+
+Historical snapshot after the 21 October recovery: 42 core records comprised 31 method/system records, three evaluation records, and eight neighboring surveys; the bibliography then contained 46 references. The four additional references were ATISS, ControlNet, CRM, and HOICraft. The later entries preserve the additions and broader expansion.
+
+At the historical 36-record stage (superseded), the core corpus contained 36 records: 27 method/system matrix records, 3 evaluation benchmarks and 6 neighboring surveys. That matrix included 26 method/system papers and 1 official industrial-system description (Genie 3); eight dimensions yielded 216 evidence cells. The bibliography contained 39 references because ATISS, ControlNet and CRM are additional component references, not additional core records. The initial 32-record corpus contained six asset, six scene, eight dynamic/world and four XR-authoring records, plus two benchmarks and six reviews. Targeted panorama/stereo work added MVDiffusion, EPIC and iSQoE; the manuscript review added Generated Reality as a tracked-input streaming system. The XR subset at that stage comprised four authoring systems and one streaming-generation system. These choices are not a prespecified quota or an exhaustive sample.
+
+Executed query strings retained in the working record
+The 42 literal strings below retain their executed wording. Chinese parenthetical working notes originally attached to the first six are represented by English explanations. Initial year or venue guesses remain as executed; they are not evidence of final publication status. Q34-Q37 concern the added Generated Reality record; Q38-Q42 concern official export implementations. Source-directed reads of named sections and versioned repository files are verification operations, not reconstructed search queries.
+
+Q01
+DreamFusion Magic3D ProlificDreamer paper official
+Working note: Recorded on 2026-10-21. Early asset-generation anchors. DreamFusion and Magic3D were included; PartCrafter replaced ProlificDreamer to balance coverage, not because of a quality-based exclusion.
+
+Q02
+TRELLIS structured 3D latents Hunyuan3D 2.0 paper
+Working note: Recorded on 2026-10-21. Feed-forward and flow-based asset generation. Original papers and official venue/project records were checked.
+
+Q03
+TRELLIS.2 Native and Compact Structured Latents for 3D Generation CVPR 2026
+Working note: Recorded on 2026-10-21. Recent representations and high-resolution asset generation. An official CVF search result was used to verify publication; the blocked direct page (HTTP 403) is recorded in the provenance.
+
+Q04
+PartCrafter Structured 3D Mesh Generation via Compositional Latent Diffusion Transformers
+Working note: Recorded on 2026-10-21. Compositional part structure. Key original-paper sections and the official NeurIPS record were inspected.
+
+Q05
+Text2Room SceneScape SceneDreamer Holodeck paper
+Working note: Recorded on 2026-10-21. Indoor meshes, continuous scenes, unbounded scenes and simulator assembly. Representatives were selected by generation unit and downstream representation; this was not an exhaustive systematic search.
+
+Q06
+HunyuanWorld 1.0 HY-World 2.0 technical report arxiv
+Working note: Recorded on 2026-10-21. Recent explicit-world generation and simulation pipelines. Technical-report status was retained; offline generation, reconstruction and subsequent simulation were recorded separately.
+
+Q07
+4D-fy text to 4D generation hybrid score distillation CVPR 2024
+
+Q08
+DreamGaussian4D 4D Gaussian Splatting arxiv 2024
+
+Q09
+DimensionX Create Any 3D and 4D Scenes from a Single Image arxiv
+
+Q10
+Matrix Game 2.0 interactive world model arxiv
+
+Q11
+Matrix-Game 3.0 Real-Time Streaming Interactive World Model Long-Horizon Memory arxiv
+
+Q12
+HunyuanWorld Voyager arxiv Tencent paper camera 2025
+
+Q13
+HY-World 1.5 world model arxiv
+
+Q14
+site:deepmind.google Genie 3 new frontier world models August 2025
+
+Q15
+"WorldPlay" "ICML 2026"
+
+Q16
+"Voyager: Long-Range" "10.1145"
+
+Q17
+"10.1080/10447318.2026.2713822" "4.3" site:tandfonline.com -site:mdpi.com
+
+Q18
+"10.1080/10447318.2026.2713822" "4.1" site:tandfonline.com -site:mdpi.com
+
+Q19
+"Visual Generative Artificial Intelligence" "Mixed Reality" "evaluation" site:tandfonline.com -site:mdpi.com
+
+Q20
+"Generative AI Meets Virtual Reality" "IEEE" "pdf" -site:mdpi.com
+
+Q21
+generative 3D virtual reality authoring DreamCrafter VRCopilot DreamMesh paper -site:mdpi.com
+
+Q22
+generative mixed reality mesh user study 2025 2026 -site:mdpi.com
+
+Q23
+WorldScore benchmark world generation CVPR 2025
+
+Q24
+MS2Mesh-XR
+
+Q25
+MS2Mesh-XR 2025 IEEE
+
+Q26
+Dreamcrafter CHI 2025 3714312
+
+Q27
+4DWorldBench site:openaccess.thecvf.com
+
+Q28
+CoGen3D arXiv 2607.03731
+
+Q29
+stereoscopic panorama diffusion virtual reality generation head tracked paper 2025 2026 -site:mdpi.com
+
+Q30
+stereo 3D generative panoramic images virtual reality MVDiffusion PanoDiffusion paper -site:mdpi.com
+
+Q31
+stereoscopic video diffusion generative virtual reality StereoCrafter paper
+
+Q32
+stereoscopic panorama generation diffusion stereo virtual reality paper -site:mdpi.com
+
+Q33
+iSQoE immersive stereoscopic quality experience CVPR 2025 paper
+
+Q34
+"Generated Reality" site:openaccess.thecvf.com
+
+Q35
+"Generated Reality" "CVPR 2026" Xie Sun Neall
+
+Q36
+"Generated Reality" "Findings" site:openreview.net
+
+Q37
+"CVPR 2026 Findings" proceedings official
+
+Q38
+site:github.com/microsoft/TRELLIS "to_glb"
+
+Q39
+site:github.com/Tencent-Hunyuan/Hunyuan3D-2 "export"
+
+Q40
+site:github.com/microsoft/TRELLIS.2 "export"
+
+Q41
+site:github.com/wgsxm/PartCrafter "export"
+
+Q42
+PartCrafter github official export glb -site:mdpi.com
+
+Source-location operations (not verbatim search strings)
+These two retained Chinese entries describe locating or reading operations. They were not literal search-engine or database queries.
+
+L01
+Exact-title/DOI location for the six existing survey records, prioritizing publication pages and arXiv full text; checked on 2026-10-21.
+Original operation description: 既有六篇题名/DOI精确检索，优先出版页面与arXiv全文；核查日期2026-10-21
+
+L02
+Within-document location of inclusion/exclusion criteria, taxonomy, 4D, tables/figures, evaluation, NeuVV, Video Games & XR, and Computational Efficiency & Real-Time Performance.
+Original operation description: 全文定位：纳排、taxonomy、4D、Table/Figure、evaluation、NeuVV、Video Games & XR、Computational Efficiency & Real-Time Performance
+
+Selection and verification
+- Core methods generate/edit visual assets, scenes or dynamic content, or integrate these capabilities into XR. Layout generation and retrieval-based assembly remain distinct from novel geometry generation.
+- Representative selection sought contrasts in output, mechanism, representation and operating stage. PartCrafter replaced ProlificDreamer to include part structure; this was not a quality rejection. No complete candidate universe or saturation claim is reconstructed.
+- Neighboring surveys and evaluation benchmarks are separate record types. The iSQoE study assesses static stereoscopic images, not runtime world generation or sustained movement comfort.
+- Historical initial retrieval excluded MDPI sources. This restriction was removed in the final targeted recovery below. General application news, unverified secondary accounts, generic conversational agents, and reconstruction/compression-only work were not included as core generative methods.
+- Titles, DOI/arXiv identifiers and versions resolve duplicate records. WorldPlay/HY-World 1.5 and Voyager/HunyuanWorld-Voyager each occur once.
+- Publication identity and the inspected technical version remain separate. Public preprints, technical reports, official system releases and peer-reviewed papers retain their source labels. Access failures do not establish nonpublication.
+- The bounded manuscript review rechecked S01 hybrid capability sources and proxy-guided MR (Sections 5.4 and 5.6) and S06 model/downstream and intervention-based evaluation (Sections 4.2.5-4.2.6). These are acknowledged overlaps, not absent topics claimed as novel.
+- Official export implementations were read at versioned commits. Implementation evidence does not imply execution, export-quality validation or headset deployment. Code locators and commit dates are retained in the structured provenance.
+- E indexes a named empirically examined property. Text/image adherence, pose accuracy and explicitly measured agency are different constructs; general satisfaction or affective dominance alone is not generation-control evidence.
+- Runtime E requires a located timing comparison, cost profile, configuration experiment, or repeated/averaged measurement. Isolated approximate stage reports remain C with their values and conditions preserved; this does not assert that the authors did not measure them. Generation throughput, decoder time, fixed-content rendering and input-to-display latency remain distinct.
+- NR means evidence was not located in the inspected material. It is not a field-wide absence claim. Codes are not combined into a readiness score, and evidence from one configuration is not inherited by another.
+
+Related delivery records
+extraction-records.json is a byte-for-byte snapshot of the current evidence.json, preserving the original bilingual working notes, inspected scope and source locators. bibliography-provenance.json retains all 46 reference records and redirects source_evidence to extraction-records.json. Its historical draft_bibliography collection is not the final reference count. evidence-matrix.csv contains 248 English method-dimension records; unchanged translations are preserved, and reviewed notes and the new record use their canonical English text.
+
+Future database-query designs (not executed in this review)
+The following Boolean expressions are proposals for a future reproducible database search. No search results, screening counts or performance claims are attributed to them.
+
+F01
+(extended reality OR virtual reality OR augmented reality OR mixed reality) AND (generative OR diffusion OR text-to-3D OR image-to-3D OR world model)
+
+F02
+(3D asset generation OR scene generation OR 4D generation OR interactive world model) AND (multiview OR geometry OR editable OR mesh OR Gaussian OR consistency OR action-conditioned)
+
+F03
+(stereo OR binocular OR inter-pupillary OR head-tracked) AND (generation OR diffusion OR neural rendering)
+
+For a future systematic expansion, predefine databases, cutoff, version resolution, language criteria and relevance thresholds, and retain per-record inclusion/exclusion decisions. ACM, IEEE, CVF, OpenReview, PMLR, Springer and arXiv are candidate sources; DBLP/Crossref can assist publication reconciliation. This proposal does not claim that complete searches of those platforms were performed.
+
+
+Final scientific-review recovery — 21 October 2026
+No publisher filter was applied in this check. The initial MDPI restriction was a retrieval constraint, not an article-level quality appraisal. Bounded recovery does not reconstruct an exhaustive candidate universe.
+
+"10.1080/10447318.2026.2719170" "4." "5." framework
+Purpose: Locate primary full-text framework and evaluation passages.
+
+"Generative Artificial Intelligence and Human Artificial Intelligence Interaction" "Table" pipeline evaluation
+Purpose: Locate the primary extraction/synthesis discussion.
+
+"HOICraft" "10.1145"
+Purpose: Verify publication DOI against author-hosted material.
+
+"Articulate AnyMesh" authors arxiv articulated 2025
+Purpose: Bounded adjacent-family countercheck; this branch exposed the embodied-generation survey. Articulate AnyMesh is not included in this handoff.
+
+site:mdpi.com/2075-5309/16/16/3319 "Generative" "Published"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+site:mdpi.com/2075-5309/16/9/1679 "Published"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+"Generative AI-Assisted Visualization Prototyping for Cultural Heritage"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+"buildings16163319"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+"buildings16091679"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+site:mdpi.com/2075-5309/16/16/3319/notes "Version of Record"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+site:mdpi.com/2075-5309/16/9/1679 "24 April 2026" "expert"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+site:mdpi.com/2075-5309/16/9/1679 "HMD" OR "headset" OR "Quest" OR "monitor"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+"buildings16091679" "experts"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+"buildings16091679" "display"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+"buildings16163319" "Published" "Revised"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+"buildings16163319" "Version of Record"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+"buildings16163319" "4.2." "time"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+"buildings16163319" "30" "PICO"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+"buildings16163319" "Table 8"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+"buildings16163319" "export" "FBX"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+"buildings16163319" "non-expert" "on-site"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+"buildings16163319" "4.3.1" "guided"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+"buildings16163319" "PICO 4" "each"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+"buildings16163319" "3.6" "Unity"
+Purpose: Primary-source recovery check after lifting historical publisher restriction.
+
+"generative" "mixed reality" "authoring" "3D" review survey 2025 2026
+Purpose: Unrestricted discovery and targeted recovery of a previously excluded publisher.
+
+"augmented reality" "generative AI" "scene" "MDPI" 2025 2026
+Purpose: Unrestricted discovery and targeted recovery of a previously excluded publisher.
+
+"generative" "extended reality" "systematic review" 2026 MDPI
+Purpose: Unrestricted discovery and targeted recovery of a previously excluded publisher.
+
+site:mdpi.com generative artificial intelligence virtual augmented reality 3D content authoring scene 2025 2026
+Purpose: Unrestricted discovery and targeted recovery of a previously excluded publisher.
+
+site:mdpi.com "generative" "mixed reality" mesh
+Purpose: Unrestricted discovery and targeted recovery of a previously excluded publisher.
+
+site:mdpi.com "Generative" "Extended Reality" survey review
+Purpose: Unrestricted discovery and targeted recovery of a previously excluded publisher.
+
+Version-bound direct checks: MultiGen arXiv:2603.06679v2; ImaginateAR arXiv:2504.21360v2; HOICraft arXiv:2602.08219v1; Ye survey arXiv:2604.26509v3. Publisher and author-project metadata establish identity separately from the technical version.
+
+Selection: D09 adds generated observations with explicit shared state; X06 adds localized mobile AR; X07 adds asset preparation and a separate heritage VR presentation; X08 adds device-based static panoramic-stimulus validation. S07/S08 broaden the comparison of prior interaction and embodied-generation frameworks. HOICraft is a contextual interaction-authoring reference, outside the visual-generation matrix. Articulate AnyMesh and sMoRe were bounded adjacent checks, not rejected for quality; the retained cases addressed the particular repair questions. ARIA was a conceptual narrative-adaptation framework, and the XR-ecosystem review concerned terminology rather than visual-generation mechanisms.
+
+The two Buildings papers were inspected through accessible official publisher pages/search-returned full-text passages; direct fetches also returned 403/429. Exact inspection scopes and version/date limits are retained in extraction records. No inferred model checkpoint, participant-by-device log, or controlled inference hardware was supplied where unavailable.
+
+2026-10-22 — CCFA targeted positioning follow-up (C015; S09)
+Scope: Resolve the closest-work comparison with 3D Scene Generation: A Survey. This is a bounded follow-up to the historical search above, not a rerun of the full discovery or screening process.
+
+Exact executed public search query:
+"3D Scene Generation: A Survey"
+Domain filters: arxiv.org; link.springer.com
+Purpose: Public-title-only identity recovery. Search returned stale first-version author metadata; the versioned arXiv and official publisher records determine the citation. No private draft wording was sent to search.
+
+Direct source-location operations (not search queries):
+https://arxiv.org/abs/2505.05474v2
+https://link.springer.com/article/10.1007/s11263-026-02999-6
+Purpose: Verify ordered authors, first/preprint and inspected-version dates, formal journal publication, volume, article number and DOI separately.
+
+Technical source: already cached Xie_3D-Scene-Generation-Survey_2505.05474v2.pdf, 44 pages. Inspected Sections 3.1, 3.5, 4.2, 5, 6 and 7; Figures 3-4 and 8; Tables 1 and 3-6. Figure 4 (p.7) and Table 6 (p.25) were checked visually. Publisher access was a subscription preview; no full Version of Record inspection is claimed.
+
+Decision: Add S09 / Xie2026SceneSurvey. Cite the 2026 IJCV article by Haozhe Xie, Beichen Wen, Zhaoxi Chen, Fangzhou Hong and Ziwei Liu, volume 134, article 418, DOI 10.1007/s11263-026-02999-6 (published 3 September 2026). Technical comparison is bound to arXiv:2505.05474v2 (12 August 2026), rather than the 2025 first posting.
+
+Positioning consequence: acknowledge its multi-dimensional method profiles, application-based XR paradigm selection, within-protocol numerical comparisons, and passive-dynamics/interactive-response distinction. Retain the present review's narrower distinction in configuration-level evidence provenance, supplying-component attribution and proposed paired transfer tests.
+
+Counts after this addition: 43 core records = 31 methods/systems + 3 evaluation records + 9 surveys. Bibliography: 47 references = 43 core + 4 component/context references. The 248 capability cells are unchanged. No model execution, new method/system evidence coding or exhaustive screening was performed.
+
+
+2026-10-22: Background and expanded literature coverage
+Targeted discovery, supplied-survey reference chaining, and exact-title/identifier checks. This is not a complete systematic-screening export. Primary-source scope is recorded in background-reference-index.json.
+
+Source batch: ccfa-workfiles/literature/visual-generative-xr/source/coverage-assets.json
+NeRF Representing Scenes as Neural Radiance Fields for View Synthesis
+3D Gaussian Splatting for Real-Time Radiance Field Rendering
+Learning Transferable Visual Models From Natural Language Supervision
+High-Resolution Image Synthesis with Latent Diffusion Models
+ProlificDreamer Variational Score Distillation NeurIPS 2023
+DreamGaussian ICLR 2024 official
+Shap-E Generating Conditional 3D Implicit Functions
+Zero-1-to-3 Zero-shot One Image to 3D Object ICCV
+SyncDreamer Generating Multiview-consistent Images ICLR
+LRM Large Reconstruction Model Single Image 3D
+InstantMesh sparse-view Large Reconstruction Models
+MVDream Multi-view Diffusion for 3D Generation ICLR
+TEXTure Text-Guided Texturing 3D Shapes SIGGRAPH 2023 official
+Instruct-NeRF2NeRF Editing 3D Scenes with Instructions ICCV
+Fantasia3D Disentangling Geometry Appearance ICCV
+TripoSG HoloPart ICCV 2025 official
+LGM Large Multi-View Gaussian Model ECCV 2024 official
+Objaverse Objaverse-XL official dataset NeurIPS CVPR
+ABO Dataset Benchmarks Real-World 3D Object Understanding
+ShapeNet An Information-Rich 3D Model Repository
+3DTopia-XL arxiv
+LN3Diff arxiv
+GRM Large Gaussian Reconstruction arxiv
+D-NeRF Neural Radiance Fields for Dynamic Scenes CVPR 2021 original
+K-Planes Explicit Radiance Fields in Space Time and Appearance CVPR 2023
+IP-Adapter Text Compatible Image Prompt Adapter original publication
+DINOv2 Learning Robust Visual Features without Supervision TMLR
+Rethinking the Inception Architecture for Computer Vision CVPR 2016
+Image Quality Assessment From Error Visibility to Structural Similarity original
+
+Source batch: ccfa-workfiles/literature/visual-generative-xr/source/coverage-scenes.json
+Text2NeRF LucidDreamer 3D scene generation CVPR 2024
+DiffuScene InstructScene LayoutGPT scene generation conference
+PanFusion PanoDreamer DreamScene360 panorama 3D generation
+LucidDreamer Domain-free; DiffuScene CVPR 2024; LayoutGPT NeurIPS 2023; InstructScene ICLR 2024
+WonderJourney WonderWorld CVPR 2024 2025 project
+Taming Stable Diffusion panorama; StereoCrafter; SceneFactor; Instruct-NeRF2NeRF (CVF restriction)
+SceneCraft 3D paper; Ctrl-Room; StereoCrafter authors
+PhyScene CVPR; SceneTex CVPR; GaussianEditor; StereoDiffusion -site:mdpi.com
+GaussianEditor Swift and Controllable; 360DVD; 3D-FRONT ProcTHOR -site:mdpi.com
+3D-FRONT; ProcTHOR; DL3DV-10K; Stereo Magnification Zhou 2018 -site:mdpi.com
+3D scene generation layout editing 2026 CVPR NeurIPS physical constraints -site:mdpi.com
+stereoscopic panorama generation 2026 CVPR stereo spatial video -site:mdpi.com
+CubeComposer CVPR 2026; Pano3DComposer (CVF restriction)
+Stereo World Model Camera-Guided (CVF restriction); Text2NeRF DOI; LucidDreamer Domain-Free DOI
+
+Source batch: ccfa-workfiles/literature/visual-generative-xr/source/coverage-dynamics.json
+Genie Generative Interactive Environments ICML 2024 official
+GameNGen Diffusion Models Are Real-Time Game Engines ICLR 2025
+WorldMem Long-term Consistent World Simulation with Memory CVPR 2025
+4D generation MAV3D Animate124 Consistent4D official paper
+site:proceedings.mlr.press Genie Generative Interactive Environments 2024 Bruce
+site:openaccess.thecvf.com Text-To-4D Dynamic Scene Generation
+site:openreview.net DIAMOND Diffusion for World Modeling Visual Details Matter
+site:openreview.net Animate124 Consistent4D SV4D
+MAV3D Text-To-4D Dynamic Scene Generation ICCV 2023 Singer
+Animate124 Animating One Image 4D ECCV 2024
+Consistent4D ICLR 2024 OpenReview
+SV4D Dynamic 3D Content Generation Multi Frame Multi View diffusion CVPR 2025
+Video World Models with Long-term Spatial Memory official
+VMem Surfel-Indexed paper
+interactive world 2026 memory manipulation state persistence paper -site:mdpi.com
+VBench CVPR 2024 official
+MotionCtrl A Unified and Flexible Motion Controller official
+CameraCtrl Enabling Camera Control ICLR 2025 paper
+Towards Accurate Generative Models of Video FVD arxiv
+The Unreasonable Effectiveness of Deep Features as a Perceptual Metric CVPR 2018
+GANs Trained by a Two Time-Scale Update Rule Converge to a Local Nash Equilibrium NeurIPS 2017
+Long-Context State-Space Video World Models arxiv
+Align Your Gaussians CVPR 2024 project
+See3D visual geometry world model paper view synthesis
+FlexWorld camera video generation paper
+"FlexWorld" "ICLR 2026"
+"FlexWorld" "NeurIPS 2025"
+"FlexWorld" "site:openreview.net/forum"
+
+Source batch: ccfa-workfiles/literature/visual-generative-xr/source/coverage-xr.json
+"generative AI" "virtual reality" authoring CHI UIST
+"GaussianShopVR"
+"SpaceBlender"
+"DreamSpace" IEEE VR
+"VideoCraft" "Mixed Reality"
+"Roomify" spatially grounded
+"FusionProtor"
+"ProtoDreamer" "10.1145"
+"ImmersiProtor" abstract
+"CreepyCoCreator?"
+"Dream Mesh" Weng pdf
+"Generative Terrain Authoring"
+"Gesture2Prop" hand gestures speech
+"Say It, See It" ISMAR Adjunct 2025 Xiu Chilukuri
+"Thing2Reality"
+"Visual Generative Artificial Intelligence" "102"
+"Survey of Large Language Models in Extended Reality" "2508.03014"
+Backward snowballing from Ning local review and Wang visual GenAI/MR review; author/lab publication lists; DOI confirmation using Crossref publisher-deposited metadata
+
+Source batch: ccfa-workfiles/writing/visual-generative-xr/background-expansion/source/root-references.json
+"A Comprehensive Survey on World Models for Embodied AI" 2510.16732
+"A Survey of Embodied World Models" "Yu Shang"
+"A Survey of Embodied World Models" "10.13140"
+"A Survey of Embodied World Models" arxiv Shang
+
+Source batch: ccfa-workfiles/writing/visual-generative-xr/background-expansion/source/xr-references.json
+
+Source batch: ccfa-workfiles/writing/visual-generative-xr/background-expansion/source/geometry-references.json
+
+Source batch: ccfa-workfiles/writing/visual-generative-xr/background-expansion/source/generative-references.json
+Generative foundations diffusion flow matching rectified flow transformer original papers
+Video generative models MAGI-1 Lumos-1 NOVA iVideoGPT original papers
+CausVid Self Forcing History Guided Video Diffusion LongLive papers
+Dreamer MuZero V-JEPA 2 world models original paper
+Exact-title and venue queries against official proceedings for canonical publication metadata; see per-entry inspected URLs.
+
+
+2026-10-22: Full-text overlap and claim-context audit
+Exact-title/identifier primary-source checks and selected original-section/table rereads.
+The checked sources, locators and whether cached text or prior extraction was used are recorded in citation-support-audit.json. This entry is an audit trail, not an invented exhaustive search-query export.
+
+
+2026-10-23: Literature-workflow refinement — targeted evidence and protocol checks
+Scope: evaluation, XR integration, proposed protocols, and current-versus-historical corpus statements. No new discovery search or full-corpus rescreening was performed.
+Source-location operations: reread cached Dreamcrafter Sections 5.1.3-5.4.2; extracted MultiGen v2 PDF pages 6 and 10-13; reread Generated Reality v1 study design and Appendix C; reread SCOPE Section 3.2 and EPIC Section 4.4. Retain the exact local paths, technical versions, and claim-level decisions in the new refinement audit.
+Decisions: distinguish fixed-outcome preview replay from live generation; distinguish demonstrated shared player-state transitions from quantitative opponent-presence classification; condition retention and binocular protocols on supported operations; label the early 42-record/46-reference inventory as historical.
+Historical pre-expansion snapshot, superseded by the current inventory above. Boundary: selected primary passages were checked. The 182 method/system rows, 37 resources, 354 cited works, 43 detailed records, 31 coded methods/systems, 248 capability entries, 29 equations, and scientific numerical data were preserved. This entry does not assert a 354-source full-text audit, new system experiments, new capability coding, or exhaustive database screening.
+Additional source-location operations: targeted passage inspection of the eight existing anchors in literature-workflow-anchors.json; official publication-page reads and exact-title metadata searches. New DOI requests were partly rate limited; fresh checks and retained historical verification are distinguished in literature-workflow-metadata.json. The actual search strings are retained in the revision workfiles.
+

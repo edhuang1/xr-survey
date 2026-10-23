@@ -1,0 +1,39 @@
+# Operating systems and editors
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python and optional local development tools
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+node_modules/
+.pytest_cache/
+.ruff_cache/
+
+# Local configuration and preview output
+.env
+.env.*
+!.env.example
+*.log
+/tmp/
+/test-results/
+/playwright-report/
+
+# Manuscripts remain outside the public website repository.
+/manuscript/
+/docs/paper/*.pdf
+*.[pP][dD][fF]
+*.[tT][eE][xX]
+*.[lL][tT][xX]
+*.[dD][oO][cC]
+*.[dD][oO][cC][xX]
+*.[oO][dD][tT]
+*.[rR][tT][fF]
+
+# Website assets and catalogue data in docs/ remain tracked.

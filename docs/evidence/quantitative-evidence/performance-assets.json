@@ -1,0 +1,738 @@
+{
+  "schema_version": "1.0",
+  "created": "2026-10-22",
+  "artifact": "Verified source-reported numerical asset-generation comparisons",
+  "owner": "asset evidence extraction; manuscript/table integration remains with root",
+  "scope": "Two distinct source protocols. All numeric result strings retain the original decimal precision. No new benchmark execution, pooled ranking, inferred missing score, or component-ablation filler.",
+  "recommended_table": {
+    "title": "Source-reported performance under two asset-generation protocols",
+    "panels": [
+      {
+        "id": "A",
+        "group": "trellis-toys4k-image",
+        "rows": "6",
+        "recommended_columns": [
+          "Method",
+          "CLIP ↑",
+          "FD_incep ↓",
+          "FD_DINOv2 ↓",
+          "FD_point ↓"
+        ],
+        "alternative_full_metrics": "Retain both KD columns for denser coverage; their values already use the source ×100 scale."
+      },
+      {
+        "id": "B",
+        "group": "partcrafter-part-object",
+        "rows": "4",
+        "recommended_columns": [
+          "Method",
+          "Objaverse: CD ↓ / F ↑ / part IoU ↓",
+          "ShapeNet: CD ↓ / F ↑ / part IoU ↓",
+          "ABO: CD ↓ / F ↑ / part IoU ↓",
+          "Time"
+        ],
+        "compact_alternative": "Use Objaverse alone if fitting both panels in one table; retain all three datasets in a separate part-quality table or appendix. Do not average datasets."
+      }
+    ],
+    "row_count": "10",
+    "no_ablation_rows": true,
+    "attribution": "Each panel cites the paper that reports the comparison. Baseline names need no new bibliography entries if explicitly described as source-reported comparisons.",
+    "caption_facts": [
+      "Panel A: single-image generation on 1,250 Toys4k objects; one generated asset per input. Image quality uses 5,000 real and 5,000 rendered images.",
+      "Panel B: source-specific object test subsets; paper reports about 2K test samples overall but no per-dataset counts.",
+      "Part IoU measures overlap among generated parts, so lower is better; it is not IoU against ground truth.",
+      "Part runtimes concern 4-part examples on one H20 GPU; they do not measure headset rendering or online response.",
+      "No ranking or boldface comparison is valid across panels or across different metrics/datasets."
+    ]
+  },
+  "sources": {
+    "trellis-v1-table2": {
+      "citation_key": "Xiang2025TRELLIS",
+      "title": "Structured 3D Latents for Scalable and Versatile 3D Generation",
+      "version": "arXiv:2412.01506v1 (technical version explicitly inspected in the manuscript)",
+      "pdf": "ccfa-workfiles/figures/source-evidence/cache/TRELLIS_arXiv-2412.01506v1.pdf",
+      "url": "https://arxiv.org/pdf/2412.01506v1",
+      "table": "Table 2",
+      "pdf_page": "7",
+      "printed_page": "7",
+      "protocol_locations": [
+        "Section 4, p. 6",
+        "Section 4.2, pp. 7–8",
+        "Appendix C.1, pp. 17–18"
+      ],
+      "configuration_locations": [
+        "Table 6 / Appendix A.1, p. 14",
+        "Appendix B.4, p. 17"
+      ],
+      "numeric_page_preview": "ccfa-workfiles/figures/table-redesign/build/assets-trellis-p07.png",
+      "numeric_visual_check": "All six image-to-3D rows and all six metric columns checked against the rendered original PDF page."
+    },
+    "partcrafter-table1": {
+      "citation_key": "Lin2025PartCrafter",
+      "title": "PartCrafter: Structured 3D Mesh Generation via Compositional Latent Diffusion Transformers",
+      "version": "NeurIPS 2025 proceedings PDF",
+      "pdf": "ccfa-workfiles/figures/source-evidence/cache/PartCrafter_NeurIPS-2025.pdf",
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2025/hash/32cc61322f1e2f56f989d29ccc7cfbb7-Abstract-Conference.html",
+      "table": "Table 1",
+      "pdf_page": "7",
+      "printed_page": "7",
+      "protocol_locations": [
+        "Section 3, p. 3",
+        "Section 3.4, p. 6",
+        "Section 4: Baselines and Evaluation Metrics, p. 6",
+        "Appendix A–B, p. 23"
+      ],
+      "numeric_page_preview": "ccfa-workfiles/figures/table-redesign/build/assets-partcrafter-p07.png",
+      "numeric_visual_check": "All four method rows, nine dataset-specific cells per row, and two reported runtimes checked against the rendered original PDF page. Dataset reference row is excluded from method comparisons."
+    }
+  },
+  "protocol_groups": [
+    {
+      "id": "trellis-toys4k-image",
+      "title": "Whole-object image-to-3D generation",
+      "source_id": "trellis-v1-table2",
+      "dataset": "Toys4k; random subset of the filtered held-out pool",
+      "test_objects": "1250",
+      "generated_assets_per_input": "1",
+      "filtered_pool_objects": "3229",
+      "input": "single image; ground-truth 3D asset supplies evaluation reference",
+      "resolution": {
+        "input_image_pixels": null,
+        "evaluation_render_pixels": null,
+        "why_null": "Pixel dimensions are not specified in the inspected PDF's evaluation protocol. Do not infer them from a released API default or a later TRELLIS release.",
+        "trellis_internal": "64^3 sparse structure; 256^3 mesh extraction grid, which are representation resolutions, not image sizes."
+      },
+      "evaluation": {
+        "appearance_views_per_asset": "4",
+        "appearance_yaw_degrees": [
+          "0",
+          "90",
+          "180",
+          "270"
+        ],
+        "appearance_pitch_degrees": "30",
+        "camera_radius": "2",
+        "camera_fov_degrees": "40",
+        "appearance_set_sizes": {
+          "real_images": "5000",
+          "generated_images": "5000"
+        },
+        "clip_views_per_asset": "8",
+        "clip_yaw_spacing_degrees": "45",
+        "clip_pitch_degrees": "30",
+        "clip_camera_radius": "2",
+        "geometry_points_per_asset": "4000",
+        "geometry_point_sampling": "Farthest point sampling of points unprojected from multiview depth maps",
+        "seed_and_uncertainty": "Not reported; do not add confidence intervals or statistical significance"
+      },
+      "metrics": [
+        {
+          "id": "clip",
+          "label": "CLIP",
+          "direction": "higher",
+          "scale": "cosine similarity ×100",
+          "definition": "Mean cosine similarity between generated-asset rendered-view CLIP features and the conditioning image features.",
+          "source_location": "Appendix C.1, p. 18"
+        },
+        {
+          "id": "fd_incep",
+          "label": "FD_incep",
+          "direction": "lower",
+          "scale": "as reported",
+          "definition": "Fréchet distance using Inception-v3 features of rendered images.",
+          "source_location": "Appendix C.1, p. 18"
+        },
+        {
+          "id": "kd_incep",
+          "label": "KD_incep ×100",
+          "direction": "lower",
+          "scale": "KD ×100, already applied in the source values",
+          "definition": "Kernel distance using Inception-v3 features; do not multiply the stored values a second time.",
+          "source_location": "Table 2, p. 7; Appendix C.1, p. 18"
+        },
+        {
+          "id": "fd_dinov2",
+          "label": "FD_DINOv2",
+          "direction": "lower",
+          "scale": "as reported",
+          "definition": "Fréchet distance using DINOv2 features of rendered images.",
+          "source_location": "Appendix C.1, p. 18"
+        },
+        {
+          "id": "kd_dinov2",
+          "label": "KD_DINOv2 ×100",
+          "direction": "lower",
+          "scale": "KD ×100, already applied in the source values",
+          "definition": "Kernel distance using DINOv2 features; do not multiply the stored values a second time.",
+          "source_location": "Table 2, p. 7; Appendix C.1, p. 18"
+        },
+        {
+          "id": "fd_point",
+          "label": "FD_point",
+          "direction": "lower",
+          "scale": "as reported",
+          "definition": "Fréchet distance using PointNet++ features of 4,000-point clouds obtained by farthest-point sampling from unprojected multiview depth maps.",
+          "source_location": "Appendix C.1, p. 18"
+        }
+      ],
+      "comparability": {
+        "within_group": "The six methods are compared by the same reporting paper on its Toys4k image-to-3D protocol. This supports source-local numerical comparison.",
+        "qualifiers": [
+          "The 3DTopia-XL appearance cells use shaded PBR renders, marked †.",
+          "TRELLIS appearance scores use decoded Gaussians while geometry uses meshes; scores compare final outputs, not a shared representation.",
+          "Baseline checkpoint hashes and sampling settings are not reported in the inspected paper. Retain source attribution instead of asserting a completely reproduced configuration.",
+          "Do not merge this image-to-3D group with text-to-3D columns, latent autoencoding reconstruction results, later TRELLIS.2 results, or the 500-instance reconstruction protocol.",
+          "All training pools may differ; equal evaluation protocol does not imply equal training data or compute."
+        ]
+      },
+      "rows": [
+        {
+          "method": "Shap-E",
+          "source_display_name": "Shap-E",
+          "row_kind": "full method comparison reported by source",
+          "input": "single conditioning image",
+          "values": {
+            "clip": "82.11",
+            "fd_incep": "34.72",
+            "kd_incep": "0.87",
+            "fd_dinov2": "465.74",
+            "kd_dinov2": "62.72",
+            "fd_point": "8.20"
+          },
+          "table_column_group": "Image-to-3D",
+          "source_id": "trellis-v1-table2",
+          "source_location": "Table 2, p. 7, Shap-E row",
+          "footnotes": [],
+          "configuration": {
+            "model_identity": "Shap-E image-conditioned baseline as evaluated in TRELLIS Table 2",
+            "benchmark_run_provenance": "Results reported by TRELLIS authors, not a new execution or a number transplanted from the baseline's own benchmark.",
+            "checkpoint_revision": "NR in source",
+            "inference_steps_and_guidance": "NR for this baseline in the inspected source",
+            "evaluation_image_pixels": "NR in source"
+          }
+        },
+        {
+          "method": "LGM",
+          "source_display_name": "LGM",
+          "row_kind": "full method comparison reported by source",
+          "input": "single conditioning image",
+          "values": {
+            "clip": "83.97",
+            "fd_incep": "26.31",
+            "kd_incep": "0.48",
+            "fd_dinov2": "322.71",
+            "kd_dinov2": "38.27",
+            "fd_point": "15.90"
+          },
+          "table_column_group": "Image-to-3D",
+          "source_id": "trellis-v1-table2",
+          "source_location": "Table 2, p. 7, LGM row",
+          "footnotes": [],
+          "configuration": {
+            "model_identity": "LGM image-conditioned baseline as evaluated in TRELLIS Table 2",
+            "benchmark_run_provenance": "Results reported by TRELLIS authors, not a new execution or a number transplanted from the baseline's own benchmark.",
+            "checkpoint_revision": "NR in source",
+            "inference_steps_and_guidance": "NR for this baseline in the inspected source",
+            "evaluation_image_pixels": "NR in source"
+          }
+        },
+        {
+          "method": "InstantMesh",
+          "source_display_name": "InstantMesh",
+          "row_kind": "full method comparison reported by source",
+          "input": "single conditioning image",
+          "values": {
+            "clip": "84.43",
+            "fd_incep": "20.22",
+            "kd_incep": "0.30",
+            "fd_dinov2": "264.36",
+            "kd_dinov2": "25.99",
+            "fd_point": "9.63"
+          },
+          "table_column_group": "Image-to-3D",
+          "source_id": "trellis-v1-table2",
+          "source_location": "Table 2, p. 7, InstantMesh row",
+          "footnotes": [],
+          "configuration": {
+            "model_identity": "InstantMesh image-conditioned baseline as evaluated in TRELLIS Table 2",
+            "benchmark_run_provenance": "Results reported by TRELLIS authors, not a new execution or a number transplanted from the baseline's own benchmark.",
+            "checkpoint_revision": "NR in source",
+            "inference_steps_and_guidance": "NR for this baseline in the inspected source",
+            "evaluation_image_pixels": "NR in source"
+          }
+        },
+        {
+          "method": "3DTopia-XL",
+          "source_display_name": "3DTopia-XL",
+          "row_kind": "full method comparison reported by source",
+          "input": "single conditioning image",
+          "values": {
+            "clip": "78.45",
+            "fd_incep": "37.68",
+            "kd_incep": "1.20",
+            "fd_dinov2": "437.37",
+            "kd_dinov2": "53.24",
+            "fd_point": "18.21"
+          },
+          "table_column_group": "Image-to-3D",
+          "source_id": "trellis-v1-table2",
+          "source_location": "Table 2, p. 7, 3DTopia-XL row",
+          "footnotes": [
+            "Appearance metrics (CLIP and the four image-feature FD/KD metrics) use shaded images of PBR meshes, as marked † in the source. FD_point has no †."
+          ],
+          "configuration": {
+            "model_identity": "3DTopia-XL image-conditioned baseline as evaluated in TRELLIS Table 2",
+            "benchmark_run_provenance": "Results reported by TRELLIS authors, not a new execution or a number transplanted from the baseline's own benchmark.",
+            "checkpoint_revision": "NR in source",
+            "inference_steps_and_guidance": "NR for this baseline in the inspected source",
+            "evaluation_image_pixels": "NR in source"
+          }
+        },
+        {
+          "method": "LN3Diff",
+          "source_display_name": "Ln3Diff",
+          "row_kind": "full method comparison reported by source",
+          "input": "single conditioning image",
+          "values": {
+            "clip": "82.74",
+            "fd_incep": "26.61",
+            "kd_incep": "0.68",
+            "fd_dinov2": "357.93",
+            "kd_dinov2": "50.72",
+            "fd_point": "7.86"
+          },
+          "table_column_group": "Image-to-3D",
+          "source_id": "trellis-v1-table2",
+          "source_location": "Table 2, p. 7, LN3Diff row",
+          "footnotes": [],
+          "configuration": {
+            "model_identity": "LN3Diff image-conditioned baseline as evaluated in TRELLIS Table 2",
+            "benchmark_run_provenance": "Results reported by TRELLIS authors, not a new execution or a number transplanted from the baseline's own benchmark.",
+            "checkpoint_revision": "NR in source",
+            "inference_steps_and_guidance": "NR for this baseline in the inspected source",
+            "evaluation_image_pixels": "NR in source"
+          }
+        },
+        {
+          "method": "TRELLIS-L",
+          "source_display_name": "Ours L",
+          "row_kind": "full method comparison reported by source",
+          "input": "single conditioning image",
+          "values": {
+            "clip": "85.77",
+            "fd_incep": "9.35",
+            "kd_incep": "0.02",
+            "fd_dinov2": "67.21",
+            "kd_dinov2": "0.72",
+            "fd_point": "2.03"
+          },
+          "table_column_group": "Image-to-3D",
+          "source_id": "trellis-v1-table2",
+          "source_location": "Table 2, p. 7, Ours L row",
+          "footnotes": [],
+          "configuration": {
+            "model_identity": "TRELLIS Large image-conditioned variant",
+            "stage_1": "GS-L image version: 24 layers, width 1024, 16 heads, 556M parameters",
+            "stage_2": "GL-L image version: 24 layers, width 1024, 16 heads, 600M parameters; sparse-convolution down/up sampling and skips",
+            "spatial_latents": "64^3 sparse structure; structure VAE compresses to 16^3 with 8 latent channels",
+            "appearance_output": "decoded 3D Gaussians",
+            "geometry_output": "decoded meshes; final mesh grid 256^3",
+            "inference": "CFG strength 3; 50 sampling steps reported in Section 4, p. 6",
+            "training": "500,777 curated 3D assets; exact L-specific training schedule not stated in the inspected PDF (the stated 64 A100 / 400K steps schedule is for XL, so it is not assigned to L)",
+            "checkpoint_revision": "NR in source",
+            "evaluation_image_pixels": "NR in source"
+          }
+        }
+      ]
+    },
+    {
+      "id": "partcrafter-part-object",
+      "title": "Single-image part-decomposable object generation",
+      "source_id": "partcrafter-table1",
+      "datasets": [
+        "Objaverse",
+        "ShapeNet",
+        "ABO"
+      ],
+      "test_objects": "about 2K samples stated for the evaluation in Section 3.4; per-dataset counts and object/scene allocation are NR",
+      "input": "single rendered RGB object image; PartCrafter also accepts desired part count N",
+      "resolution": {
+        "input_image_pixels": null,
+        "evaluation_render_pixels": null,
+        "part_iou_voxels": "64×64×64",
+        "mesh_extraction_grid": null,
+        "why_null": "The source describes the IoU voxel resolution but not input/render pixel sizes or mesh extraction grid for Table 1."
+      },
+      "metrics": [
+        {
+          "id": "cd",
+          "label": "CD",
+          "direction": "lower",
+          "definition": "L2 Chamfer Distance between the concatenated generated mesh and reference mesh. No part correspondence is assumed.",
+          "scale": "as reported in Table 1; no ×10^k multiplier given",
+          "source_location": "Section 4: Evaluation Metrics, p. 6"
+        },
+        {
+          "id": "f_score",
+          "label": "F-score (0.1)",
+          "direction": "higher",
+          "definition": "F-score of concatenated full-object meshes with distance threshold 0.1.",
+          "scale": "fraction, not percentage",
+          "source_location": "Section 4: Evaluation Metrics, p. 6"
+        },
+        {
+          "id": "part_iou",
+          "label": "Part overlap IoU",
+          "direction": "lower",
+          "definition": "Average intersection over union between generated part meshes after voxelizing canonical space into 64^3 grids; evaluates geometry independence, not reference segmentation overlap.",
+          "scale": "fraction",
+          "source_location": "Section 4: Evaluation Metrics, p. 6"
+        },
+        {
+          "id": "time",
+          "label": "Generation time",
+          "direction": "lower",
+          "definition": "Average generation time for test-set objects/scenes with 4 parts on one H20 GPU.",
+          "scale": "preserve original min/s; an exact seconds conversion is separately identified",
+          "source_location": "Section 4: Evaluation Metrics, p. 6; Table 1, p. 7"
+        }
+      ],
+      "comparability": {
+        "within_group": "Source-reported matched object-generation comparison, separately for each of Objaverse, ShapeNet, and ABO.",
+        "qualifiers": [
+          "Monolithic TripoSG rows provide full-object fidelity baselines and have no part-overlap score. Their missing IoU values are not perfect independence.",
+          "TripoSG* aligns token count to N×512. Label it explicitly; do not silently replace the original TripoSG row.",
+          "The HoloPart baseline includes TripoSG generation and SAMPart3D segmentation, rather than taking a clean ground-truth mesh as input.",
+          "PartCrafter uses requested part count N; the exact choice of N for every test case is not specified in the paper.",
+          "The paper does not state per-dataset test counts, input pixel dimensions, inference sampling settings or exact weight revisions. Preserve these unknowns.",
+          "Do not directly compare CD/F-score to TRELLIS latent-reconstruction Table 1: its test set, point sampling and F-score threshold (0.05) differ.",
+          "No confidence intervals/seeds are provided for these table cells."
+        ]
+      },
+      "rows": [
+        {
+          "method": "TripoSG",
+          "source_display_name": "TripoSG",
+          "row_kind": "full method or explicit matched-budget baseline reported in the main comparison",
+          "input": "single conditioning image",
+          "source_id": "partcrafter-table1",
+          "source_location": "Table 1, p. 7, TripoSG row",
+          "values": {
+            "Objaverse": {
+              "cd": "0.3104",
+              "f_score": "0.5940",
+              "part_iou": null
+            },
+            "ShapeNet": {
+              "cd": "0.3751",
+              "f_score": "0.5050",
+              "part_iou": null
+            },
+            "ABO": {
+              "cd": "0.2017",
+              "f_score": "0.7096",
+              "part_iou": null
+            }
+          },
+          "time": null,
+          "missing_values": {
+            "time": "Source uses / (no timing value).",
+            "part_iou": "Source uses / for monolithic TripoSG outputs; do not encode as zero."
+          },
+          "configuration": {
+            "model_identity": "original TripoSG monolithic image-to-mesh backbone baseline",
+            "token_budget": "NR for this original row; do not replace with the aligned row's N×512",
+            "part_output": "monolithic mesh; part IoU not reported / not applicable to the monolithic output",
+            "training_backbone": "TripoSG pretrained on 2 million curated shapes according to PartCrafter Section 3.1, p. 4",
+            "checkpoint_revision": "NR in source",
+            "inference_steps_and_guidance": "NR in source",
+            "input_image_pixels": "NR in source",
+            "mesh_extraction_grid": "NR in source"
+          }
+        },
+        {
+          "method": "TripoSG (token-aligned)",
+          "source_display_name": "TripoSG*",
+          "row_kind": "full method or explicit matched-budget baseline reported in the main comparison",
+          "input": "single conditioning image",
+          "source_id": "partcrafter-table1",
+          "source_location": "Table 1, p. 7, TripoSG* row",
+          "values": {
+            "Objaverse": {
+              "cd": "0.1821",
+              "f_score": "0.7115",
+              "part_iou": null
+            },
+            "ShapeNet": {
+              "cd": "0.3301",
+              "f_score": "0.5589",
+              "part_iou": null
+            },
+            "ABO": {
+              "cd": "0.1503",
+              "f_score": "0.7723",
+              "part_iou": null
+            }
+          },
+          "time": null,
+          "missing_values": {
+            "time": "Source uses / (no timing value).",
+            "part_iou": "Source uses / for monolithic TripoSG outputs; do not encode as zero."
+          },
+          "configuration": {
+            "model_identity": "TripoSG backbone with token count aligned to PartCrafter",
+            "token_budget": "N×512 tokens for N parts",
+            "part_output": "monolithic mesh; part IoU not reported / not applicable to the monolithic output",
+            "status": "explicit token-budget-matched baseline in source Table 1; not a PartCrafter component ablation",
+            "checkpoint_revision": "NR in source",
+            "inference_steps_and_guidance": "NR in source",
+            "input_image_pixels": "NR in source",
+            "mesh_extraction_grid": "NR in source"
+          }
+        },
+        {
+          "method": "TripoSG → HoloPart",
+          "source_display_name": "HoloPart",
+          "row_kind": "full method or explicit matched-budget baseline reported in the main comparison",
+          "input": "single conditioning image",
+          "source_id": "partcrafter-table1",
+          "source_location": "Table 1, p. 7, HoloPart row",
+          "values": {
+            "Objaverse": {
+              "cd": "0.1916",
+              "f_score": "0.6916",
+              "part_iou": "0.0443"
+            },
+            "ShapeNet": {
+              "cd": "0.3511",
+              "f_score": "0.5498",
+              "part_iou": "0.1107"
+            },
+            "ABO": {
+              "cd": "0.1338",
+              "f_score": "0.8093",
+              "part_iou": "0.0449"
+            }
+          },
+          "time": {
+            "value": "18",
+            "unit": "min",
+            "source_literal": "18min",
+            "seconds_derived": "1080",
+            "derivation": "18 × 60; exact unit conversion, not an additional measured result"
+          },
+          "missing_values": {},
+          "configuration": {
+            "model_identity": "source's adapted generative HoloPart baseline, not HoloPart applied to a ground-truth artistic mesh",
+            "pipeline": "single image → TripoSG mesh → SAMPart3D segmentation → HoloPart part completion",
+            "token_budget": "TripoSG token count aligned to N×512 in the object baseline comparison (Section 4, p. 6)",
+            "part_output": "separate part meshes",
+            "source_locations": [
+              "Section 4: Baselines, p. 6",
+              "Appendix B, p. 23"
+            ],
+            "checkpoint_revision": "NR in source",
+            "inference_steps_and_guidance": "NR in source",
+            "input_image_pixels": "NR in source",
+            "mesh_extraction_grid": "NR in source"
+          }
+        },
+        {
+          "method": "PartCrafter",
+          "source_display_name": "Ours",
+          "row_kind": "full method or explicit matched-budget baseline reported in the main comparison",
+          "input": "single RGB image + requested part count N",
+          "source_id": "partcrafter-table1",
+          "source_location": "Table 1, p. 7, Ours row",
+          "values": {
+            "Objaverse": {
+              "cd": "0.1726",
+              "f_score": "0.7472",
+              "part_iou": "0.0359"
+            },
+            "ShapeNet": {
+              "cd": "0.3205",
+              "f_score": "0.5668",
+              "part_iou": "0.0293"
+            },
+            "ABO": {
+              "cd": "0.1047",
+              "f_score": "0.8617",
+              "part_iou": "0.0243"
+            }
+          },
+          "time": {
+            "value": "34",
+            "unit": "s",
+            "source_literal": "34s"
+          },
+          "missing_values": {},
+          "configuration": {
+            "model_identity": "full part-decomposable-object PartCrafter model",
+            "input": "single RGB image + user-specified number of parts N; no segmentation prompt",
+            "token_budget": "512 tokens per part; N×512 jointly processed tokens",
+            "backbone": "fully fine-tuned pretrained TripoSG; 21 DiT blocks; alternating local/global self-attention, both levels image-conditioned",
+            "curriculum": "base model up to 8 parts: 5K iterations, learning rate 1e-4; object fine-tune up to 16 parts: 5K iterations, learning rate 5e-5",
+            "training": "8 H20 GPUs; batch 256; 30% monolithic objects sampled for regularization as stated in Section 3.4",
+            "part_output": "separate meshes in common canonical [-1,1]^3 coordinates",
+            "texture": "Table 1 evaluates geometry; the optional Hunyuan3D-2 texture pipeline in Appendix D is not part of these reported geometry metrics",
+            "source_locations": [
+              "Sections 3.1–3.4, pp. 3–6",
+              "Section 4 / Table 1, pp. 6–7"
+            ],
+            "checkpoint_revision": "NR in source",
+            "inference_steps_and_guidance": "NR in source",
+            "input_image_pixels": "NR in source",
+            "mesh_extraction_grid": "NR in source"
+          }
+        }
+      ]
+    }
+  ],
+  "dataset_records": [
+    {
+      "dataset": "Toys4k",
+      "role": "TRELLIS held-out evaluation; not used for training by TRELLIS or the compared methods according to the reporting paper",
+      "source_id": "trellis-v1-table2",
+      "source_locations": [
+        "Appendix B.1, p. 16",
+        "Table 8, p. 17",
+        "Appendix C.1, pp. 17–18"
+      ],
+      "dataset_scale_reported": "approximately 4K objects / 105 categories",
+      "filtered_pool": "3229",
+      "generation_test_subset": "1250",
+      "latent_reconstruction_subset": "500",
+      "warning": "The 500 reconstruction cases are not the generation test count."
+    },
+    {
+      "dataset": "Objaverse-XL (Sketchfab)",
+      "role": "TRELLIS training assets after aesthetic filtering",
+      "source_id": "trellis-v1-table2",
+      "source_locations": [
+        "Table 8, p. 17"
+      ],
+      "filtered_objects": "168307",
+      "aesthetic_threshold": "5.5"
+    },
+    {
+      "dataset": "Objaverse-XL (GitHub)",
+      "role": "TRELLIS training assets after aesthetic filtering",
+      "source_id": "trellis-v1-table2",
+      "source_locations": [
+        "Table 8, p. 17"
+      ],
+      "filtered_objects": "311843",
+      "aesthetic_threshold": "5.5"
+    },
+    {
+      "dataset": "ABO",
+      "role": "TRELLIS training assets after aesthetic filtering",
+      "source_id": "trellis-v1-table2",
+      "source_locations": [
+        "Table 8, p. 17"
+      ],
+      "filtered_objects": "4485",
+      "aesthetic_threshold": "4.5",
+      "warning": "This filtered training count is not PartCrafter's ABO test count."
+    },
+    {
+      "dataset": "3D-FUTURE",
+      "role": "TRELLIS training assets after aesthetic filtering",
+      "source_id": "trellis-v1-table2",
+      "source_locations": [
+        "Table 8, p. 17"
+      ],
+      "filtered_objects": "9472",
+      "aesthetic_threshold": "4.5"
+    },
+    {
+      "dataset": "HSSD",
+      "role": "TRELLIS object-asset training source after filtering, drawn from an indoor-scene resource",
+      "source_id": "trellis-v1-table2",
+      "source_locations": [
+        "Appendix B.1, p. 16",
+        "Table 8, p. 17"
+      ],
+      "filtered_objects": "6670",
+      "aesthetic_threshold": "4.5",
+      "warning": "The count is 3D object assets, not complete scenes."
+    },
+    {
+      "dataset": "TRELLIS curated union",
+      "role": "training",
+      "source_id": "trellis-v1-table2",
+      "source_locations": [
+        "Table 8, p. 17",
+        "Section 4, p. 6"
+      ],
+      "objects": "500777",
+      "renders_per_object_for_VAE": "150",
+      "captioning": "GPT-4o captions, summarized to multiple lengths"
+    },
+    {
+      "dataset": "PartCrafter curated Objaverse + ShapeNet-Core + ABO",
+      "role": "part-level training and separately evaluated object sources",
+      "source_id": "partcrafter-table1",
+      "source_locations": [
+        "Appendix A, p. 23",
+        "Section 3.4, p. 6"
+      ],
+      "part_labeled_objects": "approximately 50000",
+      "individual_parts": "approximately 300000",
+      "additional_monolithic_regularization_pool": "30000",
+      "training_monolithic_sampling_fraction": "30% stated in Section 3.4",
+      "test_samples_overall": "about 2000",
+      "per_dataset_train_test_counts": null,
+      "warning": "30,000 is the additional regularization pool size; 30% is the training sampling statement. Do not infer a count fraction or per-dataset splits from these two quantities."
+    },
+    {
+      "dataset": "Objaverse / ShapeNet / ABO part test subsets",
+      "role": "separate Table 1 test groups",
+      "source_id": "partcrafter-table1",
+      "source_locations": [
+        "Table 1, p. 7"
+      ],
+      "sizes": null,
+      "ground_truth_part_overlap_reference": {
+        "Objaverse": "0.0796",
+        "ShapeNet": "0.1827",
+        "ABO": "0.0137"
+      },
+      "warning": "The source's Dataset row is a reference-overlap statistic, not a method, and is excluded from the performance rows."
+    },
+    {
+      "dataset": "3D-Front",
+      "role": "PartCrafter scene adaptation and scene evaluation, processed by MIDI",
+      "source_id": "partcrafter-table1",
+      "source_locations": [
+        "Section 3.4, p. 6",
+        "Table 2, p. 7",
+        "Appendix A, p. 23"
+      ],
+      "objects_per_scene_supported": "up to 8",
+      "test_scene_count": null,
+      "warning": "Scene protocol is outside the selected asset table; do not mix its CD or F-score with object rows."
+    },
+    {
+      "dataset": "CO3D",
+      "role": "PartCrafter qualitative real-image generalization examples, including optional image-style transfer",
+      "source_id": "partcrafter-table1",
+      "source_locations": [
+        "Appendix C, p. 23"
+      ],
+      "quantitative_test_count": null,
+      "warning": "Not the source of the Table 1 numerical results."
+    }
+  ],
+  "checks": {
+    "numeric_original_pages_visually_inspected": true,
+    "source_precision_preserved": true,
+    "rows_with_ablation": "0",
+    "cross_protocol_ranking": false,
+    "dataset_reference_rows_excluded": true,
+    "full_configuration_limit": "The exact source-reported method identity, variant, pipeline and available configuration are recorded. Missing baseline weight revisions, pixel resolutions and sampling parameters remain explicitly NR; this artifact does not claim full independent reproducibility.",
+    "new_bibliography_entries_added": false,
+    "manuscript_changed": false
+  }
+}

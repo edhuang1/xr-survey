@@ -1,0 +1,648 @@
+{
+  "schema": "performance-evidence/v1",
+  "scope": "Reported within-paper comparisons for time-varying 3D and action-conditioned world generation. No new experiment or pooled cross-paper ranking.",
+  "selection": {
+    "groups": "3",
+    "rows_including_explicit_speed_variant": "18",
+    "full_method_rows": "17",
+    "policy": "Retain original numeric strings. Bold only within the same group and metric; do not transfer performance rankings across protocols. DreamGaussian4D-Fast is explicitly a different budget/input-length configuration."
+  },
+  "sources": {
+    "dg4d": {
+      "citation_key": "Ren2023DreamGaussian4D",
+      "title": "DreamGaussian4D: Generative 4D Gaussian Splatting",
+      "version": "arXiv:2312.17142v3",
+      "pdf_url": "https://arxiv.org/pdf/2312.17142v3",
+      "local_pdf": "ccfa-workfiles/figures/source-evidence/cache/dreamgaussian4d-2312.17142v3.pdf",
+      "anchors": [
+        "p.6 Sec.4 Implementation Details",
+        "p.7 Sec.4.1 Video-to-4D",
+        "p.9 Table 3",
+        "p.14 Appendix A.1-A.3 and Table 5"
+      ],
+      "visually_checked_page": "9",
+      "preview": "ccfa-workfiles/figures/table-redesign/build/dreamgaussian4d-2312.17142v3-p9.png"
+    },
+    "worldplay": {
+      "citation_key": "Sun2025WorldPlay",
+      "title": "WorldPlay: Towards Long-Term Geometric Consistency for Real-Time Interactive World Modeling",
+      "version": "PMLR 306, sun26az",
+      "pdf_url": "https://proceedings.mlr.press/v306/sun26az/sun26az.pdf",
+      "local_pdf": "ccfa-workfiles/figures/source-evidence/cache/worldplay-pmlr306-sun26az.pdf",
+      "anchors": [
+        "p.6 Table 2 and Sec.4 Evaluation Protocol",
+        "p.7 evaluation continuation, Eqs.(6)-(7), Baselines",
+        "p.8 Table 3 and structural consistency protocol",
+        "p.15 Appendix A",
+        "p.16 Appendix B / Table 7"
+      ],
+      "visually_checked_page": "6",
+      "preview": "ccfa-workfiles/figures/table-redesign/build/worldplay-pmlr306-sun26az-p6.png"
+    },
+    "multigen": {
+      "citation_key": "Po2026MultiGen",
+      "title": "MultiGen: Level-Design for Editable Multiplayer Worlds in Diffusion Game Engines",
+      "version": "arXiv:2603.06679v2, 30 March 2026",
+      "pdf_url": "https://arxiv.org/pdf/2603.06679v2",
+      "local_pdf": "ccfa-workfiles/figures/source-evidence/cache/multigen-2603.06679v2.pdf",
+      "anchors": [
+        "p.9 Sec.4.1 Level Design Dataset",
+        "pp.11-12 Sec.5, 5.1 and 5.2",
+        "pp.13-14 Sec.5.4",
+        "p.14 Table 2"
+      ],
+      "visually_checked_page": "14",
+      "preview": "ccfa-workfiles/figures/table-redesign/build/multigen-2603.06679v2-p14.png"
+    },
+    "fourdfy": {
+      "citation_key": "Bahmani2024FourDfy",
+      "version": "arXiv:2311.17984v2",
+      "pdf_url": "https://arxiv.org/pdf/2311.17984v2",
+      "local_pdf": "ccfa-workfiles/figures/source-evidence/cache/4dfy-2311.17984v2.pdf",
+      "anchors": [
+        "pp.6-7 Sec.4.1 and Table 2",
+        "p.12 S1-S2"
+      ]
+    },
+    "generated_reality": {
+      "citation_key": "Xie2026GeneratedReality",
+      "version": "arXiv:2602.18422v1, 20 February 2026",
+      "pdf_url": "https://arxiv.org/pdf/2602.18422v1",
+      "local_pdf": "ccfa-workfiles/figures/source-evidence/cache/generated-reality-v1.pdf",
+      "anchors": [
+        "p.6 Sec.4 Implementation details",
+        "p.7 Tables 1-2",
+        "p.13 Appendix A/B"
+      ]
+    }
+  },
+  "groups": [
+    {
+      "id": "video_to_4d_consistent4d",
+      "source": "dg4d",
+      "table_anchor": "p.9 Table 3",
+      "title": "Novel-view fidelity of video-to-4D generation",
+      "task": "Infer dynamic 3D content from a static-camera video; evaluate rendered novel views against corresponding original animated assets.",
+      "protocol": {
+        "dataset": "Consistent4D benchmark, as evaluated in DreamGaussian4D",
+        "test_size": "7 videos / animated assets",
+        "video_length": "32 frames per input video; DreamGaussian4D-Fast downsamples to 16 frames",
+        "conditions": "A static-view video; the first frame initializes the static 3D model.",
+        "input_camera": "0 degrees horizontal angle",
+        "evaluation_cameras": "-75, 15, 105, and 195 degrees horizontal angles",
+        "resolution": "NR in the inspected paper",
+        "reference": "Ground-truth rendered novel views from the original animated characters.",
+        "evaluation_code": "Code and data released by Consistent4D, explicitly identified by Appendix A.3.",
+        "repeats_or_confidence_intervals": "NR",
+        "test_object_names": [
+          "Pistol",
+          "Guppie",
+          "Crocodile",
+          "Monster",
+          "Skull",
+          "Trump",
+          "Aurorus"
+        ],
+        "source_anchors": [
+          "p.7 Sec.4.1 Video-to-4D",
+          "p.14 Appendix A.3; Table 5"
+        ]
+      },
+      "metrics": [
+        {
+          "id": "lpips",
+          "label": "LPIPS",
+          "direction": "down",
+          "unit": "unitless"
+        },
+        {
+          "id": "clip",
+          "label": "CLIP",
+          "direction": "up",
+          "unit": "score, retaining the original 0.xx scale",
+          "details": "Reported as CLIP for novel-view comparison on the benchmark; exact CLIP backbone and normalization are NR in the inspected video-to-4D evaluation section."
+        },
+        {
+          "id": "fvd",
+          "label": "FVD",
+          "direction": "down",
+          "unit": "score"
+        },
+        {
+          "id": "optimization_time",
+          "label": "Reported generation time",
+          "direction": "down",
+          "unit": "retain original hours/minutes strings",
+          "details": "Offline content optimization time, not rendering latency or action-to-display latency. Do not derive a uniform-hardware speedup from this column."
+        }
+      ],
+      "rows": [
+        {
+          "method": "D-NeRF",
+          "configuration": "Benchmark baseline as reported in Table 3; exact checkpoint/training configuration not restated.",
+          "values": {
+            "lpips": "0.51",
+            "clip": "0.68",
+            "fvd": "2327.83",
+            "optimization_time": "-"
+          }
+        },
+        {
+          "method": "K-planes",
+          "configuration": "Benchmark baseline as reported in Table 3; exact checkpoint/training configuration not restated.",
+          "values": {
+            "lpips": "0.38",
+            "clip": "0.72",
+            "fvd": "2295.68",
+            "optimization_time": "-"
+          }
+        },
+        {
+          "method": "Zero123",
+          "configuration": "Video-to-4D evaluation baseline as named by Table 3; do not silently substitute Zero123++ or a different checkpoint.",
+          "values": {
+            "lpips": "0.15",
+            "clip": "0.90",
+            "fvd": "1571.60",
+            "optimization_time": "-"
+          }
+        },
+        {
+          "method": "Consistent4D",
+          "configuration": "Consistent4D video-to-4D benchmark baseline.",
+          "values": {
+            "lpips": "0.16",
+            "clip": "0.87",
+            "fvd": "1133.44",
+            "optimization_time": "2 hrs"
+          }
+        },
+        {
+          "method": "DreamGaussian4D-Fast",
+          "source_label": "Ours-Fast",
+          "row_type": "explicit speed configuration",
+          "configuration": "16 input frames after downsampling; 500 dynamic optimization iterations with one random view; first frame for static generation.",
+          "values": {
+            "lpips": "0.13",
+            "clip": "0.91",
+            "fvd": "775.90",
+            "optimization_time": "5 mins"
+          }
+        },
+        {
+          "method": "DreamGaussian4D",
+          "source_label": "Ours",
+          "configuration": "All 32 input frames; 500 dynamic optimization iterations with four random views; first frame for static generation. Default static Gaussian initialization and HexPlane deformation.",
+          "values": {
+            "lpips": "0.12",
+            "clip": "0.92",
+            "fvd": "729.74",
+            "optimization_time": "15 mins"
+          }
+        }
+      ],
+      "comparability": {
+        "within_group": "All rows are reported together by DreamGaussian4D on the same Consistent4D novel-view benchmark. This review transcribes reported results; it does not rerun or harmonize the implementations.",
+        "configuration_difference": "Fast uses 16 rather than 32 frames and fewer random views, so label it explicitly as a speed configuration, not an independently ranked method.",
+        "hardware": "DreamGaussian4D reports a single 80 GB A100 for its experiments (p.6). Baseline timing hardware is not separately specified; do not assume every time entry used that same GPU.",
+        "do_not_mix": "The 6.5-min/14-frame image-to-4D result in Table 1 is a different task and configuration from the 15-min/32-frame video-to-4D result in Table 3.",
+        "missing": "Exact evaluation image resolution, per-baseline checkpoint details, FVD feature/preprocessing configuration, seeds and uncertainty are not reported in the inspected sections."
+      },
+      "suggested_caption": "Reported video-to-4D results on seven Consistent4D videos (32 frames, four novel views). Fast uses 16 frames and one random optimization view; the full DreamGaussian4D setting uses 32 frames and four views. Runtime denotes offline content generation."
+    },
+    {
+      "id": "worldplay_camera_control",
+      "source": "worldplay",
+      "table_anchor": "p.6 Table 2",
+      "title": "Camera control and revisit consistency in world generation",
+      "task": "Camera-conditioned video generation under short trajectories and longer out-and-back trajectories.",
+      "protocol": {
+        "dataset": "Author-constructed mixed test suite: DL3DV, game videos, and AI-generated images",
+        "test_size": "600 cases overall; component counts and separate short/long counts NR",
+        "short_length": "61 frames",
+        "long_length": "at least 250 frames",
+        "short_reference": "Generated frames versus ground-truth frames from test videos.",
+        "long_reference": "Frames on the return path versus corresponding frames generated on the initial pass; a self-revisit consistency test.",
+        "conditions": "Camera trajectories/poses supplied to every model; WorldPlay converts poses to discrete actions when only poses are given. The test suite includes image-conditioned cases.",
+        "resolution": "WorldPlay operating point is 720p. The paper does not state a uniform evaluation resolution or resizing policy for all methods in Table 2.",
+        "pose_evaluation": "ViPE estimates generated camera poses; both trajectories are made relative to the first frame and translation scale is normalized using the furthest frame.",
+        "repeats_or_confidence_intervals": "NR",
+        "source_anchors": [
+          "pp.6-7 Sec.4 Evaluation Protocol",
+          "p.15 Appendix A pose/action conversion"
+        ]
+      },
+      "metrics": [
+        {
+          "id": "psnr",
+          "label": "PSNR",
+          "direction": "up",
+          "unit": "dB"
+        },
+        {
+          "id": "ssim",
+          "label": "SSIM",
+          "direction": "up",
+          "unit": "unitless"
+        },
+        {
+          "id": "lpips",
+          "label": "LPIPS",
+          "direction": "down",
+          "unit": "unitless"
+        },
+        {
+          "id": "r_dist",
+          "label": "R_dist",
+          "direction": "down",
+          "unit": "angular distance; source does not print a unit",
+          "definition": "arccos((trace(R_gen R_gt^T)-1)/2), Eq.(6). Do not label the reported numbers as degrees without an explicit source statement."
+        },
+        {
+          "id": "t_dist",
+          "label": "T_dist",
+          "direction": "down",
+          "unit": "normalized squared translation distance; not metres",
+          "definition": "||t_gt - t_gen||_2^2 after translation-scale normalization, Eq.(7)."
+        }
+      ],
+      "rows": [
+        {
+          "method": "CameraCtrl",
+          "configuration": "Author-evaluated action-controlled baseline without external memory.",
+          "short": {
+            "psnr": "17.93",
+            "ssim": "0.569",
+            "lpips": "0.298",
+            "r_dist": "0.037",
+            "t_dist": "0.341"
+          },
+          "long": {
+            "psnr": "10.09",
+            "ssim": "0.241",
+            "lpips": "0.549",
+            "r_dist": "0.733",
+            "t_dist": "1.117"
+          }
+        },
+        {
+          "method": "SEVA",
+          "configuration": "Stable Virtual Camera baseline as named in Table 2; no external memory in the source comparison.",
+          "short": {
+            "psnr": "19.84",
+            "ssim": "0.598",
+            "lpips": "0.313",
+            "r_dist": "0.047",
+            "t_dist": "0.223"
+          },
+          "long": {
+            "psnr": "10.51",
+            "ssim": "0.301",
+            "lpips": "0.517",
+            "r_dist": "0.721",
+            "t_dist": "1.893"
+          }
+        },
+        {
+          "method": "ViewCrafter",
+          "configuration": "Author-evaluated camera-controlled view synthesis baseline; source categorizes it without a persistent memory module.",
+          "short": {
+            "psnr": "19.91",
+            "ssim": "0.617",
+            "lpips": "0.327",
+            "r_dist": "0.029",
+            "t_dist": "0.543"
+          },
+          "long": {
+            "psnr": "9.32",
+            "ssim": "0.277",
+            "lpips": "0.661",
+            "r_dist": "1.573",
+            "t_dist": "3.051"
+          }
+        },
+        {
+          "method": "Gen3C",
+          "configuration": "Author-evaluated memory-based baseline.",
+          "short": {
+            "psnr": "21.68",
+            "ssim": "0.635",
+            "lpips": "0.278",
+            "r_dist": "0.024",
+            "t_dist": "0.477"
+          },
+          "long": {
+            "psnr": "15.37",
+            "ssim": "0.431",
+            "lpips": "0.483",
+            "r_dist": "0.357",
+            "t_dist": "0.979"
+          }
+        },
+        {
+          "method": "VMem",
+          "configuration": "Author-evaluated memory-based baseline. Use the method name and cite WorldPlay for these measurements.",
+          "short": {
+            "psnr": "19.97",
+            "ssim": "0.587",
+            "lpips": "0.316",
+            "r_dist": "0.048",
+            "t_dist": "0.219"
+          },
+          "long": {
+            "psnr": "12.77",
+            "ssim": "0.335",
+            "lpips": "0.542",
+            "r_dist": "0.748",
+            "t_dist": "1.547"
+          }
+        },
+        {
+          "method": "Matrix-Game-2.0",
+          "configuration": "Author-evaluated action-controlled baseline without external memory.",
+          "short": {
+            "psnr": "17.26",
+            "ssim": "0.505",
+            "lpips": "0.383",
+            "r_dist": "0.287",
+            "t_dist": "0.843"
+          },
+          "long": {
+            "psnr": "9.57",
+            "ssim": "0.205",
+            "lpips": "0.631",
+            "r_dist": "2.125",
+            "t_dist": "2.742"
+          }
+        },
+        {
+          "method": "GameCraft",
+          "configuration": "Author-evaluated action-controlled baseline without external memory.",
+          "short": {
+            "psnr": "21.05",
+            "ssim": "0.639",
+            "lpips": "0.341",
+            "r_dist": "0.151",
+            "t_dist": "0.617"
+          },
+          "long": {
+            "psnr": "10.09",
+            "ssim": "0.287",
+            "lpips": "0.614",
+            "r_dist": "2.497",
+            "t_dist": "3.291"
+          }
+        },
+        {
+          "method": "WorldPlay",
+          "source_label": "Ours (full)",
+          "configuration": "Full Context Forcing-distilled autoregressive model: 4 denoising steps; 4 latent frames per chunk; 3 temporal-memory chunks, 1 spatial-memory chunk, plus first-chunk attention sink. Pretrained DiT video backbone cited as Wan/HunyuanVideo; exact checkpoint size not resolved by this paper's Appendix A.",
+          "short": {
+            "psnr": "21.92",
+            "ssim": "0.702",
+            "lpips": "0.247",
+            "r_dist": "0.031",
+            "t_dist": "0.121"
+          },
+          "long": {
+            "psnr": "18.94",
+            "ssim": "0.585",
+            "lpips": "0.371",
+            "r_dist": "0.332",
+            "t_dist": "0.797"
+          }
+        }
+      ],
+      "comparability": {
+        "within_group": "One author-run comparison table and one described test suite; short and long blocks have different reference targets and must remain separately labelled.",
+        "do_not_pool": "Long-term PSNR/SSIM/LPIPS quantify revisit consistency with the initial generated pass, not fidelity to observed ground truth. They cannot be averaged with short-term scores or treated as the same reconstruction metric.",
+        "excluded_row": "Ours (w/o Context Forcing) is an ablation and is excluded from the full-method comparison.",
+        "configuration_gaps": "The inspected paper names baselines but does not enumerate exact checkpoints, sampling steps, common resizing or per-method compute budgets for every row.",
+        "source_issue": "The VMem row's citation is printed as Wang et al. (2024b), whereas the table caption and baseline paragraph identify Li et al. (2025b). Preserve the numerical row under VMem and cite WorldPlay as measurement source; do not reproduce the inconsistent row citation."
+      },
+      "efficiency_separate_note": {
+        "source_anchor": "p.6 Sec.3.5; p.8 Table 4",
+        "fps": "24",
+        "resolution": "720p",
+        "hardware": "8×H800 GPUs",
+        "meaning": "Generation/streaming throughput with parallelism, quantization and streaming decoding; not an end-to-end action-to-display latency measurement.",
+        "do_not_convert": "Do not invert FPS and report it as measured interaction latency."
+      },
+      "suggested_caption": "WorldPlay-reported camera-controlled generation on a 600-case mixed test suite. Short-term scores (61 frames) use observed reference frames; long-term scores (at least 250 frames) compare revisits with the initial generated pass. Pose errors use ViPE and normalized relative trajectories."
+    },
+    {
+      "id": "multigen_multiplayer_visibility",
+      "source": "multigen",
+      "table_anchor": "p.14 Table 2",
+      "title": "Opponent-presence consistency in two-player generation",
+      "task": "Generate synchronized player observations while sharing one level/state.",
+      "protocol": {
+        "dataset": "ViZDoom/Doom multiplayer trajectories; the multiplayer study uses one map.",
+        "test_size": "NR: random multiplayer trajectories are sampled, but the number is not given.",
+        "video_length": "T steps; numerical T is NR for Table 2.",
+        "resolution": "NR",
+        "players_at_test": "2",
+        "conditions": "Same ground-truth per-player action streams; each method generates paired Player 1/Player 2 views. Shared map/state information is supplied according to the method's conditioning design.",
+        "reference": "Presence judgment on corresponding ground-truth frames, rather than direct geometric overlap.",
+        "judge": "Pretrained VLM, cited to the OpenAI o1 system card; exact deployed judge model/version/prompt NR.",
+        "positive_class": "Opponent visible",
+        "metrics_evaluation": "Per timestep and player, ask the VLM whether the opponent is present; compare the generated-frame judgment with the judgment on the matching ground-truth frame.",
+        "repeats_or_confidence_intervals": "NR",
+        "source_anchors": [
+          "p.12 Sec.5.2",
+          "pp.13-14 Sec.5.4"
+        ]
+      },
+      "metrics": [
+        {
+          "id": "accuracy",
+          "label": "Opponent-presence accuracy",
+          "direction": "up",
+          "unit": "%"
+        },
+        {
+          "id": "precision",
+          "label": "Opponent-presence precision",
+          "direction": "up",
+          "unit": "%"
+        },
+        {
+          "id": "recall",
+          "label": "Opponent-presence recall",
+          "direction": "up",
+          "unit": "%"
+        }
+      ],
+      "rows": [
+        {
+          "method": "IP-Adapter",
+          "configuration": "External-state conditioning baseline; evaluated on the same forced action trajectories. Exact checkpoint and training settings NR.",
+          "values": {
+            "accuracy": "62.12%",
+            "precision": "84.62%",
+            "recall": "40.73%"
+          }
+        },
+        {
+          "method": "ControlNet",
+          "configuration": "External-state conditioning baseline; evaluated on the same forced action trajectories. Exact checkpoint and training settings NR.",
+          "values": {
+            "accuracy": "60.71%",
+            "precision": "82.16%",
+            "recall": "39.20%"
+          }
+        },
+        {
+          "method": "Split-screen",
+          "configuration": "Two-player split-screen diffusion baseline, jointly predicts both views on the same map without explicit external memory. This is the MultiGen paper's evaluated baseline, not a verified public product checkpoint.",
+          "values": {
+            "accuracy": "65.31%",
+            "precision": "86.86%",
+            "recall": "44.59%"
+          }
+        },
+        {
+          "method": "MultiGen",
+          "source_label": "Ours (MultiGen)",
+          "configuration": "Separate per-player Observation/Dynamics instances with shared static map and active player poses; local frame history, action and memory-derived readouts condition each observation. Exact main-table context length and sampling steps NR.",
+          "values": {
+            "accuracy": "75.38%",
+            "precision": "88.12%",
+            "recall": "65.07%"
+          }
+        }
+      ],
+      "comparability": {
+        "within_group": "All four rows are the authors' paired-player rollout comparison under forced ground-truth actions and the same VLM presence judge.",
+        "supported_claim": "Opponent appearance/disappearance consistency across player views.",
+        "not_measured": "These numbers do not measure exact object geometry, stereo consistency, physical collision correctness, or action-to-display latency.",
+        "configuration_gaps": "Test trajectory count, rollout T, resolution, exact VLM checkpoint/prompt, baseline training budgets and seeds are not specified in the inspected paper.",
+        "no_inferred_sample_size": "Do not mistake the >10-million-frame training collection for the evaluation sample count."
+      },
+      "suggested_caption": "Reported two-player opponent-presence consistency in MultiGen. A VLM evaluates generated and corresponding ground-truth frames under matched action streams; opponent-visible is the positive class. Test trajectory count, rollout length and frame resolution are not reported."
+    }
+  ],
+  "datasets": [
+    {
+      "id": "consistent4d_video_eval",
+      "name": "Consistent4D benchmark",
+      "role": "Evaluation of video-to-4D novel-view reconstruction",
+      "scale": "7 animated assets/videos, 32 frames each",
+      "annotations": "Static input view at 0° and ground-truth novel views at -75°, 15°, 105°, 195°.",
+      "source": "dg4d",
+      "anchor": "p.7 Sec.4.1; p.14 Appendix A.3 and Table 5",
+      "note": "Do not describe this seven-video evaluation as the size of a training corpus."
+    },
+    {
+      "id": "worldplay_test",
+      "name": "WorldPlay mixed test suite",
+      "role": "Evaluation",
+      "scale": "600 cases overall",
+      "annotations": "Camera trajectories/poses; short trajectory reconstruction and designed out-and-back revisits.",
+      "source": "worldplay",
+      "anchor": "pp.6-7 Sec.4",
+      "note": "DL3DV, game videos and AI-generated images; source-specific case counts are not reported."
+    },
+    {
+      "id": "worldplay_train",
+      "name": "WorldPlay curated training mixture",
+      "role": "Training",
+      "scale": "approximately 320K clips",
+      "clip_duration": "30–40 seconds",
+      "source": "worldplay",
+      "anchor": "p.6 Sec.4; p.16 Appendix B / Table 7",
+      "components": [
+        {
+          "source": "Sekai",
+          "scale": "40K",
+          "role": "Real-world dynamics",
+          "annotations_in_table": "Neither discrete nor continuous actions initially"
+        },
+        {
+          "source": "DL3DV-derived",
+          "scale": "60K",
+          "role": "Reconstructed, rerendered and repaired real-scene trajectories",
+          "annotations_in_table": "Discrete and continuous actions"
+        },
+        {
+          "source": "UE Rendering",
+          "scale": "50K",
+          "role": "Synthetic 3D scenes",
+          "annotations_in_table": "Continuous actions initially"
+        },
+        {
+          "source": "Game video recordings",
+          "scale": "170K",
+          "role": "Simulation dynamics from first/third-person games",
+          "annotations_in_table": "Discrete actions initially"
+        }
+      ],
+      "note": "These are paper-curated clip counts, not the sizes of the original Sekai or DL3DV datasets. Appendix B describes later pose estimation and deriving missing discrete actions."
+    },
+    {
+      "id": "multigen_level_train",
+      "name": "MultiGen level-design collection",
+      "role": "Training for authored-layout generation",
+      "scale": ">10 million gameplay frames on 100 procedurally generated maps",
+      "annotations": "Actions and player poses; Obsidian-generated valid Doom layouts.",
+      "source": "multigen",
+      "anchor": "p.9 Sec.4.1",
+      "note": "Distinct from the single-map multiplayer collection."
+    },
+    {
+      "id": "multigen_multiplayer_train",
+      "name": "MultiGen multiplayer collection",
+      "role": "Training and evaluation source for multiplayer experiments",
+      "scale": ">10 million gameplay frames; single map",
+      "annotations": "Ego action, all active player poses and map layout; a pretrained agent plays against four identical agents.",
+      "source": "multigen",
+      "anchor": "p.12 Sec.5.2",
+      "note": "Each model is trained on single-view gameplay; no explicit multi-view supervision is required. Evaluation trajectory count is NR."
+    },
+    {
+      "id": "fourdfy_prompts",
+      "name": "4D-fy text-to-4D evaluation prompts",
+      "role": "Evaluation, not a training dataset",
+      "scale": "28 prompts for MAV3D comparison; 5 prompts for ablations",
+      "annotations": "Text prompts, rendered videos; 26 human evaluators for pairwise preference.",
+      "source": "fourdfy",
+      "anchor": "pp.6-7 Sec.4.1; p.12 S1-S2",
+      "note": "64 rendered frames at inference, trained with 16-frame video supervision; camera traverses azimuth with fixed elevation. Table 2 human-preference percentages are votes for 4D-fy against the row method, not that row method's score."
+    },
+    {
+      "id": "generated_reality_hot3d",
+      "name": "HOT3D subset used by Generated Reality",
+      "role": "Offline conditioning training/evaluation",
+      "scale": "5824 training clips; 45 evaluation clips from an unseen sequence",
+      "clip_duration": "5 seconds",
+      "resolution": "480×480",
+      "annotations": "Hand-object interactions with motion-capture 3D hand annotations and synchronized camera poses.",
+      "source": "generated_reality",
+      "anchor": "p.6 Sec.4",
+      "model_context": "Wan2.2 14B I2V; rank-32 LoRA on high- and low-noise experts; over 1K steps; batch size 16; learning rate 1×10^-5.",
+      "note": "This is the paper's clip split, not the total HOT3D size. Do not transfer the 14B offline table's metrics to the separate distilled 5B interactive system."
+    }
+  ],
+  "not_selected": [
+    {
+      "source": "fourdfy",
+      "anchor": "p.7 Table 2",
+      "reason": "Only two full methods (MAV3D and 4D-fy); remaining rows are ablations. Useful supporting evidence, but weaker as a dense multi-method table. Human preference is oriented toward 4D-fy and should never be placed in the MAV3D row as MAV3D's own score."
+    },
+    {
+      "source": "generated_reality",
+      "anchor": "p.7 Tables 1-2",
+      "reason": "These are conditioning-strategy adaptations/ablations of Wan2.2 14B, not full off-the-shelf PlayerOne/PEVA/ReCamMaster/InterDyn model comparisons. Avoid mislabelling the rows as independent model leaderboard entries."
+    },
+    {
+      "source": "dg4d",
+      "anchor": "p.2 Table 1",
+      "reason": "Cross-method timing list mixes task/output configurations and lacks matched hardware; prefer the source's within-benchmark Table 3 and keep its runtime caveat."
+    }
+  ],
+  "validation": {
+    "numbers": "Transcribed as strings from original tables and checked visually on full rendered PDF pages.",
+    "performance": "No new values, rounding, conversion, aggregate ranking, or inferred confidence intervals.",
+    "scope": "Only performance-worlds.json and task-scoped source-page previews created; no manuscript or shared figure edits."
+  }
+}

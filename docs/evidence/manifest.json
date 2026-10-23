@@ -1,0 +1,23 @@
+{
+  "release": "2026-10-23",
+  "manuscript_source_sha256": "1d0249c82e082c3124208046c26c89eadc4979ca3b722133f6baf435fcdb9c88",
+  "file_sha256": {
+    "catalogue-crosswalk.csv": "3342a7b8642cbc745eb1ecb36c2abf3821642ea853bfb7356f119562492ac9c6",
+    "catalogue-papers-by-year.csv": "fcf584c5c12600f23f7222648fda08e079e338b23f3414321425d6eb2ff4a538",
+    "catalogue-publication-records.csv": "d251d02b84bf587c261921b1c43577b9788761a3c64efe569c0788a81f7a9a1d",
+    "evidence-matrix.csv": "43e09fad6afc9c01b101de518b2571e444b12e0d177dde5029ecdadad5aa584e",
+    "extraction-records.json": "691f8b18a8a11680fc3c0f82ef68f8aa9606c748edf71074de34a50a05e0e918",
+    "index.html": "ad389e97cc711c08a62e4d7c243211e8ee4f18cc35c793610c25c2688ac3313e",
+    "quantitative-evidence/performance-assets.json": "3310c2f1e08a193c0ed4e934229a8f665fdb249b72b5ab970e7fd73093f904ab",
+    "quantitative-evidence/performance-scenes.json": "2a7229b9bd7bcf93cf0983d4616a97216afbfb166dc65f7267d34f4f1305525d",
+    "quantitative-evidence/performance-values.csv": "101a0cce47de34a249a636f9d0d6cc3aedb11040d625e501873aeaa2ef001989",
+    "quantitative-evidence/performance-worlds.json": "b1471dac0427e1482167029467ac9c55d886edbbfb6eb65c77206185e9565bac",
+    "quantitative-evidence/README.md": "76cd42c715f23c89cdf901edafd7f7b7ad1abb945621fdfa7ef75204276e0f29",
+    "README.md": "6d90f08081a43d00b0a1922067d3d84d440e4d3c7e40902b2f05c14857b11bc9",
+    "search-log.txt": "70db3266919a819b80caa6f9083f374c054530d868dee58c905338ad6b30cc67"
+  },
+  "records": 31,
+  "cells": 248,
+  "catalogue_records": 204,
+  "manuscript_revision_note": "A targeted whole-manuscript language pass removes repetitive defensive prose and states necessary qualifications as concrete conditions or endpoints. Evidence files, numerical values, citation commands, equations, quantitative table entries and figures are unchanged."
+}

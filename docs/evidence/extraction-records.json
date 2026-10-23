@@ -1,0 +1,3011 @@
+{
+  "project": "Visual Generative Models for Extended Reality",
+  "target_venue": "Artificial Intelligence Review",
+  "search_date": "2026-10-21",
+  "corpus_status": "Representative critical-review corpus, extended from the initial seed through targeted source verification; not an exhaustive systematic review.",
+  "scope": "XR视觉资产、场景与动态世界；基础生成方法、生成式布局/编辑与实际XR系统分别标识",
+  "codebook": {
+    "E": "专项实证评价：有针对该维度的实验、测量或用户研究；不表示达到XR门槛。",
+    "D": "实现/演示：有输出、功能或系统演示；不等同专项评价或验证成功。",
+    "C": "作者声称：原文明确宣称能力或用途，本轮未定位相应专项验证。",
+    "I": "表示或机制推断：可从模型表示推测潜力，不能视为已实施功能。",
+    "NR": "未定位证据：仅限inspected所列材料；不等于能力不存在。",
+    "NA": "不适用：按本文选定的核心输出与能力定义不适用。"
+  },
+  "dimensions": {
+    "spatial": "空间/多视角一致性；须注明几何真值、新视角图像代理、人评或回访展示。",
+    "stereo": "专门的左右眼/IPD/双目成对一致性或头显立体测评。",
+    "temporal": "时间一致性/世界持续性；分别注明相机路径、对象动态、回访记忆和状态变化。",
+    "control": "条件控制；分别注明文本/相机/结构控制精度与用户感知控制。",
+    "interaction": "输入驱动的导航/对象操作/状态改变；预设路径动画本身不计交互。",
+    "export": "输出资产的可交付性或引擎管线；内部显式表示仅属推断，附加重建器展示不等同导出。",
+    "runtime": "生成、渲染、交互计时的证据类型；不是实时性是否达标。",
+    "xr": "Documented XR-device implementation, demonstration or user study; retain mobile AR versus headset form factor, pipeline, task, and configuration. Claims of XR relevance remain C and do not establish device deployment."
+  },
+  "papers": [
+    {
+      "id": "A01",
+      "title": "DreamFusion: Text-to-3D using 2D Diffusion",
+      "short_name": "DreamFusion",
+      "year": 2023,
+      "status": "ICLR 2023；首个预印本2022。ICLR官网记录核实；方法阅读arXiv v1。",
+      "paper_type": "pure method",
+      "category": "asset / score distillation",
+      "inputs": "文本",
+      "representation": "NeRF；marching-cubes网格",
+      "mechanism": "SDS把预训练二维扩散先验蒸馏进逐资产优化的三维表示。",
+      "stage": "离线资产创建",
+      "relevance": "3D生成方法锚点；作为XR上游资产生成器纳入。",
+      "evidence_note": "CLIP R-Precision衡量文本匹配，不是几何真值误差或双目正确性。",
+      "limitations": "作者指出过饱和、过平滑；逐资产优化成本高。",
+      "inspected": "arXiv HTML v1：摘要、§3.2优化、§4、§5局限；官网Mesh exports；未运行模型。 arXiv v1 Section 3.2 Optimization rechecked on 2026-10-21. E is supported by the reported computation-time breakdown rather than by hardware disclosure alone; repeat count and dispersion were not located. Methodology audit on 2026-10-21 applied the same target-based temporal-applicability rule to all 27 rows; this clarification relies on the existing inspected source scope, without new model execution.",
+      "capabilities": {
+        "spatial": {
+          "code": "D",
+          "note": "展示多视点形状、法线和重光照；未将CLIP检索分数计作空间精度",
+          "source": "https://arxiv.org/html/2209.14988",
+          "anchor": "§4"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查章节未定位双目成对一致性或头显双目测评",
+          "source": "https://arxiv.org/html/2209.14988",
+          "anchor": "§3.2–5"
+        },
+        "temporal": {
+          "code": "NA",
+          "note": "NA for temporal evolution of the core static asset. Rendered viewpoints are indexed under spatial evidence; the inspected core method does not generate object dynamics or implement a retained-modification process.",
+          "source": "https://arxiv.org/html/2209.14988",
+          "anchor": "§3.2–5"
+        },
+        "control": {
+          "code": "E",
+          "note": "文本匹配由CLIP R-Precision评估；不是精确空间约束",
+          "source": "https://arxiv.org/html/2209.14988",
+          "anchor": "§4 Table 1"
+        },
+        "interaction": {
+          "code": "NR",
+          "note": "所查章节未定位运行时动作交互测试",
+          "source": "https://arxiv.org/html/2209.14988",
+          "anchor": "§3.2–5"
+        },
+        "export": {
+          "code": "D",
+          "note": "官网给出marching-cubes网格导出",
+          "source": "https://dreamfusion3d.github.io/",
+          "anchor": "Mesh exports"
+        },
+        "runtime": {
+          "code": "E",
+          "note": "The source reports a compute-time decomposition, divided evenly between NeRF rendering and diffusion-model evaluation, for 15,000 optimization iterations on four TPUv4 chips (about 1.5 hours). This evaluates optimization cost, not runtime display frame rate.",
+          "source": "https://arxiv.org/html/2209.14988v1",
+          "anchor": "Section 3.2, item 4 (Optimization)"
+        },
+        "xr": {
+          "code": "NR",
+          "note": "所查章节未定位头显部署或XR用户实验",
+          "source": "https://arxiv.org/html/2209.14988",
+          "anchor": "§3.2–5"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2209.14988",
+          "anchor": "§3.2–5",
+          "note": "原论文关键章节，访问于2026-10-21"
+        },
+        {
+          "url": "https://dreamfusion3d.github.io/",
+          "anchor": "Mesh exports",
+          "note": "官方资产导出展示"
+        },
+        {
+          "url": "https://blog.iclr.cc/2023/",
+          "anchor": "Announcing the ICLR 2023 Outstanding Paper Award Recipients",
+          "note": "官方会议年份/论文身份核实；OpenReview当前访问受浏览器校验阻挡"
+        },
+        {
+          "url": "https://arxiv.org/html/2209.14988v1",
+          "anchor": "Section 3.2, item 4 (Optimization)",
+          "note": "The source reports a compute-time decomposition, divided evenly between NeRF rendering and diffusion-model evaluation, for 15,000 optimization iterations on four TPUv4 chips (about 1.5 hours). This evaluates optimization cost, not runtime display frame rate."
+        },
+        {
+          "url": "https://arxiv.org/html/2209.14988",
+          "anchor": "§3.2–5",
+          "note": "NA for temporal evolution of the core static asset. Rendered viewpoints are indexed under spatial evidence; the inspected core method does not generate object dynamics or implement a retained-modification process."
+        }
+      ],
+      "costs": {
+        "generation": "约1.5小时/资产；15000步优化",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "4芯片TPUv4"
+      }
+    },
+    {
+      "id": "A02",
+      "title": "Magic3D: High-Resolution Text-to-3D Content Creation",
+      "short_name": "Magic3D",
+      "year": 2023,
+      "status": "CVPR 2023，CVF正式论文记录核实；阅读arXiv v2。",
+      "paper_type": "pure method",
+      "category": "asset / score distillation",
+      "inputs": "文本；图像或风格条件扩展",
+      "representation": "粗阶段稀疏hash-grid NeRF；细阶段纹理网格",
+      "mechanism": "低分辨率扩散引导粗形状，再用高分辨率潜扩散和可微光栅化优化网格。",
+      "stage": "离线资产创建",
+      "relevance": "连接扩散先验与可导出网格的代表工作。",
+      "evidence_note": "形状比较及用户偏好不等价于头显内空间/双目测评。",
+      "limitations": "本次核查确认需逐资产优化；未定位可据此保证交互式生成的证据。",
+      "inspected": "arXiv HTML v2：摘要、§5速度及比较、§6标题与官网编辑展示；官方CVF记录；未运行模型。 Methodology audit on 2026-10-21 applied the same target-based temporal-applicability rule to all 27 rows; this clarification relies on the existing inspected source scope, without new model execution.",
+      "capabilities": {
+        "spatial": {
+          "code": "D",
+          "note": "展示形状与纹理比较；本表不把综合视觉偏好升级为几何准确率",
+          "source": "https://arxiv.org/html/2211.10440",
+          "anchor": "§5 Figures 3–5"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查章节未定位双目成对一致性或头显双目测评",
+          "source": "https://arxiv.org/html/2211.10440",
+          "anchor": "§4–6"
+        },
+        "temporal": {
+          "code": "NA",
+          "note": "NA for temporal evolution of the core static asset. Rendered viewpoints are indexed under spatial evidence; the inspected core method does not generate object dynamics or implement a retained-modification process.",
+          "source": "https://arxiv.org/html/2211.10440",
+          "anchor": "§4–6"
+        },
+        "control": {
+          "code": "D",
+          "note": "支持改写prompt再优化、图像条件等编辑",
+          "source": "https://research.nvidia.com/labs/cosmos-lab/magic3d/",
+          "anchor": "Editing Capabilities"
+        },
+        "interaction": {
+          "code": "NR",
+          "note": "所查章节未定位运行时动作交互测试",
+          "source": "https://arxiv.org/html/2211.10440",
+          "anchor": "§4–6"
+        },
+        "export": {
+          "code": "D",
+          "note": "官方页面提供纹理网格下载",
+          "source": "https://research.nvidia.com/labs/cosmos-lab/magic3d/",
+          "anchor": "High-Resolution 3D Meshes"
+        },
+        "runtime": {
+          "code": "E",
+          "note": "粗/细优化合计40分钟，8张A100；是生成耗时，不是显示FPS",
+          "source": "https://arxiv.org/html/2211.10440",
+          "anchor": "§5 Speed evaluation"
+        },
+        "xr": {
+          "code": "NR",
+          "note": "所查章节未定位头显部署或XR用户实验",
+          "source": "https://arxiv.org/html/2211.10440",
+          "anchor": "§4–6"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2211.10440",
+          "anchor": "§4–6",
+          "note": "原论文关键章节，访问于2026-10-21"
+        },
+        {
+          "url": "https://openaccess.thecvf.com/content/CVPR2023/html/Lin_Magic3D_High-Resolution_Text-to-3D_Content_Creation_CVPR_2023_paper.html",
+          "anchor": "Bibliographic record",
+          "note": "正式发表记录"
+        },
+        {
+          "url": "https://research.nvidia.com/labs/cosmos-lab/magic3d/",
+          "anchor": "Meshes / Editing",
+          "note": "官方项目页面"
+        },
+        {
+          "url": "https://arxiv.org/html/2211.10440",
+          "anchor": "§4–6",
+          "note": "NA for temporal evolution of the core static asset. Rendered viewpoints are indexed under spatial evidence; the inspected core method does not generate object dynamics or implement a retained-modification process."
+        }
+      ],
+      "costs": {
+        "generation": "粗/细两阶段合计约40分钟/资产",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "8张NVIDIA A100"
+      }
+    },
+    {
+      "id": "A03",
+      "title": "Structured 3D Latents for Scalable and Versatile 3D Generation",
+      "short_name": "TRELLIS",
+      "year": 2025,
+      "status": "CVPR 2025；预印本2024；CVF正式记录核实，方法阅读arXiv v1。",
+      "paper_type": "pure method",
+      "category": "asset / native 3D latent generation",
+      "inputs": "文本或图像",
+      "representation": "SLAT稀疏三维结构潜变量；解码为3DGS、辐射场或网格",
+      "mechanism": "分两阶段生成稀疏结构与局部潜变量，使用rectified-flow transformer。",
+      "stage": "离线资产创建与局部编辑",
+      "relevance": "多种XR资产表示及局部编辑的技术桥梁。",
+      "evidence_note": "空间E仅指表示重建CD/F-score等；不能推出生成资产符合未观测真值或头显要求。",
+      "limitations": "资产质量评估与复杂场景展示不构成XR系统验证。",
+      "inspected": "arXiv HTML v1：摘要、§3.2–3.3、§4.1、§4.4、附录D局部编辑/组合；CVF发表记录。 Official repository at commit 442aa1e1afb9014e80681d3bf604e8d728a86ee7, committed 2025-11-05T13:18:14Z (before the 2026-10-21 cutoff); README and trellis/utils/postprocessing_utils.py read on 2026-10-21. Methodology audit on 2026-10-21 applied the same target-based temporal-applicability rule to all 27 rows; this clarification relies on the existing inspected source scope, without new model execution.",
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "表示重建用CD、F-score、法线图误差验证几何；限重建协议",
+          "source": "https://arxiv.org/html/2412.01506v1",
+          "anchor": "§4.1"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查章节未定位双目成对一致性或头显双目测评",
+          "source": "https://arxiv.org/html/2412.01506v1",
+          "anchor": "§3.2–4.4"
+        },
+        "temporal": {
+          "code": "NA",
+          "note": "NA for temporal evolution of the core static asset. Rendered viewpoints are indexed under spatial evidence; the inspected core method does not generate object dynamics or implement a retained-modification process.",
+          "source": "https://arxiv.org/html/2412.01506v1",
+          "anchor": "§3.2–4.4"
+        },
+        "control": {
+          "code": "D",
+          "note": "展示区域删除、添加、替换及资产变体",
+          "source": "https://arxiv.org/html/2412.01506v1",
+          "anchor": "§4.4 Figure 7"
+        },
+        "interaction": {
+          "code": "NR",
+          "note": "所查章节未定位运行时动作交互测试",
+          "source": "https://arxiv.org/html/2412.01506v1",
+          "anchor": "§3.2–4.4"
+        },
+        "export": {
+          "code": "D",
+          "note": "The official implementation documents textured GLB conversion and Gaussian PLY export. GLB conversion includes mesh postprocessing, UV parameterization and texture baking. Implementation inspected; model/export not executed and engine or headset validation not inferred.",
+          "source": "https://github.com/microsoft/TRELLIS/blob/442aa1e1afb9014e80681d3bf604e8d728a86ee7/README.md#L164-L176",
+          "anchor": "README minimal example, lines 164–176; trellis/utils/postprocessing_utils.py, to_glb, lines 399–453"
+        },
+        "runtime": {
+          "code": "NR",
+          "note": "所查章节未定位可核对生成/渲染/交互耗时",
+          "source": "https://arxiv.org/html/2412.01506v1",
+          "anchor": "§3.2–4.4"
+        },
+        "xr": {
+          "code": "NR",
+          "note": "所查章节未定位头显部署或XR用户实验",
+          "source": "https://arxiv.org/html/2412.01506v1",
+          "anchor": "§3.2–4.4"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2412.01506v1",
+          "anchor": "§3.2–4.4",
+          "note": "原论文关键章节，访问于2026-10-21"
+        },
+        {
+          "url": "https://openaccess.thecvf.com/content/CVPR2025/html/Xiang_Structured_3D_Latents_for_Scalable_and_Versatile_3D_Generation_CVPR_2025_paper.html",
+          "anchor": "Bibliographic record",
+          "note": "CVPR 2025正式记录"
+        },
+        {
+          "url": "https://github.com/microsoft/TRELLIS/blob/442aa1e1afb9014e80681d3bf604e8d728a86ee7/README.md#L164-L176",
+          "anchor": "README minimal example, lines 164–176; trellis/utils/postprocessing_utils.py, to_glb, lines 399–453",
+          "note": "The official implementation documents textured GLB conversion and Gaussian PLY export. GLB conversion includes mesh postprocessing, UV parameterization and texture baking. Implementation inspected; model/export not executed and engine or headset validation not inferred."
+        },
+        {
+          "url": "https://arxiv.org/html/2412.01506v1",
+          "anchor": "§3.2–4.4",
+          "note": "NA for temporal evolution of the core static asset. Rendered viewpoints are indexed under spatial evidence; the inspected core method does not generate object dynamics or implement a retained-modification process."
+        }
+      ],
+      "costs": {
+        "generation": "NR",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "NR"
+      }
+    },
+    {
+      "id": "A04",
+      "title": "Hunyuan3D 2.0: Scaling Diffusion Models for High Resolution Textured 3D Assets Generation",
+      "short_name": "Hunyuan3D 2.0",
+      "year": 2025,
+      "status": "技术报告/arXiv 2501.12202；本次未核实正式会议期刊发表。",
+      "paper_type": "system/tool",
+      "category": "asset / shape-texture generation",
+      "inputs": "单图；Studio支持草图转图再生成",
+      "representation": "形状VAE潜变量→网格；多视图合成→纹理贴图",
+      "mechanism": "flow-based DiT形状生成与几何条件多视图纹理合成解耦。",
+      "stage": "离线资产创建；后处理减面/动画",
+      "relevance": "覆盖从生成网格到生产工具的转换。",
+      "evidence_note": "ShapeVAE的IoU是重建证据；生成评估还包括ULIP/Uni3D与渲染图指标。动画是后续模块。",
+      "limitations": "核心生成器产物是静态资产；未定位头显端性能协议。",
+      "inspected": "arXiv HTML v1：摘要、§2、§4.2、§5.1–5.3、§6 Studio完整相关段；未运行代码。 Official repository at commit f8db63096c8282cb27354314d896feba5ba6ff8a, committed 2025-10-28T09:58:12Z (before the 2026-10-21 cutoff); gradio_app.py read on 2026-10-21.",
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "ShapeVAE用体积/表面IoU测重建，生成形状用跨模态相似度",
+          "source": "https://arxiv.org/html/2501.12202v1",
+          "anchor": "§5.1 Tables 1–2"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查章节未定位双目成对一致性或头显双目测评",
+          "source": "https://arxiv.org/html/2501.12202v1",
+          "anchor": "§2,4,5,6"
+        },
+        "temporal": {
+          "code": "D",
+          "note": "Studio用骨架、蒙皮和动作重定向展示动画；非生成器原生4D",
+          "source": "https://arxiv.org/html/2501.12202v1",
+          "anchor": "§6.3"
+        },
+        "control": {
+          "code": "E",
+          "note": "图像条件匹配有自动指标和用户评估",
+          "source": "https://arxiv.org/html/2501.12202v1",
+          "anchor": "§5.3"
+        },
+        "interaction": {
+          "code": "NR",
+          "note": "所查章节未定位运行时动作交互测试",
+          "source": "https://arxiv.org/html/2501.12202v1",
+          "anchor": "§2,4,5,6"
+        },
+        "export": {
+          "code": "D",
+          "note": "The official application implements mesh export and download in GLB, OBJ, PLY and STL, with separate textured and untextured paths. Implementation inspected; model/export not executed and engine or headset validation not inferred.",
+          "source": "https://github.com/Tencent-Hunyuan/Hunyuan3D-2/blob/f8db63096c8282cb27354314d896feba5ba6ff8a/gradio_app.py#L85-L94",
+          "anchor": "gradio_app.py: export_mesh, lines 85–94; Export UI, lines 460–471; on_export_click, lines 599–638; SUPPORTED_FORMATS, line 690"
+        },
+        "runtime": {
+          "code": "NR",
+          "note": "所查章节未定位可核对生成/渲染/交互耗时",
+          "source": "https://arxiv.org/html/2501.12202v1",
+          "anchor": "§2,4,5,6"
+        },
+        "xr": {
+          "code": "NR",
+          "note": "所查章节未定位头显部署或XR用户实验",
+          "source": "https://arxiv.org/html/2501.12202v1",
+          "anchor": "§2,4,5,6"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2501.12202v1",
+          "anchor": "§2,4,5,6",
+          "note": "原论文关键章节，访问于2026-10-21"
+        },
+        {
+          "url": "https://github.com/Tencent-Hunyuan/Hunyuan3D-2/blob/f8db63096c8282cb27354314d896feba5ba6ff8a/gradio_app.py#L85-L94",
+          "anchor": "gradio_app.py: export_mesh, lines 85–94; Export UI, lines 460–471; on_export_click, lines 599–638; SUPPORTED_FORMATS, line 690",
+          "note": "The official application implements mesh export and download in GLB, OBJ, PLY and STL, with separate textured and untextured paths. Implementation inspected; model/export not executed and engine or headset validation not inferred."
+        }
+      ],
+      "costs": {
+        "generation": "NR",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "NR"
+      }
+    },
+    {
+      "id": "A05",
+      "title": "Native and Compact Structured Latents for 3D Generation",
+      "short_name": "TRELLIS.2",
+      "year": 2026,
+      "status": "CVPR 2026官方CVF记录核实；预印本2025，阅读arXiv v1。",
+      "paper_type": "pure method",
+      "category": "asset / native 3D material generation",
+      "inputs": "单图；网格与参考图用于材质生成",
+      "representation": "O-Voxel几何和PBR属性；稀疏压缩VAE；网格转换",
+      "mechanism": "原生三维形状/材质结构潜变量与flow-matching生成，支持开放和非流形表面。",
+      "stage": "离线资产创建与材质生成",
+      "relevance": "可重光照PBR及复杂拓扑对XR资产处理有直接技术价值。",
+      "evidence_note": "几何重建和材质指标有专门评估；未据此推断双目舒适度。",
+      "limitations": "本次未细读附录F局限正文；泛化、物理准确性及XR部署仍需专项核查。",
+      "inspected": "arXiv HTML v1：摘要、§1、§3.1、§4.1–4.5、附录A转换算法、D评估段；CVF正式记录。 Official repository at commit 75fbf0183001ed9876c8dbb35de6b68552ee08bd, committed 2026-06-05T05:19:14Z (before the 2026-10-21 cutoff); README and o-voxel/README.md read on 2026-10-21. arXiv v1 Section 4 and Table 1 rechecked on 2026-10-21; the E code refers to the decoder experiment, while the separate H100 introduction claim has C-level support in the inspected timing context. Methodology audit on 2026-10-21 applied the same target-based temporal-applicability rule to all 27 rows; this clarification relies on the existing inspected source scope, without new model execution.",
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "重建用Mesh Distance/CD/F-score及法线误差；生成用对齐和人评",
+          "source": "https://arxiv.org/html/2512.14692v1",
+          "anchor": "§4.1–4.2"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查章节未定位双目成对一致性或头显双目测评",
+          "source": "https://arxiv.org/html/2512.14692v1",
+          "anchor": "§1,3,4; Appendix A,D"
+        },
+        "temporal": {
+          "code": "NA",
+          "note": "NA for temporal evolution of the core static asset. Rendered viewpoints are indexed under spatial evidence; the inspected core method does not generate object dynamics or implement a retained-modification process.",
+          "source": "https://arxiv.org/html/2512.14692v1",
+          "anchor": "§1,3,4; Appendix A,D"
+        },
+        "control": {
+          "code": "D",
+          "note": "可给定几何和参考图独立生成PBR材质",
+          "source": "https://arxiv.org/html/2512.14692v1",
+          "anchor": "§4.3"
+        },
+        "interaction": {
+          "code": "NR",
+          "note": "所查章节未定位运行时动作交互测试",
+          "source": "https://arxiv.org/html/2512.14692v1",
+          "anchor": "§1,3,4; Appendix A,D"
+        },
+        "export": {
+          "code": "D",
+          "note": "The official example exports generated geometry and PBR attributes to GLB through O-Voxel postprocessing. Transparency requires activation after import because the default export mode is OPAQUE. Implementation inspected; model/export not executed and engine or headset validation not inferred.",
+          "source": "https://github.com/microsoft/TRELLIS.2/blob/75fbf0183001ed9876c8dbb35de6b68552ee08bd/README.md#L151-L174",
+          "anchor": "README: Export to GLB, lines 151–174; o-voxel/README.md: Export to GLB, lines 110–127"
+        },
+        "runtime": {
+          "code": "E",
+          "note": "Decoder runtime is measured in reconstruction experiments: 0.077/0.301 s at 512³/1024³ on one A100. Separately, the introduction reports 3/17/60 s asset generation at 512³/1024³/1536³ on one H100; these are author-reported generation figures. Neither measures display latency.",
+          "source": "https://arxiv.org/html/2512.14692v1",
+          "anchor": "Section 4 implementation details; Section 4.1, Table 1, Dec. (s); Section 1 generation claim"
+        },
+        "xr": {
+          "code": "NR",
+          "note": "所查章节未定位头显部署或XR用户实验",
+          "source": "https://arxiv.org/html/2512.14692v1",
+          "anchor": "§1,3,4; Appendix A,D"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2512.14692v1",
+          "anchor": "§1,3,4; Appendix A,D",
+          "note": "原论文关键章节，访问于2026-10-21"
+        },
+        {
+          "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Xiang_Native_and_Compact_Structured_Latents_for_3D_Generation_CVPR_2026_paper.html",
+          "anchor": "CVF bibliographic record",
+          "note": "官方索引返回完整元数据；直接重复打开403，方法依据arXiv"
+        },
+        {
+          "url": "https://github.com/microsoft/TRELLIS.2/blob/75fbf0183001ed9876c8dbb35de6b68552ee08bd/README.md#L151-L174",
+          "anchor": "README: Export to GLB, lines 151–174; o-voxel/README.md: Export to GLB, lines 110–127",
+          "note": "The official example exports generated geometry and PBR attributes to GLB through O-Voxel postprocessing. Transparency requires activation after import because the default export mode is OPAQUE. Implementation inspected; model/export not executed and engine or headset validation not inferred."
+        },
+        {
+          "url": "https://arxiv.org/html/2512.14692v1",
+          "anchor": "Section 4 implementation details; Section 4.1, Table 1, Dec. (s); Section 1 generation claim",
+          "note": "Decoder runtime is measured in reconstruction experiments: 0.077/0.301 s at 512³/1024³ on one A100. Separately, the introduction reports 3/17/60 s asset generation at 512³/1024³/1536³ on one H100; these are author-reported generation figures. Neither measures display latency."
+        },
+        {
+          "url": "https://arxiv.org/html/2512.14692v1",
+          "anchor": "§1,3,4; Appendix A,D",
+          "note": "NA for temporal evolution of the core static asset. Rendered viewpoints are indexed under spatial evidence; the inspected core method does not generate object dynamics or implement a retained-modification process."
+        }
+      ],
+      "costs": {
+        "generation": "Full textured asset generation: about 3/17/60 s at 512³/1024³/1536³, reported in the introduction for one H100. A separate reconstruction experiment measures decoder-only time of 0.077/0.301 s at 512³/1024³ on one A100.",
+        "rendering": "NR; decoder-only timing is not rendering of a fixed asset.",
+        "interaction": "NR",
+        "hardware": "One H100 for the introduction's generation claim; one A100 for Table 1's reconstruction decoder experiment. These protocols and devices must not be conflated."
+      }
+    },
+    {
+      "id": "A06",
+      "title": "PartCrafter: Structured 3D Mesh Generation via Compositional Latent Diffusion Transformers",
+      "short_name": "PartCrafter",
+      "year": 2025,
+      "status": "NeurIPS 2025正式论文集核实；方法阅读arXiv v1。",
+      "paper_type": "pure method",
+      "category": "asset / compositional generation",
+      "inputs": "单RGB图像及部件数设置",
+      "representation": "每部件独立潜token及独立网格；多对象场景",
+      "mechanism": "在预训练TripoSG上采用部件局部/全局注意力，联合去噪多部件。",
+      "stage": "离线部件/对象生成",
+      "relevance": "把不可分整体变为可独立处理的结构；交互潜力须与物理验证分开。",
+      "evidence_note": "CD/F-score验证合并形状，部件平均IoU测重叠；不证明关节或物理可操作性。",
+      "limitations": "本次证据支持几何分解，未定位运动学/物理属性生成或XR测试。",
+      "inspected": "arXiv HTML v1：摘要、§3.4、§4实验问题/指标/对象结果；NeurIPS正式记录和官方仓库。 Official repository at commit 3d773bf02fad51c7ab31a5615573fec93b287b30, committed 2026-04-16T18:41:43Z (before the 2026-10-21 cutoff); scripts/inference_partcrafter.py and scripts/inference_partcrafter_scene.py read on 2026-10-21. The current script is not named inference_object.py. Methodology audit on 2026-10-21 applied the same target-based temporal-applicability rule to all 27 rows; this clarification relies on the existing inspected source scope, without new model execution.",
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "形状CD/F-score和部件重叠IoU有专项测评",
+          "source": "https://arxiv.org/html/2506.05573",
+          "anchor": "§4 Evaluation Metrics"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查章节未定位双目成对一致性或头显双目测评",
+          "source": "https://arxiv.org/html/2506.05573",
+          "anchor": "§3.4–4.2"
+        },
+        "temporal": {
+          "code": "NA",
+          "note": "NA for temporal evolution of the core static asset. Rendered viewpoints are indexed under spatial evidence; the inspected core method does not generate object dynamics or implement a retained-modification process.",
+          "source": "https://arxiv.org/html/2506.05573",
+          "anchor": "§3.4–4.2"
+        },
+        "control": {
+          "code": "D",
+          "note": "部件数设置控制输出分解粒度",
+          "source": "https://arxiv.org/html/2506.05573",
+          "anchor": "§3.4, §4"
+        },
+        "interaction": {
+          "code": "I",
+          "note": "独立网格允许分别变换是表示层推断；未验证关节/物理交互",
+          "source": "https://arxiv.org/html/2506.05573",
+          "anchor": "§4 Evaluation Metrics"
+        },
+        "export": {
+          "code": "D",
+          "note": "The official inference script exports each generated part as a separate GLB, a merged object GLB, and a part-to-file manifest. Implementation inspected; model/export not executed and engine or headset validation not inferred.",
+          "source": "https://github.com/wgsxm/PartCrafter/blob/3d773bf02fad51c7ab31a5615573fec93b287b30/scripts/inference_partcrafter.py#L159-L181",
+          "anchor": "scripts/inference_partcrafter.py: per-part and composite export and manifest, lines 159–181; scripts/inference_partcrafter_scene.py, lines 143–165"
+        },
+        "runtime": {
+          "code": "E",
+          "note": "4部件对象平均34秒，单H20；是生成耗时",
+          "source": "https://arxiv.org/html/2506.05573",
+          "anchor": "§4 Evaluation Metrics, Table 1"
+        },
+        "xr": {
+          "code": "NR",
+          "note": "所查章节未定位头显部署或XR用户实验",
+          "source": "https://arxiv.org/html/2506.05573",
+          "anchor": "§3.4–4.2"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2506.05573",
+          "anchor": "§3.4–4.2",
+          "note": "原论文关键章节，访问于2026-10-21"
+        },
+        {
+          "url": "https://proceedings.neurips.cc/paper_files/paper/2025/hash/32cc61322f1e2f56f989d29ccc7cfbb7-Abstract-Conference.html",
+          "anchor": "Main Conference Track",
+          "note": "NeurIPS 2025正式记录"
+        },
+        {
+          "url": "https://github.com/wgsxm/PartCrafter/blob/3d773bf02fad51c7ab31a5615573fec93b287b30/scripts/inference_partcrafter.py#L159-L181",
+          "anchor": "scripts/inference_partcrafter.py: per-part and composite export and manifest, lines 159–181; scripts/inference_partcrafter_scene.py, lines 143–165",
+          "note": "The official inference script exports each generated part as a separate GLB, a merged object GLB, and a part-to-file manifest. Implementation inspected; model/export not executed and engine or headset validation not inferred."
+        },
+        {
+          "url": "https://arxiv.org/html/2506.05573",
+          "anchor": "§3.4–4.2",
+          "note": "NA for temporal evolution of the core static asset. Rendered viewpoints are indexed under spatial evidence; the inspected core method does not generate object dynamics or implement a retained-modification process."
+        }
+      ],
+      "costs": {
+        "generation": "4部件对象平均34秒",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "单张NVIDIA H20"
+      }
+    },
+    {
+      "id": "SCE01",
+      "title": "Text2Room: Extracting Textured 3D Meshes from 2D Text-to-Image Models",
+      "short_name": "Text2Room",
+      "year": 2023,
+      "status": "ICCV 2023（官方项目页标注 Oral）",
+      "paper_type": "pure method",
+      "category": "scene generation",
+      "inputs": "文本；相机轨迹/视点选择",
+      "representation": "房间尺度纹理三角网格",
+      "mechanism": "预训练文本图像修补与单目深度，经深度对齐、网格融合和场景补全逐步扩展",
+      "stage": "离线场景构建",
+      "relevance": "显式室内网格可衔接XR内容制作；需另行检验双目质量、交互与头显性能",
+      "evidence_note": "空间E限人评3D结构/完整度；新视点图像指标和可浏览网格不能替代几何真值或双目测试。",
+      "limitations": "视点和局部提示仅部分约束布局；残余拉伸/孔洞及烘焙光照影响后续编辑。",
+      "inspected": "官方项目页；arXiv v2 摘要、§4运行设置、§4.2、§4.4–4.5、§5；未运行代码。 arXiv v2 Section 4 Evaluation Metrics, Section 4.2/Table 1 and Sections 4.4-4.5 rechecked on 2026-10-21. CLIP Score is retained as an alignment proxy rather than evidence of precise spatial constraint satisfaction. arXiv v2 Section 4 implementation paragraph rechecked on 2026-10-21. Classification follows the review's explicit timing-evidence rule; it does not assert that the authors did not measure the reported duration. Methodology audit on 2026-10-21 applied the same target-based temporal-applicability rule to all 27 rows; this clarification relies on the existing inspected source scope, without new model execution.",
+      "costs": {
+        "generation": "约50分钟生成单场景（§4实现设置）",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "单张NVIDIA RTX 3090"
+      },
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "§4.2含3D结构/完整度用户评分；并非真实几何误差",
+          "source": "https://arxiv.org/html/2303.11989",
+          "anchor": "§4.2, Table 1"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查章节未定位双目成对一致性或头显双目测评",
+          "source": "https://arxiv.org/html/2303.11989",
+          "anchor": "§4.2,4.4–4.5,5"
+        },
+        "temporal": {
+          "code": "NA",
+          "note": "NA for temporal content or state generation in the core static-mesh output. Construction trajectories address spatial completion; they are not a separately evaluated temporal-continuity or retained-modification protocol.",
+          "source": "https://arxiv.org/html/2303.11989",
+          "anchor": "§4.2,4.4–4.5,5"
+        },
+        "control": {
+          "code": "E",
+          "note": "CLIP scores on rendered scene images evaluate text-image alignment; precise layout control remains limited and is not established by this proxy.",
+          "source": "https://arxiv.org/html/2303.11989v2",
+          "anchor": "Section 4 (Evaluation Metrics), Section 4.2, Table 1; Sections 4.4-4.5"
+        },
+        "interaction": {
+          "code": "D",
+          "note": "官方网页可鼠标浏览网格；此证据限相机导航，非对象操作",
+          "source": "https://lukashoel.github.io/text-to-room/",
+          "anchor": "Interactive 3D Mesh Viewer"
+        },
+        "export": {
+          "code": "D",
+          "note": "输出纹理网格，官方提供完整场景网格下载",
+          "source": "https://lukashoel.github.io/text-to-room/",
+          "anchor": "Download meshes; Interactive 3D Mesh Viewer"
+        },
+        "runtime": {
+          "code": "C",
+          "note": "The implementation description reports about 50 minutes per scene on one RTX 3090, with 20 trajectories and 10 frames each. A dedicated timing comparison, profile, or repeated measurement was not located; the value is retained as an author-reported generation estimate.",
+          "source": "https://arxiv.org/html/2303.11989v2",
+          "anchor": "Section 4 (Implementation Details)"
+        },
+        "xr": {
+          "code": "C",
+          "note": "作者以AR/VR内容制作为用途；所查章节未定位头显实验",
+          "source": "https://arxiv.org/html/2303.11989",
+          "anchor": "§1 Introduction"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2303.11989",
+          "anchor": "§4.2,4.4–4.5,5",
+          "note": "原论文关键章节，访问于2026-10-21"
+        },
+        {
+          "url": "https://lukashoel.github.io/text-to-room/",
+          "anchor": "Publication; Mesh Viewer",
+          "note": "作者项目页确认ICCV 2023及网格展示/下载"
+        },
+        {
+          "url": "https://arxiv.org/html/2303.11989v2",
+          "anchor": "Section 4 (Evaluation Metrics), Section 4.2, Table 1; Sections 4.4-4.5",
+          "note": "CLIP scores on rendered scene images evaluate text-image alignment; precise layout control remains limited and is not established by this proxy."
+        },
+        {
+          "url": "https://arxiv.org/html/2303.11989v2",
+          "anchor": "Section 4 (Implementation Details)",
+          "note": "The implementation description reports about 50 minutes per scene on one RTX 3090, with 20 trajectories and 10 frames each. A dedicated timing comparison, profile, or repeated measurement was not located; the value is retained as an author-reported generation estimate."
+        },
+        {
+          "url": "https://arxiv.org/html/2303.11989",
+          "anchor": "§4.2,4.4–4.5,5",
+          "note": "NA for temporal content or state generation in the core static-mesh output. Construction trajectories address spatial completion; they are not a separately evaluated temporal-continuity or retained-modification protocol."
+        }
+      ]
+    },
+    {
+      "id": "SCE02",
+      "title": "SceneScape: Text-Driven Consistent Scene Generation",
+      "short_name": "SceneScape",
+      "year": 2023,
+      "status": "NeurIPS 2023",
+      "paper_type": "pure method",
+      "category": "scene generation",
+      "inputs": "文本；相机姿态序列",
+      "representation": "随视点扩展的统一网格及渲染帧序列",
+      "mechanism": "扩散修补、投影网格先验、逐步深度与VAE解码器测试时优化",
+      "stage": "顺序扩展/离线优化",
+      "relevance": "研究长相机路径下场景一致性；顺序在线算法不等同可实时交互的XR系统",
+      "evidence_note": "空间与时间E对应相机路径、重投影/深度及消融；静态环境的帧间一致性不是对象动力学。",
+      "limitations": "误差可沿路径累积；三角网格对天空/地面等深度突变处理困难。",
+      "inspected": "官方项目页；arXiv v2 摘要、§4.1–4.3、§5、附录A耗时；未运行代码。",
+      "costs": {
+        "generation": "约2.5小时生成50帧序列（附录A）",
+        "rendering": "约40秒/步的内部渲染阶段含抗锯齿和漂浮伪影修复；非交互显示帧率",
+        "interaction": "NR",
+        "hardware": "单张NVIDIA Tesla V100；每帧DDIM 50步"
+      },
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "评估相机误差、重投影/深度误差及SfM重建比例",
+          "source": "https://arxiv.org/html/2302.01133",
+          "anchor": "§4.1–4.3"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查章节未定位双目成对一致性或头显双目测评",
+          "source": "https://arxiv.org/html/2302.01133",
+          "anchor": "§4.1–4.3,5; Appendix A"
+        },
+        "temporal": {
+          "code": "E",
+          "note": "解码器优化消融与重投影误差针对相机运动下帧间一致性；非动态对象",
+          "source": "https://arxiv.org/html/2302.01133",
+          "anchor": "§4.2–4.3"
+        },
+        "control": {
+          "code": "E",
+          "note": "给定相机运动的恢复误差有专项评估；文本另以CLIP衡量",
+          "source": "https://arxiv.org/html/2302.01133",
+          "anchor": "§4.1–4.3"
+        },
+        "interaction": {
+          "code": "NR",
+          "note": "所查章节未定位运行时动作交互测试",
+          "source": "https://arxiv.org/html/2302.01133",
+          "anchor": "§4.1–4.3,5; Appendix A"
+        },
+        "export": {
+          "code": "I",
+          "note": "统一网格与Poisson处理支持潜在交付；项目展示不等于已核实导出",
+          "source": "https://scenescape.github.io/",
+          "anchor": "3D scene visualization"
+        },
+        "runtime": {
+          "code": "E",
+          "note": "50帧约2.5小时、Tesla V100；附录分阶段耗时不可当显示FPS",
+          "source": "https://arxiv.org/html/2302.01133",
+          "anchor": "Appendix A, Table 3"
+        },
+        "xr": {
+          "code": "NR",
+          "note": "所查章节未定位头显部署或XR用户实验",
+          "source": "https://arxiv.org/html/2302.01133",
+          "anchor": "§4.1–4.3,5; Appendix A"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2302.01133",
+          "anchor": "§4.1–4.3,5; Appendix A",
+          "note": "原论文关键章节，访问于2026-10-21"
+        },
+        {
+          "url": "https://scenescape.github.io/",
+          "anchor": "Publication; method; 3D scene visualization",
+          "note": "作者项目页，NeurIPS 2023及场景展示"
+        },
+        {
+          "url": "https://papers.neurips.cc/paper_files/paper/2023/hash/7d62a85ebfed2f680eb5544beae93191-Abstract-Conference.html",
+          "anchor": "Proceedings record",
+          "note": "官方会议记录"
+        }
+      ]
+    },
+    {
+      "id": "SCE03",
+      "title": "SceneDreamer: Unbounded 3D Scene Generation from 2D Image Collections",
+      "short_name": "SceneDreamer",
+      "year": 2023,
+      "status": "IEEE TPAMI 2023，45(12):15562–15576",
+      "paper_type": "pure method",
+      "category": "scene generation",
+      "inputs": "随机场景噪声和风格潜变量；核心模型为无条件生成",
+      "representation": "BEV高度/语义场、生成式神经哈希网格、辐射场",
+      "mechanism": "从无位姿野外二维图像进行对抗训练，以2.5D结构约束生成连续大场景",
+      "stage": "离线训练后的场景采样与神经渲染",
+      "relevance": "大范围环境和相机路径一致性的代表；核心任务不应误归为文本生成通用三维世界",
+      "evidence_note": "空间E来自深度、相机恢复/SfM指标和环形轨迹；不能推广为任意6DoF探索或双目有效性。",
+      "limitations": "高度场不能表达洞穴/隧道等多层结构；相机采样和训练稳定性受限。",
+      "inspected": "官方项目页；arXiv v3 摘要、§V-B、V-E、V-F、VI；未运行代码。 arXiv v3 Sections V-B and V-E rechecked on 2026-10-21. The paper evaluates rendered trajectories despite producing a static spatial representation. arXiv v3 Section IV-C inspected on 2026-10-21 as a targeted extension to the original Sections V-B/V-E/V-F/VI inspection.",
+      "costs": {
+        "generation": "NR",
+        "rendering": "Approximately 2 s per 960 x 540 rendered frame; standalone author estimate in Section IV-C.",
+        "interaction": "NR",
+        "hardware": "One A100 GPU for the Section IV-C rendering estimate; no end-to-end display configuration is specified."
+      },
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "深度误差、相机误差和SfM重建比例；含600帧环形轨迹验证",
+          "source": "https://arxiv.org/html/2302.01330",
+          "anchor": "§V-B,V-E"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查章节未定位双目成对一致性或头显双目测评",
+          "source": "https://arxiv.org/html/2302.01330",
+          "anchor": "§V-B,V-E,V-F,VI"
+        },
+        "temporal": {
+          "code": "E",
+          "note": "Camera-path view consistency is evaluated through camera recovery/SfM and user judgments of rendered trajectories; Section V-E also reconstructs a 600-frame circular traversal. This indexes coherence across views of a static scene, not object dynamics or retention of a user modification. The spatial and temporal entries refer to overlapping observations, not independent tests.",
+          "source": "https://arxiv.org/html/2302.01330v3",
+          "anchor": "Section V-B (CE and SfM rate); Section V-E (User Study and View Consistency), Figures 15-16"
+        },
+        "control": {
+          "code": "D",
+          "note": "场景/风格潜变量可变化并沿给定相机路径渲染；非精确布局约束",
+          "source": "https://scene-dreamer.github.io/",
+          "anchor": "Framework; style interpolation"
+        },
+        "interaction": {
+          "code": "NR",
+          "note": "官方展示预设相机路径；所查材料未定位用户输入驱动的在线交互",
+          "source": "https://scene-dreamer.github.io/",
+          "anchor": "Unbounded 3D scene generation demos"
+        },
+        "export": {
+          "code": "NR",
+          "note": "所查章节未定位导出管线",
+          "source": "https://arxiv.org/html/2302.01330",
+          "anchor": "§V-B,V-E,V-F,VI"
+        },
+        "runtime": {
+          "code": "C",
+          "note": "Section IV-C reports approximately 2 seconds to render one 960 x 540 frame on an A100 GPU. This is a standalone rendering estimate; no corresponding timing comparison, profile, or repeated-measurement protocol was located in that passage. It is not generation time or input-to-display latency.",
+          "source": "https://arxiv.org/html/2302.01330v3",
+          "anchor": "Section IV-C (Inference), High-resolution renderings"
+        },
+        "xr": {
+          "code": "NR",
+          "note": "所查章节未定位头显部署或XR用户实验",
+          "source": "https://arxiv.org/html/2302.01330",
+          "anchor": "§V-B,V-E,V-F,VI"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2302.01330",
+          "anchor": "§V-B,V-E,V-F,VI",
+          "note": "原论文关键章节，访问于2026-10-21"
+        },
+        {
+          "url": "https://scene-dreamer.github.io/",
+          "anchor": "Publication; Framework; demos",
+          "note": "作者项目页给出TPAMI卷期页与DOI 10.1109/TPAMI.2023.3321857"
+        },
+        {
+          "url": "https://arxiv.org/html/2302.01330v3",
+          "anchor": "Section V-B (CE and SfM rate); Section V-E (User Study and View Consistency), Figures 15-16",
+          "note": "Camera-path view consistency is evaluated through camera recovery/SfM and user judgments of rendered trajectories; Section V-E also reconstructs a 600-frame circular traversal. This indexes coherence across views of a static scene, not object dynamics or retention of a user modification. The spatial and temporal entries refer to overlapping observations, not independent tests."
+        },
+        {
+          "url": "https://arxiv.org/html/2302.01330v3",
+          "anchor": "Section IV-C (Inference), High-resolution renderings",
+          "note": "Section IV-C reports approximately 2 seconds to render one 960 x 540 frame on an A100 GPU. This is a standalone rendering estimate; no corresponding timing comparison, profile, or repeated-measurement protocol was located in that passage. It is not generation time or input-to-display latency."
+        }
+      ]
+    },
+    {
+      "id": "SCE04",
+      "title": "Holodeck: Language Guided Generation of 3D Embodied AI Environments",
+      "short_name": "Holodeck",
+      "year": 2024,
+      "status": "CVPR 2024",
+      "paper_type": "method + benchmark",
+      "category": "scene assembly / embodied simulation",
+      "inputs": "自然语言场景描述",
+      "representation": "Unity/AI2-THOR场景结构、检索网格、碰撞体与布局",
+      "mechanism": "GPT-4生成空间约束；检索已有Objaverse资产；约束求解装配可导航环境",
+      "stage": "离线场景构建后进入具身模拟",
+      "relevance": "对可编辑布局与可交互模拟提供结构化对照；生成的是资产组合，不是从零生成物体几何",
+      "evidence_note": "交互E限智能体导航Success/SPL；不是XR用户操作或头显交互实验。",
+      "limitations": "受检索资产覆盖、复杂布局和室内模拟器支持范围限制。",
+      "inspected": "官方项目页；arXiv v2 §3–4、§5 Table 2、附录A.1；未运行模拟器。 arXiv v2 Appendix A.1 rechecked on 2026-10-21. Hardware and included operations are recorded separately from whether a targeted timing procedure is described. Methodology audit on 2026-10-21 applied the same target-based temporal-applicability rule to all 27 rows; this clarification relies on the existing inspected source scope, without new model execution.",
+      "costs": {
+        "generation": "约3分钟生成单房间，包含GPT-4调用和布局优化（附录A.1）",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "MacBook M1；包含远程GPT-4 API，网络和服务耗时有依赖"
+      },
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "布局人评涉及空间边界、碰撞、可达性和真实感；非几何重建误差",
+          "source": "https://arxiv.org/html/2312.09067v2",
+          "anchor": "§4.3"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查章节未定位双目成对一致性或头显双目测评",
+          "source": "https://arxiv.org/html/2312.09067v2",
+          "anchor": "§3–5; Appendix A.1"
+        },
+        "temporal": {
+          "code": "NA",
+          "note": "NA for temporal content or retained-state generation in the core scene-assembly method. The separate simulator-navigation evaluation concerns agent interaction; it does not evaluate persistence of a user modification.",
+          "source": "https://arxiv.org/html/2312.09067v2",
+          "anchor": "§3–5; Appendix A.1"
+        },
+        "control": {
+          "code": "E",
+          "note": "文本遵循通过CLIP、人评和空间约束消融评估",
+          "source": "https://arxiv.org/html/2312.09067v2",
+          "anchor": "§4.1–4.3"
+        },
+        "interaction": {
+          "code": "E",
+          "note": "NoveltyTHOR智能体导航评估Success/SPL；不代表头显或对象操纵",
+          "source": "https://arxiv.org/html/2312.09067v2",
+          "anchor": "§5, Table 2"
+        },
+        "export": {
+          "code": "D",
+          "note": "导入AI2-THOR的网格、可见性点和碰撞体构成模拟器场景",
+          "source": "https://arxiv.org/html/2312.09067v2",
+          "anchor": "§3"
+        },
+        "runtime": {
+          "code": "C",
+          "note": "The source reports about three minutes to generate one room using a MacBook M1, including GPT-4 API calls and layout optimization. A timing comparison, profile, or repeated measurement was not located; this remains an author-reported implementation estimate.",
+          "source": "https://arxiv.org/html/2312.09067v2",
+          "anchor": "Appendix A.1 (Efficiency and Cost)"
+        },
+        "xr": {
+          "code": "NR",
+          "note": "所查章节未定位头显部署或XR用户实验",
+          "source": "https://arxiv.org/html/2312.09067v2",
+          "anchor": "§3–5; Appendix A.1"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2312.09067v2",
+          "anchor": "§3–5; Appendix A.1",
+          "note": "原论文关键章节，访问于2026-10-21"
+        },
+        {
+          "url": "https://yueyang.ai/holodeck/",
+          "anchor": "Publication; BibTeX",
+          "note": "作者项目页确认CVPR 2024，pp.16227–16237"
+        },
+        {
+          "url": "https://arxiv.org/html/2312.09067v2",
+          "anchor": "Appendix A.1 (Efficiency and Cost)",
+          "note": "The source reports about three minutes to generate one room using a MacBook M1, including GPT-4 API calls and layout optimization. A timing comparison, profile, or repeated measurement was not located; this remains an author-reported implementation estimate."
+        },
+        {
+          "url": "https://arxiv.org/html/2312.09067v2",
+          "anchor": "§3–5; Appendix A.1",
+          "note": "NA for temporal content or retained-state generation in the core scene-assembly method. The separate simulator-navigation evaluation concerns agent interaction; it does not evaluate persistence of a user modification."
+        }
+      ]
+    },
+    {
+      "id": "SCE05",
+      "title": "HunyuanWorld 1.0: Generating Immersive, Explorable, and Interactive 3D Worlds from Words or Pixels",
+      "short_name": "HunyuanWorld 1.0",
+      "year": 2025,
+      "status": "arXiv技术报告；所查官方来源未核实正式会议/期刊录用",
+      "paper_type": "system/tool",
+      "category": "scene / world generation",
+      "inputs": "文本或单张图像",
+      "representation": "全景代理、语义分层纹理网格、可分离对象；可选3DGS",
+      "mechanism": "先生成全景，再深度估计、语义分层和三维重建/对象分解",
+      "stage": "离线世界构建；生成后探索/对象变换",
+      "relevance": "将可分离场景结构、引擎兼容和XR设备目标纳入同一生成管线；设备适配宣称需要独立验证",
+      "evidence_note": "表3/4主要是渲染图像质量/对齐指标；据此不将空间能力标为E。VR平台名称不构成头显实验。",
+      "limitations": "遮挡与可探索范围有限；二维图像指标不足以证明场景几何、双目舒适或交互可用性。",
+      "inspected": "arXiv v1 摘要、§2.4–2.6、§3.2–3.4及评价表；未运行代码或设备演示。 Methodology audit on 2026-10-21 applied the same target-based temporal-applicability rule to all 27 rows; this clarification relies on the existing inspected source scope, without new model execution.",
+      "costs": {
+        "generation": "NR",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "NR"
+      },
+      "capabilities": {
+        "spatial": {
+          "code": "D",
+          "note": "分层三维几何和可探索结果有展示；所读量化表主要为二维图像指标",
+          "source": "https://arxiv.org/html/2507.21809v1",
+          "anchor": "§2.4,3.2–3.4"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查章节未定位双目成对一致性或头显双目测评",
+          "source": "https://arxiv.org/html/2507.21809v1",
+          "anchor": "§2.4–2.6; §3.2–3.4"
+        },
+        "temporal": {
+          "code": "NA",
+          "note": "NA for temporal content or retained-state generation in the core static-scene output. Demonstrated object transforms are indexed as interaction; a path-continuity or modification-retention protocol was not located in the inspected material.",
+          "source": "https://arxiv.org/html/2507.21809v1",
+          "anchor": "§2.4–2.6; §3.2–3.4"
+        },
+        "control": {
+          "code": "E",
+          "note": "文本/图像对齐以CLIP相关指标评估；不等于精确三维布局控制",
+          "source": "https://arxiv.org/html/2507.21809v1",
+          "anchor": "§3.2–3.3, Tables 3–4"
+        },
+        "interaction": {
+          "code": "D",
+          "note": "展示独立对象平移、旋转、缩放；未定位专项可用性或延迟评估",
+          "source": "https://arxiv.org/html/2507.21809v1",
+          "anchor": "§3.4"
+        },
+        "export": {
+          "code": "D",
+          "note": "文本描述网格格式与Unity/Unreal集成管线",
+          "source": "https://arxiv.org/html/2507.21809v1",
+          "anchor": "§3.4"
+        },
+        "runtime": {
+          "code": "NR",
+          "note": "列出TensorRT、缓存和多GPU等优化；所查章节未定位可复核耗时/FPS协议",
+          "source": "https://arxiv.org/html/2507.21809v1",
+          "anchor": "§2.6"
+        },
+        "xr": {
+          "code": "C",
+          "note": "作者称适配Vision Pro/Quest；所查范围未定位设备测评协议",
+          "source": "https://arxiv.org/html/2507.21809v1",
+          "anchor": "§3.4"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2507.21809v1",
+          "anchor": "§2.4–2.6; §3.2–3.4",
+          "note": "原论文关键章节，访问于2026-10-21"
+        },
+        {
+          "url": "https://arxiv.org/html/2507.21809v1",
+          "anchor": "§2.4–2.6; §3.2–3.4",
+          "note": "NA for temporal content or retained-state generation in the core static-scene output. Demonstrated object transforms are indexed as interaction; a path-continuity or modification-retention protocol was not located in the inspected material."
+        }
+      ]
+    },
+    {
+      "id": "SCE06",
+      "title": "HY-World 2.0: A Multi-Modal World Model for Reconstructing, Generating, and Simulating 3D Worlds",
+      "short_name": "HY-World 2.0",
+      "year": 2026,
+      "status": "arXiv技术报告（2026-04）；所查官方来源未核实正式会议/期刊录用",
+      "paper_type": "system/tool",
+      "category": "scene / world generation and reconstruction",
+      "inputs": "生成：文本/单图；重建：多视图/视频；两条任务分别报告",
+      "representation": "3D Gaussian Splatting场景及TSDF提取的碰撞代理网格",
+      "mechanism": "全景生成、轨迹规划、带记忆关键帧扩展、多视图重建与场景组合的多阶段管线",
+      "stage": "作者明确界定为offline 3D world model；生成后模拟",
+      "relevance": "将相机控制、持久世界重建和碰撞代理连接；不能将离线生成管线称为实时交互世界生成",
+      "evidence_note": "空间E与控制E来自具体组件/协议；单图生成重建、输入多视图重建、生成后虚拟智能体交互必须分开解读。",
+      "limitations": "单图下不可见区域不确定；基准几何/相机结果不覆盖所有文本生成世界，未定位头显双目或运动到光子延迟实验。",
+      "inspected": "arXiv v1 摘要/§1–2、§7.2、§8.1.3 Tables 5–7、§8.1.5和Table 10；官方GitHub发布信息；未运行系统。",
+      "costs": {
+        "generation": "Table 10报告分阶段及总生成耗时；因所读设置未确认GPU数，此表不转录数值作跨论文比较",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "NVIDIA H20；采用sequence parallel等优化，所读范围未确认卡数"
+      },
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "Table 5单图生成式重建以MVS伪真值评估Precision/Recall/F1/AUC；非全部世界生成几何真值",
+          "source": "https://arxiv.org/html/2604.14268v1",
+          "anchor": "§8.1.3, Table 5"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查章节未定位双目成对一致性或头显双目测评",
+          "source": "https://arxiv.org/html/2604.14268v1",
+          "anchor": "§1–2,7.2,8.1.3,8.1.5"
+        },
+        "temporal": {
+          "code": "D",
+          "note": "关键帧记忆支持连续相机扩展；此处是静态世界保持，非动态物体演化",
+          "source": "https://arxiv.org/html/2604.14268v1",
+          "anchor": "§2 overview; §5 WorldStereo 2.0"
+        },
+        "control": {
+          "code": "E",
+          "note": "WorldStereo 2.0相机轨迹用RotErr/TransErr/ATE专项评估；限组件协议",
+          "source": "https://arxiv.org/html/2604.14268v1",
+          "anchor": "§8.1.3, Table 6"
+        },
+        "interaction": {
+          "code": "D",
+          "note": "虚拟智能体导航/楼梯碰撞代理演示；未定位输入到反馈延迟测量",
+          "source": "https://arxiv.org/html/2604.14268v1",
+          "anchor": "§8.1.5, Figure 22"
+        },
+        "export": {
+          "code": "I",
+          "note": "已有GS与碰撞代理网格；所查范围未核实通用文件导出或外部引擎接口",
+          "source": "https://arxiv.org/html/2604.14268v1",
+          "anchor": "§7.2 Mesh Extraction; §8.1.5"
+        },
+        "runtime": {
+          "code": "E",
+          "note": "Table 10为H20上的离线分阶段生成耗时；卡数未确认，不等于渲染FPS",
+          "source": "https://arxiv.org/html/2604.14268v1",
+          "anchor": "§1 offline scope; §8.1.5, Table 10"
+        },
+        "xr": {
+          "code": "C",
+          "note": "将VR列为应用方向；所查章节未定位头显设备/用户实验",
+          "source": "https://arxiv.org/html/2604.14268v1",
+          "anchor": "§1; §8.1.5"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2604.14268v1",
+          "anchor": "§1–2,7.2,8.1.3,8.1.5",
+          "note": "原论文关键章节，访问于2026-10-21"
+        },
+        {
+          "url": "https://github.com/Tencent-Hunyuan/HY-World-2.0",
+          "anchor": "README; Technical report",
+          "note": "官方代码仓库核对系统名称和技术报告身份"
+        }
+      ]
+    },
+    {
+      "id": "D01",
+      "title": "4D-fy: Text-to-4D Generation Using Hybrid Score Distillation Sampling",
+      "short_name": "4D-fy",
+      "year": 2024,
+      "status": "CVPR 2024；预印本始于2023；核读arXiv v2",
+      "paper_type": "pure method",
+      "category": "动态世界/离线4D资产",
+      "inputs": "文本",
+      "representation": "静态与动态哈希网格辐射场",
+      "mechanism": "混合图像、多视图和视频扩散蒸馏",
+      "stage": "离线优化→预设动画渲染",
+      "relevance": "4D生成基准锚点；支持比较视觉、结构与运动取舍",
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "人评3D结构；不是度量几何验证",
+          "source": "https://arxiv.org/html/2311.17984v2",
+          "anchor": "§4/Table 2"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查部分未定位双目/IPD测评",
+          "source": "https://arxiv.org/html/2311.17984v2",
+          "anchor": "§3–5；补充S1–S2"
+        },
+        "temporal": {
+          "code": "E",
+          "note": "Paired motion-quality judgments by 26 evaluators; preference for 4D-fy against MAV3D was 41%, without a significant difference for this criterion. This does not test long-term persistence.",
+          "source": "https://arxiv.org/html/2311.17984v2",
+          "anchor": "Section4.1 User study; Table2; Supplement S2"
+        },
+        "control": {
+          "code": "E",
+          "note": "Text alignment is evaluated with CLIP scores on rendered video frames and paired human judgments; this does not test online action control.",
+          "source": "https://arxiv.org/html/2311.17984v2",
+          "anchor": "Section 4.1, Table 2; Supplement S2 (Text Alignment)"
+        },
+        "interaction": {
+          "code": "NR",
+          "note": "所查部分未定位闭环交互",
+          "source": "https://arxiv.org/html/2311.17984v2",
+          "anchor": "§3–5；补充S1–S2"
+        },
+        "export": {
+          "code": "NR",
+          "note": "所查部分未定位可用三维资产导出",
+          "source": "https://arxiv.org/html/2311.17984v2",
+          "anchor": "§3–5；补充S1–S2"
+        },
+        "runtime": {
+          "code": "E",
+          "note": "Supplement S1 compares 71 ms per rendered frame with 68 ms for a static MVDream-based model. Separately, optimization is reported as 2+2+19 hours on an A100 with about 80 GB VRAM. E refers to the rendering-time comparison; neither value establishes input-to-display latency.",
+          "source": "https://arxiv.org/html/2311.17984v2",
+          "anchor": "Supplement S1 (Computation; Runtime)"
+        },
+        "xr": {
+          "code": "NR",
+          "note": "所查部分未定位头显或XR系统验证",
+          "source": "https://arxiv.org/html/2311.17984v2",
+          "anchor": "§3–5；补充S1–S2"
+        }
+      },
+      "evidence_note": "用户研究评价普通渲染视频，不能作为XR用户实验。",
+      "limitations": "离线优化重；运动/外观取舍；立体舒适性与闭环交互未核实。",
+      "inspected": "arXiv 2311.17984v2：§3.3、§4/Table 2、§5、补充S1计算/运行耗时、S2；项目页确认CVPR。 arXiv v2 Section 4.1, Table 2 and Supplement S2 rechecked on 2026-10-21. The evaluated property is correspondence to the text condition, not online action responsiveness. arXiv v2 Supplement S1 Computation and Runtime rechecked on 2026-10-21. The render-time comparison and reported optimization-stage estimates are distinct timing objects. Timed rendering resolution and repeated-run dispersion were not located.",
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2311.17984v2",
+          "anchor": "§3.3、§4、S1–S2",
+          "note": "方法与评估全文锚点"
+        },
+        {
+          "url": "https://sherwinbahmani.github.io/4dfy/",
+          "anchor": "页首",
+          "note": "CVPR 2024身份"
+        },
+        {
+          "url": "https://arxiv.org/html/2311.17984v2",
+          "anchor": "Section 4.1, Table 2; Supplement S2 (Text Alignment)",
+          "note": "Text alignment is evaluated with CLIP scores on rendered video frames and paired human judgments; this does not test online action control."
+        },
+        {
+          "url": "https://arxiv.org/html/2311.17984v2",
+          "anchor": "Supplement S1 (Computation; Runtime)",
+          "note": "Supplement S1 compares 71 ms per rendered frame with 68 ms for a static MVDream-based model. Separately, optimization is reported as 2+2+19 hours on an A100 with about 80 GB VRAM. E refers to the rendering-time comparison; neither value establishes input-to-display latency."
+        }
+      ],
+      "costs": {
+        "generation": "约23小时离线优化（2+2+19小时）",
+        "rendering": "单帧71 ms；固定已优化表示",
+        "interaction": "NR",
+        "hardware": "NVIDIA A100，约80 GB显存；渲染计时分辨率NR；S1 Computation/Runtime"
+      }
+    },
+    {
+      "id": "D02",
+      "title": "DreamGaussian4D: Generative 4D Gaussian Splatting",
+      "short_name": "DreamGaussian4D",
+      "year": 2023,
+      "status": "arXiv预印本；v3更新于2024-06-10；未核实同行评审发表",
+      "paper_type": "pure method",
+      "category": "动态世界/离线4D资产",
+      "inputs": "图像或单目视频；驱动视频",
+      "representation": "3DGS+HexPlane变形；纹理网格序列",
+      "mechanism": "静态生成、视频驱动变形优化、视频纹理细化",
+      "stage": "离线生成→资产导出→引擎合成",
+      "relevance": "显式连接4D生成和引擎资产",
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "Video-to-4D用真实新视角评估",
+          "source": "https://arxiv.org/html/2312.17142v3",
+          "anchor": "§4.1/Table 3"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查部分未定位双目/IPD测评",
+          "source": "https://arxiv.org/html/2312.17142v3",
+          "anchor": "§3–5、附录A–D"
+        },
+        "temporal": {
+          "code": "E",
+          "note": "视频FVD与运动质量人评；细化一致性主要定性",
+          "source": "https://arxiv.org/html/2312.17142v3",
+          "anchor": "§4.1/Table 3；Fig.14"
+        },
+        "control": {
+          "code": "D",
+          "note": "选择驱动视频改变运动",
+          "source": "https://arxiv.org/html/2312.17142v3",
+          "anchor": "§4.3/Fig.15"
+        },
+        "interaction": {
+          "code": "NR",
+          "note": "所查部分未定位闭环交互",
+          "source": "https://arxiv.org/html/2312.17142v3",
+          "anchor": "§3–5、附录A–D"
+        },
+        "export": {
+          "code": "D",
+          "note": "纹理网格序列在Blender组合渲染",
+          "source": "https://arxiv.org/html/2312.17142v3",
+          "anchor": "§4.3/Fig.1"
+        },
+        "runtime": {
+          "code": "E",
+          "note": "A100：图像到4D优化6.5分钟；含细化10分钟",
+          "source": "https://arxiv.org/html/2312.17142v3",
+          "anchor": "Table 1；§4 Implementation"
+        },
+        "xr": {
+          "code": "C",
+          "note": "作者列MR应用；未定位头显验证",
+          "source": "https://arxiv.org/html/2312.17142v3",
+          "anchor": "§5 Broader Impacts"
+        }
+      },
+      "evidence_note": "6.5/10分钟是离线优化，不是播放延迟；驱动视频另需生成。",
+      "limitations": "依赖驱动视频质量；网格导出不证明可碰撞/可操纵。",
+      "inspected": "arXiv v3：§3、§4.1–4.3、Tables 1/3、Fig.14–15、§5；回查v2后以v3为主。",
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2312.17142v3",
+          "anchor": "§3–5",
+          "note": "当前版本方法、引擎合成与量化证据"
+        },
+        {
+          "url": "https://github.com/jiawei-ren/dreamgaussian4d",
+          "anchor": "README",
+          "note": "代码与预印本状态"
+        }
+      ],
+      "costs": {
+        "generation": "图像到4D优化6.5分钟，含可选纹理细化共10分钟；驱动视频另生成",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "单A100 80 GB；14帧；静态500步2分钟+动态200步4.5分钟+细化50步3.5分钟；§4/Table 1"
+      }
+    },
+    {
+      "id": "D03",
+      "title": "DimensionX: Create Any 3D and 4D Scenes from a Single Image with Decoupled Video Diffusion",
+      "short_name": "DimensionX",
+      "year": 2025,
+      "status": "ICCV 2025；全文证据核读arXiv v1（题名为Controllable Video Diffusion），终稿差异待补核",
+      "paper_type": "pure method",
+      "category": "场景与动态世界/视频到3D-4D",
+      "inputs": "图像；相机运动类型",
+      "representation": "生成视频→3DGS/4D表示",
+      "mechanism": "ST-Director解耦空间/时间；身份保持去噪",
+      "stage": "离线视频生成→三维/四维重建",
+      "relevance": "分离相机运动和物体运动，避免将所有变化混作时间动态",
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "新视角PSNR/SSIM/LPIPS评价3D重建",
+          "source": "https://arxiv.org/html/2411.04928v1",
+          "anchor": "§4.3/Table 1"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查部分未定位双目/IPD测评",
+          "source": "https://arxiv.org/html/2411.04928v1",
+          "anchor": "§3–4"
+        },
+        "temporal": {
+          "code": "E",
+          "note": "VBench主体一致性；4D新视角展示",
+          "source": "https://arxiv.org/html/2411.04928v1",
+          "anchor": "§4.2/Table 2；§4.4"
+        },
+        "control": {
+          "code": "D",
+          "note": "相机与时间运动解耦展示；非闭环控制",
+          "source": "https://arxiv.org/html/2411.04928v1",
+          "anchor": "§3.2；§4.2/Fig.4"
+        },
+        "interaction": {
+          "code": "NR",
+          "note": "所查部分未定位闭环交互",
+          "source": "https://arxiv.org/html/2411.04928v1",
+          "anchor": "§3–4"
+        },
+        "export": {
+          "code": "NR",
+          "note": "已重建GS；所查部分未定位可交付导出或引擎集成",
+          "source": "https://arxiv.org/html/2411.04928v1",
+          "anchor": "§3.3–3.4"
+        },
+        "runtime": {
+          "code": "NR",
+          "note": "所查部分未定位运行耗时/延迟测评",
+          "source": "https://arxiv.org/html/2411.04928v1",
+          "anchor": "§3–4"
+        },
+        "xr": {
+          "code": "NR",
+          "note": "所查部分未定位头显或XR系统验证",
+          "source": "https://arxiv.org/html/2411.04928v1",
+          "anchor": "§3–4"
+        }
+      },
+      "evidence_note": "旧版全文和ICCV正式题名须分开记录；VBench一致性不是头显双目验证。",
+      "limitations": "本轮未取得ICCV终稿全文；无可据此认定的在线XR延迟。",
+      "inspected": "arXiv v1：§3.2–3.4、§4.2–4.4；作者项目页确认ICCV和终稿题名；CVF取文403。",
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2411.04928v1",
+          "anchor": "§3–4",
+          "note": "能力证据使用2024预印本版本"
+        },
+        {
+          "url": "https://chenshuo20.github.io/DimensionX/",
+          "anchor": "页首",
+          "note": "ICCV 2025发表与正式题名"
+        }
+      ],
+      "costs": {
+        "generation": "NR",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "NR"
+      }
+    },
+    {
+      "id": "D04",
+      "title": "Voyager: Long-Range and World-Consistent Video Diffusion for Explorable 3D Scene Generation",
+      "short_name": "Voyager / HunyuanWorld-Voyager",
+      "year": 2025,
+      "status": "ACM TOG 44(6), Article 245, 2025；核读arXiv v1",
+      "paper_type": "pure method",
+      "category": "场景/可探索世界扩展（动态视频表示）",
+      "inputs": "图像；用户相机路径",
+      "representation": "RGB-D视频；点云世界缓存；可重建3DGS",
+      "mechanism": "联合RGB-D扩散、几何条件、世界缓存与点剔除",
+      "stage": "路径条件视频生成→世界扩展/重建",
+      "relevance": "连接视频世界生成与显式三维缓存；应与物体运动型4D分开",
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "3DGS重建与WorldScore 3D一致性",
+          "source": "https://arxiv.org/html/2506.04225v1",
+          "anchor": "§5.2–5.3/Tables 2–3"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查部分未定位双目/IPD测评",
+          "source": "https://arxiv.org/html/2506.04225v1",
+          "anchor": "§4–6、附录A"
+        },
+        "temporal": {
+          "code": "D",
+          "note": "世界缓存支持长程重复生成；动态物体持续性未定位",
+          "source": "https://arxiv.org/html/2506.04225v1",
+          "anchor": "§4.3"
+        },
+        "control": {
+          "code": "E",
+          "note": "WorldScore相机控制评估",
+          "source": "https://arxiv.org/html/2506.04225v1",
+          "anchor": "§5.3/Table 3"
+        },
+        "interaction": {
+          "code": "NR",
+          "note": "所查部分未定位闭环交互",
+          "source": "https://arxiv.org/html/2506.04225v1",
+          "anchor": "§4–6、附录A"
+        },
+        "export": {
+          "code": "NR",
+          "note": "点云用于后续3DGS重建；所查章节未定位可交付资产导出或引擎集成",
+          "source": "https://arxiv.org/html/2506.04225v1",
+          "anchor": "§5.2/Fig.5"
+        },
+        "runtime": {
+          "code": "NR",
+          "note": "所查部分未定位运行耗时/延迟测评",
+          "source": "https://arxiv.org/html/2506.04225v1",
+          "anchor": "§4–6、附录A"
+        },
+        "xr": {
+          "code": "C",
+          "note": "摘要列VR需求；未定位头显实现",
+          "source": "https://arxiv.org/html/2506.04225v1",
+          "anchor": "摘要；§6"
+        }
+      },
+      "evidence_note": "WorldScore使用static子集；不要把镜头移动等同动态世界状态。",
+      "limitations": "本轮未定位生成端到端延迟、双目或头显测评。",
+      "inspected": "arXiv v1：§4.1–4.4、§5.1–5.4、§6、附录A；ACM页面确认期刊发表。",
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2506.04225v1",
+          "anchor": "§4–6",
+          "note": "方法与评估锚点"
+        },
+        {
+          "url": "https://doi.org/10.1145/3763330",
+          "anchor": "Publication History",
+          "note": "2025-12-04正式发表，2025-08-09接收"
+        },
+        {
+          "url": "https://github.com/Tencent-Hunyuan/HunyuanWorld-Voyager",
+          "anchor": "README",
+          "note": "官方实现与版本命名"
+        }
+      ],
+      "costs": {
+        "generation": "NR",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "NR"
+      }
+    },
+    {
+      "id": "D05",
+      "title": "Matrix-Game 2.0: An Open-Source, Real-Time, and Streaming Interactive World Model",
+      "short_name": "Matrix-Game 2.0",
+      "year": 2025,
+      "status": "arXiv技术报告；核读v2",
+      "paper_type": "pure method",
+      "category": "动态世界/动作条件视频世界模型",
+      "inputs": "图像；逐帧键盘和鼠标",
+      "representation": "视频潜变量；有限KV缓存",
+      "mechanism": "因果少步自回归扩散与Self-Forcing",
+      "stage": "在线动作条件视频生成",
+      "relevance": "将在线视频吞吐与XR部署需求分列的典型",
+      "capabilities": {
+        "spatial": {
+          "code": "NR",
+          "note": "对象/场景一致性是视频感知代理；所查测评未建立多视角几何或回访空间一致性",
+          "source": "https://arxiv.org/html/2508.13009v2",
+          "anchor": "§5.1/Tables 1–2"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查部分未定位双目/IPD测评",
+          "source": "https://arxiv.org/html/2508.13009v2",
+          "anchor": "§4–5"
+        },
+        "temporal": {
+          "code": "E",
+          "note": "597帧序列的时间一致性/运动平滑度",
+          "source": "https://arxiv.org/html/2508.13009v2",
+          "anchor": "§5.1–5.2"
+        },
+        "control": {
+          "code": "E",
+          "note": "Minecraft键盘/鼠标准确率",
+          "source": "https://arxiv.org/html/2508.13009v2",
+          "anchor": "Table 1"
+        },
+        "interaction": {
+          "code": "D",
+          "note": "逐帧键鼠条件和流式反馈；头显闭环未核实",
+          "source": "https://arxiv.org/html/2508.13009v2",
+          "anchor": "§4.2"
+        },
+        "export": {
+          "code": "NR",
+          "note": "所查部分未定位可用三维资产导出",
+          "source": "https://arxiv.org/html/2508.13009v2",
+          "anchor": "§4–5"
+        },
+        "runtime": {
+          "code": "E",
+          "note": "Table 3生成吞吐消融15.49/21.03/25.15 FPS；§1报告单H100，§5.1输出352×640；非输入到反馈延迟",
+          "source": "https://arxiv.org/html/2508.13009v2",
+          "anchor": "§1；§5.1 Dataset；§5.3/Table 3；§6.1"
+        },
+        "xr": {
+          "code": "NR",
+          "note": "所查部分未定位头显或XR系统验证",
+          "source": "https://arxiv.org/html/2508.13009v2",
+          "anchor": "§4–5"
+        }
+      },
+      "evidence_note": "生成帧率和键鼠准确率不能替代motion-to-photon测量。",
+      "limitations": "固定长度KV缓存逐出旧帧；持续生成长度与回访记忆需分别编码。",
+      "inspected": "arXiv v2：§1、§4.1–4.2、§5.1–5.2、Tables 1–2。 本轮追加核读同一v2的§5.3/Table 3；原矩阵只明确列§5.1–5.2/Tables 1–2。",
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2508.13009v2",
+          "anchor": "§4–5",
+          "note": "机制、GameWorld Score与场景评估"
+        }
+      ],
+      "costs": {
+        "generation": "生成吞吐：VAE缓存15.49 FPS，再减半动作模块21.03 FPS，再将去噪4步降为3步25.15 FPS（Table 3）",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "§1报告单H100；§5.1输出352×640；Table 3为加速配置对比，未独立交代输入/传输/队列/显示的完整计时边界"
+      }
+    },
+    {
+      "id": "D06",
+      "title": "Matrix-Game 3.0: Real-Time and Streaming Interactive World Model with Long-Horizon Memory",
+      "short_name": "Matrix-Game 3.0",
+      "year": 2026,
+      "status": "arXiv技术报告v1，2026-04-10",
+      "paper_type": "pure method",
+      "category": "动态世界/记忆增强视频世界模型",
+      "inputs": "图像；动作；相机位姿",
+      "representation": "视频潜变量；相机感知历史帧记忆",
+      "mechanism": "误差感知训练、记忆检索、蒸馏、量化/VAE裁剪",
+      "stage": "在线流式视频生成",
+      "relevance": "展示长期记忆与部署吞吐的证据强度差别",
+      "capabilities": {
+        "spatial": {
+          "code": "D",
+          "note": "回访场景与遮挡后重现展示",
+          "source": "https://arxiv.org/html/2604.08995v1",
+          "anchor": "§5.2.2/Fig.11"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查部分未定位双目/IPD测评",
+          "source": "https://arxiv.org/html/2604.08995v1",
+          "anchor": "§3–5"
+        },
+        "temporal": {
+          "code": "D",
+          "note": "分钟级记忆展示；未定位一致性量化表",
+          "source": "https://arxiv.org/html/2604.08995v1",
+          "anchor": "§5.2.1–5.2.2"
+        },
+        "control": {
+          "code": "D",
+          "note": "人物和相机控制定性展示",
+          "source": "https://arxiv.org/html/2604.08995v1",
+          "anchor": "§5.2.1/Figs.8–10"
+        },
+        "interaction": {
+          "code": "D",
+          "note": "动作条件流式生成实现",
+          "source": "https://arxiv.org/html/2604.08995v1",
+          "anchor": "§3.1–3.4"
+        },
+        "export": {
+          "code": "NR",
+          "note": "所查部分未定位可用三维资产导出",
+          "source": "https://arxiv.org/html/2604.08995v1",
+          "anchor": "§3–5"
+        },
+        "runtime": {
+          "code": "E",
+          "note": "720p约40 FPS；实验为8+1 GPU异步配置",
+          "source": "https://arxiv.org/html/2604.08995v1",
+          "anchor": "§5.2.3/Table 1"
+        },
+        "xr": {
+          "code": "C",
+          "note": "引言列XR用途；未定位头显验证",
+          "source": "https://arxiv.org/html/2604.08995v1",
+          "anchor": "§1"
+        }
+      },
+      "evidence_note": "40 FPS为生成吞吐；8卡DiT+1卡VAE，与单卡结果不可直接排行。",
+      "limitations": "能力证据以展示为主；未核实双目、度量尺度及物理对象交互。",
+      "inspected": "arXiv v1：§3.1–3.4、§5.1–5.2.3、Table 1、Figs.8–11。",
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2604.08995v1",
+          "anchor": "§3；§5",
+          "note": "记忆和运行证据；列明GPU配置"
+        },
+        {
+          "url": "https://matrix-game-v3.github.io/",
+          "anchor": "Memory Model Generation",
+          "note": "官方展示"
+        }
+      ],
+      "costs": {
+        "generation": "流式视频生成约40 FPS（加速消融Table 1）",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "720p/5B；8 GPU DiT+1 GPU VAE异步配置；H系列/A系列GPU；§5.2.3"
+      }
+    },
+    {
+      "id": "D07",
+      "title": "WorldPlay: Towards Long-Term Geometric Consistency for Real-Time Interactive World Modeling",
+      "short_name": "WorldPlay / HY-World 1.5",
+      "year": 2026,
+      "status": "ICML 2026（作者主页与OpenReview索引核实）；预印本2025，核读v2 2026-06-09",
+      "paper_type": "pure method",
+      "category": "动态世界/记忆与控制协同视频世界模型",
+      "inputs": "图像/文本；离散键鼠+连续位姿",
+      "representation": "视频潜变量；时空历史帧上下文",
+      "mechanism": "双动作表示、记忆重构、Context Forcing蒸馏",
+      "stage": "流式导航与文字事件；后处理三维重建",
+      "relevance": "同时提供回访协议、几何代理指标、吞吐消融，适合证据矩阵",
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "回访帧MEt3R测评；学习式几何一致性代理，不是度量几何真值",
+          "source": "https://arxiv.org/html/2512.14614v2",
+          "anchor": "§4.1/Table 3"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查部分未定位双目/IPD测评",
+          "source": "https://arxiv.org/html/2512.14614v2",
+          "anchor": "§3–5；附录C–E"
+        },
+        "temporal": {
+          "code": "E",
+          "note": "往返轨迹重访一致性；不是无限时长保证",
+          "source": "https://arxiv.org/html/2512.14614v2",
+          "anchor": "§4 Evaluation Protocol"
+        },
+        "control": {
+          "code": "E",
+          "note": "相机旋转/平移误差与动作表示消融",
+          "source": "https://arxiv.org/html/2512.14614v2",
+          "anchor": "§4/Table 5"
+        },
+        "interaction": {
+          "code": "D",
+          "note": "在线导航；文字事件展示",
+          "source": "https://arxiv.org/html/2512.14614v2",
+          "anchor": "§3.5；§4.3/Fig.10"
+        },
+        "export": {
+          "code": "NR",
+          "note": "另接重建器产生点云作为展示；所查章节未定位可交付资产导出或引擎集成",
+          "source": "https://arxiv.org/html/2512.14614v2",
+          "anchor": "§4.3/Fig.9"
+        },
+        "runtime": {
+          "code": "E",
+          "note": "720p生成24 FPS，8×H800；吞吐消融，非输入到显示延迟",
+          "source": "https://arxiv.org/html/2512.14614v2",
+          "anchor": "§3.5；Table 4"
+        },
+        "xr": {
+          "code": "NR",
+          "note": "所查部分未定位头显或XR系统验证",
+          "source": "https://arxiv.org/html/2512.14614v2",
+          "anchor": "§3–5；附录C–E"
+        }
+      },
+      "evidence_note": "v2补充MEt3R及速度消融；头显动作延迟未定位。",
+      "limitations": "§5明示约30秒、误差累积和强遮挡检索问题；主要导航控制。",
+      "inspected": "v2：§3.2–3.5、§4实验协议/Tables 3–5、§4.3、§5限制；v1仅供版本回查；OpenReview详情触发浏览器验证，索引与作者主页一致。",
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2512.14614v2",
+          "anchor": "§3–5",
+          "note": "能力与限制采用v2"
+        },
+        {
+          "url": "https://tengfei-wang.github.io/",
+          "anchor": "WorldPlay条目",
+          "note": "作者主页标注ICML 2026"
+        },
+        {
+          "url": "https://openreview.net/search?content=authors&group=all&sort=cdate%3Adesc&source=forum&term=~Chunchao_Guo1",
+          "anchor": "WorldPlay检索条目",
+          "note": "官方索引标ICML 2026 regular"
+        },
+        {
+          "url": "https://github.com/Tencent-Hunyuan/HY-WorldPlay",
+          "anchor": "README/Citation",
+          "note": "HY-World1.5系统与WorldPlay研究论文对应，避免双计数"
+        }
+      ],
+      "costs": {
+        "generation": "流式视频生成24 FPS；加速消融Table 4",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "8×H800，720p；4步蒸馏、流式解码；§3.5及§4.1"
+      }
+    },
+    {
+      "id": "D08",
+      "title": "Genie 3: A New Frontier for World Models",
+      "short_name": "Genie 3",
+      "year": 2025,
+      "status": "Google DeepMind官方研究博文/系统介绍；不作为同行评审论文",
+      "paper_type": "system/tool",
+      "category": "动态世界/交互视频世界模型（产业前沿）",
+      "inputs": "文本；导航输入；事件提示",
+      "representation": "自回归生成帧；内部三维表示未披露",
+      "mechanism": "历史轨迹条件生成；架构细节未披露",
+      "stage": "在线导航与文字事件",
+      "relevance": "补充封闭系统的交互边界；证据等级独立标注",
+      "capabilities": {
+        "spatial": {
+          "code": "D",
+          "note": "回访环境展示；无度量几何测评",
+          "source": "https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/",
+          "anchor": "Environmental consistency over a long horizon"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查部分未定位双目/IPD测评",
+          "source": "https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/",
+          "anchor": "Capabilities及Next steps"
+        },
+        "temporal": {
+          "code": "D",
+          "note": "分钟级一致性展示",
+          "source": "https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/",
+          "anchor": "Environmental consistency over a long horizon"
+        },
+        "control": {
+          "code": "D",
+          "note": "导航和文字改变天气/添加对象示例",
+          "source": "https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/",
+          "anchor": "Promptable world events"
+        },
+        "interaction": {
+          "code": "D",
+          "note": "公开实时交互录像及SIMA代理示例",
+          "source": "https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/",
+          "anchor": "Capabilities；Fueling embodied agent research"
+        },
+        "export": {
+          "code": "NR",
+          "note": "所查部分未定位可用三维资产导出",
+          "source": "https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/",
+          "anchor": "Capabilities及Next steps"
+        },
+        "runtime": {
+          "code": "C",
+          "note": "作者报告720p/24 FPS；硬件与端到端延迟未披露",
+          "source": "https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/",
+          "anchor": "开篇与Pushing the frontier"
+        },
+        "xr": {
+          "code": "NR",
+          "note": "所查部分未定位头显或XR系统验证",
+          "source": "https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/",
+          "anchor": "Capabilities及Next steps"
+        }
+      },
+      "evidence_note": "博文展示支持D；24 FPS仅为作者报告C。",
+      "limitations": "所查公开材料无统一基准、可导出三维资产或头显实证。",
+      "inspected": "2025-08-05官方博文全部能力段落；官方当前模型页，仅作版本区分。",
+      "sources": [
+        {
+          "url": "https://deepmind.google/blog/genie-3-a-new-frontier-for-world-models/",
+          "anchor": "Capabilities",
+          "note": "原始研究发布，不视为论文"
+        },
+        {
+          "url": "https://deepmind.google/models/genie/",
+          "anchor": "Capabilities",
+          "note": "当前页面报告20–24 FPS；矩阵保留2025发布口径"
+        }
+      ],
+      "costs": {
+        "generation": "官方2025研究博文报告720p/24 FPS；作者声明",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "NR；所查官方材料未披露硬件或输入到反馈计时协议"
+      }
+    },
+    {
+      "id": "X01",
+      "short_name": "VRCopilot",
+      "title": "VRCopilot: Authoring 3D Layouts with Generative AI Models in VR",
+      "year": 2024,
+      "status": "UIST 2024；DOI 10.1145/3654777.3676451",
+      "paper_type": "system/tool",
+      "category": "XR authoring",
+      "inputs": "语音、指向、线框、房间条件",
+      "representation": "家具目录与参数化布局",
+      "mechanism": "ATISS自回归布局生成；LLM解析意图",
+      "stage": "交互式创作",
+      "relevance": "布局生成与沉浸式创作的连接案例",
+      "evidence_note": "生成布局，家具来自目录；不可表述为新几何生成。",
+      "limitations": "用户研究支持创作体验；未核实双目质量或motion-to-photon测试。",
+      "inspected": "§3.1–3.7；§4–5；§6.2 arXiv v1 Study 2 measures and results rechecked on 2026-10-21. The E code is retained for measured perceived agency, with the construct narrowed explicitly.",
+      "capabilities": {
+        "spatial": {
+          "code": "D",
+          "note": "布局在Unity中可操作",
+          "source": "https://arxiv.org/html/2408.09382v1",
+          "anchor": "§3.1–3.3"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查章节未定位专项证据",
+          "source": "https://arxiv.org/html/2408.09382v1",
+          "anchor": "§3.1–3.7；§4–5；§6.2"
+        },
+        "temporal": {
+          "code": "NR",
+          "note": "所查章节未定位专项证据",
+          "source": "https://arxiv.org/html/2408.09382v1",
+          "anchor": "§3.1–3.7；§4–5；§6.2"
+        },
+        "control": {
+          "code": "E",
+          "note": "Perceived agency is measured across manual, scaffolded, and automatic creation in Study 2; it is not a geometric command-accuracy test.",
+          "source": "https://arxiv.org/html/2408.09382v1",
+          "anchor": "Sections 5.3-5.4"
+        },
+        "interaction": {
+          "code": "E",
+          "note": "VR指向和对象操作用户研究",
+          "source": "https://arxiv.org/html/2408.09382v1",
+          "anchor": "§4–5"
+        },
+        "export": {
+          "code": "D",
+          "note": "Unity集成已有家具与生成布局",
+          "source": "https://arxiv.org/html/2408.09382v1",
+          "anchor": "§3.7"
+        },
+        "runtime": {
+          "code": "NR",
+          "note": "所查章节未定位专项证据",
+          "source": "https://arxiv.org/html/2408.09382v1",
+          "anchor": "§3.1–3.7；§4–5；§6.2"
+        },
+        "xr": {
+          "code": "E",
+          "note": "头显中的两项创作用户研究",
+          "source": "https://arxiv.org/html/2408.09382v1",
+          "anchor": "§3.7；§4–5"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2408.09382v1",
+          "anchor": "§3.1–3.7；§4–5；§6.2",
+          "note": "能力编码依据原文关键章节"
+        },
+        {
+          "url": "https://arxiv.org/html/2408.09382v1",
+          "anchor": "Sections 5.3-5.4",
+          "note": "Perceived agency is measured across manual, scaffolded, and automatic creation in Study 2; it is not a geometric command-accuracy test."
+        }
+      ],
+      "costs": {
+        "generation": "NR",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "Unity；Meta头显设备；生成计时硬件NR；§3.7"
+      }
+    },
+    {
+      "id": "X02",
+      "short_name": "MS2Mesh-XR",
+      "title": "MS2Mesh-XR: Multi-Modal Sketch-to-Mesh Generation in XR Environments",
+      "year": 2025,
+      "status": "IEEE AIxVR 2025；预印本2024",
+      "paper_type": "system/tool",
+      "category": "XR authoring",
+      "inputs": "草图、语音",
+      "representation": "带纹理mesh",
+      "mechanism": "ControlNet生成图像；CRM生成/重建mesh",
+      "stage": "异步资产生成与运行时导入",
+      "relevance": "草图到生成资产到头显运行的完整链条",
+      "evidence_note": "Quest 3客户端、RTX 4090工作站；两项用例展示。",
+      "limitations": "演示不等于受控用户研究；生成秒数不等于头动响应延迟。",
+      "inspected": "§III–V",
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2412.09008v1",
+          "anchor": "§III–V",
+          "note": "能力编码依据原文关键章节"
+        },
+        {
+          "url": "https://research.cuhk.edu.hk/en/publications/ms2mesh-xr-multi-modal-sketch-to-mesh-generation-in-xr-environmen/",
+          "anchor": "出版信息",
+          "note": "确认IEEE AIxVR 2025"
+        }
+      ],
+      "capabilities": {
+        "spatial": {
+          "code": "D",
+          "note": "生成三维mesh并在XR中查看",
+          "source": "https://arxiv.org/html/2412.09008v1",
+          "anchor": "§III-C/D"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查章节未定位专项证据",
+          "source": "https://arxiv.org/html/2412.09008v1",
+          "anchor": "§III–V"
+        },
+        "temporal": {
+          "code": "NR",
+          "note": "所查章节未定位专项证据",
+          "source": "https://arxiv.org/html/2412.09008v1",
+          "anchor": "§III–V"
+        },
+        "control": {
+          "code": "D",
+          "note": "相同草图配不同语音的结果展示",
+          "source": "https://arxiv.org/html/2412.09008v1",
+          "anchor": "§IV-B"
+        },
+        "interaction": {
+          "code": "D",
+          "note": "MRTK3缩放/旋转/移动",
+          "source": "https://arxiv.org/html/2412.09008v1",
+          "anchor": "§III-D"
+        },
+        "export": {
+          "code": "D",
+          "note": "OBJ经HTTP导入Unity",
+          "source": "https://arxiv.org/html/2412.09008v1",
+          "anchor": "§III-D"
+        },
+        "runtime": {
+          "code": "E",
+          "note": "4090：图像均值3.83秒，mesh均值12.39秒",
+          "source": "https://arxiv.org/html/2412.09008v1",
+          "anchor": "§IV-A/B"
+        },
+        "xr": {
+          "code": "D",
+          "note": "Quest 3中的VR与MR用例",
+          "source": "https://arxiv.org/html/2412.09008v1",
+          "anchor": "§IV-A；§V"
+        }
+      },
+      "costs": {
+        "generation": "图像均值3.83秒；mesh均值12.39秒（分阶段，§IV-B）",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "RTX 4090工作站；Quest 3；HTTP传输未并入统一端到端计时；§IV-A/B"
+      }
+    },
+    {
+      "id": "X03",
+      "short_name": "Dreamcrafter",
+      "title": "Dreamcrafter: Immersive Editing of 3D Radiance Fields Through Flexible, Generative Inputs and Outputs",
+      "year": 2025,
+      "status": "CHI 2025；DOI 10.1145/3706598.3714312",
+      "paper_type": "system/tool",
+      "category": "XR authoring",
+      "inputs": "语音、直接操作、几何primitive",
+      "representation": "3DGS、代理图像、mesh",
+      "mechanism": "在线代理预览；离线3D生成/编辑模块",
+      "stage": "在线预览与离线生成混合",
+      "relevance": "证明成本拆分与代理保真度需要一起分析",
+      "evidence_note": "Quest 3 PC-link创作研究；预览与最终3D结果分离。",
+      "limitations": "代理丢失尺度信息；用户报告物理操作和等待问题。",
+      "inspected": "§5–6；§8 arXiv v1 Sections 5.1 and 5.4.1 rechecked on 2026-10-21. The C code concerns the presentation of approximate stage costs; it is not assigned merely because end-to-end latency or GPU details are missing.",
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2512.20129v1",
+          "anchor": "§5–6；§8",
+          "note": "能力编码依据原文关键章节"
+        },
+        {
+          "url": "https://people.eecs.berkeley.edu/~bjoern/papers/vachha-dreamcrafter-chi2025.pdf",
+          "anchor": "首页出版信息",
+          "note": "确认CHI 2025"
+        },
+        {
+          "url": "https://arxiv.org/html/2512.20129v1",
+          "anchor": "Sections 5.1.2-5.1.3 and 5.4.1",
+          "note": "Approximate stage times are reported for online previews, but a dedicated timing procedure or measured distribution was not located; full input-to-display latency remains NR."
+        }
+      ],
+      "capabilities": {
+        "spatial": {
+          "code": "D",
+          "note": "3DGS/mesh组成Unity场景",
+          "source": "https://arxiv.org/html/2512.20129v1",
+          "anchor": "§5.2；§5.5"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查章节未定位专项证据",
+          "source": "https://arxiv.org/html/2512.20129v1",
+          "anchor": "§5–6；§8"
+        },
+        "temporal": {
+          "code": "NR",
+          "note": "所查章节未定位专项证据",
+          "source": "https://arxiv.org/html/2512.20129v1",
+          "anchor": "§5–6；§8"
+        },
+        "control": {
+          "code": "E",
+          "note": "比较提示与雕刻的控制偏好",
+          "source": "https://arxiv.org/html/2512.20129v1",
+          "anchor": "§6.4.1"
+        },
+        "interaction": {
+          "code": "E",
+          "note": "头显创作任务与访谈",
+          "source": "https://arxiv.org/html/2512.20129v1",
+          "anchor": "§6"
+        },
+        "export": {
+          "code": "D",
+          "note": "离线结果返回Unity场景",
+          "source": "https://arxiv.org/html/2512.20129v1",
+          "anchor": "§5.4–5.5"
+        },
+        "runtime": {
+          "code": "C",
+          "note": "Approximate stage times are reported for online previews, but a dedicated timing procedure or measured distribution was not located; full input-to-display latency remains NR.",
+          "source": "https://arxiv.org/html/2512.20129v1",
+          "anchor": "Sections 5.1.2-5.1.3 and 5.4.1"
+        },
+        "xr": {
+          "code": "E",
+          "note": "7人Quest 3 PC-link研究",
+          "source": "https://arxiv.org/html/2512.20129v1",
+          "anchor": "§6.1–6.4"
+        }
+      },
+      "costs": {
+        "generation": "最终3D离线处理；总耗时NR",
+        "rendering": "NR",
+        "interaction": "代理预览约10–15秒（作者描述，依操作）；完整端到端NR",
+        "hardware": "Quest 3 PC-link；GPU本轮未核实；§5.1、5.4、6.1"
+      }
+    },
+    {
+      "id": "X04",
+      "short_name": "CoGen3D",
+      "title": "CoGen3D: An Agentic Human-AI Co-Design Pipeline for 3D Asset Generation for Virtual Reality",
+      "year": 2026,
+      "status": "arXiv:2607.03731v1；未核实正式发表",
+      "paper_type": "system/tool",
+      "category": "XR authoring",
+      "inputs": "设计对话、确认后的概念图",
+      "representation": "带纹理GLB mesh",
+      "mechanism": "对话引导＋FLUX.1＋Hunyuan3D-2",
+      "stage": "异步生成后部署",
+      "relevance": "同一生成模型在具体VR系统中的部署和用户证据",
+      "evidence_note": "Quest 3 tethering；120人分设计/验证两组。",
+      "limitations": "预印本；静态资产，不能支持动态世界或普适因果结论。",
+      "inspected": "§3–5；§6.5–6.6 arXiv v1 Sections 3.1.1-3.1.3, 4.4, 5.3 and 5.7 rechecked on 2026-10-21. Countercheck: Section 5.7 includes open comments requesting scale and scene-aware control; the four rated co-design constructs are ease, helpfulness, creativity support and engagement. The conservative D code indexes the implemented refinement workflow rather than interpreting those ratings as targeted control measurement.",
+      "capabilities": {
+        "spatial": {
+          "code": "D",
+          "note": "GLB资产在Unity场景部署",
+          "source": "https://arxiv.org/html/2607.03731v1",
+          "anchor": "§3.1.4"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "所查章节未定位专项证据",
+          "source": "https://arxiv.org/html/2607.03731v1",
+          "anchor": "§3–5；§6.5–6.6"
+        },
+        "temporal": {
+          "code": "NR",
+          "note": "所查章节未定位专项证据",
+          "source": "https://arxiv.org/html/2607.03731v1",
+          "anchor": "§3–5；§6.5–6.6"
+        },
+        "control": {
+          "code": "D",
+          "note": "The implemented dialogue supports prompt refinement and concept-image confirmation. Satisfaction, creativity-support ratings, and affective dominance do not specifically measure adherence to generative conditions or perceived authoring control; qualitative feedback identifies limits in scene-aware control.",
+          "source": "https://arxiv.org/html/2607.03731v1",
+          "anchor": "Sections 3.1.1-3.1.3, 4.4, 5.3, and 5.7"
+        },
+        "interaction": {
+          "code": "E",
+          "note": "抓取/旋转/缩放遥测",
+          "source": "https://arxiv.org/html/2607.03731v1",
+          "anchor": "§4.4；§5.4"
+        },
+        "export": {
+          "code": "D",
+          "note": "GLB运行时加载并加操作组件",
+          "source": "https://arxiv.org/html/2607.03731v1",
+          "anchor": "§3.1.4"
+        },
+        "runtime": {
+          "code": "E",
+          "note": "A6000端点配置扫描；异步队列",
+          "source": "https://arxiv.org/html/2607.03731v1",
+          "anchor": "§3.2；Fig.2"
+        },
+        "xr": {
+          "code": "E",
+          "note": "Desktop web co-design followed by Quest 3 use; design and validation studies assess the specified workflow and generated scene outputs.",
+          "source": "https://arxiv.org/html/2607.03731v1",
+          "anchor": "§4.3–4.5"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2607.03731v1",
+          "anchor": "§3–5；§6.5–6.6",
+          "note": "能力编码依据原文关键章节"
+        },
+        {
+          "url": "https://arxiv.org/html/2607.03731v1",
+          "anchor": "Sections 3.1.1-3.1.3, 4.4, 5.3, and 5.7",
+          "note": "The implemented dialogue supports prompt refinement and concept-image confirmation. Satisfaction, creativity-support ratings, and affective dominance do not specifically measure adherence to generative conditions or perceived authoring control; qualitative feedback identifies limits in scene-aware control."
+        }
+      ],
+      "costs": {
+        "generation": "Fig.2参数扫描；部分3D任务可达数十分钟；异步队列",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "A6000 48 GB服务端；Quest 3 tethering；具体配置见§3.2、§4.3–4.5"
+      }
+    },
+    {
+      "id": "P01",
+      "title": "MVDiffusion: Enabling Holistic Multi-view Image Generation with Correspondence-Aware Diffusion",
+      "short_name": "MVDiffusion",
+      "year": 2023,
+      "status": "NeurIPS 2023; technical evidence inspected in arXiv 2307.01097v3, dated 2023-08-09.",
+      "paper_type": "pure method",
+      "category": "panorama / multiview generation",
+      "inputs": "Text and view correspondences; optional depth and camera poses.",
+      "representation": "Perspective image set; panoramic image; geometry-conditioned multiview texture.",
+      "mechanism": "Correspondence-aware attention couples parallel view denoising.",
+      "stage": "Offline image generation",
+      "relevance": "Separates angular coverage from stereo camera geometry.",
+      "evidence_note": "Overlap consistency and CLIP similarity are evaluated; these do not establish binocular preference.",
+      "limitations": "Depth-conditioned texturing depends on supplied geometry.",
+      "inspected": "arXiv v3 Sections4–5; official NeurIPS metadata. Methodology audit on 2026-10-21 applied the same target-based temporal-applicability rule to all 27 rows; this clarification relies on the existing inspected source scope, without new model execution. arXiv v3 Section 6 Broader impact rechecked on 2026-10-21; the explicit method-use statement is kept separate from deployment evidence.",
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "Overlap-PSNR ratio evaluated across views.",
+          "anchor": "Sections5,5.3",
+          "source": "https://arxiv.org/html/2307.01097v3"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "No paired-eye or headset assessment located.",
+          "anchor": "Sections4–5",
+          "source": "https://arxiv.org/html/2307.01097v3"
+        },
+        "temporal": {
+          "code": "NA",
+          "note": "NA for temporal evolution in the core static image-set output. Spatial view interpolation and overlap correspondence do not constitute an ordered temporal process or a retained-state protocol.",
+          "source": "https://arxiv.org/html/2307.01097v3",
+          "anchor": "Section4"
+        },
+        "control": {
+          "code": "E",
+          "note": "CLIP text-image similarity evaluated.",
+          "anchor": "Section5/Table1",
+          "source": "https://arxiv.org/html/2307.01097v3"
+        },
+        "interaction": {
+          "code": "NR",
+          "note": "No input-driven runtime interaction located.",
+          "anchor": "Sections4–5",
+          "source": "https://arxiv.org/html/2307.01097v3"
+        },
+        "export": {
+          "code": "D",
+          "note": "Scene-mesh texture construction illustrated.",
+          "anchor": "Abstract/Figure1",
+          "source": "https://arxiv.org/html/2307.01097v3"
+        },
+        "runtime": {
+          "code": "NR",
+          "note": "Inference hardware stated; timed XR response not located.",
+          "anchor": "Section5",
+          "source": "https://arxiv.org/html/2307.01097v3"
+        },
+        "xr": {
+          "code": "C",
+          "note": "The broader-impact statement names generation of environments for virtual-reality experiences as an intended use. No headset implementation, device protocol, or user validation was located in the inspected material.",
+          "source": "https://arxiv.org/html/2307.01097v3",
+          "anchor": "Section 6 (Broader impact); Sections 1 and 4-5"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2307.01097v3",
+          "anchor": "Sections4–5",
+          "note": "Technical version"
+        },
+        {
+          "url": "https://proceedings.nips.cc/paper_files/paper/2023/hash/a0da690a47b2f52faa63f6fe054057b5-Abstract-Conference.html",
+          "anchor": "BibTeX",
+          "note": "Full author list and publication metadata"
+        },
+        {
+          "url": "https://arxiv.org/html/2307.01097v3",
+          "anchor": "Section4",
+          "note": "NA for temporal evolution in the core static image-set output. Spatial view interpolation and overlap correspondence do not constitute an ordered temporal process or a retained-state protocol."
+        },
+        {
+          "url": "https://arxiv.org/html/2307.01097v3",
+          "anchor": "Section 6 (Broader impact); Sections 1 and 4-5",
+          "note": "The broader-impact statement names generation of environments for virtual-reality experiences as an intended use. No headset implementation, device protocol, or user validation was located in the inspected material."
+        }
+      ],
+      "costs": {
+        "generation": "NR",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "4 NVIDIA RTX A6000 GPUs; Section5"
+      }
+    },
+    {
+      "id": "P02",
+      "title": "EPIC: Epipolar-Consistent 360-Degree Immersive Stereo Video Generation",
+      "short_name": "EPIC",
+      "year": 2026,
+      "status": "arXiv preprint 2609.38689v1, 2026-09-30.",
+      "paper_type": "method + benchmark",
+      "category": "panoramic stereo video",
+      "inputs": "Text or image",
+      "representation": "Panoramic left/right video, followed by omnidirectional-stereo correction.",
+      "mechanism": "Depth-warped stereo generation, epipolar preference refinement, viewing correction.",
+      "stage": "Offline content generation and refinement",
+      "relevance": "Direct stereo evidence and display preparation.",
+      "evidence_note": "Stereo residual improves; diagonal residual worsens in Table3. No user-comfort result located.",
+      "limitations": "Geometric proxy evaluation does not directly establish headset comfort.",
+      "inspected": "PDFv1 and HTMLv1 Sections3–4, Tables3–4. arXiv v1 Sections 3.2, 4.2 and 5 rechecked on 2026-10-21 for the scored scene subset and pair-validity conditions. arXiv v1 Sections 3.2 and 4.1–4.3 rechecked on 2026-10-21. Selection of 500 videos per stage does not mean that all pairs are valid on every metric axis. arXiv v1 Sections 3.2, 4.2–4.3 and 5 rechecked on 2026-10-21; the targeted temporal evaluation remains E, with its evaluated subset stated explicitly. arXiv v1 Section 3.4 rechecked on 2026-10-21 to distinguish the generated rigid stereo pair from the subsequently re-rendered ODS playback pair.",
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "Spherical epipolar residuals are evaluated on retained rigid-scene correspondences after independently moving tracks are discarded. Pairs without recoverable two-view pose, including insufficient-parallax pairs, are excluded rather than assigned zero error.",
+          "source": "https://arxiv.org/html/2609.38689v1",
+          "anchor": "Sections 3.2 and 4.2; Section 4.3, Table 3; Section 5 limitations"
+        },
+        "stereo": {
+          "code": "E",
+          "note": "Stereo PEGS changes from 3.121 to 2.640 mrad with 500 videos selected per stage. The score uses valid pose-recoverable pairs of retained rigid-scene correspondences after moving tracks are excluded; it is not a headset preference or comfort measurement.",
+          "source": "https://arxiv.org/html/2609.38689v1",
+          "anchor": "Sections 3.2 and 4.1–4.2; Section 4.3, Table 3"
+        },
+        "temporal": {
+          "code": "E",
+          "note": "Temporal PEGS improves, diagonal PEGS worsens, and temporal MEt3R worsens. PEGS evaluates retained rigid-scene correspondences after moving tracks and invalid low-parallax pairs are excluded; this does not measure consistency of the excluded object dynamics.",
+          "source": "https://arxiv.org/html/2609.38689v1",
+          "anchor": "Sections 3.2 and 4.2; Section 4.3, Table 3; Section 5 limitations"
+        },
+        "control": {
+          "code": "D",
+          "note": "Prompt conditioning and stereo-baseline adjustment described.",
+          "anchor": "Sections3.1,3.4",
+          "source": "https://arxiv.org/html/2609.38689v1"
+        },
+        "interaction": {
+          "code": "NR",
+          "note": "Live action-driven manipulation not located.",
+          "anchor": "Sections3–4",
+          "source": "https://arxiv.org/html/2609.38689v1"
+        },
+        "export": {
+          "code": "D",
+          "note": "The playback conversion re-renders both omnidirectional-stereo eyes from the left view using depth whose scale is calibrated against the right view, then applies binocular super-resolution. This describes display-oriented processing, without a located device or user validation.",
+          "source": "https://arxiv.org/html/2609.38689v1",
+          "anchor": "Section 3.4, Equations 11–12; 4K Upsampling ordering statement"
+        },
+        "runtime": {
+          "code": "NR",
+          "note": "End-to-end timing not located in inspected results.",
+          "anchor": "Section4",
+          "source": "https://arxiv.org/html/2609.38689v1"
+        },
+        "xr": {
+          "code": "C",
+          "note": "Headset suitability stated; device/user validation not located.",
+          "anchor": "Sections3.4,4.5",
+          "source": "https://arxiv.org/html/2609.38689v1"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2609.38689v1",
+          "anchor": "Metadata",
+          "note": "Six authors confirmed on PDF first page; experimental HTML retains unrelated template names."
+        },
+        {
+          "url": "https://arxiv.org/html/2609.38689v1",
+          "anchor": "Sections3–4; Table3",
+          "note": "Method and mixed metric outcomes"
+        },
+        {
+          "url": "https://arxiv.org/html/2609.38689v1",
+          "anchor": "Sections 3.2 and 4.2; Section 4.3, Table 3; Section 5 limitations",
+          "note": "Spherical epipolar residuals are evaluated on retained rigid-scene correspondences after independently moving tracks are discarded. Pairs without recoverable two-view pose, including insufficient-parallax pairs, are excluded rather than assigned zero error."
+        },
+        {
+          "url": "https://arxiv.org/html/2609.38689v1",
+          "anchor": "Sections 3.2 and 4.1–4.2; Section 4.3, Table 3",
+          "note": "Stereo PEGS changes from 3.121 to 2.640 mrad with 500 videos selected per stage. The score uses valid pose-recoverable pairs of retained rigid-scene correspondences after moving tracks are excluded; it is not a headset preference or comfort measurement."
+        },
+        {
+          "url": "https://arxiv.org/html/2609.38689v1",
+          "anchor": "Section 3.4, Equations 11–12; 4K Upsampling ordering statement",
+          "note": "The playback conversion re-renders both omnidirectional-stereo eyes from the left view using depth whose scale is calibrated against the right view, then applies binocular super-resolution. This describes display-oriented processing, without a located device or user validation."
+        }
+      ],
+      "costs": {
+        "generation": "NR",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "NR"
+      }
+    },
+    {
+      "id": "X05",
+      "short_name": "Generated Reality",
+      "title": "Generated Reality: Human-centric World Simulation using Interactive Video Generation with Hand and Camera Control",
+      "year": 2026,
+      "status": "CVPR 2026 Findings, as identified by the official author project page; the paper-level CVF record, final pagination, and proceedings DOI were not retrieved. Technical evidence is restricted to arXiv:2602.18422v1 (20 February 2026); v2 exists (23 August 2026) and was not substituted.",
+      "paper_type": "system/tool",
+      "category": "head- and hand-conditioned video generation / deployed VR system",
+      "inputs": "Tracked head pose and joint-level hand poses; image or text initialization.",
+      "representation": "Generated egocentric video, latent video context, and per-frame head/hand conditioning; no native editable object scene is exposed.",
+      "mechanism": "Hybrid 2D skeleton and 3D hand-parameter conditioning with camera conditioning; the VR system distills a bidirectional Wan2.2 5B teacher into a causal 5B student and streams 12-frame chunks.",
+      "stage": "Streaming generation and remote delivery to a tracked VR headset.",
+      "relevance": "Direct connection between an action-conditioned video model and headset task evidence, complementing asset-authoring systems.",
+      "evidence_note": "Section 4 evaluates Wan2.2 14B conditioning strategies offline. Section 5 deploys a distinct distilled 5B system through Unity and Quest 3; its short-task user study does not validate all properties measured for the 14B model.",
+      "limitations": "Eleven participants and three short tasks; task success is judged from generated videos, not instrumented physical object states. The source identifies latency, stereo, resolution, and drift limitations. Neither persistent edited-object state nor comfortable long-duration head-tracked viewing is established.",
+      "inspected": "arXiv v1 Sections 3.2-3.3 and 4, Tables 1-2, Section 5 and Figures 6-7, Section 6, Appendices A.3, B.1, C and D; arXiv version/author/license metadata and official author project page. No model execution or independent replication. arXiv v1 Sections 4-6 and Appendices A-D checked for timing evidence on 2026-10-21. The 0.002 s overhead is another single reported amount; no corresponding timing conditions, ablation table, measurement procedure, or dispersion was located. Section 4 quality/control experiments use a distinct 14B configuration and do not establish the 5B deployment's runtime protocol.",
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "The offline Wan2.2 14B experiment evaluates estimated 3D hand pose/shape and recovered camera trajectories. Table 1 reports PA-MPJPE 12.23 mm and PA-MPVPE 9.10 mm for hybrid conditioning; these are Procrustes-aligned hand-estimator proxies, not metric-scale scene geometry or multiview/stereo validation of the deployed 5B system.",
+          "source": "https://arxiv.org/html/2602.18422v1",
+          "anchor": "Section 4 Metrics; Tables 1-2; Appendix A.3"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "No paired-eye, IPD, or binocular-quality test was located in the inspected sections. Section 6 explicitly identifies stereo rendering among the system's limitations; headset use alone is not stereo validation.",
+          "source": "https://arxiv.org/html/2602.18422v1",
+          "anchor": "Sections 5-6; Appendix D"
+        },
+        "temporal": {
+          "code": "D",
+          "note": "Short hand-object sequences are demonstrated. Appendix C deliberately uses short tasks to limit long-horizon drift, and Section 6 reports visual degradation after a few seconds. No intervention-departure-return test of retained object state was located; FVD is reported as distribution-level realism, not a persistent-state test.",
+          "source": "https://arxiv.org/html/2602.18422v1",
+          "anchor": "Section 4 Metrics; Sections 5-6; Appendices C-D"
+        },
+        "control": {
+          "code": "E",
+          "note": "The 5B headset study compares tracked hand-plus-head conditioning with head-pose conditioning plus task text but no tracked hand control. Mean perceived control is 4.21 versus 1.74 on a seven-point scale. Offline 14B camera/hand-control metrics in Section 4 are a separate configuration.",
+          "source": "https://arxiv.org/html/2602.18422v1",
+          "anchor": "Section 4/Table 2; Section 5 User Study Design and Evaluating User Experience; Figure 7; Appendix C"
+        },
+        "interaction": {
+          "code": "E",
+          "note": "Eleven participants perform three tasks, each within 8 seconds: press the green button, open a jar, and turn a steering wheel. Mean binary task accuracy is 71.2% with tracked hands versus 3.0% without them; generated session videos are blind-reviewed by a separate person. This tests short visual action outcomes, not persistent or physically verified object state.",
+          "source": "https://arxiv.org/html/2602.18422v1",
+          "anchor": "Section 5 User Study Design and Evaluating Task Efficiency; Figures 6-7; Appendix C"
+        },
+        "export": {
+          "code": "D",
+          "note": "Unity on Quest 3 captures head/hand poses and receives generated video chunks from the server. This documents an engine/headset streaming pipeline; it does not demonstrate export or manipulation of editable 3D assets.",
+          "source": "https://arxiv.org/html/2602.18422v1",
+          "anchor": "Section 5 Integration with VR System"
+        },
+        "runtime": {
+          "code": "C",
+          "note": "Section 5 reports 11 FPS, 1.4 s latency, and 0.002 s added conditioning overhead for the 5B system on one remote H100 with 12-frame chunks. A timing protocol, comparative timing experiment, or repeated-run distribution was not located. These author-reported figures are not an instrumented motion-to-photon result.",
+          "source": "https://arxiv.org/html/2602.18422v1",
+          "anchor": "Section 5 (Autoregressive Distillation; Integration with VR System); Appendix D"
+        },
+        "xr": {
+          "code": "E",
+          "note": "Unity/Quest 3 deployment is evaluated with 11 participants on three short hand-object tasks and perceived control. Participants see streamed generated video; the observed task improvements do not establish binocular correctness, sustained comfort, or long-term state persistence.",
+          "source": "https://arxiv.org/html/2602.18422v1",
+          "anchor": "Section 5; Figures 6-7; Appendix C"
+        }
+      },
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2602.18422v1#S4",
+          "anchor": "Section 4; Tables 1-2; Appendix A.3",
+          "note": "Offline 14B conditioning study and estimator-based metrics; separate from the 5B VR system."
+        },
+        {
+          "url": "https://arxiv.org/html/2602.18422v1#S5",
+          "anchor": "Section 5; Figures 6-7",
+          "note": "Actual model-to-Unity-to-Quest deployment, reported costs, comparison conditions, and short-task results."
+        },
+        {
+          "url": "https://arxiv.org/html/2602.18422v1#A3",
+          "anchor": "Appendix C",
+          "note": "Task design rationale, perceived-control question, and blind binary judgments of generated session videos."
+        },
+        {
+          "url": "https://arxiv.org/html/2602.18422v1#S6",
+          "anchor": "Section 6; Appendix D",
+          "note": "Stereo, resolution, latency, and long-rollout limitations."
+        },
+        {
+          "url": "https://arxiv.org/abs/2602.18422v1",
+          "anchor": "Title, authors, submission history, and license link",
+          "note": "Six authors, v1/v2 dates, arXiv DOI, and CC BY 4.0 paper license."
+        },
+        {
+          "url": "https://codeysun.github.io/generated-reality/",
+          "anchor": "Title/byline and venue heading",
+          "note": "Author-maintained project identifies CVPR 2026 Findings; paper-level CVF pagination/DOI remains unverified."
+        },
+        {
+          "url": "https://arxiv.org/html/2602.18422v1",
+          "anchor": "Section 5 (Autoregressive Distillation; Integration with VR System); Appendix D",
+          "note": "Section 5 reports 11 FPS, 1.4 s latency, and 0.002 s added conditioning overhead for the 5B system on one remote H100 with 12-frame chunks. A timing protocol, comparative timing experiment, or repeated-run distribution was not located. These author-reported figures are not an instrumented motion-to-photon result."
+        }
+      ],
+      "costs": {
+        "generation": "Author-reported 11 FPS for the deployed autoregressive 5B system, with 12-frame chunks on one remote H100. Section 5 does not specify a timing protocol or repeated-run distribution.",
+        "rendering": "NR as a separate existing-content renderer measurement; video decoding contributes to the reported generation/decoding bottleneck.",
+        "interaction": "Author-reported 1.4 s latency and 0.002 s added conditioning overhead. Start/end instrumentation and transport/display inclusions are not defined; not an instrumented motion-to-photon measurement.",
+        "hardware": "One remote H100 server; Unity client on Meta Quest 3. Section 4's 480 x 480 resolution belongs to 14B offline training/evaluation and is not assigned to the Section 5 runtime configuration."
+      }
+    },
+    {
+      "citation_key": "Po2026MultiGen",
+      "title": "MultiGen: Level-Design for Editable Multiplayer Worlds in Diffusion Game Engines",
+      "short_name": "MultiGen",
+      "year": 2026,
+      "authors": [
+        "Ryan Po",
+        "David Junhao Zhang",
+        "Amir Hertz",
+        "Gordon Wetzstein",
+        "Neal Wadhwa",
+        "Nataniel Ruiz"
+      ],
+      "publication": {
+        "type": "arXiv preprint",
+        "venue": "",
+        "doi": "10.48550/arXiv.2603.06679",
+        "stable_url": "https://arxiv.org/abs/2603.06679v2",
+        "formal_publication_status": "No formal venue established in inspected primary sources."
+      },
+      "inspected_version": {
+        "identifier": "arXiv:2603.06679v2",
+        "date": "2026-03-30",
+        "first_preprint_date": "2026-03-03",
+        "source": "https://arxiv.org/html/2603.06679v2"
+      },
+      "paper_type": "method with game-domain evaluation",
+      "category": "dynamic world / externally stored state conditioned video",
+      "inputs": "Authored 2D map, initial pose, player actions and recent frames",
+      "representation": "Static map, evolving player poses and generated observations",
+      "mechanism": "Separate Memory, Observation and Dynamics modules",
+      "stage": "Interactive observation generation",
+      "relevance": "Shows shared task state can condition video; output medium alone does not determine state retention.",
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "Simulator-reference frame fidelity; no metric 3D test.",
+          "source": "https://arxiv.org/html/2603.06679v2",
+          "anchor": "Section 4.3, Table 1"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "No calibrated paired-eye protocol located.",
+          "source": "https://arxiv.org/html/2603.06679v2",
+          "anchor": "Sections 3–6"
+        },
+        "temporal": {
+          "code": "E",
+          "note": "Reference fidelity over ranges 1–128 and 128–256; no arbitrary-edit retention test.",
+          "source": "https://arxiv.org/html/2603.06679v2",
+          "anchor": "Section 4.3, Table 1"
+        },
+        "control": {
+          "code": "D",
+          "note": "Authored map and action conditioning implemented.",
+          "source": "https://arxiv.org/html/2603.06679v2",
+          "anchor": "Sections 3.1–3.4, 4.2; Figure 3"
+        },
+        "interaction": {
+          "code": "E",
+          "note": "VLM opponent-presence agreement with simulator-frame judgments; one-map multiplayer evaluation.",
+          "source": "https://arxiv.org/html/2603.06679v2",
+          "anchor": "Sections 5.2–5.4, Table 2"
+        },
+        "export": {
+          "code": "NR",
+          "note": "No asset or engine export located.",
+          "source": "https://arxiv.org/html/2603.06679v2",
+          "anchor": "Sections 3–6"
+        },
+        "runtime": {
+          "code": "C",
+          "note": "Approximately 20 FPS reported, one A100 per player; not display latency.",
+          "source": "https://arxiv.org/html/2603.06679v2",
+          "anchor": "Section 5.3"
+        },
+        "xr": {
+          "code": "NR",
+          "note": "No AR/MR/VR device deployment located.",
+          "source": "https://arxiv.org/html/2603.06679v2",
+          "anchor": "Sections 3–6; project page"
+        }
+      },
+      "costs": {
+        "generation": "Approximately 20 FPS, reported per player.",
+        "rendering": "NR",
+        "interaction": "Input-to-display latency NR",
+        "hardware": "One NVIDIA A100 per player; resolution NR."
+      },
+      "limitations": "Map fixed during rollout; unencoded texture/small-object persistence unsupported; pose drift.",
+      "inspected": "v2 Sections 3–6, Tables 1–3, Figures 3–6; official project. No model execution.",
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2603.06679v2",
+          "anchor": "Sections 3–6",
+          "note": "Capability and cost extraction uses v2, not v1."
+        },
+        {
+          "url": "https://ryanpo.com/multigen/",
+          "anchor": "Method Overview; Level Design; Multiplayer Interaction; BibTeX",
+          "note": "Authors, title, mechanism and project metadata."
+        },
+        {
+          "url": "https://arxiv.org/abs/2603.06679v2",
+          "anchor": "Submission history; author list; DOI",
+          "note": "Complete authors and version metadata."
+        }
+      ],
+      "integration_warnings": [
+        "Table 1 v2 differs from v1. Do not import v1 rollout ranges or scores.",
+        "Figure 4 says death frames are illustrative, not model output.",
+        "Separate player views do not constitute left/right-eye stereo evidence.",
+        "The project page's 30-minute four-player demonstration is not Table 1's evaluated horizon or a persistent-edit experiment."
+      ],
+      "id": "D09",
+      "status": "arXiv preprint; inspected arXiv:2603.06679v2",
+      "evidence_note": "Map fixed during rollout; unencoded texture/small-object persistence unsupported; pose drift."
+    },
+    {
+      "citation_key": "Lee2025ImaginateAR",
+      "title": "ImaginateAR: AI-Assisted In-Situ Authoring in Augmented Reality",
+      "short_name": "ImaginateAR",
+      "year": 2025,
+      "authors": [
+        "Jaewook Lee",
+        "Filippo Aleotti",
+        "Diego Mazala",
+        "Guillermo Garcia-Hernando",
+        "Sara Vicente",
+        "Oliver James Johnston",
+        "Isabel Kraus-Liang",
+        "Jakub Powierza",
+        "Donghoon Shin",
+        "Jon E. Froehlich",
+        "Gabriel Brostow",
+        "Jessica Van Brummelen"
+      ],
+      "publication": {
+        "type": "peer-reviewed conference paper",
+        "venue": "Proceedings of the 38th Annual ACM Symposium on User Interface Software and Technology",
+        "series": "UIST '25",
+        "publisher": "Association for Computing Machinery",
+        "doi": "10.1145/3746059.3747635",
+        "stable_url": "https://doi.org/10.1145/3746059.3747635",
+        "article_number": "52",
+        "pages": "",
+        "formal_publication_status": "UIST 2025, Article 52 and DOI confirmed by the arXiv journal-reference field; full-text inspection bound to arXiv v2."
+      },
+      "inspected_version": {
+        "identifier": "arXiv:2504.21360v2",
+        "date": "2025-08-23",
+        "first_preprint_date": "2025-04-30",
+        "source": "https://arxiv.org/html/2504.21360v2"
+      },
+      "paper_type": "deployed handheld AR authoring system",
+      "category": "XR system / physically grounded asset generation and placement",
+      "inputs": "Speech/text, physical scene graph, phone localization, manual editing",
+      "representation": "Textured meshes and physical/virtual scene graph",
+      "mechanism": "Offline scene understanding; remote image-to-mesh generation; localized scene assembly",
+      "stage": "In-situ authoring with generation before mesh use",
+      "relevance": "Adds physical-reference and handheld-AR requirements to the task synthesis.",
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "Five scenes, 27 reference boxes, IoU ≥ 0.25; scene-graph recall/labels, not registration accuracy.",
+          "source": "https://arxiv.org/html/2504.21360v2",
+          "anchor": "Section 5.1, Table 2"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "No paired-eye evaluation located; handheld AR.",
+          "source": "https://arxiv.org/html/2504.21360v2",
+          "anchor": "Sections 4.3, 6–8"
+        },
+        "temporal": {
+          "code": "D",
+          "note": "Object-ID/transform updates and prior-asset reuse implemented; no longitudinal retention evaluation.",
+          "source": "https://arxiv.org/html/2504.21360v2",
+          "anchor": "Section 4.3"
+        },
+        "control": {
+          "code": "E",
+          "note": "Qualitative comparisons and participant reports examine perceived control, precision, and ownership during manual and AI-assisted authoring. This is a user-reported control target, not geometric constraint accuracy; general satisfaction or the creativity-support score alone is not used as control evidence.",
+          "source": "https://arxiv.org/html/2504.21360v2",
+          "anchor": "Sections 6.2-6.3 and 7.1-7.2 (authoring preferences and control reports)"
+        },
+        "interaction": {
+          "code": "E",
+          "note": "Creation, placement, modification and removal studied in situ.",
+          "source": "https://arxiv.org/html/2504.21360v2",
+          "anchor": "Sections 6–7"
+        },
+        "export": {
+          "code": "D",
+          "note": "Generated textured meshes delivered into Unity mobile AR.",
+          "source": "https://arxiv.org/html/2504.21360v2",
+          "anchor": "Sections 4.2–4.3"
+        },
+        "runtime": {
+          "code": "E",
+          "note": "50-trial component timing: total 33.92 ± 5.83 s; not display latency.",
+          "source": "https://arxiv.org/html/2504.21360v2",
+          "anchor": "Section 5, Table 1"
+        },
+        "xr": {
+          "code": "E",
+          "note": "20 main participants, public-park handheld AR study; four pilots separate.",
+          "source": "https://arxiv.org/html/2504.21360v2",
+          "anchor": "Sections 6–7"
+        }
+      },
+      "costs": {
+        "generation": "Image 12.53 ± 2.48 s; mesh 9.14 ± 0.08 s (50 trials).",
+        "rendering": "NR",
+        "interaction": "Input-to-display latency NR",
+        "hardware": "Asset-server GPU/resolution NR; NVIDIA L4 applies only to offline scene graphs."
+      },
+      "limitations": "Pre-scan freshness; single study location; no headset, shared-user or registration-error evaluation.",
+      "inspected": "v2 Sections 4–8, Tables 1–3 and study procedures; official project. No system execution.",
+      "sources": [
+        {
+          "url": "https://arxiv.org/html/2504.21360v2",
+          "anchor": "Sections 4–8; title/author and DOI header",
+          "note": "Version-bound full text and bibliographic metadata."
+        },
+        {
+          "url": "https://nianticspatial.github.io/imaginatear/",
+          "anchor": "System Overview; User Study & Evaluation; author list",
+          "note": "Project confirmation of UIST acceptance and deployed authoring workflow."
+        },
+        {
+          "url": "https://arxiv.org/abs/2504.21360v2",
+          "anchor": "Author list; Journal reference; related DOI; submission history",
+          "note": "Complete authors, UIST Article 52 and version metadata."
+        }
+      ],
+      "integration_warnings": [
+        "XR E requires expanding the current headset-only codebook to include handheld AR, with device form factor retained.",
+        "Temporal D is restricted to documented state-update implementation, not generated animation or long-term persistence.",
+        "Do not label all scene-graph metrics superior: Table 2 full-model recall is lower than OpenMask3D.",
+        "The asset timing comparison in Table 3 imports prior official results; it is not a controlled hardware comparison.",
+        "iPhone 13 Pro identifies scene capture; do not assign that device to all user-study participants without additional evidence.",
+        "The L4 GPU belongs to offline scene understanding, not the remote asset timing."
+      ],
+      "id": "X06",
+      "status": "peer-reviewed conference paper; inspected arXiv:2504.21360v2",
+      "evidence_note": "Pre-scan freshness; single study location; no headset, shared-user or registration-error evaluation."
+    },
+    {
+      "id": "X07",
+      "title": "Generative AI-Assisted Visualization Prototyping for Cultural Heritage: A Computational Framework from 2D Planes to 3D Immersive Scenes",
+      "short_name": "Heritage visualization prototyping",
+      "year": 2026,
+      "status": "Buildings 16(16), article 3319; published 20 August 2026",
+      "paper_type": "XR system / human-in-the-loop workflow",
+      "category": "XR visualization and asset preparation",
+      "inputs": "Four historical-painting fragments, prompts, manually selected historical references and human/domain-expert corrections; three object pairs in the technical comparison.",
+      "representation": "Generated 3D object assets inspected in Blender; separately generated complete environmental scenes deployed through Unity for PICO 4 presentation.",
+      "mechanism": "Hosted image generation and multimodal review followed by hosted object/scene generation, topology inspection, manual refinement and perceptual calibration. Interface labels identify services, not reproducible backend checkpoints.",
+      "stage": "Offline generation and manual asset preparation, followed by VR presentation and guided evaluation.",
+      "relevance": "Direct evidence that raw asset delivery, close-up visual suitability, structural editability and headset experience involve distinct preparation requirements.",
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "Three AI/manual object pairs undergo mesh-level geometry, topology, UV and organization inspection. These are technical properties of selected assets, not metric agreement with a historically verified 3D scene.",
+          "source": "https://www.mdpi.com/2075-5309/16/16/3319",
+          "anchor": "Sections 4.2.1-4.2.2; Tables 6-8"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "No paired-eye, interpupillary-distance, or binocular-quality protocol was located; PICO 4 presentation alone does not establish these properties.",
+          "source": "https://www.mdpi.com/2075-5309/16/16/3319",
+          "anchor": "Sections 4.1 and 4.3; Section 5.3 limitations"
+        },
+        "temporal": {
+          "code": "NR",
+          "note": "The deployed scene workflow is examined for guided experience; no intervention-departure-return or retained-edit test was located. Static source content does not establish session-state persistence.",
+          "source": "https://www.mdpi.com/2075-5309/16/16/3319",
+          "anchor": "Sections 4.1 and 4.3; Section 5.3"
+        },
+        "control": {
+          "code": "D",
+          "note": "Structured prompts, manually selected historical references and human/expert correction form an implemented revision workflow. No standalone model diagnosis accuracy or condition-adherence test is claimed.",
+          "source": "https://www.mdpi.com/2075-5309/16/16/3319",
+          "anchor": "Sections 3.1 and 4.1.2; Figure 3; Section 5.3"
+        },
+        "interaction": {
+          "code": "D",
+          "note": "The Unity/PICO 4 workflow supports guided scene exploration. The paper explicitly lacks task-based usability testing; experience questionnaires do not establish manipulation accuracy or retained state.",
+          "source": "https://www.mdpi.com/2075-5309/16/16/3319",
+          "anchor": "Sections 4.1 and 4.3.1; Figure 7; Section 5.3"
+        },
+        "export": {
+          "code": "D",
+          "note": "Object outputs are imported into Blender for inspection, while scene outputs are deployed through Unity for VR presentation. This documents a processing/deployment route, not universal preservation of editable topology.",
+          "source": "https://www.mdpi.com/2075-5309/16/16/3319",
+          "anchor": "Sections 4.1 and 4.1.3; Section 4.2"
+        },
+        "runtime": {
+          "code": "E",
+          "note": "An exploratory three-pair workflow comparison records raw generation, manual modeling and use-dependent post-processing endpoints. Raw generation is approximately 3-4 min; close-up refinement 1-2 h; basic structural editability 4-5 h total post-processing, including close-up refinement. These are bounded workflow comparisons, not GPU inference or response-latency measurements.",
+          "source": "https://www.mdpi.com/2075-5309/16/16/3319",
+          "anchor": "Section 4.2.1, Table 6 (Build time); Section 4.2.2, Tables 7-8 and accompanying endpoint explanation"
+        },
+        "xr": {
+          "code": "E",
+          "note": "Unity/PICO 4 presentation is evaluated using questionnaires and interviews with nine experts and 30 non-experts. Experts used a mixture of on-site VR and remote first-person video; their results are descriptive. The source describes guided non-expert VR experience but does not provide a participant-by-device log.",
+          "source": "https://www.mdpi.com/2075-5309/16/16/3319",
+          "anchor": "Sections 4.1, 4.3.1-4.3.3; Figure 7; Section 5.3"
+        }
+      },
+      "evidence_note": "The object-level comparison uses the hosted option labeled 3D Generation V3.0 (HY-3D-3.0); the immersive scenes use a separate World 2.0 service. Do not treat the three object pairs as the exact scenes rated by users or inherit a known Hunyuan research checkpoint. Basic structural editability excludes full UV reorganization, standardized naming and production-level retopology.",
+      "limitations": "Single-artwork proof of concept with four fragments and three technical model pairs; mixed expert viewing modes; guided non-expert study without control or unguided baseline. Backend snapshots, seeds and inference hardware were unavailable. Task-based usability, standardized presence and dedicated discomfort measures were not included. All 30 non-experts should not be labeled individually PICO-tested without an explicit per-participant device record.",
+      "inspected": "Official publisher search-returned full-text passages: metadata/abstract; Sections 3.1, 4.1, 4.1.1-4.1.3, 4.2.1-4.2.2, Tables 6-8, Sections 4.3.1-4.3.5, Figure 7, Section 5.3 and conclusion; official version-notes table. Direct article/notes fetches returned 403/429; no model execution, supplementary-data validation, or independent human review.",
+      "costs": {
+        "generation": "Approximately 3-4 min raw AI asset generation across three object pairs; approximately 4-6 h complete manual modeling. Close-up preparation: 1-2 h; basic structural editability: 4-5 h total post-processing, including close-up refinement. The latter is not complete production equivalence.",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "Hosted generation backend hardware unavailable. Local preprocessing/inspection/Blender/Unity/VR workstation: Windows 11, Intel Core i7-14650HX, 16 GB RAM, RTX 5060; PICO 4 presentation. Do not attribute hosted generation times to the local GPU."
+      },
+      "sources": [
+        {
+          "url": "https://www.mdpi.com/2075-5309/16/16/3319",
+          "anchor": "Sections 4.1-4.3; Tables 6-8; Section 5.3",
+          "note": "Publisher-origin full-text passages returned by targeted search; direct retrieval restricted."
+        },
+        {
+          "url": "https://www.mdpi.com/2075-5309/16/16/3319/notes",
+          "anchor": "Article Versions Notes",
+          "note": "Original HTML 20 August 2026 21:11 CEST; PDF Version of Record 20 August 2026 21:10 CEST."
+        }
+      ]
+    },
+    {
+      "id": "X08",
+      "title": "Leveraging Generative AI for High-Fidelity 360° Spatial Images: Methodological Validation for Use as Experimental Stimuli",
+      "short_name": "360-degree stimulus validation",
+      "year": 2026,
+      "status": "Buildings 16(9), article 1679; 2026. Publisher displays differ by one day for exact publication date.",
+      "paper_type": "XR stimulus-generation workflow and evaluation",
+      "category": "Panoramic generation / headset perception",
+      "inputs": "Text-specified indoor architectural conditions; generated base panorama; prompts for greenery placement and density.",
+      "representation": "Static 8K equirectangular 360-degree panoramic images; generated greenery variants; no editable 3D asset is exposed by this workflow.",
+      "mechanism": "Skybox AI Model 4 generates base panoramas; hosted image editing inserts greenery, followed by image-based technical checks and expert headset evaluation.",
+      "stage": "Offline stimulus generation and editing, followed by static panoramic presentation in a headset.",
+      "relevance": "Connects generated panoramas to displayed-stimulus judgments; tests a viewing/perception task rather than asset manipulation or paired-eye consistency.",
+      "capabilities": {
+        "spatial": {
+          "code": "E",
+          "note": "Straight-line distortion, seam quality and image-similarity measures assess the panoramic images. Expert ratings address perceived layout and visual consistency; these are image/perceptual proxies, not metric 3D reconstruction or translational-view validity.",
+          "source": "https://www.mdpi.com/2075-5309/16/9/1679",
+          "anchor": "Sections 3.5.2 and 4.3.4; Tables 3-7"
+        },
+        "stereo": {
+          "code": "NR",
+          "note": "No paired-eye generation, stereo baseline, interpupillary-distance manipulation or binocular-consistency protocol was located. Quest 3 viewing does not establish these properties.",
+          "source": "https://www.mdpi.com/2075-5309/16/9/1679",
+          "anchor": "Section 4.3.4; discussion and limitations"
+        },
+        "temporal": {
+          "code": "NA",
+          "note": "NA for temporal evolution in the core static panoramic-stimulus output. The reported evaluation does not define an ordered-video or retained-modification task.",
+          "source": "https://www.mdpi.com/2075-5309/16/9/1679",
+          "anchor": "Section 3.1; Section 4.3.4; limitations"
+        },
+        "control": {
+          "code": "E",
+          "note": "CLIP text-image alignment and expert prompt/greenery-alignment ratings evaluate specified conditioning targets. They do not establish precise three-dimensional placement or strict causal isolation of every environmental variable.",
+          "source": "https://www.mdpi.com/2075-5309/16/9/1679",
+          "anchor": "Section 3.5.2, Table 3; Section 4.3.4, Table 7"
+        },
+        "interaction": {
+          "code": "NR",
+          "note": "The inspected protocol establishes viewing of panoramic stimuli in a headset; a targeted input-driven manipulation, navigation-task or retained-state evaluation was not located.",
+          "source": "https://www.mdpi.com/2075-5309/16/9/1679",
+          "anchor": "Section 4.3.4; Tables 6-7"
+        },
+        "export": {
+          "code": "D",
+          "note": "Generated panoramic images are presented using Meta Quest 3 headsets. This documents delivery to a viewing configuration, not export of editable 3D geometry or a general engine-integration path.",
+          "source": "https://www.mdpi.com/2075-5309/16/9/1679",
+          "anchor": "Section 4.3.4"
+        },
+        "runtime": {
+          "code": "NR",
+          "note": "No generation, fixed-content rendering, or input-to-display timing protocol was located in the inspected sections.",
+          "source": "https://www.mdpi.com/2075-5309/16/9/1679",
+          "anchor": "Sections 3.2-3.5 and 4.3.4; discussion"
+        },
+        "xr": {
+          "code": "E",
+          "note": "Seven senior experts view AI-generated and SketchUp/Enscape reference panoramas using Meta Quest 3 and rate presence and related perceptual qualities. The comparison concerns selected static stimuli; it does not establish free translation, binocular correctness or sustained comfort.",
+          "source": "https://www.mdpi.com/2075-5309/16/9/1679",
+          "anchor": "Section 4.3.4; Tables 6-7"
+        }
+      },
+      "evidence_note": "The displayed-stimulus comparison is directly relevant to XR, but source conclusions about universal substitutability or strict experimental-variable control exceed what image metrics and seven-expert judgments alone establish. Preserve the bounded observations rather than adopting those general claims.",
+      "limitations": "Small expert-only static-stimulus comparison; no paired-eye or freely translating evaluation. Skybox Remix does not support fixed seeds; hosted tool/version dependence limits reproducibility. The inspected passages do not establish randomized/counterbalanced presentation or a motion-comfort protocol.",
+      "inspected": "Official publisher full-text page via DOI and publisher-origin search passages: title/authors/year; Sections 3.1-3.5.2, 4.3.4, Tables 2-7 and limitations. Direct initial URL fetch returned 403/429; DOI-backed page and original-site indexed passages were accessible. No model execution or independent human review.",
+      "costs": {
+        "generation": "NR",
+        "rendering": "NR",
+        "interaction": "NR",
+        "hardware": "Meta Quest 3 for expert viewing. Generator/backend timing hardware NR; 8K image specification is not a measured headset rendering configuration."
+      },
+      "sources": [
+        {
+          "url": "https://www.mdpi.com/2075-5309/16/9/1679",
+          "anchor": "Sections 3.2-3.5.2; Section 4.3.4; Tables 2-7",
+          "note": "Direct DOI-backed publisher page and indexed publisher full-text passages."
+        },
+        {
+          "url": "https://doi.org/10.3390/buildings16091679",
+          "anchor": "Publisher metadata and Section 4.3.4",
+          "note": "Official rendering variants show publication on 23 versus 24 April 2026. Bibliography uses year only; no exact-day inference."
+        }
+      ]
+    }
+  ],
+  "benchmarks": [
+    {
+      "id": "B01",
+      "title": "WorldScore: A Unified Evaluation Benchmark for World Generation",
+      "year": 2025,
+      "status": "ICCV 2025",
+      "paper_type": "pure benchmark",
+      "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Duan_WorldScore_A_Unified_Evaluation_Benchmark_for_World_Generation_ICCV_2025_paper.html",
+      "scope": "相机轨迹指定的连续场景生成",
+      "dimensions": "可控性、质量、动态",
+      "xr_use": "支持相机控制/跨场景质量比较",
+      "not_established": "头显双目舒适度、motion-to-photon、资产碰撞或闭环交互适用性",
+      "inspected": "官方摘要；论文§3–4与Table 2的原站检索返回段落",
+      "note": "ICCV版20模型与早期arXiv摘要19模型不同；本表不混用排名。",
+      "sources": [
+        {
+          "url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Duan_WorldScore_A_Unified_Evaluation_Benchmark_for_World_Generation_ICCV_2025_paper.pdf",
+          "anchor": "§3–4",
+          "note": "原站全文段落通过搜索返回；直接PDF抓取403"
+        }
+      ]
+    },
+    {
+      "id": "B02",
+      "title": "4DWorldBench: A Comprehensive Evaluation Framework for 3D/4D World Generation Models",
+      "year": 2025,
+      "status": "arXiv:2511.19836v1；检索到CVPR 2026官方条目，终稿未读",
+      "paper_type": "pure benchmark",
+      "url": "https://arxiv.org/html/2511.19836v1",
+      "scope": "text/image/video-to-3D/4D",
+      "dimensions": "感知质量、条件对齐、物理真实性、4D一致性",
+      "xr_use": "空间时间和物理维度的候选评价来源",
+      "not_established": "不能凭4D一致性综合分证明XR运行性能或双目质量",
+      "inspected": "§3–5；§7–10",
+      "note": "包括模型判分和人类偏好相关性；属于生成评价，不是头显体验实验。",
+      "sources": [
+        {
+          "url": "https://openaccess.thecvf.com/content/CVPR2026/html/Lu_4DWorldBench_A_Comprehensive_Evaluation_Framework_for_3D4D_World_Generation_Models_CVPR_2026_paper.html",
+          "anchor": "官方检索条目",
+          "note": "直接访问403；能力描述以已读arXiv版本为准"
+        }
+      ]
+    },
+    {
+      "id": "B03",
+      "title": "What Makes for a Good Stereoscopic Image?",
+      "year": 2025,
+      "status": "CVPR Workshops 2025, CV4Metaverse",
+      "paper_type": "method + benchmark",
+      "url": "https://openaccess.thecvf.com/content/CVPR2025W/CV4Metaverse/html/Tamir_What_Makes_for_a_Good_Stereoscopic_Image_CVPRW_2025_paper.html",
+      "scope": "Static stereoscopic-image preferences and learned quality prediction.",
+      "dimensions": "Binocular image quality and viewing-condition dependence.",
+      "xr_use": "Headset preference data, including Apple Vision Pro and separate display comparisons.",
+      "not_established": "Motion-to-photon response or comfort during sustained head-tracked navigation.",
+      "inspected": "Sections3.2,4.3,4.4,10,11; verified by Section8 source record.",
+      "note": "The quality predictor and its preference dataset form one evaluation record.",
+      "sources": [
+        {
+          "url": "https://openaccess.thecvf.com/content/CVPR2025W/CV4Metaverse/html/Tamir_What_Makes_for_a_Good_Stereoscopic_Image_CVPRW_2025_paper.html",
+          "anchor": "Citation metadata and BibTeX",
+          "note": "Verified venue, publication year, month and pages using direct HTTP retrieval; web wrapper returned 403."
+        },
+        {
+          "url": "https://openaccess.thecvf.com/content/CVPR2025W/CV4Metaverse/papers/Tamir_What_Makes_for_a_Good_Stereoscopic_Image_CVPRW_2025_paper.pdf",
+          "anchor": "p.1 author line",
+          "note": "Formal PDF includes Netanel Y. Tamir; CVF HTML/BibTeX shortens given name to Netanel."
+        },
+        {
+          "url": "https://machinelearning.apple.com/research/good-stereoscopic",
+          "anchor": "Authors and acceptance notice",
+          "note": "Confirms full authors and CV4Metaverse Workshop at CVPR 2025."
+        },
+        {
+          "url": "https://arxiv.org/abs/2412.21127",
+          "anchor": "Author list and submission history",
+          "note": "v2 dated 2025-04-03, full authors including Y."
+        }
+      ]
+    }
+  ],
+  "coding_rules": {
+    "unit": "A named property and inspected configuration within a broad dimension; codes are indices to notes, not whole-dimension judgments or ordinal scores.",
+    "runtime": "E requires an identifiable timing comparison, cost profile, configuration experiment, or repeated/averaged measurement. Isolated approximate stage duration or throughput reports are C. Preserve the original value, interval, and hardware, without assuming an unreported measurement occurred or did not occur.",
+    "control": "Text/image adherence, camera/hand pose accuracy, and explicitly measured agency can qualify for E under their named constructs. General satisfaction, creativity support, and affective dominance alone do not establish generation control.",
+    "implementation": "Versioned official export code can supply D for implementation. Static code inspection does not imply model execution, output validation, or successful engine/headset use.",
+    "mixed_evidence": "When a broad cell contains a measured component and a separate claim, the note records both scopes; an E for the component does not validate the separate claim.",
+    "temporal_applicability": "Name the temporal target before assigning a code: object evolution, ordered-view coherence, revisiting, or retained modification. Static representation does not imply NA when a path or revisit protocol is examined. NA for a standalone static output refers only to temporal content/state generation; persistence relevant to an editing/streaming system but unexamined is NR. Spatial/path entries can index the same observation and are not independent tests."
+  },
+  "last_targeted_followup_date": "2026-10-22",
+  "supplement_release": "2026-10-23 final narrative-review audit",
+  "catalogue_counts": {
+    "methods_and_systems": 204,
+    "resources": 37,
+    "coded_methods_and_systems": 31,
+    "cells": 248
+  }
+}
