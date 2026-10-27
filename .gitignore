@@ -25,7 +25,7 @@ node_modules/
 /test-results/
 /playwright-report/
 
-# Manuscripts remain outside the public website repository.
+# Private manuscripts and source files remain outside the public repository.
 /manuscript/
 /docs/paper/*.pdf
 *.[pP][dD][fF]
@@ -35,5 +35,8 @@ node_modules/
 *.[dD][oO][cC][xX]
 *.[oO][dD][tT]
 *.[rR][tT][fF]
+
+# Public reading copy of the author's published preprint (explicit exception).
+!/docs/paper/visual-generative-ai-xr-survey.pdf
 
 # Website assets and catalogue data in docs/ remain tracked.

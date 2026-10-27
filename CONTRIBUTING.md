@@ -38,7 +38,7 @@ Evidence files include a release manifest. If updating an evidence release, rege
 
 The deployable website lives in `docs/`. Keep local links and assets relative so they work on both a local preview and a repository-based GitHub Pages URL. Use accessible headings, descriptive image alternatives, keyboard-operable controls, and responsive layouts.
 
-Use the existing source attribution records in [docs/assets/CREDITS.md](docs/assets/CREDITS.md) when changing figures. Preserve figure credits and the rights attached to source material. Do not add manuscript PDFs, LaTeX or Word sources, private review notes, credentials, local absolute paths, or unrelated working files to this repository. Link to external papers through their canonical source URLs. The site validator rejects manuscript file formats in the deployable package.
+Use the existing source attribution records in [docs/assets/CREDITS.md](docs/assets/CREDITS.md) when changing figures. Preserve figure credits and the rights attached to source material. The only permitted manuscript PDF is the public reading copy at `docs/paper/visual-generative-ai-xr-survey.pdf`. Keep it below 5 MB with searchable text, preserve the scientific content and links, and keep its abstract, DOI, and version metadata aligned with the public preprint. Do not add other manuscript PDFs, LaTeX or Word sources, private review notes, credentials, local absolute paths, or unrelated working files. Link to external papers through their canonical source URLs. The site validator enforces this narrow PDF exception.
 
 ## Validate and preview
 

@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this survey, catalogue, or evidence supplement, please cite the preprint below."
+type: dataset
+title: "Visual Generative AI for Extended Reality: A Survey — companion resources"
+authors:
+  - family-names: Huang
+    given-names: Guoxi
+    orcid: "https://orcid.org/0000-0002-8481-0232"
+url: "https://edhuang1.github.io/xr-survey/"
+repository-code: "https://github.com/edhuang1/xr-survey"
+preferred-citation:
+  type: generic
+  title: "Visual Generative AI for Extended Reality: A Survey"
+  authors:
+    - family-names: Huang
+      given-names: Guoxi
+      orcid: "https://orcid.org/0000-0002-8481-0232"
+  year: 2026
+  date-published: 2026-10-27
+  version: "1"
+  doi: "10.20944/preprints202610.2630.v1"
+  url: "https://www.preprints.org/manuscript/202610.2630"
+  notes: "Preprint, not peer reviewed."

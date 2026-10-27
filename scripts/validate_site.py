@@ -20,9 +20,12 @@ class Page(HTMLParser):
         self.ids = set()
         self.links = []
         self.images = []
+        self.meta = {}
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if tag == "meta" and attrs.get("name"):
+            self.meta[attrs["name"]] = attrs.get("content", "")
         if "id" in attrs:
             if attrs["id"] in self.ids:
                 errors.append(f"Duplicate HTML id: {attrs['id']}")
@@ -283,11 +286,31 @@ if config.get("repository"):
 if config.get("homepage"):
     assert urlsplit(config["homepage"]).scheme == "https"
 manuscript_extensions = {".pdf", ".tex", ".ltx", ".doc", ".docx", ".odt", ".rtf"}
+public_pdf = DOCS / "paper/visual-generative-ai-xr-survey.pdf"
+paper_page = pages[(DOCS / "paper/index.html").resolve()]
+expected_meta = {
+    "citation_title": project["title"],
+    "citation_author": "Guoxi Huang",
+    "citation_publication_date": "2026/10/27",
+    "citation_doi": "10.20944/preprints202610.2630.v1",
+    "citation_pdf_url": "https://edhuang1.github.io/xr-survey/paper/visual-generative-ai-xr-survey.pdf",
+}
+for key, value in expected_meta.items():
+    if paper_page.meta.get(key) != value:
+        errors.append(f"Paper citation metadata mismatch: {key}")
+if public_pdf.is_file():
+    if public_pdf.stat().st_size > 5_000_000:
+        errors.append("Public reading PDF exceeds the 5 MB Scholar indexing limit")
+    with public_pdf.open("rb") as stream:
+        if stream.read(5) != b"%PDF-":
+            errors.append("Public reading copy is not a PDF")
+else:
+    errors.append("Public reading PDF is missing")
 for path in DOCS.rglob("*"):
     if not path.is_file():
         continue
-    if path.suffix.lower() in manuscript_extensions:
-        errors.append(f"Manuscript files are forbidden in the public package: {path.relative_to(ROOT)}")
+    if path.suffix.lower() in manuscript_extensions and path != public_pdf:
+        errors.append(f"Unapproved manuscript file in the public package: {path.relative_to(ROOT)}")
     if path.stat().st_size >= 100 * 1024 * 1024:
         errors.append(f"File exceeds GitHub file limit: {path.relative_to(ROOT)}")
 
@@ -300,4 +323,4 @@ print(f"PASS: {len(showcase_ids)} showcase images; paths, alt text, sources, and
 print(f"PASS: {len(video_ids)} videos in four groups; official URLs, metadata, poster dimensions and hashes valid")
 print(f"PASS: {len(benchmark_ids)} guide resources match the catalogue; reading-route anchors valid")
 print(f"PASS: public package {size / 1024 / 1024:.2f} MiB; all files below GitHub size limit")
-print("PASS: public package contains no PDF, LaTeX, or word-processing manuscript files")
+print("PASS: one approved public PDF below 5 MB; citation metadata consistent; private manuscript formats excluded")

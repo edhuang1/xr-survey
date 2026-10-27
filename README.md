@@ -19,7 +19,7 @@
 
 Visual generative models create objects, spatial scenes, time-varying 3D content, and action-conditioned observations. This survey follows those outputs into **specific XR operations**: viewing, editing, retaining an accepted change, and responding to tracked input. It connects the representation a model produces to the components and evidence an XR application needs.
 
-This repository accompanies *Visual Generative AI for Extended Reality: A Survey*. It provides a searchable project website, a structured catalogue, and source-linked evidence records. The manuscript and its source files remain outside the public repository. Targeted literature retrieval extends through **23 October 2026**.
+This repository accompanies *Visual Generative AI for Extended Reality: A Survey*. It provides a searchable project website, a structured catalogue, source-linked evidence records, and a [public reading copy of the preprint](https://edhuang1.github.io/xr-survey/paper/visual-generative-ai-xr-survey.pdf). Manuscript source files and submission packages remain outside the public repository. Targeted literature retrieval extends through **23 October 2026**.
 
 The website opens with eight official video demonstrations, an interactive spatial representation sandbox, and 12 attributed research figures in a single switchable showcase. A searchable catalogue follows. Method taxonomy, review framework, evaluation questions, resources, and citation information expand on demand. Videos load when visible, pause offscreen, and respect reduced-motion preferences. Video files remain on their official project hosts; only credited posters and metadata are stored here.
 
@@ -151,7 +151,7 @@ Five proposed matched evaluation designs connect model-level evidence to XR use:
 
 Huang, G. (2026). *Visual Generative AI for Extended Reality: A Survey.* Preprints. [https://doi.org/10.20944/preprints202610.2630.v1](https://doi.org/10.20944/preprints202610.2630.v1)
 
-[Read the preprint on Preprints.org](https://www.preprints.org/manuscript/202610.2630) · Version 1, posted 27 October 2026 · [Download BibTeX](docs/paper/citation.bib). The full text remains on Preprints.org; this repository provides the website and citation record.
+[Read the abstract](https://edhuang1.github.io/xr-survey/paper/) · [Read the PDF](https://edhuang1.github.io/xr-survey/paper/visual-generative-ai-xr-survey.pdf) · [Preprints.org publication record](https://www.preprints.org/manuscript/202610.2630) · Version 1, posted 27 October 2026 · [Download BibTeX](docs/paper/citation.bib). The local PDF is a compressed author manuscript; Preprints.org hosts the publication record and publisher-formatted PDF. The paper is a preprint, not peer reviewed, published under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), with third-party rights as indicated in the paper.
 
 ```bibtex
 @misc{huang2026visualgenerativexr,
