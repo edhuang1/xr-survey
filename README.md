@@ -155,14 +155,11 @@ Huang, G. (2026). *Visual Generative AI for Extended Reality: A Survey.* Preprin
 
 ```bibtex
 @misc{huang2026visualgenerativexr,
-  title        = {Visual Generative {AI} for Extended Reality: A Survey},
-  author       = {Huang, Guoxi},
-  year         = {2026},
-  month        = oct,
-  howpublished = {Preprints},
-  doi          = {10.20944/preprints202610.2630.v1},
-  url          = {https://www.preprints.org/manuscript/202610.2630},
-  note         = {Preprint, version 1}
+  title  = {Visual Generative {AI} for Extended Reality: A Survey},
+  author = {Huang, Guoxi},
+  year   = {2026},
+  doi    = {10.20944/preprints202610.2630.v1},
+  url    = {https://www.preprints.org/manuscript/202610.2630}
 }
 ```
 
