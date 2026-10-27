@@ -11,7 +11,7 @@
 ![Detailed evidence profiles: 31](https://img.shields.io/badge/Evidence_profiles-31-a37535?style=flat-square)
 ![Coverage through 23 October 2026](https://img.shields.io/badge/Coverage-23_Oct_2026-555c70?style=flat-square)
 
-[**Project website**](https://edhuang1.github.io/xr-survey/) · [**Full catalogue**](https://edhuang1.github.io/xr-survey/#collection) · [**Evidence supplement**](https://edhuang1.github.io/xr-survey/evidence/) · [**Bibliography**](docs/paper/references.bib)
+[**Project website**](https://edhuang1.github.io/xr-survey/) · [**Read the preprint**](https://www.preprints.org/manuscript/202610.2630) · [**Full catalogue**](https://edhuang1.github.io/xr-survey/#collection) · [**Evidence supplement**](https://edhuang1.github.io/xr-survey/evidence/) · [**Bibliography**](docs/paper/references.bib)
 
 </div>
 
@@ -149,14 +149,20 @@ Five proposed matched evaluation designs connect model-level evidence to XR use:
 
 ## Citation
 
-Use the following bibliographic record to refer to the accompanying research manuscript. This repository does not distribute the manuscript:
+Huang, G. (2026). *Visual Generative AI for Extended Reality: A Survey.* Preprints. [https://doi.org/10.20944/preprints202610.2630.v1](https://doi.org/10.20944/preprints202610.2630.v1)
+
+[Read the preprint on Preprints.org](https://www.preprints.org/manuscript/202610.2630) · Version 1, posted 27 October 2026 · [Download BibTeX](docs/paper/citation.bib). The full text remains on Preprints.org; this repository provides the website and citation record.
 
 ```bibtex
-@unpublished{huang2026visualgenerativexr,
-  title  = {Visual Generative AI for Extended Reality: A Survey},
-  author = {Huang, Guoxi},
-  year   = {2026},
-  note   = {Manuscript, 23 October 2026}
+@misc{huang2026visualgenerativexr,
+  title        = {Visual Generative {AI} for Extended Reality: A Survey},
+  author       = {Huang, Guoxi},
+  year         = {2026},
+  month        = oct,
+  howpublished = {Preprints},
+  doi          = {10.20944/preprints202610.2630.v1},
+  url          = {https://www.preprints.org/manuscript/202610.2630},
+  note         = {Preprint, version 1}
 }
 ```
 
